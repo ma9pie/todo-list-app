@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,20 +20,54 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/constants/*": ["constants/*"],
-      "@/components/*": ["components/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/api/*": ["pages/api/*"],
-      "@/recoil/*": ["recoil/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/utils/*": ["utils/*"],
-      "@/pages/*": ["pages/*"],
-      "@/public/*": ["public/*"],
-      "@/styles/*": ["styles/*"],
-      "@/svg/*": ["components/svg/*"],
-      "@/images/*": ["public/images/*"]
-    }
+      "@/constants/*": [
+        "constants/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/layouts/*": [
+        "layouts/*"
+      ],
+      "@/api/*": [
+        "pages/api/*"
+      ],
+      "@/recoil/*": [
+        "recoil/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/public/*": [
+        "public/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/svg/*": [
+        "components/svg/*"
+      ],
+      "@/images/*": [
+        "public/images/*"
+      ]
+    },
+    "types": [
+      "@emotion/react/types/css-prop"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/test.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

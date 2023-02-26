@@ -22,42 +22,30 @@ a {
 
 /* 라이트모드(기본) */
 :root {
-  --brandColor: #0064ff;
   // Text
   --main: #21252f;
-  --sub: #868d9a;
-  --btn: #ffffff;
+  --sub: #636363;
   // Background
-  --bg: #ffffff;
+  --bg: #f4f4f4;
   --overlay: rgba(0, 0, 0, 0.4);
   --toast: rgba(0, 0, 0, 0.6);
   // Components
-  --textBox: #f9f9f9;
-  --disabled: #e9eaed;
-  --sectionLine: #f0f0f0;
-  --icon1: #b4b9c1;
-  --icon2: #727988;
-  --pressedMainBtn: #194aa6;
-  --pressedSubBtn: #e6e6e6;
+  --box: #ffffff;
+  --selected: #e8e8e8;
+  --sectionLine: #e3e3e3;
 }
 
 /* 다크모드 */
 [data-theme="Dark"] {
-  --brandColor: #0064ff;
   // Text
   --main: #ffffff;
-  --sub: #868d9a;
-  --btn: #ffffff;
+  --sub: #636363;
   // Background
-  --bg: #1d1d21;
+  --bg: #121212;
   --overlay: rgba(0, 0, 0, 0.7);
   --toast: rgba(88, 88, 88, 0.8);
   // Components
-  --textBox: #2d3138;
-  --disabled: #3b3b3b;
-  --sectionLine: #343a45;
-  --icon1: #4a515d;
-  --icon2: #727988;
-  --pressedMainBtn: #194aa6;
-  --pressedSubBtn: #27272b;
+  --box: #1f1f1f;
+  --selected: #363636;
+  --sectionLine: #292929;
 }
