@@ -5,13 +5,13 @@ import React from "react";
 import ListSvg from "@/svg/ListSvg";
 
 interface Props {
-  openSideBar: any;
+  setLeft: Function;
 }
 
-export const Header: NextPage<Props> = ({ openSideBar }) => {
+export const Header: NextPage<Props> = ({ setLeft }) => {
   return (
     <Wrapper>
-      <ListSvg onClick={openSideBar}></ListSvg>
+      <ListSvg onClick={() => setLeft(0)}></ListSvg>
     </Wrapper>
   );
 };

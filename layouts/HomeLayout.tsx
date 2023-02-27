@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactNode } from "react";
 import { DraggableCore } from "react-draggable";
 
@@ -11,6 +11,8 @@ interface LayoutProps {
 }
 
 const HomeLayout = ({ children }: LayoutProps) => {
+  const ref = useRef(null);
+
   const [left, setLeft] = useState(-200);
   const [transition, setTransition] = useState("");
 
@@ -34,23 +36,24 @@ const HomeLayout = ({ children }: LayoutProps) => {
     }
   };
 
-  const openSideBar = () => {
-    setLeft(0);
-  };
-
   return (
-    <Container>
-      <DraggableCore
-        onStop={onStop}
-        onDrag={(e, { deltaX }) => onDrag(left + deltaX)}
-      >
-        <Test>
-          <SideBar left={left} transition={transition}></SideBar>
-        </Test>
-      </DraggableCore>
-      <Header openSideBar={openSideBar}></Header>
-      <Content>{children}</Content>
-    </Container>
+    <DraggableCore
+      onStop={onStop}
+      onDrag={(e, { deltaX }) => {
+        onDrag(left + deltaX);
+      }}
+    >
+      <Container>
+        <Overlay
+          opacity={((left + 200) / 200) * 0.4}
+          display={left === -200 ? "none" : "block"}
+          onClick={() => setLeft(-200)}
+        ></Overlay>
+        <SideBar left={left} transition={transition}></SideBar>
+        <Header setLeft={setLeft}></Header>
+        <Content>{children}</Content>
+      </Container>
+    </DraggableCore>
   );
 };
 
@@ -62,13 +65,15 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-const Content = styled.div`
-  height: calc(100vh - 40px);
-`;
-
-const Test = styled.div`
+const Overlay = styled.div<{ opacity: number; display: string }>`
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: transparent;
+  background-color: #000000;
+  display: ${(props) => props.display};
+  opacity: ${(props) => props.opacity};
+`;
+
+const Content = styled.div`
+  height: calc(100vh - 40px);
 `;
