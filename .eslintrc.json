@@ -4,6 +4,8 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "simple-import-sort/imports": "error",
-    "no-multiple-empty-lines": "error"
+    "no-multiple-empty-lines": "error",
+    "import/no-anonymous-default-export": "off",
+    "react/display-name": "off"
   }
 }

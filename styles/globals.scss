@@ -20,6 +20,10 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+svg {
+  cursor: pointer;
+}
+
 /* 라이트모드(기본) */
 :root {
   // Text

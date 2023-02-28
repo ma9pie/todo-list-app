@@ -18,6 +18,7 @@
     "paths": {
       "@/constants/*": ["constants/*"],
       "@/components/*": ["components/*"],
+      "@/shared/*": ["components/shared/*"],
       "@/layouts/*": ["layouts/*"],
       "@/api/*": ["pages/api/*"],
       "@/recoil/*": ["recoil/*"],
@@ -26,7 +27,7 @@
       "@/pages/*": ["pages/*"],
       "@/public/*": ["public/*"],
       "@/styles/*": ["styles/*"],
-      "@/svg/*": ["components/svg/*"],
+      "@/svgs/*": ["components/svgs/*"],
       "@/images/*": ["public/images/*"]
     },
     "types": ["@emotion/react/types/css-prop"]
