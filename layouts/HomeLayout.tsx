@@ -22,7 +22,7 @@ const HomeLayout = ({ children }: LayoutProps) => {
   const [display, setDisplay] = useState("");
 
   useEffect(() => {
-    if (opacity === 0) {
+    if (left === -SIDEBAR_WIDTH && opacity === 0) {
       setTimeout(() => {
         setDisplay("none");
         setTransition("");
@@ -30,7 +30,7 @@ const HomeLayout = ({ children }: LayoutProps) => {
     } else {
       setDisplay("block");
     }
-  }, [opacity]);
+  }, [left, opacity]);
 
   // 사이드바 열기
   const openSideBar = () => {
