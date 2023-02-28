@@ -17,13 +17,18 @@ export const Header: NextPage<Props> = ({ setLeft }) => {
         onClick={() => {
           setLeft(0);
         }}
-        onTouchEnd={() => {
-          alert("onTouchEnd");
+      ></ListSvg>
+      <button
+        onClick={() => {
+          alert("onClick");
         }}
         onMouseUp={() => {
           alert("onMouseUp");
         }}
-      ></ListSvg>
+        onTouchEnd={() => {
+          alert("onTouchEnd");
+        }}
+      ></button>
     </Wrapper>
   );
 };
