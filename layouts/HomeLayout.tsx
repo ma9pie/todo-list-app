@@ -34,16 +34,8 @@ const HomeLayout = ({ children }: LayoutProps) => {
     }
   }, [left, opacity, transition]);
 
-  console.log({
-    display: display,
-    left: left,
-    opacity: opacity,
-    transition: transition,
-  });
-
   // 사이드바 열기
   const openSideBar = () => {
-    console.log("openSideBar");
     setLeft(0);
     setOpacity(calcOpacity(0));
     setTransition(TRANSITION);
@@ -51,7 +43,6 @@ const HomeLayout = ({ children }: LayoutProps) => {
 
   // 사이드바 닫기
   const closeSideBar = () => {
-    console.log("closeSideBar");
     setLeft(-SIDEBAR_WIDTH);
     setOpacity(calcOpacity(-SIDEBAR_WIDTH));
     setTransition(TRANSITION);
@@ -59,7 +50,6 @@ const HomeLayout = ({ children }: LayoutProps) => {
 
   // 드래그에서 마우스 뗄 때
   const onStop = () => {
-    console.log("onStop");
     const nextLeft = left <= -SIDEBAR_WIDTH / 2 ? -SIDEBAR_WIDTH : 0;
     setLeft(nextLeft);
     setOpacity(calcOpacity(nextLeft));
@@ -68,7 +58,6 @@ const HomeLayout = ({ children }: LayoutProps) => {
 
   // 드래그
   const onDrag = (value: number) => {
-    console.log("onDrag");
     let nextLeft = 0;
     if (value < -SIDEBAR_WIDTH) {
       nextLeft = -SIDEBAR_WIDTH;
