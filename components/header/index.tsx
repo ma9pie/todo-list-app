@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import type { NextPage } from "next";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import ListSvg from "@/svg/ListSvg";
 
@@ -9,9 +9,21 @@ interface Props {
 }
 
 export const Header: NextPage<Props> = ({ setLeft }) => {
+  const openSideBar = () => {};
+
   return (
     <Wrapper>
-      <ListSvg onClick={() => setLeft(0)}></ListSvg>
+      <ListSvg
+        onClick={() => {
+          setLeft(0);
+        }}
+        onTouchEnd={() => {
+          alert("onTouchEnd");
+        }}
+        onMouseUp={() => {
+          alert("onMouseUp");
+        }}
+      ></ListSvg>
     </Wrapper>
   );
 };
