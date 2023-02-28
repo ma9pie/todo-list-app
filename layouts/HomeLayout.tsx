@@ -87,6 +87,7 @@ const HomeLayout = ({ children }: LayoutProps) => {
           opacity={opacity}
           transition={transition}
           onClick={closeSideBar}
+          onTouchEnd={closeSideBar}
         ></Overlay>
         <SideBar ref={ref} left={left} transition={transition}></SideBar>
         <Header openSideBar={openSideBar}></Header>

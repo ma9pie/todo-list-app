@@ -5,20 +5,13 @@ import React, { useEffect, useState } from "react";
 import ListSvg from "@/svg/ListSvg";
 
 interface Props {
-  openSideBar: Function;
+  openSideBar: any;
 }
 
 export const Header: NextPage<Props> = ({ openSideBar }) => {
   return (
     <Wrapper>
-      <ListSvg
-        onClick={() => {
-          openSideBar();
-        }}
-        onTouchEnd={() => {
-          openSideBar();
-        }}
-      ></ListSvg>
+      <ListSvg onClick={openSideBar} onTouchEnd={openSideBar}></ListSvg>
     </Wrapper>
   );
 };
