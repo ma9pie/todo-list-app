@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { ReactNode } from "react";
 import { DraggableCore } from "react-draggable";
 
@@ -10,30 +10,68 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+const SIDEBAR_WIDTH = 200;
+const TRANSITION = "left 0.2s ease-in-out, opacity 0.2s ease-in-out";
+
 const HomeLayout = ({ children }: LayoutProps) => {
-  const ref = useRef(null);
+  const ref = createRef<HTMLDivElement>();
 
   const [left, setLeft] = useState(-200);
+  const [opacity, setOpacity] = useState(0);
   const [transition, setTransition] = useState("");
+  const [display, setDisplay] = useState("");
 
-  const onStop = () => {
-    console.log("onStop");
-    setLeft(left <= -100 ? -200 : 0);
-    setTransition("left 0.3s ease-in-out");
-    setTimeout(() => {
-      setTransition("");
-    }, 200);
+  useEffect(() => {
+    if (opacity === 0) {
+      setTimeout(() => {
+        setDisplay("none");
+        setTransition("");
+      }, 200);
+    } else {
+      setDisplay("block");
+    }
+  }, [opacity]);
+
+  // 사이드바 열기
+  const openSideBar = () => {
+    setLeft(0);
+    setOpacity(calcOpacity(0));
+    setTransition(TRANSITION);
   };
 
-  const onDrag = (nextValue: number) => {
-    console.log("onDrag");
-    if (nextValue < -200) {
-      setLeft(-200);
-    } else if (nextValue > 0) {
-      setLeft(0);
+  // 사이드바 닫기
+  const closeSideBar = () => {
+    setLeft(-SIDEBAR_WIDTH);
+    setOpacity(calcOpacity(-SIDEBAR_WIDTH));
+    setTransition(TRANSITION);
+  };
+
+  // 드래그에서 마우스 뗄 때
+  const onStop = () => {
+    const nextLeft = left <= -SIDEBAR_WIDTH / 2 ? -SIDEBAR_WIDTH : 0;
+    setLeft(nextLeft);
+    setOpacity(calcOpacity(nextLeft));
+    setTransition(TRANSITION);
+  };
+
+  // 드래그
+  const onDrag = (value: number) => {
+    let nextLeft = 0;
+    if (value < -SIDEBAR_WIDTH) {
+      nextLeft = -SIDEBAR_WIDTH;
+    } else if (value > 0) {
+      nextLeft = 0;
     } else {
-      setLeft(nextValue);
+      nextLeft = value;
     }
+    setLeft(nextLeft);
+    setOpacity(calcOpacity(nextLeft));
+    setTransition("");
+  };
+
+  // 투명도 계산
+  const calcOpacity = (x: number) => {
+    return ((x + SIDEBAR_WIDTH) / SIDEBAR_WIDTH) * 0.4;
   };
 
   return (
@@ -45,12 +83,13 @@ const HomeLayout = ({ children }: LayoutProps) => {
     >
       <Container>
         <Overlay
-          opacity={((left + 200) / 200) * 0.4}
-          display={left === -200 ? "none" : "block"}
-          onClick={() => setLeft(-200)}
+          display={display}
+          opacity={opacity}
+          transition={transition}
+          onClick={closeSideBar}
         ></Overlay>
-        <SideBar left={left} transition={transition}></SideBar>
-        <Header setLeft={setLeft}></Header>
+        <SideBar ref={ref} left={left} transition={transition}></SideBar>
+        <Header openSideBar={openSideBar}></Header>
         <Content>{children}</Content>
       </Container>
     </DraggableCore>
@@ -65,13 +104,18 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-const Overlay = styled.div<{ opacity: number; display: string }>`
+const Overlay = styled.div<{
+  display: string;
+  opacity: number;
+  transition: string;
+}>`
   position: absolute;
   width: 100vw;
   height: 100vh;
   background-color: #000000;
   display: ${(props) => props.display};
   opacity: ${(props) => props.opacity};
+  transition: ${(props) => props.transition};
 `;
 
 const Content = styled.div`
