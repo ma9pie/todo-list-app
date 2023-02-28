@@ -7,6 +7,7 @@ interface Props {
   color?: string;
   cursor?: string;
   onClick(): any;
+  onTouchEnd(): any;
 }
 
 const SvgComponent: NextPage<Props> = (props) => (
