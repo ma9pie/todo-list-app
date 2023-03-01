@@ -117,6 +117,11 @@ export default function Document() {
         ></script>
       </Head>
       <body>
+        <div id="modal"></div>
+        <div id="bottom-sheet"></div>
+        <div id="toast-popup"></div>
+        <div id="confirm-modal"></div>
+        <div id="alert-modal"></div>
         <Main />
         <NextScript />
       </body>

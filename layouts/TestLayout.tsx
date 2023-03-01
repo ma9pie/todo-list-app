@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 
 import Theme from "@/components/Theme";
-import useEventListener from "@/hooks/useEventListener";
+import useClickOutside from "@/hooks/useClickOutside";
 import AppsSvg from "@/images/apps.svg";
 import CloseSvg from "@/images/close.svg";
 
@@ -31,6 +31,10 @@ const TestLayout = (props: Props) => {
       title: "icons",
       url: "/test/icons",
     },
+    {
+      title: "modals",
+      url: "/test/modals",
+    },
   ];
 
   useEffect(() => {
@@ -43,19 +47,14 @@ const TestLayout = (props: Props) => {
     router.push(item.url);
   };
 
-  // 영역 외 클릭 시 사이드바 닫기
-  const handleClickOutSide = (e: any) => {
-    if (ref.current && !ref.current.contains(e.target)) {
-      setIsOpenMenu(false);
-    }
-  };
-
   // 첫글자 대문자로 변환
   const convertFirstStr = (str: string) => {
     return str.replace(/^[a-z]/, (str) => str.toUpperCase());
   };
 
-  useEventListener("mousedown", handleClickOutSide);
+  useClickOutside(() => {
+    setIsOpenMenu(false);
+  }, ref);
 
   return (
     <Wrapper>
@@ -107,7 +106,7 @@ const Top = styled.div`
   padding: 0px 24px;
 `;
 const Title = styled.h1`
-  font: var(--headline24);
+  font: var(--bold24);
 `;
 const Content = styled.div`
   min-width: 360px;
@@ -133,7 +132,7 @@ const ListBox = styled.div`
   padding: 8px 0px;
 `;
 const List = styled.p`
-  font: var(--body18);
+  font: var(--medium18);
   cursor: pointer;
   padding: 4px 8px;
   transition: background-color 0.1s ease;

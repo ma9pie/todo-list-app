@@ -1,49 +1,21 @@
-/**
- * @refference
- * https://learnersbucket.com/examples/interview/usethrottle-hook-in-react/
- */
-import { useCallback, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const useThrottle = (
-  callback: Function,
-  wait = 300,
-  option = { leading: true, trailing: true }
-) => {
-  const timerId: any = useRef(); // track the timer
-  const lastArgs: any = useRef(); // track the args
+function useThrottle<T>(value: T, delay: number) {
+  const [throttledValue, setThrottledValue] = useState<T>(value);
+  const lastValue = useRef<T>(value);
+  const timeoutId = useRef<number>();
 
-  const throttle = useCallback(
-    function (...args: any[]) {
-      const { trailing, leading } = option;
-      // 딜레이 호출 함수
-      const waitFunc = () => {
-        if (trailing && lastArgs.current) {
-          callback(lastArgs.current);
-          lastArgs.current = null;
-          timerId.current = setTimeout(waitFunc, wait);
-        } else {
-          // 타이머 리셋
-          timerId.current = null;
-        }
-      };
+  useEffect(() => {
+    if (value !== lastValue.current) {
+      lastValue.current = value;
+      clearTimeout(timeoutId.current);
+      timeoutId.current = window.setTimeout(() => {
+        setThrottledValue(value);
+      }, delay);
+    }
+  }, [value, delay]);
 
-      // leading이 true일 경우 바로 실행
-      if (!timerId.current && leading) {
-        callback(args);
-      }
-      // arg 저장
-      else {
-        lastArgs.current = args;
-      }
+  return throttledValue;
+}
 
-      // 딜레이 된 호출 실행
-      if (!timerId.current) {
-        timerId.current = setTimeout(waitFunc, wait);
-      }
-    },
-    [callback, wait, option]
-  );
-
-  return throttle;
-};
 export default useThrottle;

@@ -1,44 +1,31 @@
 import { useEffect, useRef } from "react";
 
-/**
- * 이벤트 리스너 hooks
- * @param {String} eventName : 이벤트 이름
- * @param {Function} handler : 이벤트 발생 시 실행할 함수
- * @param {Object} element : 이벤트를 등록할 요소
- * @refference
- * https://usehooks.com/useEventListener
- */
+type EventCallback<E extends Event = Event> = (event: E) => void;
 
-function useEventListener(
-  eventName: string,
-  handler: Function,
-  element = window
+function useEventListener<K extends keyof DocumentEventMap>(
+  eventName: K,
+  handler: EventCallback<DocumentEventMap[K]>,
+  options?: EventListenerOptions
 ) {
   const savedHandler = useRef<any>();
 
-  // handler 변경 시 ref.current 업데이트
   useEffect(() => {
     savedHandler.current = handler;
   }, [handler]);
 
-  useEffect(
-    () => {
-      // 해당 요소가 addEventListener를 지원하는지 확인
-      const isSupported = element && element.addEventListener;
-      if (!isSupported) return;
+  useEffect(() => {
+    const eventListener = (event: any) => savedHandler.current?.(event);
 
-      // ref내에 저장된 handler함수를 호출하는 이벤트 리스너 생성
-      const eventListener = (e: any) => savedHandler.current(e);
+    if (typeof window !== "undefined") {
+      window.addEventListener(eventName, eventListener, options);
+    }
 
-      // 이벤트 등록
-      element.addEventListener(eventName, eventListener);
-      return () => {
-        // 이벤트 해제
-        element.removeEventListener(eventName, eventListener);
-      };
-    },
-    [eventName, element] // eventName 또는 element 변경 시
-  );
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener(eventName, eventListener, options);
+      }
+    };
+  }, [eventName, options]);
 }
 
 export default useEventListener;

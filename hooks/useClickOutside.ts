@@ -1,23 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-/**
- * 바깥영역 클릭 감지 hooks
- * @param {any} ref : 요소
- * @param {Function} callback : 콜백함수
- */
+type EventCallback<E extends Event = Event> = (event: E) => void;
 
-const useClickOutside = (ref: any, callback: Function) => {
-  const handleClick = (e: any) => {
-    if (ref.current && !ref.current.contains(e.target)) {
-      callback();
-    }
-  };
+function useClickOutside<T extends HTMLElement = HTMLElement>(
+  callback: EventCallback,
+  ref: React.RefObject<T>
+) {
+  const savedCallback = useRef(callback);
+
   useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        savedCallback.current(event);
+      }
     };
-  }, []);
-};
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
 
 export default useClickOutside;

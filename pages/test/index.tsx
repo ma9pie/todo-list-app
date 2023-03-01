@@ -24,9 +24,9 @@ Components.getLayout = function getLayout(page: ReactElement) {
 
 const Wrapper = styled.div``;
 const Title = styled.p`
-  font: var(--headline24);
+  font: var(--medium20);
   margin-bottom: 24px;
 `;
 const Text = styled.p`
-  font: var(--body14);
+  font: var(--normal14);
 `;
