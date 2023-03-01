@@ -15,7 +15,7 @@ const Header = (props: Props) => {
         onClick={props.openSideBar}
         onTouchEnd={props.openSideBar}
       ></MenuSvg>
-      <Link href="/test">
+      <Link href="/test" passHref>
         <LinkButton>Test</LinkButton>
       </Link>
     </Wrapper>
