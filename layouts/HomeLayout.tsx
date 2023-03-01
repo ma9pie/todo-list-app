@@ -100,7 +100,6 @@ const HomeLayout = (props: Props) => {
 
 export default HomeLayout;
 
-const Wrapper = styled.div``;
 const Container = styled.div`
   position: relative;
   width: 100vw;
