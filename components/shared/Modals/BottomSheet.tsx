@@ -23,9 +23,11 @@ function BottomSheet(props: any) {
         <Top>
           <BlankBox></BlankBox>
           <Title>{props.title}</Title>
-          <CloseSvgWrapper onClick={() => props.onRequestClose()}>
-            <CloseSvg></CloseSvg>
-          </CloseSvgWrapper>
+          <CloseSvg
+            width={32}
+            height={32}
+            onClick={() => props.onRequestClose()}
+          ></CloseSvg>
         </Top>
         <Content>{props.component()} </Content>
       </Container>
@@ -96,14 +98,6 @@ const BlankBox = styled.div`
 `;
 const Title = styled.p`
   font: var(--bold20);
-`;
-const CloseSvgWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 18px;
-  cursor: pointer;
 `;
 const Content = styled.div`
   padding-right: 8px;

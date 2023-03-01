@@ -134,7 +134,7 @@ const ListBox = styled.div`
 const List = styled.p`
   font: var(--medium18);
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 8px;
   transition: background-color 0.1s ease;
   &:hover {
     background-color: var(--selected);

@@ -64,7 +64,7 @@ Confirm.defaultProps = {
   onAfterOpen: () => {},
   onAfterClose: () => {},
   onRequestClose: () => {},
-  onClickConfirm: () => {},
+  onRequestConfirm: () => {},
 };
 
 const fadeIn = css`
