@@ -77,7 +77,7 @@ function ToastPopup(props: any) {
             height="24px"
             className={css`
               path {
-                fill: white;
+                fill: var(--yellow400);
               }
             `}
           ></WarningSvg>
