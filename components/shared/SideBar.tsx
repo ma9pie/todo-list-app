@@ -1,12 +1,5 @@
 import styled from "@emotion/styled";
-import type { NextPage } from "next";
-import React, { forwardRef, Ref, useEffect, useRef } from "react";
-
-// interface Props {
-//   ref: Ref<HTMLDivElement>;
-//   left: number;
-//   transition: string;
-// }
+import React, { forwardRef, Ref } from "react";
 
 type Props = {
   left: number;

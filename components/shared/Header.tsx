@@ -1,17 +1,24 @@
 import styled from "@emotion/styled";
 import type { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import MenuSvg from "@/images/menu.svg";
 
-interface Props {
-  openSideBar: any;
-}
+// interface Props {
+//   openSideBar: any;
+// }
 
-export const Header: NextPage<Props> = ({ openSideBar }) => {
+type Props = {
+  openSideBar: any;
+};
+
+export const Header = (props: Props) => {
   return (
     <Wrapper>
-      <MenuSvg onClick={openSideBar} onTouchEnd={openSideBar}></MenuSvg>
+      <MenuSvg
+        onClick={props.openSideBar}
+        onTouchEnd={props.openSideBar}
+      ></MenuSvg>
     </Wrapper>
   );
 };
