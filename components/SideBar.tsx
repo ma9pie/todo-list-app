@@ -6,7 +6,7 @@ type Props = {
   transition: string;
 };
 
-export const SideBar = forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
+const SideBar = forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   return (
     <Wrapper>
       <Content
@@ -18,12 +18,14 @@ export const SideBar = forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   );
 });
 
+export default SideBar;
+
 SideBar.displayName = "SideBar";
 
 const Wrapper = styled.div`
   position: absolute;
 `;
-const Content = styled.div<{ left: string; transition: string }>`
+const Content = styled.div<any>`
   position: absolute;
   width: 200px;
   min-height: 100vh;

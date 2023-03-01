@@ -1,21 +1,20 @@
 import styled from "@emotion/styled";
-import React, { createRef, useEffect, useRef, useState } from "react";
-import { ReactNode } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { DraggableCore } from "react-draggable";
 
-import { Header } from "@/components/header";
-import { SideBar } from "@/components/sideBar";
+import Header from "@/components/Header";
+import SideBar from "@/components/SideBar";
 
-interface LayoutProps {
+type Props = {
   children: ReactNode;
-}
+};
 
 let pid: any;
 const SIDEBAR_WIDTH = 200;
 const TRANSITION = "left 0.2s ease-in-out, opacity 0.2s ease-in-out";
 
-const HomeLayout = ({ children }: LayoutProps) => {
-  const ref = createRef<HTMLDivElement>();
+const HomeLayout = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   const [left, setLeft] = useState(-200);
   const [opacity, setOpacity] = useState(0);
@@ -93,7 +92,7 @@ const HomeLayout = ({ children }: LayoutProps) => {
         ></Overlay>
         <SideBar ref={ref} left={left} transition={transition}></SideBar>
         <Header openSideBar={openSideBar}></Header>
-        <Content>{children}</Content>
+        <Content>{props.children}</Content>
       </Container>
     </DraggableCore>
   );
@@ -107,11 +106,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-const Overlay = styled.div<{
-  display: string;
-  opacity: number;
-  transition: string;
-}>`
+const Overlay = styled.div<any>`
   position: absolute;
   width: 100vw;
   height: 100vh;

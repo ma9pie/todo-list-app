@@ -14,7 +14,7 @@ function useEventListener(
   handler: Function,
   element = window
 ) {
-  const savedHandler: any = useRef();
+  const savedHandler = useRef<any>();
 
   // handler 변경 시 ref.current 업데이트
   useEffect(() => {
