@@ -116,5 +116,5 @@ const Overlay = styled.div<any>`
 `;
 
 const Content = styled.div`
-  height: calc(100vh - 40px);
+  height: calc(100vh - 60px);
 `;

@@ -3,14 +3,7 @@ import type { ReactElement } from "react";
 
 import HomeLayout from "@/layouts/HomeLayout";
 export default function Home() {
-  return (
-    <Wrapper>
-      <TestButton
-        onClick={() => alert("onClick")}
-        onTouchEnd={() => alert("onTouchEnd")}
-      ></TestButton>
-    </Wrapper>
-  );
+  return <Wrapper></Wrapper>;
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
@@ -18,7 +11,3 @@ Home.getLayout = function getLayout(page: ReactElement) {
 };
 
 const Wrapper = styled.div``;
-const TestButton = styled.button`
-  width: 40px;
-  height: 24px;
-`;

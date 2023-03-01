@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -19,15 +18,14 @@ const Header = (props: Props) => {
   return (
     <Wrapper>
       <MenuSvg
+        width={40}
+        height={40}
         onClick={props.openSideBar}
         onTouchEnd={props.openSideBar}
       ></MenuSvg>
       <LinkButton onClick={goToTestPage} onTouchEnd={goToTestPage}>
         Test
       </LinkButton>
-      <Link href="/test" passHref>
-        <LinkButton>Test</LinkButton>
-      </Link>
     </Wrapper>
   );
 };
@@ -38,13 +36,15 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
+  height: 60px;
   padding: 0px 16px;
   border-bottom: 1px solid var(--sectionLine);
 `;
 const LinkButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 24px;
   background-color: var(--box);
-  border: 1px solid red;
 `;
