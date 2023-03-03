@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
@@ -18,6 +19,7 @@ import DashboardSvg from "@/images/dashboard.svg";
 import DeleteSvg from "@/images/delete.svg";
 import EditSvg from "@/images/edit.svg";
 import ErrorSvg from "@/images/error_outline.svg";
+import GithubSvg from "@/images/github.svg";
 import ListSvg from "@/images/list.svg";
 import LogoSvg from "@/images/logo.svg";
 import EmailSvg from "@/images/mail_outline.svg";
@@ -72,6 +74,11 @@ const Setting = () => {
     });
   };
 
+  // 깃허브
+  const github = () => {
+    window.open("https://github.com/ma9pie/todo-list", "_blank");
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -111,6 +118,13 @@ const Setting = () => {
             </Content>
             <ForwardSvg></ForwardSvg>
           </List>
+          <List onClick={github}>
+            <Content>
+              <GithubSvg></GithubSvg>
+              <ListTitle>Github</ListTitle>
+            </Content>
+            <ForwardSvg></ForwardSvg>
+          </List>
         </ListContainer>
       </Container>
 
@@ -143,7 +157,7 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div``;
 const Subtitle = styled.p`
-  font: var(--medium16);
+  font: var(--medium12);
   color: var(--sub);
   margin-bottom: 8px;
 `;
@@ -159,6 +173,7 @@ const List = styled.div`
   padding: 0px 16px;
   border-radius: 10px;
   cursor: pointer;
+  user-select: none;
   background-color: var(--box);
   & * {
     background-color: inherit;

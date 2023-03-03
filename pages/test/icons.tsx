@@ -17,6 +17,7 @@ import DashboardSvg from "@/images/dashboard.svg";
 import DeleteSvg from "@/images/delete.svg";
 import EditSvg from "@/images/edit.svg";
 import ErrorSvg from "@/images/error_outline.svg";
+import GithubSvg from "@/images/github.svg";
 import ListSvg from "@/images/list.svg";
 import LogoSvg from "@/images/logo.svg";
 import EmailSvg from "@/images/mail_outline.svg";
@@ -48,6 +49,7 @@ function Components() {
         <DeleteSvg></DeleteSvg>
         <EditSvg></EditSvg>
         <ErrorSvg></ErrorSvg>
+        <GithubSvg></GithubSvg>
         <ListSvg></ListSvg>
         <EmailSvg></EmailSvg>
         <MenuSvg></MenuSvg>
