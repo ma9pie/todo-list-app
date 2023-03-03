@@ -26,7 +26,7 @@ const Header = (props: Props) => {
         onClick={props.openSideBar}
         onTouchEnd={props.openSideBar}
       ></MenuSvg>
-      <SettingSvg onClick={openSettings} ontouchEnd={openSettings}></SettingSvg>
+      <SettingSvg onClick={openSettings} onTouchEnd={openSettings}></SettingSvg>
     </Wrapper>
   );
 };
