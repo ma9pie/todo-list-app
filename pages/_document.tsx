@@ -75,7 +75,7 @@ export default function Document() {
           sizes="152x152"
           href="icons/apple-touch-icon-152x152.png"
         />
-        <link
+        {/* <link
           rel="icon"
           type="image/png"
           href="icons/favicon-16x16.png"
@@ -98,7 +98,7 @@ export default function Document() {
           type="image/png"
           href="icons/favicon-128.png"
           sizes="128x128"
-        />
+        /> */}
         <link
           rel="icon"
           type="image/png"
