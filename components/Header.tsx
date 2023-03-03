@@ -11,6 +11,13 @@ type Props = {
 };
 
 const Header = (props: Props) => {
+  const openSettings = () => {
+    modalUtils.openBottomSheet({
+      title: "Settings",
+      component: Setting,
+    });
+  };
+
   return (
     <Wrapper>
       <MenuSvg
@@ -19,14 +26,7 @@ const Header = (props: Props) => {
         onClick={props.openSideBar}
         onTouchEnd={props.openSideBar}
       ></MenuSvg>
-      <SettingSvg
-        onClick={() =>
-          modalUtils.openBottomSheet({
-            title: "Settings",
-            component: Setting,
-          })
-        }
-      ></SettingSvg>
+      <SettingSvg onClick={openSettings} ontouchEnd={openSettings}></SettingSvg>
     </Wrapper>
   );
 };
