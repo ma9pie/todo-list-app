@@ -1,33 +1,19 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import MoonSvg from "@/images/bedtime.svg";
 import SunSvg from "@/images/wb_sunny.svg";
-import themeUtils from "@/utils/themeUtils";
 
-const Theme = () => {
-  const [theme, setTheme] = useState("Light");
+type Props = {
+  theme: string;
+  onClick?: any;
+};
 
-  useEffect(() => {
-    if (localStorage.getItem("theme") === "Light") {
-      themeUtils.setLight(setTheme);
-    } else {
-      themeUtils.setDark(setTheme);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (theme === "Dark") {
-      themeUtils.setLight(setTheme);
-    } else {
-      themeUtils.setDark(setTheme);
-    }
-  };
-
+const Theme = (props: Props) => {
   return (
-    <Wrapper onClick={toggleTheme}>
-      {theme === "Light" && <SunSvg></SunSvg>}
-      {theme === "Dark" && <MoonSvg></MoonSvg>}
+    <Wrapper onClick={props.onClick}>
+      {props.theme === "Light" && <SunSvg></SunSvg>}
+      {props.theme === "Dark" && <MoonSvg></MoonSvg>}
     </Wrapper>
   );
 };
@@ -39,5 +25,4 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 24px;
   height: 24px;
-  cursor: pointer;
 `;

@@ -73,17 +73,18 @@ const Container = styled.div<any>`
   position: fixed;
   bottom: 0px;
   width: 100%;
+  min-width: 240px;
+  height: ${(props) => props.height};
+  max-height: 100vh;
   border-radius: 25px 25px 0px 0px;
   padding: 36px 24px;
-  max-height: 100vh;
-  height: ${(props) => props.height};
   z-index: 999;
   & * {
     overscroll-behavior: contain;
-    -ms-overflow-style: none; /* 인터넷 익스플로러 */
-    scrollbar-width: none; /* 파이어폭스 */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     &::-webkit-scrollbar {
-      display: none; /* 크롬, 사파리, 오페라, 엣지 */
+      display: none;
     }
   }
 `;
@@ -102,6 +103,6 @@ const Title = styled.p`
 const Content = styled.div`
   padding-right: 8px;
   // 전체높이 - top영역 - 아래쪽 여백
-  max-height: calc(100vh - 82px - 32px);
-  overflow: scroll;
+  max-height: calc(100vh - 32px - 56px - 32px);
+  overflow-y: scroll;
 `;

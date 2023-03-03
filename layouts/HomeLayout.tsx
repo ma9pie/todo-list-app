@@ -77,7 +77,7 @@ const HomeLayout = (props: Props) => {
 
   return (
     <DraggableCore
-      scale={0.5}
+      scale={0.75}
       onStop={onStop}
       onDrag={(e, { deltaX }) => {
         onDrag(left + deltaX);

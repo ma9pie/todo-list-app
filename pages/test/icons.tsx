@@ -11,6 +11,7 @@ import CheckSvg from "@/images/check.svg";
 import CloseSvg from "@/images/close.svg";
 import CloudDoneSvg from "@/images/cloud_done.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
+import CodeSvg from "@/images/code.svg";
 import PaintSvg from "@/images/color_lens.svg";
 import DashboardSvg from "@/images/dashboard.svg";
 import DeleteSvg from "@/images/delete.svg";
@@ -21,6 +22,7 @@ import LogoSvg from "@/images/logo.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import MenuSvg from "@/images/menu.svg";
 import SettingSvg from "@/images/settings.svg";
+import SubjectSvg from "@/images/subject.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import SunSvg from "@/images/wb_sunny.svg";
 import TestLayout from "@/layouts/TestLayout";
@@ -40,6 +42,7 @@ function Components() {
         <CloseSvg></CloseSvg>
         <CloudDoneSvg></CloudDoneSvg>
         <CloudDownloadSvg></CloudDownloadSvg>
+        <CodeSvg></CodeSvg>
         <PaintSvg></PaintSvg>
         <DashboardSvg></DashboardSvg>
         <DeleteSvg></DeleteSvg>
@@ -49,6 +52,7 @@ function Components() {
         <EmailSvg></EmailSvg>
         <MenuSvg></MenuSvg>
         <SettingSvg></SettingSvg>
+        <SubjectSvg></SubjectSvg>
         <WarningSvg></WarningSvg>
         <SunSvg></SunSvg>
       </Grid>
