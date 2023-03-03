@@ -53,8 +53,8 @@
       "type": "image/png"
     },
     {
-      "src": "icons/favicon-512x512.png",
-      "sizes": "512x512",
+      "src": "icons/favicon.ico",
+      "sizes": "64x64",
       "type": "image/icon",
       "purpose": "any maskable"
     }

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { DraggableCore } from "react-draggable";
 
+import Head from "@/components/Head";
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
 
@@ -76,31 +77,35 @@ const HomeLayout = (props: Props) => {
   };
 
   return (
-    <DraggableCore
-      scale={0.75}
-      onStop={onStop}
-      onDrag={(e, { deltaX }) => {
-        onDrag(left + deltaX);
-      }}
-    >
-      <Container>
-        <Overlay
-          display={display}
-          opacity={opacity}
-          transition={transition}
-          onClick={closeSideBar}
-          onTouchEnd={closeSideBar}
-        ></Overlay>
-        <SideBar ref={ref} left={left} transition={transition}></SideBar>
-        <Header openSideBar={openSideBar}></Header>
-        <Content>{props.children}</Content>
-      </Container>
-    </DraggableCore>
+    <Wrapper>
+      <Head></Head>
+      <DraggableCore
+        scale={0.75}
+        onStop={onStop}
+        onDrag={(e, { deltaX }) => {
+          onDrag(left + deltaX);
+        }}
+      >
+        <Container>
+          <Overlay
+            display={display}
+            opacity={opacity}
+            transition={transition}
+            onClick={closeSideBar}
+            onTouchEnd={closeSideBar}
+          ></Overlay>
+          <SideBar ref={ref} left={left} transition={transition}></SideBar>
+          <Header openSideBar={openSideBar}></Header>
+          <Content>{props.children}</Content>
+        </Container>
+      </DraggableCore>
+    </Wrapper>
   );
 };
 
 export default HomeLayout;
 
+const Wrapper = styled.div``;
 const Container = styled.div`
   position: relative;
   width: 100vw;
