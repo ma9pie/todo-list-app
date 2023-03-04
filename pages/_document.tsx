@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="ko">
       <Head>
+        {/* 메타 태그 설정 */}
         <meta
           name="description"
           content="사용자가 할 일을 리스트에 추가하고, 체크박스로 완료 여부를 표시할 수 있도록 해주는 Todo List App입니다. 사용자들은 할 일을 보다 체계적으로 관리할 수 있으며, 직관적이고 간단한 디자인으로 제작되어, 간편하게 사용할 수 있습니다."
@@ -13,8 +14,9 @@ export default function Document() {
         <meta name="author" content="ma9pie" />
         <meta name="image" content="/images/logo.svg" />
         <meta name="robots" content="index, follow" />
-
         <meta name="keywords" content="todo, todo list, todo list app" />
+
+        {/* Naver 블로그, 카카오톡 미리보기 설정 */}
         <meta property="og:url" content="https://todo-list-ma9pie.vercel.app" />
         <meta property="og:site_name" content="Todo List App" />
         <meta property="og:title" content="Todo List App" />
@@ -25,6 +27,7 @@ export default function Document() {
         />
         <meta property="og:type" content="website" />
 
+        {/* 트위터 미리보기 설정 */}
         <meta name="twitter:card" content="Todo List App" />
         <meta
           name="twitter:url"
