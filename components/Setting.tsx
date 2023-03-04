@@ -61,7 +61,7 @@ const Setting = () => {
   // 문의하기
   const inquiry = () => {
     window.open(
-      "https://docs.google.com/forms/d/1eE3KBOtAmtNh5cLHlGyrZC7q5I_rvG0TxwaJ16UiuvI/edit",
+      "https://docs.google.com/forms/d/1eE3KBOtAmtNh5cLHlGyrZC7q5I_rvG0TxwaJ16UiuvI",
       "_blank"
     );
   };
