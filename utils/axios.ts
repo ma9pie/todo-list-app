@@ -40,7 +40,7 @@ instance.interceptors.response.use(
     if (!isServerError) {
       isServerError = true;
       modalUtils.openAlert({
-        message: `서버오류가\n 발생하였습니다.`,
+        message: `서버 오류가\n 발생하였습니다.`,
         onAfterClose: () => {
           isServerError = false;
         },

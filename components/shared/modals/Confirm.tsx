@@ -124,9 +124,6 @@ const Title = styled.p`
   margin: 0px;
 `;
 const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   max-height: 1000px;
   padding: 0px 16px;

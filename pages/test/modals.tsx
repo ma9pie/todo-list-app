@@ -15,7 +15,7 @@ function Components() {
           onClick={() =>
             modalUtils.openAlert({
               title: "Alert",
-              message: "message",
+              message: `message\n message\n message`,
               confirmBtnText: "yes",
               onAfterOpen: () => {
                 console.log("onAfterOpen");
@@ -45,7 +45,7 @@ function Components() {
           onClick={() =>
             modalUtils.openConfirm({
               title: "Confirm",
-              message: "message",
+              message: `message\n message\n message`,
               confirmBtnText: "yes",
               cancleBtnText: "no",
               onAfterOpen: () => {

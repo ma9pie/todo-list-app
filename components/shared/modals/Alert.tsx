@@ -21,6 +21,8 @@ function Alert(props: Props) {
     return () => props.onAfterClose();
   }, []);
 
+  console.log(props.message.split("\n"));
+
   return (
     <Wrapper>
       <Overlay
@@ -36,15 +38,13 @@ function Alert(props: Props) {
           <Title>{props.title}</Title>
         </Top>
         <Content>
-          <>
-            {props.component()}
-            {props.message &&
-              props.message
-                .split("\n")
-                .map((text: string, idx: number) => (
-                  <Text key={idx}>{text}</Text>
-                ))}
-          </>
+          {props.component()}
+          {props.message &&
+            props.message
+              .split("\n")
+              .map((text: string, idx: number) => (
+                <Text key={idx}>{text}</Text>
+              ))}
         </Content>
         <ButtonBox>
           <MainButton onClick={props.onRequestClose}>
@@ -113,9 +113,6 @@ const Title = styled.p`
   margin: 0px;
 `;
 const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   max-height: 1000px;
   padding: 0px 16px;
