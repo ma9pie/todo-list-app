@@ -73,10 +73,10 @@ export default function Home() {
         {todo.map((data, key) => (
           <Todo key={data.id} {...data}></Todo>
         ))}
-        <AddWrapper>
-          <Add onClick={openAddList}></Add>
-        </AddWrapper>
       </Container>
+      <AddWrapper>
+        <Add onClick={openAddList}></Add>
+      </AddWrapper>
     </Wrapper>
   );
 }
@@ -98,8 +98,8 @@ const Container = styled.div`
 `;
 const AddWrapper = styled.div`
   position: absolute;
-  left: max(96% - 60px, 190px);
-  bottom: 2%;
+  left: max(96vw - 60px, 190px);
+  bottom: 2vh;
   background-color: transparent;
   & * {
     background-color: transparent;
