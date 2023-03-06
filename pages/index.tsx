@@ -78,13 +78,20 @@ export default function Home() {
   return (
     <Wrapper>
       <Container>
-        {todo.map((data, key) => (
-          <Todo key={data.id} {...data}></Todo>
-        ))}
+        {todo
+          .concat(todo)
+          .concat(todo)
+          .concat(todo)
+          .map((data, key) => (
+            <Todo key={data.id} {...data}></Todo>
+          ))}
+        <Test>
+          <Add onClick={openAddList}></Add>
+        </Test>
       </Container>
-      <AddWrapper bottom={isMobile ? "calc(2vh + 60px)" : "2vh"}>
+      {/* <AddWrapper bottom={isMobile ? "calc(2vh + 60px)" : "2vh"}>
         <Add onClick={openAddList}></Add>
-      </AddWrapper>
+      </AddWrapper> */}
     </Wrapper>
   );
 }
@@ -109,4 +116,10 @@ const AddWrapper = styled.div<{ bottom: string }>`
   left: max(96vw - 60px, 190px);
   bottom: ${(props) => props.bottom};
   background-color: transparent;
+`;
+const Test = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
 `;
