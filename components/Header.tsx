@@ -7,7 +7,7 @@ import SettingSvg from "@/images/settings.svg";
 import modalUtils from "@/utils/modalUtils";
 
 type Props = {
-  openSideBar: any;
+  openSideBar: Function;
 };
 
 const Header = (props: Props) => {

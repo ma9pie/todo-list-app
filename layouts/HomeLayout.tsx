@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode;
 };
 
-let pid: any;
+let pid: ReturnType<typeof setTimeout>;
 const SIDEBAR_WIDTH = 200;
 const TRANSITION = "left 0.2s ease-in-out, opacity 0.2s ease-in-out";
 

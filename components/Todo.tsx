@@ -9,7 +9,20 @@ type Props = {
   color: string;
   pinned: boolean;
   created: string;
-  tasks: Array<any>;
+  tasks: Array<Tasks>;
+};
+
+type Tasks = {
+  id: string;
+  content: string;
+  done: boolean;
+  note: string;
+  subTasks: Array<SubTasks>;
+};
+
+type SubTasks = {
+  content: string;
+  done: boolean;
 };
 
 const Todo = (props: Props) => {

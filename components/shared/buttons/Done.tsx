@@ -4,7 +4,7 @@ import React from "react";
 import CheckSvg from "@/images/check.svg";
 
 type Props = {
-  onClick: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Done = (props: Props) => {
@@ -30,11 +30,15 @@ const Wrapper = styled.div`
   border-radius: 50%;
   background-color: var(--blue500);
   box-shadow: var(--boxShadow);
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
   cursor: pointer;
   & * {
     background-color: inherit;
   }
   path {
     fill: white;
+  }
+  &:active:not([disabled]) {
+    background-color: var(--blue700);
   }
 `;

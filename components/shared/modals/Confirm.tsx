@@ -2,7 +2,22 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
-function Confirm(props: any) {
+type Props = {
+  isOpen: boolean;
+  top: string;
+  left: string;
+  title: string;
+  message: string;
+  confirmBtnText: string;
+  cancleBtnText: string;
+  component: Function;
+  onAfterOpen: Function;
+  onAfterClose: Function;
+  onRequestClose: Function;
+  onRequestConfirm: Function;
+};
+
+function Confirm(props: Props) {
   useEffect(() => {
     props.onAfterOpen();
     return () => props.onAfterClose();
@@ -74,7 +89,7 @@ const fadeOut = css`
   animation: fade-out 0.2s ease-in-out forwards;
 `;
 const Wrapper = styled.div``;
-const Overlay = styled.div`
+const Overlay = styled.div<any>`
   position: fixed;
   top: 0;
   left: 0;
@@ -140,7 +155,7 @@ const MainButton = styled.button`
     background-color: var(--blue700);
   }
 `;
-const SubButton = styled.button`
+const SubButton = styled.button<any>`
   font: var(--normal14);
   width: 100%;
   height: 40px;

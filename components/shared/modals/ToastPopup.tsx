@@ -6,10 +6,18 @@ import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 
-let pid: any = -1;
-function ToastPopup(props: any) {
+type Props = {
+  type: string;
+  message: string;
+  isOpen: boolean;
+  unmount: Function;
+  onRequestClose: Function;
+};
+
+let pid: ReturnType<typeof setTimeout>;
+function ToastPopup(props: Props) {
   const [isIOS, setIsIOS] = useState(false);
-  const [isOpen, setIsOpen] = useState<any>(null);
+  const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (/iPhone|iPad/i.test(navigator.userAgent)) {
@@ -103,7 +111,9 @@ export default React.memo(ToastPopup);
 
 ToastPopup.defaultProps = {
   type: "",
+  message: "",
   isOpen: null,
+  unmount: () => {},
   onRequestClose: () => {},
 };
 

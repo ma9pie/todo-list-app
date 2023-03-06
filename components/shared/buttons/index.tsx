@@ -3,13 +3,19 @@ import { forwardRef, ReactNode } from "react";
 
 type Props = {
   fullWidth?: boolean;
+  disabled?: boolean;
   children?: ReactNode;
-  onClick?: Function;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button = forwardRef((props: Props, ref) => {
   return (
-    <Wrapper ref={ref} {...props}>
+    <Wrapper
+      ref={ref}
+      disabled={props.disabled}
+      fullWidth={props.fullWidth}
+      onClick={props.onClick}
+    >
       <Inner>{props.children}</Inner>
     </Wrapper>
   );
@@ -19,9 +25,11 @@ export default Button;
 
 Button.defaultProps = {
   fullWidth: true,
+  disabled: false,
+  onClick: () => {},
 };
 
-const Wrapper = styled.div<any>`
+const Wrapper = styled.button<any>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -42,9 +50,9 @@ const Wrapper = styled.div<any>`
   }
   &:disabled {
     opacity: 0.26;
-    cursor: not-allowed;
+    cursor: default;
   }
-  &:active {
+  &:active:not([disabled]) {
     background-color: var(--blue700);
   }
   & * {

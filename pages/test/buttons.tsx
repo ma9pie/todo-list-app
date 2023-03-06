@@ -10,7 +10,8 @@ import TestLayout from "@/layouts/TestLayout";
 function Components() {
   return (
     <Wrapper>
-      <Button></Button>
+      <Button>button</Button>
+      <Button disabled>disabled button</Button>
       <Add></Add>
       <Done></Done>
     </Wrapper>

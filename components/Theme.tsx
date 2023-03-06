@@ -6,7 +6,7 @@ import SunSvg from "@/images/wb_sunny.svg";
 
 type Props = {
   theme: string;
-  onClick?: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Theme = (props: Props) => {
@@ -18,9 +18,13 @@ const Theme = (props: Props) => {
   );
 };
 
+Theme.defaultProps = {
+  onClick: () => {},
+};
+
 export default Theme;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<any>`
   display: flex;
   justify-content: center;
   width: 24px;

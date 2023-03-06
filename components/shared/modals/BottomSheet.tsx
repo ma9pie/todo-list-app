@@ -4,7 +4,17 @@ import React, { useEffect } from "react";
 
 import CloseSvg from "@/images/close.svg";
 
-function BottomSheet(props: any) {
+type Props = {
+  height: string;
+  isOpen: boolean;
+  title: string;
+  component: Function;
+  onAfterOpen: Function;
+  onAfterClose: Function;
+  onRequestClose: Function;
+};
+
+function BottomSheet(props: Props) {
   useEffect(() => {
     props.onAfterOpen();
     return () => props.onAfterClose();
@@ -60,7 +70,7 @@ const slideDown = css`
   animation: slide-down 0.2s ease-in-out forwards;
 `;
 const Wrapper = styled.div``;
-const Overlay = styled.div`
+const Overlay = styled.div<any>`
   position: fixed;
   top: 0;
   left: 0;

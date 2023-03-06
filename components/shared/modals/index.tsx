@@ -2,7 +2,18 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
-function Modal(props: any) {
+type Props = {
+  isOpen: boolean;
+  top: string;
+  left: string;
+  padding: string;
+  component: Function;
+  onAfterOpen: Function;
+  onAfterClose: Function;
+  onRequestClose: Function;
+};
+
+function Modal(props: Props) {
   useEffect(() => {
     props.onAfterOpen();
     return () => props.onAfterClose();
@@ -46,7 +57,7 @@ const fadeOut = css`
   animation: fade-out 0.2s ease-in-out forwards;
 `;
 const Wrapper = styled.div``;
-const Overlay = styled.div`
+const Overlay = styled.div<any>`
   position: fixed;
   top: 0;
   left: 0;
