@@ -4,9 +4,15 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  height: 100vh;
-  height: var(--doc-height);
   min-width: 240px;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+html {
+  height: -webkit-fill-available;
 }
 
 a {
@@ -33,7 +39,6 @@ svg {
 
 /* 라이트모드(기본) */
 :root {
-  --doc-height: 100%;
   // Text
   --main: #21252f;
   --sub: #636363;
