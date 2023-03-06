@@ -10,7 +10,6 @@ export default function Document() {
           content="사용자가 할 일을 리스트에 추가하고, 체크박스로 완료 여부를 표시할 수 있도록 해주는 Todo List App입니다. 사용자들은 할 일을 보다 체계적으로 관리할 수 있으며, 직관적이고 간단한 디자인으로 제작되어, 간편하게 사용할 수 있습니다."
         />
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="ma9pie" />
         <meta name="image" content="/images/logo.svg" />
         <meta name="robots" content="index, follow" />
