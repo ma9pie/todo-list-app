@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 
-import AddTodoBtn from "@/components/AddTodoBtn";
 import Todo from "@/components/Todo";
-import AddCircleSvg from "@/images/add_circle_outline.svg";
 import AddTodoSvg from "@/images/add_todo.svg";
 import HomeLayout from "@/layouts/HomeLayout";
 export default function Home() {
@@ -90,7 +88,7 @@ const Container = styled.div`
 `;
 const AddTodoBtnWrapper = styled.div`
   position: absolute;
-  left: max(98vw - 40px, 195px);
+  left: max(96vw - 60px, 190px);
   bottom: 2vh;
   background-color: transparent;
   & * {
