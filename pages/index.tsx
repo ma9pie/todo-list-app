@@ -72,18 +72,9 @@ export default function Home() {
   return (
     <Wrapper>
       <Container>
-        {todo
-          .concat(todo)
-          .concat(todo)
-          .concat(todo)
-          .concat(todo)
-          .map((data, idx) => (
-            <Todo
-              // key={data.id}
-              key={idx}
-              {...data}
-            ></Todo>
-          ))}
+        {todo.map((data) => (
+          <Todo key={data.id} {...data}></Todo>
+        ))}
         <AddWrapper>
           <Add onClick={openAddList}></Add>
         </AddWrapper>
