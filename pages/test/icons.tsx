@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
+import AddSvg from "@/images/add.svg";
 import AddCircleSvg from "@/images/add_circle_outline.svg";
 import AppsSvg from "@/images/apps.svg";
 import BackSvg from "@/images/arrow_back_ios.svg";
@@ -34,6 +35,7 @@ function Components() {
       <LogoSvg width={200} height={200}></LogoSvg>
 
       <Grid>
+        <AddSvg></AddSvg>
         <AddCircleSvg></AddCircleSvg>
         <AppsSvg></AppsSvg>
         <BackSvg></BackSvg>

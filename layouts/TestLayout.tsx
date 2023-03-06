@@ -37,6 +37,10 @@ const TestLayout = (props: Props) => {
       title: "modals",
       url: "/test/modals",
     },
+    {
+      title: "paints",
+      url: "/test/paints",
+    },
   ];
 
   useEffect(() => {

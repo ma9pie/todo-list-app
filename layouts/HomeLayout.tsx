@@ -119,8 +119,10 @@ const Overlay = styled.div<any>`
   display: ${(props) => props.display};
   opacity: ${(props) => props.opacity};
   transition: ${(props) => props.transition};
+  z-index: 1;
 `;
 
 const Content = styled.div`
+  min-width: 240px;
   height: calc(100vh - 60px);
 `;

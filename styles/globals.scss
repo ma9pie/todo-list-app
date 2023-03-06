@@ -38,6 +38,7 @@ svg {
   --box: #ffffff;
   --selected: #e8e8e8;
   --sectionLine: #e3e3e3;
+  --boxShadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* 다크모드 */
@@ -53,6 +54,7 @@ svg {
   --box: #1f1f1f;
   --selected: #363636;
   --sectionLine: #292929;
+  --boxShadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes fade-in {

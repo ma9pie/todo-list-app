@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import Alert from "@/components/shared/Modals/Alert";
-import BottomSheet from "@/components/shared/Modals/BottomSheet";
-import Confirm from "@/components/shared/Modals/Confirm";
-import Modal from "@/components/shared/Modals/index";
-import ToastPopup from "@/components/shared/Modals/ToastPopup";
+import Modal from "@/components/shared/modals";
+import Alert from "@/components/shared/modals/Alert";
+import BottomSheet from "@/components/shared/modals/BottomSheet";
+import Confirm from "@/components/shared/modals/Confirm";
+import ToastPopup from "@/components/shared/modals/ToastPopup";
 
 const modalUtils = {
   propsMap: new Map(),
