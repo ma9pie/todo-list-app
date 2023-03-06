@@ -82,7 +82,7 @@ export default function Home() {
           <Todo key={data.id} {...data}></Todo>
         ))}
       </Container>
-      <AddWrapper bottom={isMobile ? "calc(2vh + 50px)" : "2vh"}>
+      <AddWrapper bottom={!isMobile ? "calc(2vh + 60px)" : "2vh"}>
         <Add onClick={openAddList}></Add>
       </AddWrapper>
     </Wrapper>
@@ -109,7 +109,4 @@ const AddWrapper = styled.div<{ bottom: string }>`
   left: max(96vw - 60px, 190px);
   bottom: ${(props) => props.bottom};
   background-color: transparent;
-  & * {
-    background-color: transparent;
-  }
 `;
