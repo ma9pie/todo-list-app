@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 
+import AddList from "@/components/AddList";
+import Add from "@/components/shared/buttons/Add";
 import Todo from "@/components/Todo";
-import AddTodoSvg from "@/images/add_todo.svg";
 import HomeLayout from "@/layouts/HomeLayout";
+import modalUtils from "@/utils/modalUtils";
 export default function Home() {
   const todo = [
     {
@@ -56,6 +58,15 @@ export default function Home() {
     },
   ];
 
+  const openAddList = () => {
+    modalUtils.openBottomSheet({
+      key: "addList",
+      title: "Add List",
+      height: "50%",
+      component: AddList,
+    });
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -64,9 +75,9 @@ export default function Home() {
         ))}
       </Container>
 
-      <AddTodoBtnWrapper>
-        <AddTodoSvg></AddTodoSvg>
-      </AddTodoBtnWrapper>
+      <AddWrapper>
+        <Add onClick={openAddList}></Add>
+      </AddWrapper>
     </Wrapper>
   );
 }
@@ -86,7 +97,7 @@ const Container = styled.div`
   flex: 1;
   gap: 8px;
 `;
-const AddTodoBtnWrapper = styled.div`
+const AddWrapper = styled.div`
   position: absolute;
   left: max(96vw - 60px, 190px);
   bottom: 2vh;

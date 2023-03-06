@@ -3,8 +3,8 @@ import { forwardRef, ReactNode } from "react";
 
 type Props = {
   fullWidth?: boolean;
-  children: ReactNode;
-  onClick: Function;
+  children?: ReactNode;
+  onClick?: Function;
 };
 
 const Button = forwardRef((props: Props, ref) => {

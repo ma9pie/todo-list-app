@@ -24,8 +24,8 @@ function BottomSheet(props: any) {
           <BlankBox></BlankBox>
           <Title>{props.title}</Title>
           <CloseSvg
-            width={32}
-            height={32}
+            width={24}
+            height={24}
             onClick={() => props.onRequestClose()}
           ></CloseSvg>
         </Top>
@@ -103,6 +103,6 @@ const Title = styled.p`
 const Content = styled.div`
   padding-right: 8px;
   // 전체높이 - top영역 - 아래쪽 여백
-  max-height: calc(100vh - 32px - 56px - 32px);
+  max-height: calc(100vh - 32px - 48px - 32px);
   overflow-y: scroll;
 `;

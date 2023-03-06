@@ -13,6 +13,7 @@ type Props = {
 const Header = (props: Props) => {
   const openSettings = () => {
     modalUtils.openBottomSheet({
+      key: "settings",
       title: "Settings",
       component: Setting,
     });

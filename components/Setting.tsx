@@ -49,6 +49,7 @@ const Setting = () => {
     } else {
       themeUtils.setDark(setTheme);
     }
+    modalUtils.close("settings");
   };
 
   // 백업 및 가져오기

@@ -13,7 +13,7 @@ import CloseSvg from "@/images/close.svg";
 import CloudDoneSvg from "@/images/cloud_done.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import CodeSvg from "@/images/code.svg";
-import PaintSvg from "@/images/color_lens.svg";
+import PaintBoardSvg from "@/images/color_lens.svg";
 import DashboardSvg from "@/images/dashboard.svg";
 import DeleteSvg from "@/images/delete.svg";
 import EditSvg from "@/images/edit.svg";
@@ -46,7 +46,7 @@ function Components() {
         <CloudDoneSvg></CloudDoneSvg>
         <CloudDownloadSvg></CloudDownloadSvg>
         <CodeSvg></CodeSvg>
-        <PaintSvg></PaintSvg>
+        <PaintBoardSvg></PaintBoardSvg>
         <DashboardSvg></DashboardSvg>
         <DeleteSvg></DeleteSvg>
         <EditSvg></EditSvg>

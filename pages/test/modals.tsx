@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
+import Button from "@/components/shared/buttons/index";
 import TestLayout from "@/layouts/TestLayout";
-import Button from "@/shared/Button";
 import modalUtils from "@/utils/modalUtils";
 
 function Components() {

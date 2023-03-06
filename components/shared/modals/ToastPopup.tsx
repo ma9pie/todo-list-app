@@ -51,11 +51,7 @@ function ToastPopup(props: any) {
           <CheckSvg
             width="24px"
             height="24px"
-            className={css`
-              path {
-                fill: var(--green400);
-              }
-            `}
+            className={successColor}
           ></CheckSvg>
         );
       case "error":
@@ -63,11 +59,7 @@ function ToastPopup(props: any) {
           <ErrorSvg
             width="24px"
             height="24px"
-            className={css`
-              path {
-                fill: var(--red400);
-              }
-            `}
+            className={errorColor}
           ></ErrorSvg>
         );
       case "warn":
@@ -75,11 +67,7 @@ function ToastPopup(props: any) {
           <WarningSvg
             width="24px"
             height="24px"
-            className={css`
-              path {
-                fill: var(--yellow400);
-              }
-            `}
+            className={warnColor}
           ></WarningSvg>
         );
 
@@ -127,6 +115,21 @@ const CloseToastPopup = css`
 `;
 const HideToastPopup = css`
   visibility: hidden;
+`;
+const successColor = css`
+  path {
+    fill: var(--green400);
+  }
+`;
+const errorColor = css`
+  path {
+    fill: var(--red400);
+  }
+`;
+const warnColor = css`
+  path {
+    fill: var(--yellow400);
+  }
 `;
 const Wrapper = styled.div<any>`
   position: fixed;

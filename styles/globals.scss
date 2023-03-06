@@ -21,6 +21,10 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+input:focus {
+  outline: none;
+}
+
 svg {
   cursor: pointer;
 }

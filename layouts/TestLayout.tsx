@@ -34,6 +34,10 @@ const TestLayout = (props: Props) => {
       url: "/test/icons",
     },
     {
+      title: "buttons",
+      url: "/test/buttons",
+    },
+    {
       title: "modals",
       url: "/test/modals",
     },
