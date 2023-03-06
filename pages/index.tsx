@@ -1,12 +1,20 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddList from "@/components/AddList";
 import Add from "@/components/shared/buttons/Add";
 import Todo from "@/components/Todo";
 import HomeLayout from "@/layouts/HomeLayout";
 import modalUtils from "@/utils/modalUtils";
+
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    setIsMobile(checkMobile);
+  }, []);
+
   const todo = [
     {
       id: "2h4hrj",
@@ -74,7 +82,7 @@ export default function Home() {
           <Todo key={data.id} {...data}></Todo>
         ))}
       </Container>
-      <AddWrapper>
+      <AddWrapper bottom={!isMobile ? "calc(2vh + 50px)" : "2vh"}>
         <Add onClick={openAddList}></Add>
       </AddWrapper>
     </Wrapper>
@@ -96,10 +104,10 @@ const Container = styled.div`
   flex: 1;
   gap: 8px;
 `;
-const AddWrapper = styled.div`
+const AddWrapper = styled.div<{ bottom: string }>`
   position: absolute;
   left: max(96vw - 60px, 190px);
-  bottom: 2vh;
+  bottom: ${(props) => props.bottom};
   background-color: transparent;
   & * {
     background-color: transparent;
