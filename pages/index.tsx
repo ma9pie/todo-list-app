@@ -99,8 +99,8 @@ const Container = styled.div`
 `;
 const AddWrapper = styled.div`
   position: absolute;
-  left: max(96vw - 60px, 190px);
-  bottom: 2vh;
+  left: max(96% - 60px, 190px);
+  bottom: 2%;
   background-color: transparent;
   & * {
     background-color: transparent;
