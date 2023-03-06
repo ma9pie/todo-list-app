@@ -21,13 +21,8 @@ const Header = (props: Props) => {
 
   return (
     <Wrapper>
-      <MenuSvg
-        width={40}
-        height={40}
-        onClick={props.openSideBar}
-        onTouchEnd={props.openSideBar}
-      ></MenuSvg>
-      <SettingSvg onClick={openSettings} onTouchEnd={openSettings}></SettingSvg>
+      <MenuSvg width={40} height={40} onClick={props.openSideBar}></MenuSvg>
+      <SettingSvg onClick={openSettings}></SettingSvg>
     </Wrapper>
   );
 };

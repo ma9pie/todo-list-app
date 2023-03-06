@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-import { DraggableCore } from "react-draggable";
 
 import Head from "@/components/Head";
 import Header from "@/components/Header";
@@ -48,29 +47,6 @@ const HomeLayout = (props: Props) => {
     setTransition(TRANSITION);
   };
 
-  // 드래그에서 마우스 뗄 때
-  const onStop = () => {
-    const nextLeft = left <= -SIDEBAR_WIDTH / 2 ? -SIDEBAR_WIDTH : 0;
-    setLeft(nextLeft);
-    setOpacity(calcOpacity(nextLeft));
-    setTransition(TRANSITION);
-  };
-
-  // 드래그
-  const onDrag = (value: number) => {
-    let nextLeft = 0;
-    if (value < -SIDEBAR_WIDTH) {
-      nextLeft = -SIDEBAR_WIDTH;
-    } else if (value > 0) {
-      nextLeft = 0;
-    } else {
-      nextLeft = value;
-    }
-    setLeft(nextLeft);
-    setOpacity(calcOpacity(nextLeft));
-    setTransition("");
-  };
-
   // 투명도 계산
   const calcOpacity = (x: number) => {
     return ((x + SIDEBAR_WIDTH) / SIDEBAR_WIDTH) * 0.4;
@@ -79,26 +55,21 @@ const HomeLayout = (props: Props) => {
   return (
     <Wrapper>
       <Head></Head>
-      <DraggableCore
-        scale={0.75}
-        onStop={onStop}
-        onDrag={(e, { deltaX }) => {
-          onDrag(left + deltaX);
-        }}
-      >
-        <Container>
-          <Overlay
-            display={display}
-            opacity={opacity}
-            transition={transition}
-            onClick={closeSideBar}
-            onTouchEnd={closeSideBar}
-          ></Overlay>
-          <SideBar ref={ref} left={left} transition={transition}></SideBar>
+      <Container>
+        <Overlay
+          display={display}
+          opacity={opacity}
+          transition={transition}
+          onClick={closeSideBar}
+        ></Overlay>
+        <SideBar ref={ref} left={left} transition={transition}></SideBar>
+        <HeaderWrapper>
           <Header openSideBar={openSideBar}></Header>
+        </HeaderWrapper>
+        <ContentWrapper>
           <Content>{props.children}</Content>
-        </Container>
-      </DraggableCore>
+        </ContentWrapper>
+      </Container>
     </Wrapper>
   );
 };
@@ -109,10 +80,10 @@ const Wrapper = styled.div``;
 const Container = styled.div`
   position: relative;
   width: 100vw;
-  height: 100vh;
 `;
 const Overlay = styled.div<any>`
-  position: absolute;
+  position: fixed;
+  top: 0px;
   width: 100vw;
   height: 100vh;
   background-color: #000000;
@@ -120,9 +91,18 @@ const Overlay = styled.div<any>`
   opacity: ${(props) => props.opacity};
   transition: ${(props) => props.transition};
   z-index: 1;
+  touch-action: auto;
 `;
 
 const Content = styled.div`
   min-width: 240px;
-  height: calc(100vh - 60px);
+  height: calc(100% - 60px);
+`;
+const HeaderWrapper = styled.div`
+  position: fixed;
+  top: 0px;
+  width: 100%;
+`;
+const ContentWrapper = styled.div`
+  padding-top: 60px;
 `;

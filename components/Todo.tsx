@@ -26,7 +26,6 @@ type SubTasks = {
 };
 
 const Todo = (props: Props) => {
-  console.log(props.tasks);
   return (
     <Wrapper>
       <List>

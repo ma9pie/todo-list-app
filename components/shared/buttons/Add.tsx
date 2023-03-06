@@ -10,12 +10,7 @@ type Props = {
 const Add = (props: Props) => {
   return (
     <Wrapper>
-      <AddSvg
-        width={40}
-        height={40}
-        onClick={props.onClick}
-        onTouchEnd={props.onClick}
-      ></AddSvg>
+      <AddSvg width={40} height={40} onClick={props.onClick}></AddSvg>
     </Wrapper>
   );
 };

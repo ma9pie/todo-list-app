@@ -9,12 +9,6 @@ import HomeLayout from "@/layouts/HomeLayout";
 import modalUtils from "@/utils/modalUtils";
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    setIsMobile(checkMobile);
-  }, []);
-
   const todo = [
     {
       id: "2h4hrj",
@@ -82,16 +76,18 @@ export default function Home() {
           .concat(todo)
           .concat(todo)
           .concat(todo)
-          .map((data, key) => (
-            <Todo key={data.id} {...data}></Todo>
+          .concat(todo)
+          .map((data, idx) => (
+            <Todo
+              // key={data.id}
+              key={idx}
+              {...data}
+            ></Todo>
           ))}
-        <Test>
+        <AddWrapper>
           <Add onClick={openAddList}></Add>
-        </Test>
+        </AddWrapper>
       </Container>
-      {/* <AddWrapper bottom={isMobile ? "calc(2vh + 60px)" : "2vh"}>
-        <Add onClick={openAddList}></Add>
-      </AddWrapper> */}
     </Wrapper>
   );
 }
@@ -111,13 +107,7 @@ const Container = styled.div`
   flex: 1;
   gap: 8px;
 `;
-const AddWrapper = styled.div<{ bottom: string }>`
-  position: absolute;
-  left: max(96vw - 60px, 190px);
-  bottom: ${(props) => props.bottom};
-  background-color: transparent;
-`;
-const Test = styled.div`
+const AddWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
