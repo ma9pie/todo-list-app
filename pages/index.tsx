@@ -73,11 +73,10 @@ export default function Home() {
         {todo.map((data, key) => (
           <Todo key={data.id} {...data}></Todo>
         ))}
+        <AddWrapper>
+          <Add onClick={openAddList}></Add>
+        </AddWrapper>
       </Container>
-
-      <AddWrapper>
-        <Add onClick={openAddList}></Add>
-      </AddWrapper>
     </Wrapper>
   );
 }
