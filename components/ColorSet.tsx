@@ -18,8 +18,9 @@ const colorSet = [
 ];
 
 type Props = {
-  colorNum: number;
-  setColorNum: Function;
+  color: string;
+  colorList: Array<string>;
+  setColor: Function;
 };
 
 const ColorSet = (props: Props) => {
@@ -29,8 +30,8 @@ const ColorSet = (props: Props) => {
     setisOpenColorSet(!isOpenColorSet);
   };
 
-  const selectColor = (idx: number) => {
-    props.setColorNum(idx);
+  const selectColor = (color: string) => {
+    props.setColor(color);
     setisOpenColorSet(false);
   };
 
@@ -38,14 +39,14 @@ const ColorSet = (props: Props) => {
     <Wrapper>
       <CurrentColor onClick={toggleColorSet}>
         <PaintBoardSvg className={sub}></PaintBoardSvg>
-        <Circle bg={colorSet[props.colorNum]}></Circle>
+        <Circle bg={props.color}></Circle>
       </CurrentColor>
 
       {isOpenColorSet && (
         <Grid>
           {colorSet.map((item, idx) => (
-            <Circle key={idx} bg={item} onClick={() => selectColor(idx)}>
-              {props.colorNum === idx && (
+            <Circle key={idx} bg={item} onClick={() => selectColor(item)}>
+              {props.color === item && (
                 <CheckSvg className={white} width={16} height={16}></CheckSvg>
               )}
             </Circle>

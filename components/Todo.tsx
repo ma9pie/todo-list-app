@@ -4,7 +4,7 @@ import React from "react";
 import Dot from "@/components/Dot";
 
 type Props = {
-  id: string;
+  clusterId: string;
   title: string;
   color: string;
   pinned: boolean;
@@ -13,16 +13,11 @@ type Props = {
 };
 
 type Tasks = {
-  id: string;
+  taskId: string;
+  clusterId: string;
   content: string;
   done: boolean;
-  note: string;
-  subTasks: Array<SubTasks>;
-};
-
-type SubTasks = {
-  content: string;
-  done: boolean;
+  created: "";
 };
 
 const Todo = (props: Props) => {
@@ -32,8 +27,8 @@ const Todo = (props: Props) => {
         <Dot color={props.color}></Dot>
         <Title>{props.title}</Title>
       </List>
-      {props.tasks.map((item, key) => (
-        <List key={item.id}>
+      {props.tasks.map((item) => (
+        <List key={item.taskId}>
           <Dot color="var(--box)"></Dot>
           <SubText>{item.content}</SubText>
         </List>
@@ -62,10 +57,6 @@ const List = styled.div`
   justify-content: left;
   align-items: center;
   gap: 8px;
-`;
-const Color = styled.div`
-  width: 8px;
-  height: 8px;
 `;
 const Title = styled.h3`
   font: var(--medium14);

@@ -4,67 +4,23 @@ import React, { useEffect, useState } from "react";
 
 import AddList from "@/components/AddList";
 import Add from "@/components/shared/buttons/Add";
+import Button from "@/components/shared/buttons/index";
 import Todo from "@/components/Todo";
 import HomeLayout from "@/layouts/HomeLayout";
+import localUtils from "@/utils/localUtils";
 import modalUtils from "@/utils/modalUtils";
 
 export default function Home() {
-  const todo = [
-    {
-      id: "2h4hrj",
-      title: "오늘 해야할 일",
-      color: "#64a8ff",
-      pinned: false,
-      created: "",
-      tasks: [
-        {
-          id: "asffg3a",
-          content: "react 공부",
-          done: false,
-          note: "",
-          subTasks: [
-            {
-              content: "useState",
-              done: false,
-            },
-            {
-              content: "useEffect",
-              done: false,
-            },
-          ],
-        },
-        {
-          id: "fasdq2",
-          content: "ts 공부",
-          done: false,
-          note: "",
-          subTasks: [],
-        },
-      ],
-    },
-    {
-      id: "fsg324f",
-      title: "내일 해야할 일",
-      color: "#fb8890",
-      pinned: false,
-      created: "",
-      tasks: [
-        {
-          id: "wzzz442",
-          content: "redux 공부",
-          done: false,
-          note: "",
-          subTasks: [],
-        },
-      ],
-    },
-  ];
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    setTodos(localUtils.getTodos());
+  }, []);
 
   const openAddList = () => {
     modalUtils.openBottomSheet({
       key: "addList",
       title: "Add List",
-      height: "50%",
       component: AddList,
     });
   };
@@ -72,12 +28,15 @@ export default function Home() {
   return (
     <Wrapper>
       <Container>
-        {todo.map((data) => (
-          <Todo key={data.id} {...data}></Todo>
+        {todos.map((todo: any) => (
+          <Todo key={todo.clusterId} {...todo}></Todo>
         ))}
         <AddWrapper>
           <Add onClick={openAddList}></Add>
         </AddWrapper>
+        <Init>
+          <Button onClick={() => localUtils.init()}>데이터 초기화</Button>
+        </Init>
       </Container>
     </Wrapper>
   );
@@ -104,3 +63,4 @@ const AddWrapper = styled.div`
   align-items: center;
   margin-top: 24px;
 `;
+const Init = styled.div``;
