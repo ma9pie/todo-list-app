@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useRef, useState } from "react";
 
-import ColorSet from "@/components/ColorSet";
 import Done from "@/components/shared/buttons/Done";
+import ColorSet from "@/components/shared/ColorSet";
 import localUtils from "@/utils/localUtils";
 import modalUtils from "@/utils/modalUtils";
 

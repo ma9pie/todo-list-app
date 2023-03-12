@@ -23,6 +23,8 @@ import ListSvg from "@/images/list.svg";
 import LogoSvg from "@/images/logo.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import MenuSvg from "@/images/menu.svg";
+import MoreVertSvg from "@/images/more_vert.svg";
+import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
 import WarningSvg from "@/images/warning_amber.svg";
@@ -55,6 +57,8 @@ function Components() {
         <ListSvg></ListSvg>
         <EmailSvg></EmailSvg>
         <MenuSvg></MenuSvg>
+        <MoreVertSvg></MoreVertSvg>
+        <PushPinSvg></PushPinSvg>
         <SettingSvg></SettingSvg>
         <SubjectSvg></SubjectSvg>
         <WarningSvg></WarningSvg>

@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
@@ -5,6 +6,8 @@ import Head from "@/components/shared/Head";
 import Settings from "@/components/shared/modals/contents/Settings";
 import SideBar from "@/components/SideBar";
 import MenuSvg from "@/images/menu.svg";
+import MoreVertSvg from "@/images/more_vert.svg";
+import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
 import modalUtils from "@/utils/modalUtils";
 
@@ -16,21 +19,12 @@ type RefProps = {
   openSideBar: () => void;
 };
 
-const HomeLayout = (props: Props) => {
+const PageLayout = (props: Props) => {
   const ref = useRef<RefProps>(null);
 
   // Open SideBar
   const openSideBar = () => {
     ref.current?.openSideBar();
-  };
-
-  // Open Settings
-  const openSettings = () => {
-    modalUtils.openBottomSheet({
-      key: "settings",
-      title: "Settings",
-      component: Settings,
-    });
   };
 
   return (
@@ -40,11 +34,15 @@ const HomeLayout = (props: Props) => {
         <SideBar ref={ref}></SideBar>
         <Header>
           <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
-          <SettingSvg
-            width={32}
-            height={32}
-            onClick={openSettings}
-          ></SettingSvg>
+          <IconContainer>
+            <PushPinSvg
+              width={32}
+              height={32}
+              className={pushPinStyles}
+              color="red"
+            ></PushPinSvg>
+            <MoreVertSvg width={32} height={32}></MoreVertSvg>
+          </IconContainer>
         </Header>
         <Content>{props.children}</Content>
       </Container>
@@ -52,8 +50,11 @@ const HomeLayout = (props: Props) => {
   );
 };
 
-export default HomeLayout;
+export default PageLayout;
 
+const pushPinStyles = css`
+  transform: rotate(0.125turn);
+`;
 const Wrapper = styled.div``;
 const Container = styled.div`
   width: 100vw;
@@ -70,4 +71,8 @@ const Header = styled.div`
   height: 60px;
   padding: 0px 16px;
   border-bottom: 1px solid var(--sectionLine);
+`;
+const IconContainer = styled.div`
+  display: flex;
+  gap: 16px;
 `;

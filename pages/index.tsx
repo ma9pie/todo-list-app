@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
-import AddList from "@/components/AddList";
+import AddList from "@/components/home/AddList";
+import Todo from "@/components/home/Todo";
 import Add from "@/components/shared/buttons/Add";
 import Button from "@/components/shared/buttons/index";
-import Todo from "@/components/Todo";
 import HomeLayout from "@/layouts/HomeLayout";
 import localUtils from "@/utils/localUtils";
 import modalUtils from "@/utils/modalUtils";

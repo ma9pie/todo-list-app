@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 
-import Theme from "@/components/Theme";
+import Theme from "@/components/shared/Theme";
 import useClickOutside from "@/hooks/useClickOutside";
 import AppsSvg from "@/images/apps.svg";
 import CloseSvg from "@/images/close.svg";

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
-import TermsAndConditions from "@/components/TermsAndConditions";
-import Theme from "@/components/Theme";
+import TermsAndConditions from "@/components/shared/modals/contents/TermsAndConditions";
+import Theme from "@/components/shared/Theme";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import CodeSvg from "@/images/code.svg";
@@ -13,7 +13,7 @@ import SubjectSvg from "@/images/subject.svg";
 import modalUtils from "@/utils/modalUtils";
 import themeUtils from "@/utils/themeUtils";
 
-const Setting = () => {
+const Settings = () => {
   const [theme, setTheme] = useState("Light");
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default Settings;
 
 const Wrapper = styled.div`
   display: grid;

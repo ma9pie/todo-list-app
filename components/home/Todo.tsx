@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 import React from "react";
 
-import Dot from "@/components/Dot";
+import Dot from "@/components/shared/Dot";
 
 type Props = {
   clusterId: string;
@@ -22,18 +23,20 @@ type Tasks = {
 
 const Todo = (props: Props) => {
   return (
-    <Wrapper>
-      <List>
-        <Dot color={props.color}></Dot>
-        <Title>{props.title}</Title>
-      </List>
-      {props.tasks.map((item) => (
-        <List key={item.taskId}>
-          <Dot color="var(--box)"></Dot>
-          <SubText>{item.content}</SubText>
+    <Link href={`/todo/${props.clusterId}`}>
+      <Wrapper>
+        <List>
+          <Dot color={props.color}></Dot>
+          <Title>{props.title}</Title>
         </List>
-      ))}
-    </Wrapper>
+        {props.tasks.map((item) => (
+          <List key={item.taskId}>
+            <Dot color="var(--box)"></Dot>
+            <SubText>{item.content}</SubText>
+          </List>
+        ))}
+      </Wrapper>
+    </Link>
   );
 };
 
