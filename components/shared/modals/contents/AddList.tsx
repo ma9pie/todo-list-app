@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
+import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import Done from "@/components/shared/buttons/Done";
 import ColorSet from "@/components/shared/ColorSet";
+import { clusterState, taskState } from "@/recoil/atom";
+import commonUtils from "@/utils/commonUtils";
 import localUtils from "@/utils/localUtils";
 import modalUtils from "@/utils/modalUtils";
 
@@ -23,6 +27,7 @@ const AddList = () => {
 
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(colorList[0]);
+  const [clusters, setClusters] = useRecoilState(clusterState);
 
   useEffect(() => {
     if (ref.current) {
@@ -41,13 +46,25 @@ const AddList = () => {
         message: "Please input list name",
       });
     } else {
-      localUtils.addCluster(title, color);
+      addCluster();
       modalUtils.openToastPopup({
         type: "success",
         message: "List added",
       });
       modalUtils.close("addList");
     }
+  };
+
+  const addCluster = () => {
+    const result = clusters.concat({
+      clusterId: commonUtils.uid(),
+      title: title,
+      color: color,
+      pinned: false,
+      created: moment().format("YYYY-MM-DD HH:mm:ss"),
+      tasks: [],
+    });
+    setClusters(result);
   };
 
   return (

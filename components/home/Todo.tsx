@@ -3,25 +3,9 @@ import Link from "next/link";
 import React from "react";
 
 import Dot from "@/components/shared/Dot";
+import { Cluster, Task } from "@/types";
 
-type Props = {
-  clusterId: string;
-  title: string;
-  color: string;
-  pinned: boolean;
-  created: string;
-  tasks: Array<Tasks>;
-};
-
-type Tasks = {
-  taskId: string;
-  clusterId: string;
-  content: string;
-  done: boolean;
-  created: "";
-};
-
-const Todo = (props: Props) => {
+const Todo = (props: Cluster) => {
   return (
     <Link href={`/todo/${props.clusterId}`}>
       <Wrapper>
@@ -29,7 +13,7 @@ const Todo = (props: Props) => {
           <Dot color={props.color}></Dot>
           <Title>{props.title}</Title>
         </List>
-        {props.tasks.map((item) => (
+        {props.tasks.map((item: Task) => (
           <List key={item.taskId}>
             <Dot color="var(--box)"></Dot>
             <SubText>{item.content}</SubText>

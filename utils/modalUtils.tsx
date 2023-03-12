@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { RecoilRoot } from "recoil";
 
 import Modal from "@/components/shared/modals";
 import Alert from "@/components/shared/modals/Alert";
 import BottomSheet from "@/components/shared/modals/BottomSheet";
 import Confirm from "@/components/shared/modals/Confirm";
 import ToastPopup from "@/components/shared/modals/ToastPopup";
-
 const modalUtils = {
   propsMap: new Map(),
 
