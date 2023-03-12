@@ -90,6 +90,7 @@ const Content = styled.div`
 const Input = styled.input`
   font: var(--normal16);
   width: 100%;
+  height: 30px;
   border: 0px;
 `;
 const DoneWrapper = styled.div`

@@ -3,7 +3,7 @@ import React, { ReactNode, useRef } from "react";
 
 import Head from "@/components/shared/Head";
 import Settings from "@/components/shared/modals/contents/Settings";
-import SideBar from "@/components/SideBar";
+import SideBar from "@/components/shared/SideBar";
 import MenuSvg from "@/images/menu.svg";
 import SettingSvg from "@/images/settings.svg";
 import modalUtils from "@/utils/modalUtils";
@@ -36,18 +36,12 @@ const HomeLayout = (props: Props) => {
   return (
     <Wrapper>
       <Head></Head>
-      <Container>
-        <SideBar ref={ref}></SideBar>
-        <Header>
-          <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
-          <SettingSvg
-            width={32}
-            height={32}
-            onClick={openSettings}
-          ></SettingSvg>
-        </Header>
-        <Content>{props.children}</Content>
-      </Container>
+      <SideBar ref={ref}></SideBar>
+      <Header>
+        <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
+        <SettingSvg width={32} height={32} onClick={openSettings}></SettingSvg>
+      </Header>
+      <Content>{props.children}</Content>
     </Wrapper>
   );
 };
@@ -55,12 +49,9 @@ const HomeLayout = (props: Props) => {
 export default HomeLayout;
 
 const Wrapper = styled.div``;
-const Container = styled.div`
-  width: 100vw;
-`;
 const Content = styled.div`
   min-width: var(--minWidth);
-  height: calc(100% - 60px);
+  height: calc(100vh - 60px);
 `;
 const Header = styled.div`
   display: flex;

@@ -4,7 +4,8 @@ import React, { ReactNode, useRef } from "react";
 
 import Head from "@/components/shared/Head";
 import Settings from "@/components/shared/modals/contents/Settings";
-import SideBar from "@/components/SideBar";
+import SideBar from "@/components/shared/SideBar";
+import TaskInput from "@/components/todo/TaskInput";
 import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";
 import PushPinSvg from "@/images/push_pin.svg";
@@ -30,22 +31,21 @@ const PageLayout = (props: Props) => {
   return (
     <Wrapper>
       <Head></Head>
-      <Container>
-        <SideBar ref={ref}></SideBar>
-        <Header>
-          <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
-          <IconContainer>
-            <PushPinSvg
-              width={32}
-              height={32}
-              className={pushPinStyles}
-              color="red"
-            ></PushPinSvg>
-            <MoreVertSvg width={32} height={32}></MoreVertSvg>
-          </IconContainer>
-        </Header>
-        <Content>{props.children}</Content>
-      </Container>
+      <SideBar ref={ref}></SideBar>
+      <Header>
+        <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
+        <IconContainer>
+          <PushPinSvg
+            width={32}
+            height={32}
+            className={pushPinStyles}
+            color="red"
+          ></PushPinSvg>
+          <MoreVertSvg width={32} height={32}></MoreVertSvg>
+        </IconContainer>
+      </Header>
+      <Content>{props.children}</Content>
+      <TaskInput></TaskInput>
     </Wrapper>
   );
 };
@@ -56,12 +56,9 @@ const pushPinStyles = css`
   transform: rotate(0.125turn);
 `;
 const Wrapper = styled.div``;
-const Container = styled.div`
-  width: 100vw;
-`;
 const Content = styled.div`
   min-width: var(--minWidth);
-  height: calc(100% - 60px);
+  height: calc(100vh - 120px);
 `;
 const Header = styled.div`
   display: flex;
