@@ -14,14 +14,32 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    setTodos(localUtils.getTodos());
+    getTodos();
   }, []);
 
+  // todo 조회
+  const getTodos = () => {
+    setTodos(localUtils.getTodos());
+  };
+
+  // 할일 추가창 열기
   const openAddList = () => {
     modalUtils.openBottomSheet({
       key: "addList",
       title: "Add List",
       component: AddList,
+      onAfterClose: getTodos,
+    });
+  };
+
+  // 데이터 초기화
+  const initData = () => {
+    modalUtils.openConfirm({
+      message: "데이터를 초기화 하시겠습니까?",
+      onRequestConfirm: () => {
+        localUtils.init();
+        getTodos();
+      },
     });
   };
 
@@ -35,7 +53,7 @@ export default function Home() {
           <Add onClick={openAddList}></Add>
         </AddWrapper>
         <Init>
-          <Button onClick={() => localUtils.init()}>데이터 초기화</Button>
+          <Button onClick={initData}>데이터 초기화</Button>
         </Init>
       </Container>
     </Wrapper>

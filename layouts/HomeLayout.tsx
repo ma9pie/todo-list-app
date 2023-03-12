@@ -95,7 +95,7 @@ const Overlay = styled.div<any>`
 `;
 
 const Content = styled.div`
-  min-width: 240px;
+  min-width: var(--minWidth);
   height: calc(100% - 60px);
 `;
 const HeaderWrapper = styled.div`

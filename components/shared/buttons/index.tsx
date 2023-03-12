@@ -34,6 +34,7 @@ const Wrapper = styled.button<any>`
   align-items: center;
   justify-content: center;
   width: ${(props) => (props.fullWidth ? "100%" : "auto")};
+  min-width: var(--minWidth);
   height: 56px;
   border: 0 solid transparent;
   border-radius: 16px;

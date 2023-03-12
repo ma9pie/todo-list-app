@@ -43,6 +43,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: calc(100vw - 32px);
+  min-width: var(--minWidth);
   padding: 16px;
   border-radius: 5px;
   box-shadow: var(--boxShadow);
@@ -57,9 +59,13 @@ const List = styled.div`
   justify-content: left;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  word-wrap: break-word;
 `;
 const Title = styled.h3`
   font: var(--medium14);
+  width: calc(100% - 24px);
+  flex: 1;
 `;
 const SubText = styled.p`
   font: var(--normal14);
