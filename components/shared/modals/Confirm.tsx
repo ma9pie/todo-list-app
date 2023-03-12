@@ -130,7 +130,7 @@ const Content = styled.div`
   text-align: center;
 `;
 const Text = styled.p`
-  font: var(--normal16);
+  font: var(--normal14);
   min-height: 20px;
   margin: 0px;
 `;

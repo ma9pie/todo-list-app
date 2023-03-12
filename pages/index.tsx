@@ -1,75 +1,43 @@
 import styled from "@emotion/styled";
-import moment from "moment";
 import type { ReactElement } from "react";
-import React, { useCallback, useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Todo from "@/components/home/Todo";
 import Add from "@/components/shared/buttons/Add";
 import Button from "@/components/shared/buttons/index";
+import Loading from "@/components/shared/Loading";
 import AddList from "@/components/shared/modals/contents/AddList";
 import HomeLayout from "@/layouts/HomeLayout";
-import { clusterState, taskState } from "@/recoil/atom";
-import { todoState } from "@/recoil/selector";
-import { Cluster, Task } from "@/types";
-import commonUtils from "@/utils/commonUtils";
+import { clusterState, taskState } from "@/recoil/atoms";
+import { todoState } from "@/recoil/selectors";
 import modalUtils from "@/utils/modalUtils";
 export default function Home() {
-  const [todos, setTodos] = useState([]);
-
   const [clusters, setClusters] = useRecoilState(clusterState);
   const [tasks, setTasks] = useRecoilState(taskState);
-  const todo = useRecoilValue(todoState);
+  const todos = useRecoilValue(todoState);
 
-  const addCluster = (title: string, color: string) => {
-    console.log("addCluster", clusters);
-    const result = clusters.concat({
-      clusterId: commonUtils.uid(),
-      title: title,
-      color: color,
-      pinned: false,
-      created: moment().format("YYYY-MM-DD HH:mm:ss"),
-      tasks: [],
-    });
-    setClusters(result);
-  };
+  const [list, setList] = useState([]);
+  const [isMount, setIsMount] = useState(false);
 
-  // todo 조회
-  const getTodos = () => {
-    console.log("getTodos", clusters);
-    const tasksMap = new Map();
-    const tmpTodos = [].concat(clusters);
+  useEffect(() => {
+    setIsMount(true);
+  }, []);
 
-    tasks.map((task: Task) => {
-      const cluster = tasksMap.get(task.clusterId);
-      if (cluster) {
-        tasksMap.set(task.clusterId, cluster.concat(task));
-      } else {
-        tasksMap.set(task.clusterId, [task]);
-      }
-    });
-
-    tmpTodos.map((cluster: Cluster) => {
-      const tmp = { ...cluster };
-      tmp.tasks = tasksMap.get(tmp.clusterId) || [];
-      return tmp;
-    });
-    setTodos(tmpTodos);
-  };
+  useEffect(() => {
+    setList(todos);
+  }, [clusters, tasks, todos]);
 
   // 할일 추가창 열기
   const openAddList = () => {
     modalUtils.openBottomSheet({
       key: "addList",
       title: "Add List",
-      component: AddList,
-      onAfterClose: getTodos,
+      component: () => (
+        <AddList clusters={clusters} setClusters={setClusters}></AddList>
+      ),
     });
   };
-
-  useEffect(() => {
-    getTodos();
-  }, [clusters, tasks]);
 
   // 데이터 초기화
   const initData = () => {
@@ -82,21 +50,24 @@ export default function Home() {
     });
   };
 
+  if (!isMount) {
+    return (
+      <LoadingWrapper>
+        <Loading></Loading>
+      </LoadingWrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <Container>
-        {todos.map((todo: any) => (
+        {list.map((todo: any) => (
           <Todo key={todo.clusterId} {...todo}></Todo>
         ))}
         <AddWrapper>
           <Add onClick={openAddList}></Add>
         </AddWrapper>
-        <Init>
-          <Button onClick={initData}>데이터 초기화</Button>
-        </Init>
-        <Init>
-          <Button onClick={() => addCluster("test", "red")}>데이터 추가</Button>
-        </Init>
+        <Button onClick={initData}>데이터 초기화</Button>
       </Container>
     </Wrapper>
   );
@@ -123,4 +94,9 @@ const AddWrapper = styled.div`
   align-items: center;
   margin-top: 24px;
 `;
-const Init = styled.div``;
+const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;

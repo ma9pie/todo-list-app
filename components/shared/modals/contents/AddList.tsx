@@ -1,13 +1,11 @@
 import styled from "@emotion/styled";
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import Done from "@/components/shared/buttons/Done";
 import ColorSet from "@/components/shared/ColorSet";
-import { clusterState, taskState } from "@/recoil/atom";
+import { Cluster } from "@/types";
 import commonUtils from "@/utils/commonUtils";
-import localUtils from "@/utils/localUtils";
 import modalUtils from "@/utils/modalUtils";
 
 const colorList = [
@@ -22,12 +20,16 @@ const colorList = [
   "#4d4d59",
 ];
 
-const AddList = () => {
+type Props = {
+  clusters: Array<Cluster>;
+  setClusters: Function;
+};
+
+const AddList = (props: Props) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(colorList[0]);
-  const [clusters, setClusters] = useRecoilState(clusterState);
 
   useEffect(() => {
     if (ref.current) {
@@ -56,7 +58,7 @@ const AddList = () => {
   };
 
   const addCluster = () => {
-    const result = clusters.concat({
+    const result = props.clusters.concat({
       clusterId: commonUtils.uid(),
       title: title,
       color: color,
@@ -64,7 +66,7 @@ const AddList = () => {
       created: moment().format("YYYY-MM-DD HH:mm:ss"),
       tasks: [],
     });
-    setClusters(result);
+    props.setClusters(result);
   };
 
   return (
