@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import type { ReactElement, ReactNode } from "react";
 import { Fragment, useEffect } from "react";
+import { RecoilRoot } from "recoil";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -32,5 +33,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     };
   }, [router.events]);
 
-  return <Fragment>{getLayout(<Component {...pageProps} />)}</Fragment>;
+  return (
+    <Fragment>
+      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
+    </Fragment>
+  );
 }

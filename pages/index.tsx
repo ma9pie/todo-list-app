@@ -1,17 +1,27 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import Todo from "@/components/home/Todo";
 import Add from "@/components/shared/buttons/Add";
 import Button from "@/components/shared/buttons/index";
 import AddList from "@/components/shared/modals/contents/AddList";
 import HomeLayout from "@/layouts/HomeLayout";
+import { clusters, tasks } from "@/recoil/atom";
 import localUtils from "@/utils/localUtils";
 import modalUtils from "@/utils/modalUtils";
-
 export default function Home() {
   const [todos, setTodos] = useState([]);
+
+  const setClusters = useSetRecoilState(clusters);
+  const setTasks = useSetRecoilState(tasks);
+
+  // localStorage 정보를 recoil에 저장
+  useEffect(() => {
+    setClusters(localUtils.getList("clusters"));
+    setTasks(localUtils.getList("tasks"));
+  }, []);
 
   useEffect(() => {
     getTodos();
