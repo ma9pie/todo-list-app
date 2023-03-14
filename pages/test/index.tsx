@@ -22,10 +22,8 @@ function Components() {
         _ngcontent-lbw-c39=""
         autoComplete="off"
         inputMode="decimal"
-        maxLength="25"
         type="text"
         id="bid_order_form_price"
-        class="ng-untouched ng-pristine ng-valid"
       ></input>
     </Wrapper>
   );
