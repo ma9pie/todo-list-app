@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
+import Settings from "@/components/home/Settings";
 import Head from "@/components/shared/Head";
-import Settings from "@/components/shared/modals/contents/Settings";
 import SideBar from "@/components/shared/SideBar";
 import MenuSvg from "@/images/menu.svg";
 import SettingSvg from "@/images/settings.svg";

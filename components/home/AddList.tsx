@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import moment from "moment";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 import Done from "@/components/shared/buttons/Done";
 import ColorSet from "@/components/shared/ColorSet";
@@ -26,16 +26,8 @@ type Props = {
 };
 
 const AddList = (props: Props) => {
-  const ref = useRef<HTMLInputElement>(null);
-
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(colorList[0]);
-
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.focus();
-    }
-  }, []);
 
   const onChange = (e: any) => {
     setTitle(e.target.value);
@@ -73,7 +65,6 @@ const AddList = (props: Props) => {
     <Wrapper>
       <Content>
         <Input
-          ref={ref}
           type="text"
           value={title}
           placeholder="List name"

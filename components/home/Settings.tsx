@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
-import TermsAndConditions from "@/components/shared/modals/contents/TermsAndConditions";
+import TermsAndConditions from "@/components/home/TermsAndConditions";
 import Theme from "@/components/shared/Theme";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
