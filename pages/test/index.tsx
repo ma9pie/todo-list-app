@@ -3,66 +3,11 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
 import TestLayout from "@/layouts/TestLayout";
-import axiosUtils from "@/utils/axios";
+import axios from "@/utils/axios";
 
 function Components() {
   useEffect(() => {
-    axiosUtils.get("/api/todo/list").then((res) => {});
-  }, []);
-
-  useEffect(() => {
-    const container = [
-      {
-        id: "2h4hrj",
-        title: "오늘 해야할 일",
-        color: "red",
-        pinned: false,
-        created: "",
-      },
-      {
-        id: "fsg324f",
-        title: "내일 해야할 일",
-        color: "blue",
-        pinned: false,
-        created: "",
-      },
-    ];
-
-    const task = [
-      {
-        id: "asffg3a",
-        containerId: "2h4hrj",
-        content: "react 공부",
-        done: false,
-        note: "",
-        subTask: [
-          {
-            content: "useState",
-            done: false,
-          },
-          {
-            content: "useEffect",
-            done: false,
-          },
-        ],
-      },
-      {
-        id: "fasdq2",
-        containerId: "2h4hrj",
-        content: "ts 공부",
-        done: false,
-        note: "",
-        subTask: [],
-      },
-      {
-        id: "wzzz442",
-        containerId: "fsg324f",
-        content: "redux 공부",
-        done: false,
-        note: "",
-        subTask: [],
-      },
-    ];
+    axios.get("/api/todo/list").then((res) => {});
   }, []);
 
   return (
@@ -72,6 +17,16 @@ function Components() {
       <Text>
         Frequently used components are classified by list and developed.
       </Text>
+      <input autoComplete="off" inputMode="decimal" type="text"></input>
+      <input
+        _ngcontent-lbw-c39=""
+        autoComplete="off"
+        inputMode="decimal"
+        maxLength="25"
+        type="text"
+        id="bid_order_form_price"
+        class="ng-untouched ng-pristine ng-valid"
+      ></input>
     </Wrapper>
   );
 }
