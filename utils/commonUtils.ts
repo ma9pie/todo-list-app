@@ -1,5 +1,5 @@
 const commonUtils = {
-  // generate unique id
+  // uid 생성기
   uid: () => {
     if (typeof window !== undefined && window.crypto) {
       const array = new Uint32Array(1);

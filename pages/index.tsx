@@ -12,6 +12,7 @@ import HomeLayout from "@/layouts/HomeLayout";
 import { clusterState, taskState } from "@/recoil/atoms";
 import { todoState } from "@/recoil/selectors";
 import modalUtils from "@/utils/modalUtils";
+
 export default function Home() {
   const [clusters, setClusters] = useRecoilState(clusterState);
   const [tasks, setTasks] = useRecoilState(taskState);
