@@ -3,7 +3,7 @@
   "plugins": ["react-hooks", "simple-import-sort"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": "warn",
     "no-multiple-empty-lines": "error",
     "import/no-anonymous-default-export": "off",
     "react/display-name": "off"
