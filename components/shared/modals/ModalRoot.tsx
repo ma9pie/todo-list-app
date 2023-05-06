@@ -3,7 +3,6 @@ import { FC, ReactNode } from "react";
 import { Fragment } from "react";
 import { useRecoilState } from "recoil";
 
-import ToastPopup from "@/components/shared/modals/Toast";
 import RecoilComponent from "@/components/test/RecoilComponent";
 import useModal from "@/hooks/useModal";
 import { modalState } from "@/recoil/states/modal";
@@ -11,6 +10,7 @@ import Modal from "@/shared/modals";
 import Alert from "@/shared/modals/Alert";
 import BottomSheet from "@/shared/modals/BottomSheet";
 import Confirm from "@/shared/modals/Confirm";
+import ToastPopup from "@/shared/modals/Toast";
 
 const ModalRoot = () => {
   const modal = useModal();

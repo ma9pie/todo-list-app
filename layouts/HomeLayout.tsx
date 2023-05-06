@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
 import Settings from "@/components/home/Settings";
-import Head from "@/shared/Head";
-import SideBar from "@/shared/SideBar";
 import MenuSvg from "@/images/menu.svg";
 import SettingSvg from "@/images/settings.svg";
+import Head from "@/shared/Head";
+import SideBar from "@/shared/SideBar";
 import modalUtils from "@/utils/modalUtils";
 
 type Props = {

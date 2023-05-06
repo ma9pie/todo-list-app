@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
 import TermsAndConditions from "@/components/home/TermsAndConditions";
-import Theme from "@/shared/Theme";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import CodeSvg from "@/images/code.svg";
@@ -10,6 +9,7 @@ import PaintSvg from "@/images/color_lens.svg";
 import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
+import Theme from "@/shared/Theme";
 import modalUtils from "@/utils/modalUtils";
 import themeUtils from "@/utils/themeUtils";
 
