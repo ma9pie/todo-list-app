@@ -1,14 +1,43 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
-import Button from "@/components/shared/buttons/index";
+import RecoilComponent from "@/components/test/RecoilComponent";
+import useModal from "@/hooks/useModal";
 import TestLayout from "@/layouts/TestLayout";
+import { testState } from "@/recoil/atoms";
+import Button from "@/shared/buttons/index";
 import modalUtils from "@/utils/modalUtils";
-
 function Components() {
+  const modal = useModal();
+  const [test, setTest] = useRecoilState(testState);
+
+  useEffect(() => {
+    modal.closeModal();
+  }, []);
+
   return (
     <Wrapper>
+      <Content>
+        <Title>Test</Title>
+        <Button
+          onClick={() => {
+            modal.openModal({
+              component: () => <RecoilComponent></RecoilComponent>,
+            });
+          }}
+        >
+          Test
+        </Button>
+        <Button
+          onClick={() => {
+            setTest(test + 1);
+          }}
+        >
+          +1
+        </Button>
+      </Content>
       <Content>
         <Title>Alert</Title>
         <Button
@@ -77,7 +106,7 @@ function Components() {
         <Title>Toast</Title>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
+            modalUtils.openToast({
               type: "success",
               message: "장바구니에 등록되었습니다.",
             });
@@ -87,7 +116,7 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
+            modalUtils.openToast({
               type: "error",
               message: "상품 정보가 존재하지 않습니다.",
             });
@@ -97,7 +126,7 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
+            modalUtils.openToast({
               type: "warn",
               message: "로그인 후 이용해주세요.",
             });
@@ -107,7 +136,7 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
+            modalUtils.openToast({
               message: `해당 이벤트는 종료된 이벤트 입니다.\n 공지사항을 확인해주세요.`,
             });
           }}

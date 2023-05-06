@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
 import Settings from "@/components/home/Settings";
-import Head from "@/components/shared/Head";
-import SideBar from "@/components/shared/SideBar";
+import Head from "@/shared/Head";
+import SideBar from "@/shared/SideBar";
 import TaskInput from "@/components/todo/TaskInput";
 import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";

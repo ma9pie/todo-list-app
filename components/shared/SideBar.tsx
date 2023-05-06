@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { useRecoilValue } from "recoil";
 
-import Dot from "@/components/shared/Dot";
+import Dot from "@/shared/Dot";
 import DashboardSvg from "@/images/dashboard.svg";
 import SubjectSvg from "@/images/subject.svg";
 import { todoState } from "@/recoil/selectors";

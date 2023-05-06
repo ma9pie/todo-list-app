@@ -7,6 +7,8 @@ import type { ReactElement, ReactNode } from "react";
 import { Fragment, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 
+import ModalRoot from "@/shared/modals/ModalRoot";
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -35,7 +37,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <Fragment>
-      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
+      <RecoilRoot>
+        <ModalRoot></ModalRoot>
+        {getLayout(<Component {...pageProps} />)}
+      </RecoilRoot>
     </Fragment>
   );
 }

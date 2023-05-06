@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import moment from "moment";
 import React, { useState } from "react";
 
-import Done from "@/components/shared/buttons/Done";
-import ColorSet from "@/components/shared/ColorSet";
+import Done from "@/shared/buttons/Done";
+import ColorSet from "@/shared/ColorSet";
 import { Cluster } from "@/types";
 import commonUtils from "@/utils/commonUtils";
 import modalUtils from "@/utils/modalUtils";
@@ -35,13 +35,13 @@ const AddList = (props: Props) => {
 
   const addList = () => {
     if (title === "") {
-      modalUtils.openToastPopup({
+      modalUtils.openToast({
         type: "warn",
         message: "Please input list name",
       });
     } else {
       addCluster();
-      modalUtils.openToastPopup({
+      modalUtils.openToast({
         type: "success",
         message: "List added",
       });

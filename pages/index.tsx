@@ -5,12 +5,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import AddList from "@/components/home/AddList";
 import Todo from "@/components/home/Todo";
-import Add from "@/components/shared/buttons/Add";
-import Button from "@/components/shared/buttons/index";
-import Loading from "@/components/shared/Loading";
 import HomeLayout from "@/layouts/HomeLayout";
 import { clusterState, taskState } from "@/recoil/atoms";
 import { todoState } from "@/recoil/selectors";
+import Add from "@/shared/buttons/Add";
+import Button from "@/shared/buttons/index";
+import Loading from "@/shared/Loading";
 import modalUtils from "@/utils/modalUtils";
 
 export default function Home() {

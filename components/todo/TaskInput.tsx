@@ -13,13 +13,13 @@ const TaskInput = () => {
 
   const addTask = () => {
     if (task) {
-      modalUtils.openToastPopup({
+      modalUtils.openToast({
         type: "success",
         message: "Task added",
       });
       setTask("");
     } else {
-      modalUtils.openToastPopup({
+      modalUtils.openToast({
         type: "warn",
         message: "Please input task",
       });

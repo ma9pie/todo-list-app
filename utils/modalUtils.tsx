@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 
-import Modal from "@/components/shared/modals";
-import Alert from "@/components/shared/modals/Alert";
-import BottomSheet from "@/components/shared/modals/BottomSheet";
-import Confirm from "@/components/shared/modals/Confirm";
-import ToastPopup from "@/components/shared/modals/ToastPopup";
+import Toast from "@/components/shared/modals/Toast";
+import Modal from "@/shared/modals";
+import Alert from "@/shared/modals/Alert";
+import BottomSheet from "@/shared/modals/BottomSheet";
+import Confirm from "@/shared/modals/Confirm";
+
 const modalUtils = {
   propsMap: new Map(),
 
@@ -79,10 +80,10 @@ const modalUtils = {
     modalUtils.appendNode(BottomSheet, data, "bottom-sheet");
   },
 
-  // toast-popup
-  openToastPopup: (data: any) => {
-    modalUtils.removeChildNodes("toast-popup");
-    modalUtils.appendNode(ToastPopup, data, "toast-popup");
+  // toast
+  openToast: (data: any) => {
+    modalUtils.removeChildNodes("toast");
+    modalUtils.appendNode(Toast, data, "toast");
   },
 };
 

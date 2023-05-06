@@ -15,7 +15,7 @@ type Props = {
 };
 
 let pid: ReturnType<typeof setTimeout>;
-function ToastPopup(props: Props) {
+function Toast(props: Props) {
   const [isIOS, setIsIOS] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -91,7 +91,7 @@ function ToastPopup(props: Props) {
           isOpen === null
             ? cx(HideToastPopup)
             : isOpen
-            ? cx(OpenToastPopup)
+            ? cx(openToast)
             : cx(CloseToastPopup)
         }
         onClick={close}
@@ -107,9 +107,9 @@ function ToastPopup(props: Props) {
   );
 }
 
-export default React.memo(ToastPopup);
+export default React.memo(Toast);
 
-ToastPopup.defaultProps = {
+Toast.defaultProps = {
   type: "",
   message: "",
   isOpen: null,
@@ -117,7 +117,7 @@ ToastPopup.defaultProps = {
   onRequestClose: () => {},
 };
 
-const OpenToastPopup = css`
+const openToast = css`
   animation: open-toast 0.2s ease forwards;
 `;
 const CloseToastPopup = css`
