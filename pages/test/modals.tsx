@@ -42,7 +42,7 @@ function Components() {
         <Title>Alert</Title>
         <Button
           onClick={() =>
-            modalUtils.openAlert({
+            modal.openAlert({
               title: "Alert",
               message: `message\n message\n message`,
               confirmBtnText: "yes",
@@ -59,7 +59,7 @@ function Components() {
         </Button>
         <Button
           onClick={() =>
-            modalUtils.openAlert({
+            modal.openAlert({
               component: () => <TestComponent></TestComponent>,
             })
           }

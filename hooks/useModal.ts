@@ -1,43 +1,50 @@
 import { useRecoilState } from "recoil";
 
-import { Modal, modalState } from "@/recoil/states/modal";
+import { Modal, modalState, ModalType } from "@/recoil/states/modal";
 
 interface UseModal {
   openModal: (props: Modal) => void;
+  openAlert: (props: Modal) => void;
   closeModal: () => void;
 }
 
 export default function useModal(): UseModal {
-  const [modalList, setModalList] = useRecoilState(modalState);
+  const [modals, setModals] = useRecoilState(modalState);
 
   const openModal = (props: Modal) => {
-    const list: Modal[] = [...modalList];
+    const list: Modal[] = [...modals];
     props.isOpen = true;
     props.onRequestClose = () => {
-      const list: Modal[] = [...modalList];
+      const list: Modal[] = [...modals];
       list.push({ ...props, isOpen: false });
-      setModalList(list);
+      setModals(list);
       setTimeout(() => {
-        setModalList(list.slice(0, -1));
+        setModals(list.slice(0, -1));
       }, 200);
     };
     list.push(props);
-    setModalList(list);
+    setModals(list);
+  };
+
+  const openAlert = (props: Modal) => {
+    props.type = ModalType.Alert;
+    openModal(props);
   };
 
   const closeModal = () => {
-    if (modalList.length === 0) return;
-    const list: Modal[] = [...modalList];
+    if (modals.length === 0) return;
+    const list: Modal[] = [...modals];
     const props = list.pop();
     list.push({ ...props, isOpen: false });
-    setModalList(list);
+    setModals(list);
     setTimeout(() => {
-      setModalList(list.slice(0, -1));
+      setModals(list.slice(0, -1));
     }, 200);
   };
 
   return {
     openModal,
+    openAlert,
     closeModal,
   };
 }

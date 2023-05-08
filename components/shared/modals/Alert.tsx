@@ -21,8 +21,6 @@ function Alert(props: Props) {
     return () => props.onAfterClose();
   }, []);
 
-  console.log(props.message.split("\n"));
-
   return (
     <Wrapper>
       <Overlay
