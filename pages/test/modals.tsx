@@ -7,6 +7,7 @@ import RecoilComponent from "@/components/test/RecoilComponent";
 import useModal from "@/hooks/useModal";
 import TestLayout from "@/layouts/TestLayout";
 import { testState } from "@/recoil/atoms";
+import { ToastStatus } from "@/recoil/states/modal";
 import Button from "@/shared/buttons/index";
 import modalUtils from "@/utils/modalUtils";
 function Components() {
@@ -72,7 +73,7 @@ function Components() {
         <Title>Confirm</Title>
         <Button
           onClick={() =>
-            modalUtils.openConfirm({
+            modal.openConfirm({
               title: "Confirm",
               message: `message\n message\n message`,
               confirmBtnText: "yes",
@@ -93,7 +94,7 @@ function Components() {
         </Button>
         <Button
           onClick={() =>
-            modalUtils.openConfirm({
+            modal.openConfirm({
               component: () => <TestComponent></TestComponent>,
             })
           }
@@ -106,8 +107,8 @@ function Components() {
         <Title>Toast</Title>
         <Button
           onClick={() => {
-            modalUtils.openToast({
-              type: "success",
+            modal.openToast({
+              status: ToastStatus.Success,
               message: "장바구니에 등록되었습니다.",
             });
           }}
@@ -116,8 +117,8 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToast({
-              type: "error",
+            modal.openToast({
+              status: ToastStatus.Error,
               message: "상품 정보가 존재하지 않습니다.",
             });
           }}
@@ -126,8 +127,8 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToast({
-              type: "warn",
+            modal.openToast({
+              status: ToastStatus.Warn,
               message: "로그인 후 이용해주세요.",
             });
           }}
@@ -136,7 +137,7 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToast({
+            modal.openToast({
               message: `해당 이벤트는 종료된 이벤트 입니다.\n 공지사항을 확인해주세요.`,
             });
           }}
@@ -149,14 +150,14 @@ function Components() {
         <Title>Bottom Sheet</Title>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({ title: "Setting" });
+            modal.openBottomSheet({ title: "Setting" });
           }}
         >
           BottomSheet
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({
+            modal.openBottomSheet({
               component: () => {
                 return <TestComponent></TestComponent>;
               },
@@ -167,14 +168,14 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({ height: "50%" });
+            modal.openBottomSheet({ height: "50%" });
           }}
         >
           BottomSheet 50%
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({ height: "100%" });
+            modal.openBottomSheet({ height: "100%" });
           }}
         >
           BottomSheet 100%

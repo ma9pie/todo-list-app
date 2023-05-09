@@ -5,6 +5,9 @@ import { Modal, modalState, ModalType } from "@/recoil/states/modal";
 interface UseModal {
   openModal: (props: Modal) => void;
   openAlert: (props: Modal) => void;
+  openConfirm: (props: Modal) => void;
+  openBottomSheet: (props: Modal) => void;
+  openToast: (props: Modal) => void;
   closeModal: () => void;
 }
 
@@ -26,11 +29,6 @@ export default function useModal(): UseModal {
     setModals(list);
   };
 
-  const openAlert = (props: Modal) => {
-    props.type = ModalType.Alert;
-    openModal(props);
-  };
-
   const closeModal = () => {
     if (modals.length === 0) return;
     const list: Modal[] = [...modals];
@@ -44,7 +42,11 @@ export default function useModal(): UseModal {
 
   return {
     openModal,
-    openAlert,
+    openAlert: (props) => openModal({ ...props, type: ModalType.Alert }),
+    openConfirm: (props) => openModal({ ...props, type: ModalType.Confirm }),
+    openBottomSheet: (props) =>
+      openModal({ ...props, type: ModalType.BottomSheet }),
+    openToast: (props) => openModal({ ...props, type: ModalType.Toast }),
     closeModal,
   };
 }

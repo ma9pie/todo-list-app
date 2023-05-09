@@ -1,13 +1,16 @@
 import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
+import { modalState, ModalType } from "@/recoil/states/modal";
+import { ToastStatus } from "@/recoil/states/modal";
 
 type Props = {
-  type: string;
+  status: ToastStatus;
   message: string;
   isOpen: boolean;
   unmount: Function;
@@ -15,7 +18,9 @@ type Props = {
 };
 
 let pid: ReturnType<typeof setTimeout>;
+
 function Toast(props: Props) {
+  const [modals, setModals] = useRecoilState(modalState);
   const [isIOS, setIsIOS] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -26,35 +31,25 @@ function Toast(props: Props) {
   }, []);
 
   useEffect(() => {
-    let delay = 0;
-    delay = props.isOpen ? 100 : 0;
-    setIsOpen(isOpen ? false : null);
-    setTimeout(() => {
-      setIsOpen(true);
-    }, delay);
+    setIsOpen(true);
     clearTimeout(pid);
     pid = setTimeout(() => {
       setIsOpen(false);
-      setTimeout(() => {
-        props.unmount();
-      }, 100);
+      props.onRequestClose();
     }, 2000);
     return () => {
+      setIsOpen(false);
       clearTimeout(pid);
-      setIsOpen(null);
     };
   }, []);
-
   const close = () => {
     setIsOpen(false);
-    setTimeout(() => {
-      props.unmount();
-    }, 200);
+    props.onRequestClose();
   };
 
-  const getSvg = useCallback((type: string) => {
-    switch (type) {
-      case "success":
+  const getSvg = useCallback((status: ToastStatus) => {
+    switch (status) {
+      case ToastStatus.Success:
         return (
           <CheckSvg
             width="24px"
@@ -62,7 +57,7 @@ function Toast(props: Props) {
             className={successColor}
           ></CheckSvg>
         );
-      case "error":
+      case ToastStatus.Error:
         return (
           <ErrorSvg
             width="24px"
@@ -70,7 +65,7 @@ function Toast(props: Props) {
             className={errorColor}
           ></ErrorSvg>
         );
-      case "warn":
+      case ToastStatus.Warn:
         return (
           <WarningSvg
             width="24px"
@@ -96,7 +91,7 @@ function Toast(props: Props) {
         }
         onClick={close}
       >
-        <SvgWrapper>{getSvg(props.type)}</SvgWrapper>
+        <SvgWrapper>{getSvg(props.status)}</SvgWrapper>
         <TextBox>
           {props.message?.split("\n").map((message: string, key: number) => (
             <Text key={key}>{message}</Text>
@@ -110,7 +105,7 @@ function Toast(props: Props) {
 export default React.memo(Toast);
 
 Toast.defaultProps = {
-  type: "",
+  status: ToastStatus.None,
   message: "",
   isOpen: null,
   unmount: () => {},

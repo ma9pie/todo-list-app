@@ -15,8 +15,13 @@ const RecoilComponent = () => {
       <TextBox>{`test : ${test}`}</TextBox>
       <Button
         onClick={() => {
+          // modal.closeModal();
           // modal.openModal({ component: () => <div>123</div> });
-          modal.closeModal();
+          // modal.openConfirm({});
+          modal.openBottomSheet({});
+          // modal.openToast({
+          //   message: "Toast Test",
+          // });
         }}
       >
         details
