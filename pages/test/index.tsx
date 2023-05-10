@@ -17,14 +17,6 @@ function Components() {
       <Text>
         Frequently used components are classified by list and developed.
       </Text>
-      <input autoComplete="off" inputMode="decimal" type="text"></input>
-      <input
-        _ngcontent-lbw-c39=""
-        autoComplete="off"
-        inputMode="decimal"
-        type="text"
-        id="bid_order_form_price"
-      ></input>
     </Wrapper>
   );
 }

@@ -13,7 +13,8 @@ export enum ToastStatus {
   None,
 }
 
-export type Modal = {
+export type ModalProps = {
+  key?: string;
   type?: ModalType;
   status?: ToastStatus;
   isOpen?: boolean;
@@ -29,7 +30,7 @@ export type Modal = {
   onAfterClose?: () => void;
 };
 
-export const modalState = atom<Modal[]>({
+export const modalState = atom<Map<string, ModalProps>>({
   key: "modalState",
-  default: [],
+  default: new Map(),
 });

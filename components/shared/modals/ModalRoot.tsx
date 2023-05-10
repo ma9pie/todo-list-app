@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useRecoilValue } from "recoil";
 
-import { modalState, ModalType } from "@/recoil/states/modal";
+import { ModalProps, modalState, ModalType } from "@/recoil/states/modal";
 import Modal from "@/shared/modals";
 import Alert from "@/shared/modals/Alert";
 import BottomSheet from "@/shared/modals/BottomSheet";
@@ -11,39 +11,57 @@ import Toast from "@/shared/modals/Toast";
 const ModalRoot = () => {
   const modals = useRecoilValue(modalState);
 
-  const modalList = modals.filter((item) => item.type === undefined);
-  const alertList = modals.filter((item) => item.type === ModalType.Alert);
-  const confirmList = modals.filter((item) => item.type === ModalType.Confirm);
-  const bottomSheetList = modals.filter(
-    (item) => item.type === ModalType.BottomSheet
-  );
-  const toastList = modals.filter((item) => item.type === ModalType.Toast);
+  const modalList: ModalProps[] = [];
+  const alertList: ModalProps[] = [];
+  const confirmList: ModalProps[] = [];
+  const bottomSheetList: ModalProps[] = [];
+  const toastList: ModalProps[] = [];
+
+  modals.forEach((value, key) => {
+    switch (value.type) {
+      case ModalType.Alert:
+        alertList.push(value);
+        break;
+      case ModalType.Confirm:
+        confirmList.push(value);
+        break;
+      case ModalType.BottomSheet:
+        bottomSheetList.push(value);
+        break;
+      case ModalType.Toast:
+        toastList.push(value);
+        break;
+      default:
+        modalList.push(value);
+        break;
+    }
+  });
 
   return (
     <Wrapper id="modal-manager">
       <Container id="modal">
-        {modalList.map((props: any, idx) => (
-          <Modal key={idx} {...props}></Modal>
+        {modalList.map((props) => (
+          <Modal key={props.key} {...props}></Modal>
         ))}
       </Container>
       <Container id="alert-modal">
-        {alertList.map((props: any, idx) => (
-          <Alert key={idx} {...props}></Alert>
+        {alertList.map((props) => (
+          <Alert key={props.key} {...props}></Alert>
         ))}
       </Container>
       <Container id="confirm-modal">
-        {confirmList.map((props: any, idx) => (
-          <Confirm key={idx} {...props}></Confirm>
+        {confirmList.map((props) => (
+          <Confirm key={props.key} {...props}></Confirm>
         ))}
       </Container>
       <Container id="bottom-sheet">
-        {bottomSheetList.map((props: any, idx) => (
-          <BottomSheet key={idx} {...props}></BottomSheet>
+        {bottomSheetList.map((props) => (
+          <BottomSheet key={props.key} {...props}></BottomSheet>
         ))}
       </Container>
       <Container id="toast">
-        {toastList.map((props: any, idx) => (
-          <Toast key={idx} {...props}></Toast>
+        {toastList.map((props) => (
+          <Toast key={props.key} {...props}></Toast>
         ))}
       </Container>
     </Wrapper>

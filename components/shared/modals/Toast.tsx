@@ -1,12 +1,10 @@
 import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
 
 import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
-import { modalState, ModalType } from "@/recoil/states/modal";
 import { ToastStatus } from "@/recoil/states/modal";
 
 type Props = {
@@ -20,7 +18,6 @@ type Props = {
 let pid: ReturnType<typeof setTimeout>;
 
 function Toast(props: Props) {
-  const [modals, setModals] = useRecoilState(modalState);
   const [isIOS, setIsIOS] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -42,6 +39,7 @@ function Toast(props: Props) {
       clearTimeout(pid);
     };
   }, []);
+
   const close = () => {
     setIsOpen(false);
     props.onRequestClose();
@@ -73,7 +71,6 @@ function Toast(props: Props) {
             className={warnColor}
           ></WarningSvg>
         );
-
       default:
         return null;
     }

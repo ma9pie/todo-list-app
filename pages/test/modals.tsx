@@ -14,9 +14,7 @@ function Components() {
   const modal = useModal();
   const [test, setTest] = useRecoilState(testState);
 
-  useEffect(() => {
-    modal.closeModal();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Wrapper>
