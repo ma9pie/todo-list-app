@@ -2,31 +2,18 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
-type Props = {
-  isOpen: boolean;
-  top: string;
-  left: string;
-  title: string;
-  message: string;
-  confirmBtnText: string;
-  cancleBtnText: string;
-  component: Function;
-  onAfterOpen: Function;
-  onAfterClose: Function;
-  onRequestClose: Function;
-  onRequestConfirm: Function;
-};
+import { ModalProps } from "@/recoil/states/modal";
 
-function Confirm(props: Props) {
+const Confirm = (props: ModalProps) => {
   useEffect(() => {
-    props.onAfterOpen();
-    return () => props.onAfterClose();
+    props.onAfterOpen && props.onAfterOpen();
+    return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
   // 확인 버튼 클릭
   const onClickConfirm = () => {
-    props.onRequestConfirm();
-    props.onRequestClose();
+    props.onRequestConfirm && props.onRequestConfirm();
+    props.onRequestClose && props.onRequestClose();
   };
 
   return (
@@ -44,7 +31,7 @@ function Confirm(props: Props) {
           <Title>{props.title}</Title>
         </Top>
         <Content>
-          {props.component()}
+          {props.component && props.component()}
           {props.message &&
             props.message
               .split("\n")
@@ -63,7 +50,7 @@ function Confirm(props: Props) {
       </Container>
     </Wrapper>
   );
-}
+};
 
 export default Confirm;
 

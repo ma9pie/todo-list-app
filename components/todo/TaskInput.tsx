@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 
+import useModal from "@/hooks/useModal";
 import AddSvg from "@/images/add.svg";
-import modalUtils from "@/utils/modalUtils";
+import { ToastStatus } from "@/recoil/states/modal";
 
 const TaskInput = () => {
+  const modal = useModal();
+
   const [task, setTask] = useState("");
 
   const handleInput = (e: any) => {
@@ -13,14 +16,14 @@ const TaskInput = () => {
 
   const addTask = () => {
     if (task) {
-      modalUtils.openToast({
-        type: "success",
+      modal.openToast({
+        status: ToastStatus.Success,
         message: "Task added",
       });
       setTask("");
     } else {
-      modalUtils.openToast({
-        type: "warn",
+      modal.openToast({
+        status: ToastStatus.Warn,
         message: "Please input task",
       });
     }

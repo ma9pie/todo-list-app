@@ -10,7 +10,6 @@ import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
-import modalUtils from "@/utils/modalUtils";
 
 type Props = {
   children: ReactNode;

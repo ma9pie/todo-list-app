@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
 import Settings from "@/components/home/Settings";
+import useModal from "@/hooks/useModal";
 import MenuSvg from "@/images/menu.svg";
 import SettingSvg from "@/images/settings.svg";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
-import modalUtils from "@/utils/modalUtils";
 
 type Props = {
   children: ReactNode;
@@ -17,6 +17,8 @@ type RefProps = {
 };
 
 const HomeLayout = (props: Props) => {
+  const modal = useModal();
+
   const ref = useRef<RefProps>(null);
 
   // Open SideBar
@@ -26,7 +28,7 @@ const HomeLayout = (props: Props) => {
 
   // Open Settings
   const openSettings = () => {
-    modalUtils.openBottomSheet({
+    modal.openBottomSheet({
       key: "settings",
       title: "Settings",
       component: Settings,

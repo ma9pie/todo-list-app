@@ -13,12 +13,13 @@ import SubjectSvg from "@/images/subject.svg";
 import { todoState } from "@/recoil/selectors";
 import Dot from "@/shared/Dot";
 import { Cluster } from "@/types";
-const SIDEBAR_WIDTH = 200;
 
 type Props = {};
 type RefProps = {
   openSideBar: () => void;
 };
+
+const SIDEBAR_WIDTH = 200;
 
 const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   const todos = useRecoilValue(todoState);

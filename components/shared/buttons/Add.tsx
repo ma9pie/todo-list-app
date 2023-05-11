@@ -9,8 +9,8 @@ type Props = {
 
 const Add = (props: Props) => {
   return (
-    <Wrapper>
-      <AddSvg width={40} height={40} onClick={props.onClick}></AddSvg>
+    <Wrapper onClick={props.onClick}>
+      <AddSvg width={40} height={40}></AddSvg>
     </Wrapper>
   );
 };
@@ -21,7 +21,7 @@ Add.defaultProps = {
   onClick: () => {},
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<any>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,6 @@ const Wrapper = styled.div`
   border-radius: 50%;
   background-color: var(--blue500);
   box-shadow: var(--boxShadow);
-  cursor: pointer;
   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
   cursor: pointer;
   & * {

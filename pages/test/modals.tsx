@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 import RecoilComponent from "@/components/test/RecoilComponent";
-import useModal from "@/hooks/useModal";
+import useModal, { modalUtils } from "@/hooks/useModal";
 import TestLayout from "@/layouts/TestLayout";
 import { testState } from "@/recoil/atoms";
 import { ToastStatus } from "@/recoil/states/modal";
 import Button from "@/shared/buttons/index";
-import modalUtils from "@/utils/modalUtils";
+
 function Components() {
   const modal = useModal();
   const [test, setTest] = useRecoilState(testState);
@@ -179,6 +179,25 @@ function Components() {
           BottomSheet 100%
         </Button>
       </Content>
+
+      <Content>
+        <Title>ModalUtils</Title>
+        <Button
+          onClick={() => {
+            modalUtils.openModal({
+              component: () => <TestComponent></TestComponent>,
+            });
+          }}
+        >
+          openModal
+        </Button>
+        <Button onClick={() => modalUtils.openAlert({})}>openAlert</Button>
+        <Button onClick={() => modalUtils.openConfirm({})}>openConfirm</Button>
+        <Button onClick={() => modalUtils.openToast({})}>openToast</Button>
+        <Button onClick={() => modalUtils.openBottomSheet({})}>
+          openBottomSheet
+        </Button>
+      </Content>
     </Wrapper>
   );
 }
@@ -189,12 +208,15 @@ Components.getLayout = function getLayout(page: ReactElement) {
   return <TestLayout>{page}</TestLayout>;
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
 `;
 const Title = styled.p`
   font: var(--bold18);

@@ -44,6 +44,11 @@ const ModalRoot = () => {
           <Modal key={props.key} {...props}></Modal>
         ))}
       </Container>
+      <Container id="bottom-sheet">
+        {bottomSheetList.map((props) => (
+          <BottomSheet key={props.key} {...props}></BottomSheet>
+        ))}
+      </Container>
       <Container id="alert-modal">
         {alertList.map((props) => (
           <Alert key={props.key} {...props}></Alert>
@@ -52,11 +57,6 @@ const ModalRoot = () => {
       <Container id="confirm-modal">
         {confirmList.map((props) => (
           <Confirm key={props.key} {...props}></Confirm>
-        ))}
-      </Container>
-      <Container id="bottom-sheet">
-        {bottomSheetList.map((props) => (
-          <BottomSheet key={props.key} {...props}></BottomSheet>
         ))}
       </Container>
       <Container id="toast">

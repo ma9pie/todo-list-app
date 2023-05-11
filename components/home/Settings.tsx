@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
 import TermsAndConditions from "@/components/home/TermsAndConditions";
+import useModal from "@/hooks/useModal";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import CodeSvg from "@/images/code.svg";
@@ -10,10 +11,11 @@ import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
 import Theme from "@/shared/Theme";
-import modalUtils from "@/utils/modalUtils";
 import themeUtils from "@/utils/themeUtils";
 
 const Settings = () => {
+  const modal = useModal();
+
   const [theme, setTheme] = useState("Light");
 
   useEffect(() => {
@@ -31,12 +33,12 @@ const Settings = () => {
     } else {
       themeUtils.setDark(setTheme);
     }
-    modalUtils.close("settings");
+    modal.closeModal("settings");
   };
 
   // 백업 및 가져오기
   const backupAndRestore = () => {
-    modalUtils.openAlert({
+    modal.openAlert({
       message: "구글 계정 연동 개발 예정",
     });
   };
@@ -51,7 +53,7 @@ const Settings = () => {
 
   // 이용약관
   const termsAndCondition = () => {
-    modalUtils.openBottomSheet({
+    modal.openBottomSheet({
       title: "이용약관",
       component: TermsAndConditions,
     });

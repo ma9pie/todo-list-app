@@ -7,6 +7,10 @@ import BottomSheet from "@/shared/modals/BottomSheet";
 import Confirm from "@/shared/modals/Confirm";
 import Toast from "@/shared/modals/Toast";
 
+/**
+ * @deprecated
+ * please use useModal hooks instead
+ * */
 const modalUtils = {
   propsMap: new Map(),
 

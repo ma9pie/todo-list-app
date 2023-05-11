@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import modalUtils from "@/utils/modalUtils";
+import { modalUtils } from "@/hooks/useModal";
 
 let isServerError = false;
 
@@ -29,13 +29,11 @@ instance.interceptors.response.use(
     console.log("\n========== axios response ==========");
     console.log(res.request.responseURL);
     console.log(res.data);
-    // console.log("========== Axios LOG END ==========\n\n");
     return Promise.resolve(res);
   },
   (error) => {
     console.log("########## axios error ##########");
     console.log(error);
-    // console.log("########## Axios END ##########");
 
     if (!isServerError) {
       isServerError = true;

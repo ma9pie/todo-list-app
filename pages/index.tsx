@@ -5,15 +5,17 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import AddList from "@/components/home/AddList";
 import Todo from "@/components/home/Todo";
+import useModal from "@/hooks/useModal";
 import HomeLayout from "@/layouts/HomeLayout";
 import { clusterState, taskState } from "@/recoil/atoms";
 import { todoState } from "@/recoil/selectors";
 import Add from "@/shared/buttons/Add";
 import Button from "@/shared/buttons/index";
 import Loading from "@/shared/Loading";
-import modalUtils from "@/utils/modalUtils";
 
 export default function Home() {
+  const modal = useModal();
+
   const [clusters, setClusters] = useRecoilState(clusterState);
   const [tasks, setTasks] = useRecoilState(taskState);
   const todos = useRecoilValue(todoState);
@@ -31,7 +33,7 @@ export default function Home() {
 
   // 할일 추가창 열기
   const openAddList = () => {
-    modalUtils.openBottomSheet({
+    modal.openBottomSheet({
       key: "addList",
       title: "Add List",
       component: () => (
@@ -42,7 +44,7 @@ export default function Home() {
 
   // 데이터 초기화
   const initData = () => {
-    modalUtils.openConfirm({
+    modal.openConfirm({
       message: "데이터를 초기화 하시겠습니까?",
       onRequestConfirm: () => {
         setClusters([]);

@@ -6,18 +6,11 @@ import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import { ToastStatus } from "@/recoil/states/modal";
-
-type Props = {
-  status: ToastStatus;
-  message: string;
-  isOpen: boolean;
-  unmount: Function;
-  onRequestClose: Function;
-};
+import { ModalProps } from "@/recoil/states/modal";
 
 let pid: ReturnType<typeof setTimeout>;
 
-function Toast(props: Props) {
+const Toast = (props: ModalProps) => {
   const [isIOS, setIsIOS] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -32,7 +25,7 @@ function Toast(props: Props) {
     clearTimeout(pid);
     pid = setTimeout(() => {
       setIsOpen(false);
-      props.onRequestClose();
+      props.onRequestClose && props.onRequestClose();
     }, 2000);
     return () => {
       setIsOpen(false);
@@ -42,7 +35,7 @@ function Toast(props: Props) {
 
   const close = () => {
     setIsOpen(false);
-    props.onRequestClose();
+    props.onRequestClose && props.onRequestClose();
   };
 
   const getSvg = useCallback((status: ToastStatus) => {
@@ -88,7 +81,7 @@ function Toast(props: Props) {
         }
         onClick={close}
       >
-        <SvgWrapper>{getSvg(props.status)}</SvgWrapper>
+        <SvgWrapper>{props.status && getSvg(props.status)}</SvgWrapper>
         <TextBox>
           {props.message?.split("\n").map((message: string, key: number) => (
             <Text key={key}>{message}</Text>
@@ -97,9 +90,9 @@ function Toast(props: Props) {
       </Content>
     </Wrapper>
   );
-}
+};
 
-export default React.memo(Toast);
+export default Toast;
 
 Toast.defaultProps = {
   status: ToastStatus.None,
@@ -144,6 +137,7 @@ const Wrapper = styled.div<any>`
   height: 100vh;
   z-index: 999;
   pointer-events: none;
+  user-select: none;
   background-color: transparent;
   & * {
     background-color: transparent;

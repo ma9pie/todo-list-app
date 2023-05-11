@@ -20,6 +20,9 @@ export type ModalProps = {
   isOpen?: boolean;
   title?: string;
   message?: string;
+  top?: string;
+  left?: string;
+  padding?: string;
   height?: string;
   cancleBtnText?: string;
   confirmBtnText?: string;

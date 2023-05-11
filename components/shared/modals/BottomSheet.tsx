@@ -3,21 +3,12 @@ import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
 import CloseSvg from "@/images/close.svg";
+import { ModalProps } from "@/recoil/states/modal";
 
-type Props = {
-  height: string;
-  isOpen: boolean;
-  title: string;
-  component: Function;
-  onAfterOpen: Function;
-  onAfterClose: Function;
-  onRequestClose: Function;
-};
-
-function BottomSheet(props: Props) {
+const BottomSheet = (props: ModalProps) => {
   useEffect(() => {
-    props.onAfterOpen();
-    return () => props.onAfterClose();
+    props.onAfterOpen && props.onAfterOpen();
+    return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
   return (
@@ -36,16 +27,16 @@ function BottomSheet(props: Props) {
           <CloseSvg
             width={24}
             height={24}
-            onClick={() => props.onRequestClose()}
+            onClick={() => props.onRequestClose && props.onRequestClose()}
           ></CloseSvg>
         </Top>
-        <Content>{props.component()} </Content>
+        <Content>{props.component && props.component()} </Content>
       </Container>
     </Wrapper>
   );
-}
+};
 
-export default React.memo(BottomSheet);
+export default BottomSheet;
 
 BottomSheet.defaultProps = {
   height: "auto",
