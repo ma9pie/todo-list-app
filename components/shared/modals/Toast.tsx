@@ -38,7 +38,7 @@ const Toast = (props: ModalProps) => {
     props.onRequestClose && props.onRequestClose();
   };
 
-  const getSvg = useCallback((status: ToastStatus) => {
+  const getSvg = useCallback((status: ToastStatus | undefined) => {
     switch (status) {
       case ToastStatus.Success:
         return (
@@ -81,7 +81,7 @@ const Toast = (props: ModalProps) => {
         }
         onClick={close}
       >
-        <SvgWrapper>{props.status && getSvg(props.status)}</SvgWrapper>
+        <SvgWrapper>{getSvg(props.status)}</SvgWrapper>
         <TextBox>
           {props.message?.split("\n").map((message: string, key: number) => (
             <Text key={key}>{message}</Text>

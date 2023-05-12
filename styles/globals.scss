@@ -6,6 +6,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   min-width: var(--minWidth);
 }
+
 a {
   color: inherit;
   text-decoration: none;
@@ -33,33 +34,33 @@ svg {
   --minWidth: 240px;
   --brandColor: var(--blue500);
   // Text
-  --main: #21252f;
-  --sub: #636363;
+  --main: var(--grey900);
+  --sub: var(--grey500);
   // Background
-  --bg: #f4f4f4;
+  --bg: var(--background);
   --overlay: rgba(0, 0, 0, 0.4);
   --toast: rgba(0, 0, 0, 0.6);
   // Components
-  --box: #ffffff;
-  --selected: #e8e8e8;
-  --sectionLine: #e3e3e3;
-  --boxShadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+  --box: var(--grey200);
+  --selected: var(--grey300);
+  --sectionLine: var(--greyOpacity200);
+  --boxShadow: : 0px 0px 9px rgba(0, 0, 0, 0.4);
 }
 
 /* 다크모드 */
 [data-theme="Dark"] {
   // Text
-  --main: #ffffff;
-  --sub: #636363;
+  --main: var(--grey50);
+  --sub: var(--grey600);
   // Background
-  --bg: #121212;
+  --bg: var(--darkBackground);
   --overlay: rgba(0, 0, 0, 0.7);
   --toast: rgba(0, 0, 0, 0.6);
   // Components
-  --box: #1f1f1f;
-  --selected: #363636;
-  --sectionLine: #292929;
-  --boxShadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+  --box: var(--inverseGrey50);
+  --selected: var(--inverseGrey100);
+  --sectionLine: var(--whiteOpacity50);
+  --boxShadow: : 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fade-in {

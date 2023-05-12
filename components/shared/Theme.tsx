@@ -6,12 +6,13 @@ import SunSvg from "@/images/wb_sunny.svg";
 
 type Props = {
   theme: string;
+  className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Theme = (props: Props) => {
   return (
-    <Wrapper onClick={props.onClick}>
+    <Wrapper className={props.className} onClick={props.onClick}>
       {props.theme === "Light" && <SunSvg></SunSvg>}
       {props.theme === "Dark" && <MoonSvg></MoonSvg>}
     </Wrapper>

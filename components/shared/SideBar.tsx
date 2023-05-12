@@ -108,7 +108,7 @@ const Overlay = styled.div<any>`
   left: ${(props) => props.left};
   width: 100vw;
   height: 100vh;
-  background-color: #000000;
+  background-color: black;
   opacity: ${(props) => props.opacity};
   transition: opacity 0.2s ease-in-out;
   z-index: 1;
@@ -120,7 +120,7 @@ const Content = styled.div<any>`
   height: 100vh;
   left: ${(props) => props.left};
   transition: left 0.2s ease-in-out;
-  background-color: var(--box);
+  background-color: var(--bg);
   & * {
     background-color: inherit;
   }

@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
@@ -12,6 +13,12 @@ import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
 import Theme from "@/shared/Theme";
 import themeUtils from "@/utils/themeUtils";
+
+const SUB_COLOR = css`
+  path {
+    fill: var(--sub);
+  }
+`;
 
 const Settings = () => {
   const modal = useModal();
@@ -74,14 +81,14 @@ const Settings = () => {
               <PaintSvg></PaintSvg>
               <ListTitle>Theme</ListTitle>
             </Content>
-            <Theme theme={theme}></Theme>
+            <Theme className={SUB_COLOR} theme={theme}></Theme>
           </List>
           <List onClick={backupAndRestore}>
             <Content>
               <CloudDownloadSvg></CloudDownloadSvg>
               <ListTitle>Backup / Restore</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
         </ListContainer>
       </Container>
@@ -94,21 +101,21 @@ const Settings = () => {
               <EmailSvg></EmailSvg>
               <ListTitle>Inquiry</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
           <List onClick={termsAndCondition}>
             <Content>
               <SubjectSvg></SubjectSvg>
               <ListTitle>Terms & Condition</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
           <List onClick={github}>
             <Content>
               <GithubSvg></GithubSvg>
               <ListTitle>Github</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
         </ListContainer>
       </Container>
@@ -125,7 +132,7 @@ const Settings = () => {
               <CodeSvg></CodeSvg>
               <ListTitle>Test</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
         </ListContainer>
       </Container>
