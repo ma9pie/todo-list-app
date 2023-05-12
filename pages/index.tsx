@@ -67,10 +67,14 @@ export default function Home() {
         {list.map((todo: any) => (
           <Todo key={todo.clusterId} {...todo}></Todo>
         ))}
-        <AddWrapper>
-          <Add onClick={openAddList}></Add>
-        </AddWrapper>
-        <Button onClick={initData}>데이터 초기화</Button>
+        <Button margin="64px 0px 0px 0px" onClick={initData}>
+          데이터 초기화
+        </Button>
+        <Bottom>
+          <AddWrapper>
+            <Add onClick={openAddList}></Add>
+          </AddWrapper>
+        </Bottom>
       </Container>
     </Wrapper>
   );
@@ -102,4 +106,12 @@ const LoadingWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+const Bottom = styled.div`
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  gap: 8px;
 `;

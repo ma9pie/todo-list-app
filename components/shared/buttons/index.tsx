@@ -5,6 +5,7 @@ type Props = {
   fullWidth?: boolean;
   disabled?: boolean;
   children?: ReactNode;
+  margin?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -14,6 +15,7 @@ const Button = forwardRef((props: Props, ref) => {
       ref={ref}
       disabled={props.disabled}
       fullWidth={props.fullWidth}
+      margin={props.margin}
       onClick={props.onClick}
     >
       <Inner>{props.children}</Inner>
@@ -34,6 +36,7 @@ const Wrapper = styled.button<any>`
   align-items: center;
   justify-content: center;
   width: ${(props) => (props.fullWidth ? "100%" : "auto")};
+  margin: ${(props) => props.margin};
   min-width: var(--minWidth);
   height: 56px;
   border: 0 solid transparent;
