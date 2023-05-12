@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 
 import RecoilComponent from "@/components/test/RecoilComponent";
 import useModal, { modalUtils } from "@/hooks/useModal";
-import TestLayout from "@/layouts/TestLayout";
+import TestLayout from "@/components/layouts/TestLayout";
 import { testState } from "@/recoil/atoms";
 import { ToastStatus } from "@/recoil/states/modal";
 import Button from "@/shared/buttons/index";

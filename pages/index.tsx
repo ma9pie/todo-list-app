@@ -3,10 +3,10 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import AddList from "@/components/home/AddList";
 import Todo from "@/components/home/Todo";
+import HomeLayout from "@/components/layouts/HomeLayout";
+import AddList from "@/components/shared/modals/contents/AddList";
 import useModal from "@/hooks/useModal";
-import HomeLayout from "@/layouts/HomeLayout";
 import { clusterState, taskState } from "@/recoil/atoms";
 import { todoState } from "@/recoil/selectors";
 import Add from "@/shared/buttons/Add";

@@ -19,7 +19,7 @@
       "@/constants/*": ["constants/*"],
       "@/components/*": ["components/*"],
       "@/shared/*": ["components/shared/*"],
-      "@/layouts/*": ["layouts/*"],
+      "@/layouts/*": ["components/layouts/*"],
       "@/api/*": ["pages/api/*"],
       "@/recoil/*": ["recoil/*"],
       "@/hooks/*": ["hooks/*"],

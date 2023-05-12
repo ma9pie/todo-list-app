@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
+import TestLayout from "@/components/layouts/TestLayout";
 import AddSvg from "@/images/add.svg";
 import AddCircleSvg from "@/images/add_circle_outline.svg";
 import AppsSvg from "@/images/apps.svg";
@@ -31,7 +32,6 @@ import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import SunSvg from "@/images/wb_sunny.svg";
-import TestLayout from "@/layouts/TestLayout";
 
 function Components() {
   return (

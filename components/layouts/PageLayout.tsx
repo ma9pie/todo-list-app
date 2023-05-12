@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
-import Settings from "@/components/home/Settings";
+import Settings from "@/components/shared/modals/contents/Settings";
 import TaskInput from "@/components/todo/TaskInput";
 import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";

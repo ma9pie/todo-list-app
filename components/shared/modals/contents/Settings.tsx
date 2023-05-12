@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
-import TermsAndConditions from "@/components/home/TermsAndConditions";
+import TermsAndConditions from "@/components/shared/modals/contents/TermsAndConditions";
 import useModal from "@/hooks/useModal";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
