@@ -2,12 +2,12 @@ import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
-import Settings from "@/components/shared/modals/contents/Settings";
 import TaskInput from "@/components/todo/TaskInput";
 import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";
 import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
+import Settings from "@/modals/contents/Settings";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
 

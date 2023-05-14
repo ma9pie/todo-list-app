@@ -7,7 +7,7 @@ import type { ReactElement, ReactNode } from "react";
 import { Fragment, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 
-import ModalRoot from "@/shared/modals/ModalRoot";
+import ModalRoot from "@/modals/ModalRoot";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

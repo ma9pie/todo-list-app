@@ -2,12 +2,12 @@ import { ReactHTMLElement, useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import { useRecoilState } from "recoil";
 
+import Alert from "@/modals/Alert";
+import BottomSheet from "@/modals/BottomSheet";
+import Confirm from "@/modals/Confirm";
+import Modal from "@/modals/index";
+import Toast from "@/modals/Toast";
 import { ModalProps, modalState, ModalType } from "@/recoil/states/modal";
-import Modal from "@/shared/modals";
-import Alert from "@/shared/modals/Alert";
-import BottomSheet from "@/shared/modals/BottomSheet";
-import Confirm from "@/shared/modals/Confirm";
-import Toast from "@/shared/modals/Toast";
 
 interface UseModal {
   openModal: (props: ModalProps) => void;

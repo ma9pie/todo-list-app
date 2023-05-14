@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import Modal from "@/shared/modals";
-import Alert from "@/shared/modals/Alert";
-import BottomSheet from "@/shared/modals/BottomSheet";
-import Confirm from "@/shared/modals/Confirm";
-import Toast from "@/shared/modals/Toast";
+import Alert from "@/modals/Alert";
+import BottomSheet from "@/modals/BottomSheet";
+import Confirm from "@/modals/Confirm";
+import Modal from "@/modals/index";
+import Toast from "@/modals/Toast";
 
 /**
  * @deprecated

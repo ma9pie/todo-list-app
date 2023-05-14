@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
-import Settings from "@/components/shared/modals/contents/Settings";
+import Settings from "@/modals/contents/Settings";
 import useModal from "@/hooks/useModal";
 import MenuSvg from "@/images/menu.svg";
 import SettingSvg from "@/images/settings.svg";

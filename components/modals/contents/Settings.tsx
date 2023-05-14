@@ -1,8 +1,8 @@
 import { css } from "@emotion/css";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import TermsAndConditions from "@/components/shared/modals/contents/TermsAndConditions";
 import useModal from "@/hooks/useModal";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
@@ -11,6 +11,7 @@ import PaintSvg from "@/images/color_lens.svg";
 import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
+import TermsAndConditions from "@/modals/contents/TermsAndConditions";
 import Theme from "@/shared/Theme";
 import themeUtils from "@/utils/themeUtils";
 
@@ -21,6 +22,7 @@ const SUB_COLOR = css`
 `;
 
 const Settings = () => {
+  const router = useRouter();
   const modal = useModal();
 
   const [theme, setTheme] = useState("Light");
@@ -123,11 +125,7 @@ const Settings = () => {
       <Container>
         <Subtitle>Test</Subtitle>
         <ListContainer>
-          <List
-            onClick={() => {
-              window.location.href = "/test";
-            }}
-          >
+          <List onClick={() => router.push("/test")}>
             <Content>
               <CodeSvg></CodeSvg>
               <ListTitle>Test</ListTitle>

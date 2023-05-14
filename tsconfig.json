@@ -18,8 +18,9 @@
     "paths": {
       "@/constants/*": ["constants/*"],
       "@/components/*": ["components/*"],
-      "@/shared/*": ["components/shared/*"],
       "@/layouts/*": ["components/layouts/*"],
+      "@/modals/*": ["components/modals/*"],
+      "@/shared/*": ["components/shared/*"],
       "@/api/*": ["pages/api/*"],
       "@/recoil/*": ["recoil/*"],
       "@/hooks/*": ["hooks/*"],
