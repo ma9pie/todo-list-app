@@ -125,7 +125,12 @@ const Settings = () => {
       <Container>
         <Subtitle>Test</Subtitle>
         <ListContainer>
-          <List onClick={() => router.push("/test")}>
+          <List
+            onClick={() => {
+              router.push("/test");
+              modal.closeModal("settings");
+            }}
+          >
             <Content>
               <CodeSvg></CodeSvg>
               <ListTitle>Test</ListTitle>
