@@ -2,9 +2,11 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
+import useFixedScreen from "@/hooks/useFixedScreen";
 import { ModalProps } from "@/recoil/states/modal";
 
 const Confirm = (props: ModalProps) => {
+  useFixedScreen("confirm");
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();

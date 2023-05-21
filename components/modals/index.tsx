@@ -2,9 +2,11 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
+import useFixedScreen from "@/hooks/useFixedScreen";
 import { ModalProps } from "@/recoil/states/modal";
 
 const Modal = (props: ModalProps) => {
+  useFixedScreen("modal");
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();
@@ -64,6 +66,7 @@ const Container = styled.div<any>`
   padding: ${(props) => props.padding};
   width: 80%;
   min-width: 240px;
+  max-width: 600px;
   gap: 16px;
   border-radius: 15px;
   overflow: hidden;
