@@ -35,7 +35,6 @@ export default RecoilComponent;
 const Wrapper = styled.div`
   display: grid;
   gap: 16px;
-  padding: 16px;
   width: 100%;
 `;
 const Title = styled.p`

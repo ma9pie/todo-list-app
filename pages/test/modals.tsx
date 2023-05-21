@@ -3,9 +3,10 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
+import TestLayout from "@/components/layouts/TestLayout";
+import ProcessTest from "@/components/test/process";
 import RecoilComponent from "@/components/test/RecoilComponent";
 import useModal, { modalUtils } from "@/hooks/useModal";
-import TestLayout from "@/components/layouts/TestLayout";
 import { testState } from "@/recoil/atoms";
 import { ToastStatus } from "@/recoil/states/modal";
 import Button from "@/shared/buttons/index";
@@ -23,11 +24,21 @@ function Components() {
         <Button
           onClick={() => {
             modal.openModal({
+              key: "ProcessTest",
+              component: () => <ProcessTest></ProcessTest>,
+            });
+          }}
+        >
+          ProcessTest
+        </Button>
+        <Button
+          onClick={() => {
+            modal.openModal({
               component: () => <RecoilComponent></RecoilComponent>,
             });
           }}
         >
-          Test
+          RecoilComponent
         </Button>
         <Button
           onClick={() => {

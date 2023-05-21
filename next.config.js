@@ -27,6 +27,10 @@ const nextConfig = {
 
     return config;
   },
+
+  images: {
+    domains: ["static.toss.im"],
+  },
 };
 
 module.exports = nextConfig;
