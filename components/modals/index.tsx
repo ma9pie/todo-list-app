@@ -34,7 +34,7 @@ Modal.defaultProps = {
   isOpen: false,
   top: "50%",
   left: "50%",
-  padding: "0px",
+  padding: "16px",
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
@@ -59,13 +59,10 @@ const Overlay = styled.div<any>`
 `;
 const Container = styled.div<any>`
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   padding: ${(props) => props.padding};
+  width: 80%;
   min-width: 240px;
   gap: 16px;
   border-radius: 15px;

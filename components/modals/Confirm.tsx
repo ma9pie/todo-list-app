@@ -106,7 +106,7 @@ const Top = styled.div`
   margin-top: 16px;
 `;
 const Title = styled.p`
-  font: var(--bold20);
+  font: var(--bold18);
   text-align: center;
   margin: 0px;
 `;

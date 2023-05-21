@@ -38,7 +38,7 @@ const Wrapper = styled.button<any>`
   width: ${(props) => (props.fullWidth ? "100%" : "auto")};
   margin: ${(props) => props.margin};
   min-width: var(--minWidth);
-  height: 56px;
+  height: 48px;
   border: 0 solid transparent;
   border-radius: 16px;
   background-color: var(--blue500);

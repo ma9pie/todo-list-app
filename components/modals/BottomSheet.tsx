@@ -78,7 +78,7 @@ const Container = styled.div<any>`
   height: ${(props) => props.height};
   max-height: 100vh;
   border-radius: 25px 25px 0px 0px;
-  padding: 36px 24px;
+  padding: 24px;
   z-index: 999;
   & * {
     overscroll-behavior: contain;
@@ -99,7 +99,7 @@ const BlankBox = styled.div`
   width: 16px;
 `;
 const Title = styled.p`
-  font: var(--bold20);
+  font: var(--bold18);
 `;
 const Content = styled.div`
   padding-right: 8px;
