@@ -3,10 +3,9 @@ import moment from "moment";
 import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
-import { ToastStatus } from "@/recoil/states/modal";
 import Done from "@/shared/buttons/Done";
 import ColorSet from "@/shared/ColorSet";
-import { Cluster } from "@/types";
+import { Cluster, ToastStatus } from "@/types";
 import commonUtils from "@/utils/commonUtils";
 
 const colorList = [

@@ -8,8 +8,8 @@ import ProcessTest from "@/components/test/process";
 import RecoilComponent from "@/components/test/RecoilComponent";
 import useModal, { modalUtils } from "@/hooks/useModal";
 import { testState } from "@/recoil/atoms";
-import { ToastStatus } from "@/recoil/states/modal";
 import Button from "@/shared/buttons/index";
+import { ToastStatus } from "@/types";
 
 function Components() {
   const modal = useModal();

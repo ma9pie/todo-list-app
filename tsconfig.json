@@ -25,7 +25,7 @@
       "@/recoil/*": ["recoil/*"],
       "@/hooks/*": ["hooks/*"],
       "@/utils/*": ["utils/*"],
-      "@/types": ["types/types"],
+      "@/types": ["types"],
       "@/pages/*": ["pages/*"],
       "@/public/*": ["public/*"],
       "@/styles/*": ["styles/*"],

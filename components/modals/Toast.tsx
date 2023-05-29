@@ -5,8 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
-import { ToastStatus } from "@/recoil/states/modal";
-import { ModalProps } from "@/recoil/states/modal";
+import { ModalProps, ToastStatus } from "@/types";
 
 let pid: ReturnType<typeof setTimeout>;
 

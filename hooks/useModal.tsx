@@ -1,13 +1,13 @@
-import { ReactHTMLElement, useCallback } from "react";
+import { useCallback, useContext } from "react";
 import ReactDOM from "react-dom/client";
-import { useRecoilState } from "recoil";
 
 import Alert from "@/modals/Alert";
 import BottomSheet from "@/modals/BottomSheet";
 import Confirm from "@/modals/Confirm";
 import Modal from "@/modals/index";
+import { ModalContext } from "@/modals/ModalProvider";
 import Toast from "@/modals/Toast";
-import { ModalProps, modalState, ModalType } from "@/recoil/states/modal";
+import { ModalProps, ModalType } from "@/types";
 
 interface UseModal {
   openModal: (props: ModalProps) => void;
@@ -24,7 +24,7 @@ interface UseModal {
  * @returns 모달 utils methods
  */
 export default function useModal(): UseModal {
-  const [modals, setModals] = useRecoilState(modalState);
+  const { modals, setModals } = useContext(ModalContext);
 
   const createUid = useCallback(() => {
     if (typeof window !== undefined && window.crypto) {

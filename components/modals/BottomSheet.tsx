@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 import useFixedScreen from "@/hooks/useFixedScreen";
 import CloseSvg from "@/images/close.svg";
-import { ModalProps } from "@/recoil/states/modal";
+import { ModalProps } from "@/types";
 
 const BottomSheet = (props: ModalProps) => {
   useFixedScreen("bottom-sheet");

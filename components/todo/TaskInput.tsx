@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
 import AddSvg from "@/images/add.svg";
-import { ToastStatus } from "@/recoil/states/modal";
+import { ToastStatus } from "@/types";
 
 const TaskInput = () => {
   const modal = useModal();

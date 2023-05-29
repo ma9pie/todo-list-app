@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
 import useFixedScreen from "@/hooks/useFixedScreen";
-import { ModalProps } from "@/recoil/states/modal";
+import { ModalProps } from "@/types";
 
 const Modal = (props: ModalProps) => {
   useFixedScreen("modal");
