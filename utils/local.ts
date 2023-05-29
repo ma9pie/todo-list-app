@@ -1,10 +1,10 @@
 import moment from "moment";
 
-import commonUtils from "@/utils/commonUtils";
+import { createUid } from "@/utils";
 
-const localUtils = {
+export const local = {
   init: () => {
-    localUtils.setList("clusters", [
+    local.setList("clusters", [
       {
         clusterId: "1",
         title: "오늘 해야할 일",
@@ -22,7 +22,7 @@ const localUtils = {
         tasks: [],
       },
     ]);
-    localUtils.setList("tasks", [
+    local.setList("tasks", [
       {
         taskId: "1001",
         clusterId: "1",
@@ -58,8 +58,8 @@ const localUtils = {
     localStorage.setItem(key, JSON.stringify(value));
   },
   getTodos: () => {
-    const clusters = localUtils.getList("clusters");
-    const tasks = localUtils.getList("tasks");
+    const clusters = local.getList("clusters");
+    const tasks = local.getList("tasks");
     const tasksMap = new Map();
 
     tasks.map((task: any) => {
@@ -76,8 +76,8 @@ const localUtils = {
     });
   },
   addCluster: (title: string, color: string) => {
-    const clusters = localUtils.getList("clusters").concat({
-      clusterId: commonUtils.uid(),
+    const clusters = local.getList("clusters").concat({
+      clusterId: createUid(),
       title: title,
       color: color,
       pinned: false,
@@ -85,8 +85,6 @@ const localUtils = {
       tasks: [],
     });
     console.log(clusters);
-    localUtils.setList("clusters", clusters);
+    local.setList("clusters", clusters);
   },
 };
-
-export default localUtils;

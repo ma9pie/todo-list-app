@@ -3,7 +3,7 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
 import TestLayout from "@/components/layouts/TestLayout";
-import axios from "@/utils/axios";
+import { axios } from "@/utils";
 
 function Components() {
   useEffect(() => {

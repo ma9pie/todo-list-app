@@ -1,4 +1,4 @@
-import axios from "axios";
+import Axios from "axios";
 
 import { modalUtils } from "@/hooks/useModal";
 
@@ -8,13 +8,13 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const instance = axios.create({
+export const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   timeout: 15000,
   headers: headers,
 });
 
-instance.interceptors.request.use(
+axios.interceptors.request.use(
   (req) => {
     return req;
   },
@@ -24,7 +24,7 @@ instance.interceptors.request.use(
   }
 );
 
-instance.interceptors.response.use(
+axios.interceptors.response.use(
   (res) => {
     console.log("\n========== axios response ==========");
     console.log(res.request.responseURL);
@@ -48,5 +48,3 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default instance;

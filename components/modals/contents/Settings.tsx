@@ -13,7 +13,7 @@ import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TermsAndConditions from "@/modals/contents/TermsAndConditions";
 import Theme from "@/shared/Theme";
-import themeUtils from "@/utils/themeUtils";
+import { setDark, setLight } from "@/utils";
 
 const SUB_COLOR = css`
   path {
@@ -29,18 +29,18 @@ const Settings = () => {
 
   useEffect(() => {
     if (localStorage.getItem("theme") === "Light") {
-      themeUtils.setLight(setTheme);
+      setLight(setTheme);
     } else {
-      themeUtils.setDark(setTheme);
+      setDark(setTheme);
     }
   }, []);
 
   // 테마 변경
   const toggleTheme = () => {
     if (theme === "Dark") {
-      themeUtils.setLight(setTheme);
+      setLight(setTheme);
     } else {
-      themeUtils.setDark(setTheme);
+      setDark(setTheme);
     }
     modal.closeModal("settings");
   };

@@ -7,7 +7,7 @@ import AppsSvg from "@/images/apps.svg";
 import CloseSvg from "@/images/close.svg";
 import HomesSvg from "@/images/home.svg";
 import Theme from "@/shared/Theme";
-import themeUtils from "@/utils/themeUtils";
+import { setDark, setLight, toggleTheme } from "@/utils";
 
 type Props = {
   children: ReactNode;
@@ -69,9 +69,9 @@ const TestLayout = (props: Props) => {
 
   useEffect(() => {
     if (localStorage.getItem("theme") === "Light") {
-      themeUtils.setLight(setTheme);
+      setLight(setTheme);
     } else {
-      themeUtils.setDark(setTheme);
+      setDark(setTheme);
     }
   }, []);
 
@@ -112,10 +112,7 @@ const TestLayout = (props: Props) => {
             height={30}
             onClick={() => router.push("/")}
           ></HomesSvg>
-          <Theme
-            theme={theme}
-            onClick={() => themeUtils.toggleTheme(setTheme)}
-          ></Theme>
+          <Theme theme={theme} onClick={() => toggleTheme(setTheme)}></Theme>
         </Icons>
       </Top>
 

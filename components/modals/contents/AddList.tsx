@@ -6,7 +6,7 @@ import useModal from "@/hooks/useModal";
 import Done from "@/shared/buttons/Done";
 import ColorSet from "@/shared/ColorSet";
 import { Cluster, ToastStatus } from "@/types";
-import commonUtils from "@/utils/commonUtils";
+import { createUid } from "@/utils";
 
 const colorList = [
   "#64a8ff",
@@ -53,7 +53,7 @@ const AddList = (props: Props) => {
 
   const addCluster = () => {
     const result = props.clusters.concat({
-      clusterId: commonUtils.uid(),
+      clusterId: createUid(),
       title: title,
       color: color,
       pinned: false,
