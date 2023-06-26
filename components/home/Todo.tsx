@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import React from "react";
 
-import Dot from "@/components/shared/Dot";
+import Dot from "@/shared/Dot";
 import { Cluster, Task } from "@/types";
 
 const Todo = (props: Cluster) => {

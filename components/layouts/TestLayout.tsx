@@ -2,11 +2,12 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 
-import Theme from "@/components/shared/Theme";
 import useClickOutside from "@/hooks/useClickOutside";
 import AppsSvg from "@/images/apps.svg";
 import CloseSvg from "@/images/close.svg";
-import themeUtils from "@/utils/themeUtils";
+import HomesSvg from "@/images/home.svg";
+import Theme from "@/shared/Theme";
+import { setDark, setLight, toggleTheme } from "@/utils";
 
 type Props = {
   children: ReactNode;
@@ -68,9 +69,9 @@ const TestLayout = (props: Props) => {
 
   useEffect(() => {
     if (localStorage.getItem("theme") === "Light") {
-      themeUtils.setLight(setTheme);
+      setLight(setTheme);
     } else {
-      themeUtils.setDark(setTheme);
+      setDark(setTheme);
     }
   }, []);
 
@@ -102,11 +103,17 @@ const TestLayout = (props: Props) => {
           color="var(--main)"
           onClick={() => setIsOpenMenu(true)}
         ></AppsSvg>
+
         <Title>{title}</Title>
-        <Theme
-          theme={theme}
-          onClick={() => themeUtils.toggleTheme(setTheme)}
-        ></Theme>
+
+        <Icons>
+          <HomesSvg
+            width={30}
+            height={30}
+            onClick={() => router.push("/")}
+          ></HomesSvg>
+          <Theme theme={theme} onClick={() => toggleTheme(setTheme)}></Theme>
+        </Icons>
       </Top>
 
       {/* 본문 */}
@@ -124,7 +131,7 @@ const Top = styled.div`
   align-items: center;
   min-width: 200px;
   height: 60px;
-  padding: 0px 24px;
+  padding: 0px 16px;
 `;
 const Title = styled.h1`
   font: var(--bold24);
@@ -142,7 +149,7 @@ const Sidebar = styled.div<any>`
   width: 200px;
   height: 100vh;
   z-index: 20;
-  background-color: var(--box);
+  background-color: var(--bg);
   border: 1px solid var(--sectionLine);
   transition: left 0.2s ease;
   & * {
@@ -160,4 +167,9 @@ const List = styled.p`
   &:hover {
     background-color: var(--selected);
   }
+`;
+const Icons = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
 `;

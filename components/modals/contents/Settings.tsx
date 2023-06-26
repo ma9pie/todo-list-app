@@ -1,8 +1,9 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import TermsAndConditions from "@/components/home/TermsAndConditions";
-import Theme from "@/components/shared/Theme";
+import useModal from "@/hooks/useModal";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import CodeSvg from "@/images/code.svg";
@@ -10,33 +11,43 @@ import PaintSvg from "@/images/color_lens.svg";
 import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
-import modalUtils from "@/utils/modalUtils";
-import themeUtils from "@/utils/themeUtils";
+import TermsAndConditions from "@/modals/contents/TermsAndConditions";
+import Theme from "@/shared/Theme";
+import { setDark, setLight } from "@/utils";
+
+const SUB_COLOR = css`
+  path {
+    fill: var(--sub);
+  }
+`;
 
 const Settings = () => {
+  const router = useRouter();
+  const modal = useModal();
+
   const [theme, setTheme] = useState("Light");
 
   useEffect(() => {
     if (localStorage.getItem("theme") === "Light") {
-      themeUtils.setLight(setTheme);
+      setLight(setTheme);
     } else {
-      themeUtils.setDark(setTheme);
+      setDark(setTheme);
     }
   }, []);
 
   // 테마 변경
   const toggleTheme = () => {
     if (theme === "Dark") {
-      themeUtils.setLight(setTheme);
+      setLight(setTheme);
     } else {
-      themeUtils.setDark(setTheme);
+      setDark(setTheme);
     }
-    modalUtils.close("settings");
+    modal.closeModal("settings");
   };
 
   // 백업 및 가져오기
   const backupAndRestore = () => {
-    modalUtils.openAlert({
+    modal.openAlert({
       message: "구글 계정 연동 개발 예정",
     });
   };
@@ -51,7 +62,7 @@ const Settings = () => {
 
   // 이용약관
   const termsAndCondition = () => {
-    modalUtils.openBottomSheet({
+    modal.openBottomSheet({
       title: "이용약관",
       component: TermsAndConditions,
     });
@@ -72,14 +83,14 @@ const Settings = () => {
               <PaintSvg></PaintSvg>
               <ListTitle>Theme</ListTitle>
             </Content>
-            <Theme theme={theme}></Theme>
+            <Theme className={SUB_COLOR} theme={theme}></Theme>
           </List>
           <List onClick={backupAndRestore}>
             <Content>
               <CloudDownloadSvg></CloudDownloadSvg>
               <ListTitle>Backup / Restore</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
         </ListContainer>
       </Container>
@@ -92,21 +103,21 @@ const Settings = () => {
               <EmailSvg></EmailSvg>
               <ListTitle>Inquiry</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
           <List onClick={termsAndCondition}>
             <Content>
               <SubjectSvg></SubjectSvg>
               <ListTitle>Terms & Condition</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
           <List onClick={github}>
             <Content>
               <GithubSvg></GithubSvg>
               <ListTitle>Github</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
         </ListContainer>
       </Container>
@@ -116,14 +127,15 @@ const Settings = () => {
         <ListContainer>
           <List
             onClick={() => {
-              window.location.href = "/test";
+              router.push("/test");
+              modal.closeModal("settings");
             }}
           >
             <Content>
               <CodeSvg></CodeSvg>
               <ListTitle>Test</ListTitle>
             </Content>
-            <ForwardSvg></ForwardSvg>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
         </ListContainer>
       </Container>

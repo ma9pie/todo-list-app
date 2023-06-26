@@ -2,22 +2,15 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
+import useFixedScreen from "@/hooks/useFixedScreen";
 import CloseSvg from "@/images/close.svg";
+import { ModalProps } from "@/types";
 
-type Props = {
-  height: string;
-  isOpen: boolean;
-  title: string;
-  component: Function;
-  onAfterOpen: Function;
-  onAfterClose: Function;
-  onRequestClose: Function;
-};
-
-function BottomSheet(props: Props) {
+const BottomSheet = (props: ModalProps) => {
+  useFixedScreen("bottom-sheet");
   useEffect(() => {
-    props.onAfterOpen();
-    return () => props.onAfterClose();
+    props.onAfterOpen && props.onAfterOpen();
+    return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
   return (
@@ -36,16 +29,16 @@ function BottomSheet(props: Props) {
           <CloseSvg
             width={24}
             height={24}
-            onClick={() => props.onRequestClose()}
+            onClick={() => props.onRequestClose && props.onRequestClose()}
           ></CloseSvg>
         </Top>
-        <Content>{props.component()} </Content>
+        <Content>{props.component && props.component()} </Content>
       </Container>
     </Wrapper>
   );
-}
+};
 
-export default React.memo(BottomSheet);
+export default BottomSheet;
 
 BottomSheet.defaultProps = {
   height: "auto",
@@ -87,7 +80,7 @@ const Container = styled.div<any>`
   height: ${(props) => props.height};
   max-height: 100vh;
   border-radius: 25px 25px 0px 0px;
-  padding: 36px 24px;
+  padding: 24px;
   z-index: 999;
   & * {
     overscroll-behavior: contain;
@@ -108,7 +101,7 @@ const BlankBox = styled.div`
   width: 16px;
 `;
 const Title = styled.p`
-  font: var(--bold20);
+  font: var(--bold18);
 `;
 const Content = styled.div`
   padding-right: 8px;

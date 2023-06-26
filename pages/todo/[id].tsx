@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-import PageLayout from "@/layouts/PageLayout";
+import PageLayout from "@/components/layouts/PageLayout";
 
 const Todo = () => {
   const router = useRouter();

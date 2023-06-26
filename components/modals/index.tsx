@@ -2,21 +2,14 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
-type Props = {
-  isOpen: boolean;
-  top: string;
-  left: string;
-  padding: string;
-  component: Function;
-  onAfterOpen: Function;
-  onAfterClose: Function;
-  onRequestClose: Function;
-};
+import useFixedScreen from "@/hooks/useFixedScreen";
+import { ModalProps } from "@/types";
 
-function Modal(props: Props) {
+const Modal = (props: ModalProps) => {
+  useFixedScreen("modal");
   useEffect(() => {
-    props.onAfterOpen();
-    return () => props.onAfterClose();
+    props.onAfterOpen && props.onAfterOpen();
+    return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
   return (
@@ -31,11 +24,11 @@ function Modal(props: Props) {
         padding={props.padding}
         className={props.isOpen ? fadeIn : fadeOut}
       >
-        {props.component()}
+        {props.component && props.component()}
       </Container>
     </Wrapper>
   );
-}
+};
 
 export default Modal;
 
@@ -43,7 +36,7 @@ Modal.defaultProps = {
   isOpen: false,
   top: "50%",
   left: "50%",
-  padding: "0px",
+  padding: "16px",
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
@@ -68,14 +61,12 @@ const Overlay = styled.div<any>`
 `;
 const Container = styled.div<any>`
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   padding: ${(props) => props.padding};
+  width: 80%;
   min-width: 240px;
+  max-width: 600px;
   gap: 16px;
   border-radius: 15px;
   overflow: hidden;

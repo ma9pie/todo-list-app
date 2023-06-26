@@ -3,17 +3,19 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import AddList from "@/components/home/AddList";
 import Todo from "@/components/home/Todo";
-import Add from "@/components/shared/buttons/Add";
-import Button from "@/components/shared/buttons/index";
-import Loading from "@/components/shared/Loading";
-import HomeLayout from "@/layouts/HomeLayout";
+import HomeLayout from "@/components/layouts/HomeLayout";
+import useModal from "@/hooks/useModal";
+import AddList from "@/modals/contents/AddList";
 import { clusterState, taskState } from "@/recoil/atoms";
 import { todoState } from "@/recoil/selectors";
-import modalUtils from "@/utils/modalUtils";
+import Add from "@/shared/buttons/Add";
+import Button from "@/shared/buttons/index";
+import Loading from "@/shared/Loading";
 
 export default function Home() {
+  const modal = useModal();
+
   const [clusters, setClusters] = useRecoilState(clusterState);
   const [tasks, setTasks] = useRecoilState(taskState);
   const todos = useRecoilValue(todoState);
@@ -31,7 +33,7 @@ export default function Home() {
 
   // 할일 추가창 열기
   const openAddList = () => {
-    modalUtils.openBottomSheet({
+    modal.openBottomSheet({
       key: "addList",
       title: "Add List",
       component: () => (
@@ -42,7 +44,7 @@ export default function Home() {
 
   // 데이터 초기화
   const initData = () => {
-    modalUtils.openConfirm({
+    modal.openConfirm({
       message: "데이터를 초기화 하시겠습니까?",
       onRequestConfirm: () => {
         setClusters([]);
@@ -65,10 +67,14 @@ export default function Home() {
         {list.map((todo: any) => (
           <Todo key={todo.clusterId} {...todo}></Todo>
         ))}
-        <AddWrapper>
-          <Add onClick={openAddList}></Add>
-        </AddWrapper>
-        <Button onClick={initData}>데이터 초기화</Button>
+        <Button margin="64px 0px 0px 0px" onClick={initData}>
+          데이터 초기화
+        </Button>
+        <Bottom>
+          <AddWrapper>
+            <Add onClick={openAddList}></Add>
+          </AddWrapper>
+        </Bottom>
       </Container>
     </Wrapper>
   );
@@ -100,4 +106,12 @@ const LoadingWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+const Bottom = styled.div`
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  gap: 8px;
 `;

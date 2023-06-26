@@ -9,8 +9,8 @@ type Props = {
 
 const Done = (props: Props) => {
   return (
-    <Wrapper>
-      <CheckSvg width={40} height={40} onClick={props.onClick}></CheckSvg>
+    <Wrapper onClick={props.onClick}>
+      <CheckSvg width={40} height={40}></CheckSvg>
     </Wrapper>
   );
 };
@@ -21,7 +21,7 @@ Done.defaultProps = {
   onClick: () => {},
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<any>`
   display: flex;
   justify-content: center;
   align-items: center;

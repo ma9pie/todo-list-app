@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
-import TestLayout from "@/layouts/TestLayout";
-import axios from "@/utils/axios";
+import TestLayout from "@/components/layouts/TestLayout";
+import { axios } from "@/utils";
 
 function Components() {
   useEffect(() => {
@@ -17,14 +17,6 @@ function Components() {
       <Text>
         Frequently used components are classified by list and developed.
       </Text>
-      <input autoComplete="off" inputMode="decimal" type="text"></input>
-      <input
-        _ngcontent-lbw-c39=""
-        autoComplete="off"
-        inputMode="decimal"
-        type="text"
-        id="bid_order_form_price"
-      ></input>
     </Wrapper>
   );
 }

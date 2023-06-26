@@ -1,6 +1,6 @@
-import axios from "axios";
+import Axios from "axios";
 
-import modalUtils from "@/utils/modalUtils";
+import { modalUtils } from "@/hooks/useModal";
 
 let isServerError = false;
 
@@ -8,13 +8,13 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const instance = axios.create({
+export const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   timeout: 15000,
   headers: headers,
 });
 
-instance.interceptors.request.use(
+axios.interceptors.request.use(
   (req) => {
     return req;
   },
@@ -24,18 +24,16 @@ instance.interceptors.request.use(
   }
 );
 
-instance.interceptors.response.use(
+axios.interceptors.response.use(
   (res) => {
     console.log("\n========== axios response ==========");
     console.log(res.request.responseURL);
     console.log(res.data);
-    // console.log("========== Axios LOG END ==========\n\n");
     return Promise.resolve(res);
   },
   (error) => {
     console.log("########## axios error ##########");
     console.log(error);
-    // console.log("########## Axios END ##########");
 
     if (!isServerError) {
       isServerError = true;
@@ -50,5 +48,3 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default instance;

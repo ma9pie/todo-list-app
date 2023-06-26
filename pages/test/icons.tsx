@@ -1,7 +1,9 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
+import TestLayout from "@/components/layouts/TestLayout";
 import AddSvg from "@/images/add.svg";
 import AddCircleSvg from "@/images/add_circle_outline.svg";
 import AppsSvg from "@/images/apps.svg";
@@ -19,6 +21,7 @@ import DeleteSvg from "@/images/delete.svg";
 import EditSvg from "@/images/edit.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import GithubSvg from "@/images/github.svg";
+import HomeSvg from "@/images/home.svg";
 import ListSvg from "@/images/list.svg";
 import LogoSvg from "@/images/logo.svg";
 import EmailSvg from "@/images/mail_outline.svg";
@@ -29,7 +32,6 @@ import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import SunSvg from "@/images/wb_sunny.svg";
-import TestLayout from "@/layouts/TestLayout";
 
 function Components() {
   return (
@@ -54,6 +56,7 @@ function Components() {
         <EditSvg></EditSvg>
         <ErrorSvg></ErrorSvg>
         <GithubSvg></GithubSvg>
+        <HomeSvg></HomeSvg>
         <ListSvg></ListSvg>
         <EmailSvg></EmailSvg>
         <MenuSvg></MenuSvg>
@@ -63,6 +66,23 @@ function Components() {
         <SubjectSvg></SubjectSvg>
         <WarningSvg></WarningSvg>
         <SunSvg></SunSvg>
+      </Grid>
+
+      <Grid>
+        <MoonSvg
+          className={css`
+            path {
+              fill: var(--sub);
+            }
+          `}
+        ></MoonSvg>
+        <SunSvg
+          className={css`
+            path {
+              fill: var(--sub);
+            }
+          `}
+        ></SunSvg>
       </Grid>
     </Wrapper>
   );
@@ -74,7 +94,10 @@ Components.getLayout = function getLayout(page: ReactElement) {
   return <TestLayout>{page}</TestLayout>;
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: grid;
+  gap: 32px;
+`;
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 30px);

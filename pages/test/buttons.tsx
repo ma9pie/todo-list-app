@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
-import Add from "@/components/shared/buttons/Add";
-import Done from "@/components/shared/buttons/Done";
-import Button from "@/components/shared/buttons/index";
-import TestLayout from "@/layouts/TestLayout";
+import TestLayout from "@/components/layouts/TestLayout";
+import Add from "@/shared/buttons/Add";
+import Done from "@/shared/buttons/Done";
+import Button from "@/shared/buttons/index";
 
 function Components() {
   return (

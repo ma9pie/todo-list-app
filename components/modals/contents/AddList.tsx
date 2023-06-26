@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import moment from "moment";
 import React, { useState } from "react";
 
-import Done from "@/components/shared/buttons/Done";
-import ColorSet from "@/components/shared/ColorSet";
-import { Cluster } from "@/types";
-import commonUtils from "@/utils/commonUtils";
-import modalUtils from "@/utils/modalUtils";
+import useModal from "@/hooks/useModal";
+import Done from "@/shared/buttons/Done";
+import ColorSet from "@/shared/ColorSet";
+import { Cluster, ToastStatus } from "@/types";
+import { createUid } from "@/utils";
 
 const colorList = [
   "#64a8ff",
@@ -26,6 +26,8 @@ type Props = {
 };
 
 const AddList = (props: Props) => {
+  const modal = useModal();
+
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(colorList[0]);
 
@@ -35,23 +37,23 @@ const AddList = (props: Props) => {
 
   const addList = () => {
     if (title === "") {
-      modalUtils.openToastPopup({
-        type: "warn",
+      modal.openToast({
+        status: ToastStatus.Warn,
         message: "Please input list name",
       });
     } else {
       addCluster();
-      modalUtils.openToastPopup({
-        type: "success",
+      modal.openToast({
+        status: ToastStatus.Success,
         message: "List added",
       });
-      modalUtils.close("addList");
+      modal.closeModal("addList");
     }
   };
 
   const addCluster = () => {
     const result = props.clusters.concat({
-      clusterId: commonUtils.uid(),
+      clusterId: createUid(),
       title: title,
       color: color,
       pinned: false,

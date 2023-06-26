@@ -17,19 +17,19 @@
     "baseUrl": ".",
     "paths": {
       "@/constants/*": ["constants/*"],
+      "@/types": ["types"],
+      "@/pages/*": ["pages/*"],
       "@/components/*": ["components/*"],
+      "@/layouts/*": ["components/layouts/*"],
+      "@/modals/*": ["components/modals/*"],
       "@/shared/*": ["components/shared/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/api/*": ["pages/api/*"],
       "@/recoil/*": ["recoil/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/utils/*": ["utils/*"],
-      "@/types": ["types/types"],
-      "@/pages/*": ["pages/*"],
+      "@/utils": ["utils"],
       "@/public/*": ["public/*"],
       "@/styles/*": ["styles/*"],
-      "@/svgs/*": ["components/svgs/*"],
-      "@/images/*": ["public/images/*"]
+      "@/images/*": ["public/images/*"],
+      "@/svgs/*": ["components/svgs/*"]
     },
     "types": ["@emotion/react/types/css-prop"]
   },

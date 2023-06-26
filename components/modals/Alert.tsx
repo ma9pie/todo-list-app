@@ -2,32 +2,15 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
-type Props = {
-  isOpen: boolean;
-  top: string;
-  left: string;
-  title: string;
-  message: string;
-  confirmBtnText: string;
-  cancleBtnText: string;
-  component: Function;
-  onAfterOpen: Function;
-  onAfterClose: Function;
-  onRequestClose: Function;
-  onRequestConfirm: Function;
-};
+import useFixedScreen from "@/hooks/useFixedScreen";
+import { ModalProps } from "@/types";
 
-function Confirm(props: Props) {
+const Alert = (props: ModalProps) => {
+  useFixedScreen("alert");
   useEffect(() => {
-    props.onAfterOpen();
-    return () => props.onAfterClose();
+    props.onAfterOpen && props.onAfterOpen();
+    return () => props.onAfterClose && props.onAfterClose();
   }, []);
-
-  // 확인 버튼 클릭
-  const onClickConfirm = () => {
-    props.onRequestConfirm();
-    props.onRequestClose();
-  };
 
   return (
     <Wrapper>
@@ -44,7 +27,7 @@ function Confirm(props: Props) {
           <Title>{props.title}</Title>
         </Top>
         <Content>
-          {props.component()}
+          {props.component && props.component()}
           {props.message &&
             props.message
               .split("\n")
@@ -53,33 +36,28 @@ function Confirm(props: Props) {
               ))}
         </Content>
         <ButtonBox>
-          <SubButton onClick={props.onRequestClose}>
-            {props.cancleBtnText}
-          </SubButton>
-          <MainButton onClick={onClickConfirm}>
+          <MainButton onClick={props.onRequestClose}>
             {props.confirmBtnText}
           </MainButton>
         </ButtonBox>
       </Container>
     </Wrapper>
   );
-}
+};
 
-export default Confirm;
+export default Alert;
 
-Confirm.defaultProps = {
+Alert.defaultProps = {
   isOpen: false,
   top: "50%",
   left: "50%",
   title: "알림",
   message: "",
   confirmBtnText: "확인",
-  cancleBtnText: "취소",
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
   onRequestClose: () => {},
-  onRequestConfirm: () => {},
 };
 
 const fadeIn = css`
@@ -119,7 +97,7 @@ const Top = styled.div`
   margin-top: 16px;
 `;
 const Title = styled.p`
-  font: var(--bold20);
+  font: var(--bold18);
   text-align: center;
   margin: 0px;
 `;
@@ -139,7 +117,7 @@ const ButtonBox = styled.div`
   justify-content: center;
   width: 100%;
 `;
-const MainButton = styled.button`
+const MainButton = styled.button<any>`
   font: var(--normal14);
   width: 100%;
   height: 40px;
@@ -150,17 +128,5 @@ const MainButton = styled.button`
   background-color: var(--blue500);
   &:hover {
     background-color: var(--blue700);
-  }
-`;
-const SubButton = styled.button<any>`
-  font: var(--normal14);
-  width: 100%;
-  height: 40px;
-  border: 0px;
-  transition: background-color 0.15s ease-in-out;
-  cursor: pointer;
-  background-color: var(--box);
-  &:hover {
-    background-color: var(--selected);
   }
 `;

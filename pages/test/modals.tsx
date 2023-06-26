@@ -1,19 +1,58 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
-import Button from "@/components/shared/buttons/index";
-import TestLayout from "@/layouts/TestLayout";
-import modalUtils from "@/utils/modalUtils";
+import TestLayout from "@/components/layouts/TestLayout";
+import ProcessTest from "@/components/test/process";
+import RecoilComponent from "@/components/test/RecoilComponent";
+import useModal, { modalUtils } from "@/hooks/useModal";
+import { testState } from "@/recoil/atoms";
+import Button from "@/shared/buttons/index";
+import { ToastStatus } from "@/types";
 
 function Components() {
+  const modal = useModal();
+  const [test, setTest] = useRecoilState(testState);
+
+  useEffect(() => {}, []);
+
   return (
     <Wrapper>
+      <Content>
+        <Title>Test</Title>
+        <Button
+          onClick={() => {
+            modal.openModal({
+              key: "ProcessTest",
+              component: () => <ProcessTest></ProcessTest>,
+            });
+          }}
+        >
+          ProcessTest
+        </Button>
+        <Button
+          onClick={() => {
+            modal.openModal({
+              component: () => <RecoilComponent></RecoilComponent>,
+            });
+          }}
+        >
+          RecoilComponent
+        </Button>
+        <Button
+          onClick={() => {
+            setTest(test + 1);
+          }}
+        >
+          +1
+        </Button>
+      </Content>
       <Content>
         <Title>Alert</Title>
         <Button
           onClick={() =>
-            modalUtils.openAlert({
+            modal.openAlert({
               title: "Alert",
               message: `message\n message\n message`,
               confirmBtnText: "yes",
@@ -30,7 +69,7 @@ function Components() {
         </Button>
         <Button
           onClick={() =>
-            modalUtils.openAlert({
+            modal.openAlert({
               component: () => <TestComponent></TestComponent>,
             })
           }
@@ -43,7 +82,7 @@ function Components() {
         <Title>Confirm</Title>
         <Button
           onClick={() =>
-            modalUtils.openConfirm({
+            modal.openConfirm({
               title: "Confirm",
               message: `message\n message\n message`,
               confirmBtnText: "yes",
@@ -64,7 +103,7 @@ function Components() {
         </Button>
         <Button
           onClick={() =>
-            modalUtils.openConfirm({
+            modal.openConfirm({
               component: () => <TestComponent></TestComponent>,
             })
           }
@@ -77,8 +116,8 @@ function Components() {
         <Title>Toast</Title>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
-              type: "success",
+            modal.openToast({
+              status: ToastStatus.Success,
               message: "장바구니에 등록되었습니다.",
             });
           }}
@@ -87,8 +126,8 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
-              type: "error",
+            modal.openToast({
+              status: ToastStatus.Error,
               message: "상품 정보가 존재하지 않습니다.",
             });
           }}
@@ -97,8 +136,8 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
-              type: "warn",
+            modal.openToast({
+              status: ToastStatus.Warn,
               message: "로그인 후 이용해주세요.",
             });
           }}
@@ -107,7 +146,7 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openToastPopup({
+            modal.openToast({
               message: `해당 이벤트는 종료된 이벤트 입니다.\n 공지사항을 확인해주세요.`,
             });
           }}
@@ -120,14 +159,14 @@ function Components() {
         <Title>Bottom Sheet</Title>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({ title: "Setting" });
+            modal.openBottomSheet({ title: "Setting" });
           }}
         >
           BottomSheet
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({
+            modal.openBottomSheet({
               component: () => {
                 return <TestComponent></TestComponent>;
               },
@@ -138,17 +177,36 @@ function Components() {
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({ height: "50%" });
+            modal.openBottomSheet({ height: "50%" });
           }}
         >
           BottomSheet 50%
         </Button>
         <Button
           onClick={() => {
-            modalUtils.openBottomSheet({ height: "100%" });
+            modal.openBottomSheet({ height: "100%" });
           }}
         >
           BottomSheet 100%
+        </Button>
+      </Content>
+
+      <Content>
+        <Title>ModalUtils</Title>
+        <Button
+          onClick={() => {
+            modalUtils.openModal({
+              component: () => <TestComponent></TestComponent>,
+            });
+          }}
+        >
+          openModal
+        </Button>
+        <Button onClick={() => modalUtils.openAlert({})}>openAlert</Button>
+        <Button onClick={() => modalUtils.openConfirm({})}>openConfirm</Button>
+        <Button onClick={() => modalUtils.openToast({})}>openToast</Button>
+        <Button onClick={() => modalUtils.openBottomSheet({})}>
+          openBottomSheet
         </Button>
       </Content>
     </Wrapper>
@@ -161,12 +219,15 @@ Components.getLayout = function getLayout(page: ReactElement) {
   return <TestLayout>{page}</TestLayout>;
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
 `;
 const Title = styled.p`
   font: var(--bold18);

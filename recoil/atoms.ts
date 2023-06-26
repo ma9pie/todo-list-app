@@ -14,3 +14,7 @@ export const taskState = atom({
   default: [],
   effects_UNSTABLE: [persistAtom],
 });
+export const testState = atom({
+  key: "testState",
+  default: 0,
+});
