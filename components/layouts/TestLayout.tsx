@@ -63,9 +63,9 @@ const TestLayout = (props: Props) => {
     return str.replace(/^[a-z]/, (str) => str.toUpperCase());
   };
 
-  useClickOutside(() => {
+  useClickOutside(ref, () => {
     setIsOpenMenu(false);
-  }, ref);
+  });
 
   useEffect(() => {
     if (localStorage.getItem("theme") === "Light") {

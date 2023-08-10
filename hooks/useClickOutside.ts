@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 type EventCallback<E extends Event = Event> = (event: E) => void;
 
 function useClickOutside<T extends HTMLElement = HTMLElement>(
-  callback: EventCallback,
-  ref: React.RefObject<T>
+  ref: React.RefObject<T>,
+  callback: EventCallback
 ) {
   const savedCallback = useRef(callback);
 
