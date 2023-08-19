@@ -114,9 +114,12 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
         </div>
         <Bottom>
           <Divider></Divider>
-          <SettingIconWrapper onClick={openSettings}>
-            <SettingSvg className="fill-sub"></SettingSvg>
-          </SettingIconWrapper>
+          <SubtitleBox onClick={openSettings}>
+            <Div>
+              <SettingSvg className="fill-sub"></SettingSvg>
+              <Subtitle color="var(--sub)">SETTING</Subtitle>
+            </Div>
+          </SubtitleBox>
         </Bottom>
       </Content>
     </Wrapper>
@@ -193,8 +196,6 @@ const DotWrapper = styled.div`
   width: 24px;
   height: 24px;
 `;
-const Bottom = styled.div``;
-const SettingIconWrapper = styled.div`
-  padding: 16px;
+const Bottom = styled.div`
   cursor: pointer;
 `;
