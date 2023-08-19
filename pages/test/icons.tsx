@@ -30,6 +30,7 @@ import MoreVertSvg from "@/images/more_vert.svg";
 import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
+import TrashCanSvg from "@/images/trash_can.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import SunSvg from "@/images/wb_sunny.svg";
 
@@ -65,6 +66,7 @@ function Components() {
         <SettingSvg></SettingSvg>
         <SubjectSvg></SubjectSvg>
         <WarningSvg></WarningSvg>
+        <TrashCanSvg></TrashCanSvg>
         <SunSvg></SunSvg>
       </Grid>
 

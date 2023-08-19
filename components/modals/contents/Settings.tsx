@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import CodeSvg from "@/images/code.svg";
@@ -11,6 +12,7 @@ import PaintSvg from "@/images/color_lens.svg";
 import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
+import TrashCanSvg from "@/images/trash_can.svg";
 import TermsAndConditions from "@/modals/contents/TermsAndConditions";
 import Theme from "@/shared/Theme";
 import { setDark, setLight } from "@/utils";
@@ -23,6 +25,8 @@ const SUB_COLOR = css`
 
 const Settings = () => {
   const router = useRouter();
+
+  const { setClusters, setTasks } = useTodo();
   const modal = useModal();
 
   const [theme, setTheme] = useState("Light");
@@ -49,6 +53,17 @@ const Settings = () => {
   const backupAndRestore = () => {
     modal.openAlert({
       message: "구글 계정 연동 개발 예정",
+    });
+  };
+
+  // 데이터 초기화
+  const resetData = () => {
+    modal.openConfirm({
+      message: "데이터를 초기화 하시겠습니까?",
+      onRequestConfirm: () => {
+        setClusters([]);
+        setTasks([]);
+      },
     });
   };
 
@@ -89,6 +104,13 @@ const Settings = () => {
             <Content>
               <CloudDownloadSvg></CloudDownloadSvg>
               <ListTitle>Backup / Restore</ListTitle>
+            </Content>
+            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
+          </List>
+          <List onClick={resetData}>
+            <Content>
+              <TrashCanSvg></TrashCanSvg>
+              <ListTitle>Reset data</ListTitle>
             </Content>
             <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>

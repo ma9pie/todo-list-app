@@ -1,18 +1,19 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
 
 import PageLayout from "@/components/layouts/PageLayout";
 
 const Todo = () => {
   const router = useRouter();
 
+  const [id, setId] = useState<any>("");
+
   useEffect(() => {
-    console.log(router.query);
+    setId(router.query.id);
   }, [router.query]);
 
-  return <Wrapper></Wrapper>;
+  return <Wrapper>{id}</Wrapper>;
 };
 
 export default Todo;

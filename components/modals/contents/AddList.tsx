@@ -3,9 +3,10 @@ import moment from "moment";
 import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
 import Done from "@/shared/buttons/Done";
 import ColorSet from "@/shared/ColorSet";
-import { Cluster, ToastStatus } from "@/types";
+import { ToastStatus } from "@/types";
 import { createUid } from "@/utils";
 
 const colorList = [
@@ -20,12 +21,8 @@ const colorList = [
   "#4d4d59",
 ];
 
-type Props = {
-  clusters: Array<Cluster>;
-  setClusters: Function;
-};
-
-const AddList = (props: Props) => {
+const AddList = () => {
+  const { clusters, setClusters } = useTodo();
   const modal = useModal();
 
   const [title, setTitle] = useState("");
@@ -52,7 +49,7 @@ const AddList = (props: Props) => {
   };
 
   const addCluster = () => {
-    const result = props.clusters.concat({
+    const result = clusters.concat({
       clusterId: createUid(),
       title: title,
       color: color,
@@ -60,7 +57,7 @@ const AddList = (props: Props) => {
       created: moment().format("YYYY-MM-DD HH:mm:ss"),
       tasks: [],
     });
-    props.setClusters(result);
+    setClusters(result);
   };
 
   return (

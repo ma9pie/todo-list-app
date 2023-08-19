@@ -1,26 +1,20 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 
 import Todo from "@/components/home/Todo";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
 import AddList from "@/modals/contents/AddList";
-import { clusterState, taskState } from "@/recoil/atoms";
-import { todoState } from "@/recoil/selectors";
 import Add from "@/shared/buttons/Add";
-import Button from "@/shared/buttons/index";
 import Loading from "@/shared/Loading";
 
 export default function Home() {
+  const { clusters } = useTodo();
   const modal = useModal();
 
-  const [clusters, setClusters] = useRecoilState(clusterState);
-  const [tasks, setTasks] = useRecoilState(taskState);
-  const todos = useRecoilValue(todoState);
-
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<any[]>([]);
   const [isMount, setIsMount] = useState(false);
 
   useEffect(() => {
@@ -28,28 +22,15 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    setList(todos);
-  }, [clusters, tasks, todos]);
+    setList(clusters);
+  }, [clusters]);
 
   // 할일 추가창 열기
   const openAddList = () => {
     modal.openBottomSheet({
       key: "addList",
       title: "Add List",
-      component: () => (
-        <AddList clusters={clusters} setClusters={setClusters}></AddList>
-      ),
-    });
-  };
-
-  // 데이터 초기화
-  const initData = () => {
-    modal.openConfirm({
-      message: "데이터를 초기화 하시겠습니까?",
-      onRequestConfirm: () => {
-        setClusters([]);
-        setTasks([]);
-      },
+      component: () => <AddList></AddList>,
     });
   };
 
@@ -67,9 +48,7 @@ export default function Home() {
         {list.map((todo: any) => (
           <Todo key={todo.clusterId} {...todo}></Todo>
         ))}
-        <Button margin="64px 0px 0px 0px" onClick={initData}>
-          데이터 초기화
-        </Button>
+
         <Bottom>
           <AddWrapper>
             <Add onClick={openAddList}></Add>

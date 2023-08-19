@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 import React, {
   forwardRef,
   Ref,
@@ -6,11 +7,10 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
-import { useRecoilValue } from "recoil";
 
+import useTodo from "@/hooks/useTodo";
 import DashboardSvg from "@/images/dashboard.svg";
 import SubjectSvg from "@/images/subject.svg";
-import { todoState } from "@/recoil/selectors";
 import Dot from "@/shared/Dot";
 import { Cluster } from "@/types";
 
@@ -22,7 +22,7 @@ type RefProps = {
 const SIDEBAR_WIDTH = 200;
 
 const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
-  const todos = useRecoilValue(todoState);
+  const { clusters } = useTodo();
 
   const [isMount, setIsMount] = useState<boolean>(false);
   const [sideBarLeft, setSideBarLeft] = useState<string>(`${-SIDEBAR_WIDTH}px`);
@@ -69,10 +69,12 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
       ></Overlay>
       <Content left={sideBarLeft} width={`${SIDEBAR_WIDTH}px`}>
         <SubtitleBox>
-          <Div>
-            <DashboardSvg></DashboardSvg>
-            <Subtitle>ALL</Subtitle>
-          </Div>
+          <Link href="/" onClick={closeSideBar}>
+            <Div>
+              <DashboardSvg></DashboardSvg>
+              <Subtitle>ALL</Subtitle>
+            </Div>
+          </Link>
         </SubtitleBox>
 
         <SubtitleBox>
@@ -81,16 +83,22 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
             <Subtitle>LIST</Subtitle>
           </Div>
         </SubtitleBox>
-        {todos.map((todo: Cluster) => (
-          <ListBox key={todo.clusterId}>
-            <Div>
-              <DotWrapper>
-                <Dot color={todo.color}></Dot>
-              </DotWrapper>
-              <Text>{todo.title}</Text>
-            </Div>
-            <SubText>{todo.tasks.length}</SubText>
-          </ListBox>
+        {clusters.map(({ clusterId, color, title, tasks }: Cluster) => (
+          <Link
+            key={clusterId}
+            href={`/todo/${clusterId}`}
+            onClick={closeSideBar}
+          >
+            <ListBox>
+              <Div>
+                <DotWrapper>
+                  <Dot color={color}></Dot>
+                </DotWrapper>
+                <Text>{title}</Text>
+              </Div>
+              <SubText>{tasks.length}</SubText>
+            </ListBox>
+          </Link>
         ))}
       </Content>
     </Wrapper>
@@ -132,7 +140,6 @@ const SubtitleBox = styled.div`
   height: 60px;
   padding: 0px 16px;
   border-bottom: 1px solid var(--sectionLine);
-  cursor: pointer;
 `;
 const Subtitle = styled.p`
   font: var(--medium16);
