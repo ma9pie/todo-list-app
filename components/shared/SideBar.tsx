@@ -8,8 +8,10 @@ import React, {
   useState,
 } from "react";
 
+import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import DashboardSvg from "@/images/dashboard.svg";
+import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
 import Dot from "@/shared/Dot";
 import { Cluster } from "@/types";
@@ -23,10 +25,13 @@ const SIDEBAR_WIDTH = 200;
 
 const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   const { clusters } = useTodo();
+  const { openSettings } = useModal();
 
   const [isMount, setIsMount] = useState<boolean>(false);
-  const [sideBarLeft, setSideBarLeft] = useState<string>(`${-SIDEBAR_WIDTH}px`);
-  const [overlayLeft, setOverlayLeft] = useState<string>("-100vw");
+  const [sideBarRight, setSideBarRight] = useState<string>(
+    `${-SIDEBAR_WIDTH}px`
+  );
+  const [overlayRight, setOverlayRight] = useState<string>("-100vw");
   const [opacity, setOpacity] = useState<number>(0);
 
   useEffect(() => {
@@ -39,17 +44,17 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
 
   // 사이드바 열기
   const openSideBar = () => {
-    setSideBarLeft("0px");
-    setOverlayLeft("0px");
+    setSideBarRight("0px");
+    setOverlayRight("0px");
     setOpacity(calcOpacity(0));
   };
 
   // 사이드바 닫기
   const closeSideBar = () => {
-    setSideBarLeft(`${-SIDEBAR_WIDTH}px`);
+    setSideBarRight(`${-SIDEBAR_WIDTH}px`);
     setOpacity(calcOpacity(-SIDEBAR_WIDTH));
     setTimeout(() => {
-      setOverlayLeft("-100vw");
+      setOverlayRight("-100vw");
     }, 200);
   };
 
@@ -63,43 +68,56 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   return (
     <Wrapper>
       <Overlay
-        left={overlayLeft}
+        right={overlayRight}
         opacity={opacity}
         onClick={closeSideBar}
       ></Overlay>
-      <Content left={sideBarLeft} width={`${SIDEBAR_WIDTH}px`}>
-        <SubtitleBox>
+      <Content right={sideBarRight} width={`${SIDEBAR_WIDTH}px`}>
+        <div>
           <Link href="/" onClick={closeSideBar}>
-            <Div>
-              <DashboardSvg></DashboardSvg>
-              <Subtitle>ALL</Subtitle>
-            </Div>
-          </Link>
-        </SubtitleBox>
-
-        <SubtitleBox>
-          <Div>
-            <SubjectSvg></SubjectSvg>
-            <Subtitle>LIST</Subtitle>
-          </Div>
-        </SubtitleBox>
-        {clusters.map(({ clusterId, color, title, tasks }: Cluster) => (
-          <Link
-            key={clusterId}
-            href={`/todo/${clusterId}`}
-            onClick={closeSideBar}
-          >
-            <ListBox>
+            <SubtitleBox>
               <Div>
-                <DotWrapper>
-                  <Dot color={color}></Dot>
-                </DotWrapper>
-                <Text>{title}</Text>
+                <DashboardSvg></DashboardSvg>
+                <Subtitle>ALL</Subtitle>
               </Div>
-              <SubText>{tasks.length}</SubText>
-            </ListBox>
+            </SubtitleBox>
           </Link>
-        ))}
+
+          <Divider></Divider>
+
+          <SubtitleBox>
+            <Div>
+              <SubjectSvg className="fill-sub"></SubjectSvg>
+              <Subtitle color="var(--sub)">LIST</Subtitle>
+            </Div>
+          </SubtitleBox>
+
+          <Divider></Divider>
+
+          {clusters.map(({ clusterId, color, title, tasks }: Cluster) => (
+            <Link
+              key={clusterId}
+              href={`/todo/${clusterId}`}
+              onClick={closeSideBar}
+            >
+              <ListBox>
+                <Div>
+                  <DotWrapper>
+                    <Dot color={color}></Dot>
+                  </DotWrapper>
+                  <Text>{title}</Text>
+                </Div>
+                <SubText>{tasks.length}</SubText>
+              </ListBox>
+            </Link>
+          ))}
+        </div>
+        <Bottom>
+          <Divider></Divider>
+          <SettingIconWrapper onClick={openSettings}>
+            <SettingSvg className="fill-sub"></SettingSvg>
+          </SettingIconWrapper>
+        </Bottom>
       </Content>
     </Wrapper>
   );
@@ -113,7 +131,7 @@ const Wrapper = styled.div``;
 const Overlay = styled.div<any>`
   position: fixed;
   top: 0px;
-  left: ${(props) => props.left};
+  right: ${(props) => props.right};
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   background-color: black;
@@ -124,14 +142,14 @@ const Overlay = styled.div<any>`
 const Content = styled.div<any>`
   position: fixed;
   top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: ${(props) => props.width};
   height: calc(var(--vh, 1vh) * 100);
-  left: ${(props) => props.left};
-  transition: left 0.2s ease-in-out;
+  right: ${(props) => props.right};
+  transition: right 0.2s ease-in-out;
   background-color: var(--bg);
-  & * {
-    background-color: inherit;
-  }
   z-index: 2;
 `;
 const SubtitleBox = styled.div`
@@ -139,10 +157,13 @@ const SubtitleBox = styled.div`
   align-items: center;
   height: 60px;
   padding: 0px 16px;
-  border-bottom: 1px solid var(--sectionLine);
 `;
-const Subtitle = styled.p`
+const Subtitle = styled.p<any>`
   font: var(--medium16);
+  color: ${(props) => props.color};
+`;
+const Divider = styled.div`
+  border-bottom: 1px solid var(--sectionLine);
 `;
 const Div = styled.div`
   display: flex;
@@ -171,4 +192,9 @@ const DotWrapper = styled.div`
   align-items: center;
   width: 24px;
   height: 24px;
+`;
+const Bottom = styled.div``;
+const SettingIconWrapper = styled.div`
+  padding: 16px;
+  cursor: pointer;
 `;

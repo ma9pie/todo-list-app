@@ -38,6 +38,7 @@ function Components() {
   return (
     <Wrapper>
       <LogoSvg width={200} height={200}></LogoSvg>
+      <LogoSvg width={32} height={32}></LogoSvg>
 
       <Grid>
         <AddSvg></AddSvg>

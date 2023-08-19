@@ -117,3 +117,15 @@ svg {
     transform: scale(0.5);
   }
 }
+
+.fill-main{
+  path {
+    fill: var(--main);
+  }
+}
+
+.fill-sub{
+  path {
+    fill: var(--sub);
+  }
+}

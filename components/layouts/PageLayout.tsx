@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import styled from "@emotion/styled";
+import Link from "next/link";
 import React, { ReactNode, useRef } from "react";
 
 import TaskInput from "@/components/todo/TaskInput";
@@ -10,6 +11,7 @@ import SettingSvg from "@/images/settings.svg";
 import Settings from "@/modals/contents/Settings";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
+import TextLogo from "@/shared/TextLogo";
 
 type Props = {
   children: ReactNode;
@@ -32,8 +34,9 @@ const PageLayout = (props: Props) => {
       <Head></Head>
       <SideBar ref={ref}></SideBar>
       <Header>
+        <TextLogo></TextLogo>
         <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
-        <IconContainer>
+        {/* <IconContainer>
           <PushPinSvg
             width={32}
             height={32}
@@ -41,7 +44,7 @@ const PageLayout = (props: Props) => {
             color="red"
           ></PushPinSvg>
           <MoreVertSvg width={32} height={32}></MoreVertSvg>
-        </IconContainer>
+        </IconContainer> */}
       </Header>
       <Content>{props.children}</Content>
       <TaskInput></TaskInput>

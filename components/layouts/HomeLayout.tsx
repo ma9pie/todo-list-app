@@ -1,12 +1,10 @@
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
-import useModal from "@/hooks/useModal";
 import MenuSvg from "@/images/menu.svg";
-import SettingSvg from "@/images/settings.svg";
-import Settings from "@/modals/contents/Settings";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
+import TextLogo from "@/shared/TextLogo";
 
 type Props = {
   children: ReactNode;
@@ -17,8 +15,6 @@ type RefProps = {
 };
 
 const HomeLayout = (props: Props) => {
-  const modal = useModal();
-
   const ref = useRef<RefProps>(null);
 
   // Open SideBar
@@ -26,22 +22,15 @@ const HomeLayout = (props: Props) => {
     ref.current?.openSideBar();
   };
 
-  // Open Settings
-  const openSettings = () => {
-    modal.openBottomSheet({
-      key: "settings",
-      title: "Settings",
-      component: () => <Settings></Settings>,
-    });
-  };
-
   return (
     <Wrapper>
       <Head></Head>
       <SideBar ref={ref}></SideBar>
       <Header>
-        <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
-        <SettingSvg width={32} height={32} onClick={openSettings}></SettingSvg>
+        <TextLogo></TextLogo>
+        <IconContainer>
+          <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
+        </IconContainer>
       </Header>
       <Content>{props.children}</Content>
     </Wrapper>
@@ -63,4 +52,9 @@ const Header = styled.div`
   height: 60px;
   padding: 0px 16px;
   border-bottom: 1px solid var(--sectionLine);
+`;
+const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;

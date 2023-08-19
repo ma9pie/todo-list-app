@@ -1,26 +1,12 @@
 import { useCallback, useContext } from "react";
-import ReactDOM from "react-dom/client";
 
-import Alert from "@/modals/Alert";
-import BottomSheet from "@/modals/BottomSheet";
-import Confirm from "@/modals/Confirm";
-import Modal from "@/modals/index";
+import Settings from "@/modals/contents/Settings";
 import { ModalContext } from "@/modals/ModalProvider";
-import Toast from "@/modals/Toast";
 import { ModalProps, Modals, ModalType } from "@/types";
-
-interface UseModal {
-  openModal: (props: ModalProps) => void;
-  openAlert: (props: ModalProps) => void;
-  openConfirm: (props: ModalProps) => void;
-  openBottomSheet: (props: ModalProps) => void;
-  openToast: (props: ModalProps) => void;
-  closeModal: (key?: string) => void;
-}
 
 let tmpModals: Modals;
 
-export default function useModal(): UseModal {
+export default function useModal() {
   const { modals, setModals } = useContext(ModalContext);
   tmpModals = modals;
 
@@ -92,6 +78,14 @@ export default function useModal(): UseModal {
     openModal({ ...props, type: ModalType.Toast });
   };
 
+  const openSettings = () => {
+    openBottomSheet({
+      key: "settings",
+      title: "Settings",
+      component: () => <Settings></Settings>,
+    });
+  };
+
   return {
     openModal,
     closeModal,
@@ -99,5 +93,6 @@ export default function useModal(): UseModal {
     openConfirm,
     openBottomSheet,
     openToast,
+    openSettings,
   };
 }
