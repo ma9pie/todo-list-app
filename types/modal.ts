@@ -10,6 +10,7 @@ export enum ToastStatus {
   Warn,
   None,
 }
+export type Modals = Map<string, ModalProps>;
 
 export type ModalProps = {
   key?: string;

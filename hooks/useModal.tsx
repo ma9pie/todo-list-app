@@ -7,7 +7,7 @@ import Confirm from "@/modals/Confirm";
 import Modal from "@/modals/index";
 import { ModalContext } from "@/modals/ModalProvider";
 import Toast from "@/modals/Toast";
-import { ModalProps, ModalType } from "@/types";
+import { ModalProps, Modals, ModalType } from "@/types";
 
 interface UseModal {
   openModal: (props: ModalProps) => void;
@@ -18,13 +18,11 @@ interface UseModal {
   closeModal: (key?: string) => void;
 }
 
-/**
- * recoil state로 Modal data 상태를 관리하는 hooks
- * 컴포넌트 내에서 recoilState 사용 가능
- * @returns 모달 utils methods
- */
+let tmpModals: Modals;
+
 export default function useModal(): UseModal {
   const { modals, setModals } = useContext(ModalContext);
+  tmpModals = modals;
 
   const createUid = useCallback(() => {
     if (typeof window !== undefined && window.crypto) {
@@ -37,7 +35,7 @@ export default function useModal(): UseModal {
   }, []);
 
   const openModal = (props: ModalProps) => {
-    const hashMapA: Map<string, ModalProps> = new Map(modals);
+    const hashMapA: Map<string, ModalProps> = new Map(tmpModals);
     hashMapA.forEach((value, key) => {
       if (value.type === ModalType.Toast) {
         hashMapA.delete(key);
@@ -78,21 +76,36 @@ export default function useModal(): UseModal {
     }
   };
 
+  const openAlert = (props: ModalProps) => {
+    openModal({ ...props, type: ModalType.Alert });
+  };
+
+  const openConfirm = (props: ModalProps) => {
+    openModal({ ...props, type: ModalType.Confirm });
+  };
+
+  const openBottomSheet = (props: ModalProps) => {
+    openModal({ ...props, type: ModalType.BottomSheet });
+  };
+
+  const openToast = (props: ModalProps) => {
+    openModal({ ...props, type: ModalType.Toast });
+  };
+
   return {
     openModal,
-    openAlert: (props) => openModal({ ...props, type: ModalType.Alert }),
-    openConfirm: (props) => openModal({ ...props, type: ModalType.Confirm }),
-    openBottomSheet: (props) =>
-      openModal({ ...props, type: ModalType.BottomSheet }),
-    openToast: (props) => openModal({ ...props, type: ModalType.Toast }),
     closeModal,
+    openAlert,
+    openConfirm,
+    openBottomSheet,
+    openToast,
   };
 }
 
 /**
  * React component가 아닌
- * 일반 자바스크립트 파일에서 사용 가능한 Modal Utils
- * 컴포넌트 내에서 recoilState 사용불가
+ * 일반 자바스크립트 파일에서 tmpModals사용 가능한 Modal Utils
+ * 컴포넌트 내에서 recoilStatetmpModals사용불가
  * (useModal 개발 이전에 사용하던 방식)
  */
 export const modalUtils = {
