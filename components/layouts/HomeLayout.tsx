@@ -53,7 +53,7 @@ export default HomeLayout;
 const Wrapper = styled.div``;
 const Content = styled.div`
   min-width: var(--minWidth);
-  height: calc(100vh - 60px);
+  height: calc(var(--vh, 1vh) * 100 - 60px);
 `;
 const Header = styled.div`
   display: flex;

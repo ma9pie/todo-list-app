@@ -133,7 +133,7 @@ const Wrapper = styled.div<any>`
   left: 0px;
   bottom: ${(props) => props.bottom};
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: 999;
   pointer-events: none;
   user-select: none;

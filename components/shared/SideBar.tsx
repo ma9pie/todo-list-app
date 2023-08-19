@@ -115,7 +115,7 @@ const Overlay = styled.div<any>`
   top: 0px;
   left: ${(props) => props.left};
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: black;
   opacity: ${(props) => props.opacity};
   transition: opacity 0.2s ease-in-out;
@@ -125,7 +125,7 @@ const Content = styled.div<any>`
   position: fixed;
   top: 0px;
   width: ${(props) => props.width};
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   left: ${(props) => props.left};
   transition: left 0.2s ease-in-out;
   background-color: var(--bg);

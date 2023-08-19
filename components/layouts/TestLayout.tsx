@@ -147,7 +147,7 @@ const Sidebar = styled.div<any>`
   top: 0px;
   left: ${(props) => props.left};
   width: 200px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: 20;
   background-color: var(--bg);
   border: 1px solid var(--sectionLine);
