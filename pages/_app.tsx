@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import type { ReactElement, ReactNode } from "react";
 import { Fragment, useEffect } from "react";
-import { RecoilRoot } from "recoil";
+import { RecoilEnv, RecoilRoot } from "recoil";
 
 import ModalProvider from "@/modals/ModalProvider";
 
@@ -16,6 +16,8 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
