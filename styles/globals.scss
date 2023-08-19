@@ -6,6 +6,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   min-width: var(--minWidth);
   height: calc(var(--vh, 1vh) * 100);
+  overscroll-behavior: none;
 }
 
 a {
