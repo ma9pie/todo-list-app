@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import TestLayout from "@/components/layouts/TestLayout";
 import ProcessTest from "@/components/test/process";
 import RecoilComponent from "@/components/test/RecoilComponent";
-import useModal, { modalUtils } from "@/hooks/useModal";
+import useModal from "@/hooks/useModal";
 import { testState } from "@/recoil/atoms";
 import Button from "@/shared/buttons/index";
 import { ToastStatus } from "@/types";
@@ -188,25 +188,6 @@ function Components() {
           }}
         >
           BottomSheet 100%
-        </Button>
-      </Content>
-
-      <Content>
-        <Title>ModalUtils</Title>
-        <Button
-          onClick={() => {
-            modalUtils.openModal({
-              component: () => <TestComponent></TestComponent>,
-            });
-          }}
-        >
-          openModal
-        </Button>
-        <Button onClick={() => modalUtils.openAlert({})}>openAlert</Button>
-        <Button onClick={() => modalUtils.openConfirm({})}>openConfirm</Button>
-        <Button onClick={() => modalUtils.openToast({})}>openToast</Button>
-        <Button onClick={() => modalUtils.openBottomSheet({})}>
-          openBottomSheet
         </Button>
       </Content>
     </Wrapper>

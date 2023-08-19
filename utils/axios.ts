@@ -1,9 +1,5 @@
 import Axios from "axios";
 
-import { modalUtils } from "@/hooks/useModal";
-
-let isServerError = false;
-
 const headers = {
   "Content-Type": "application/json",
 };
@@ -34,17 +30,7 @@ axios.interceptors.response.use(
   (error) => {
     console.log("########## axios error ##########");
     console.log(error);
-
-    if (!isServerError) {
-      isServerError = true;
-      modalUtils.openAlert({
-        message: `서버 오류가\n 발생하였습니다.`,
-        onAfterClose: () => {
-          isServerError = false;
-        },
-      });
-    }
-
+    alert("server error");
     return Promise.reject(error);
   }
 );
