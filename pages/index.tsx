@@ -88,7 +88,7 @@ const LoadingWrapper = styled.div`
 `;
 const Bottom = styled.div`
   position: fixed;
-  bottom: 16px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
