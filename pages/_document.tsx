@@ -16,7 +16,7 @@ export default function Document() {
         <meta name="keywords" content="todo, todo list, todo list app" />
 
         {/* Naver 블로그, 카카오톡 미리보기 설정 */}
-        <meta property="og:url" content="https://todo-list-ma9pie.vercel.app" />
+        <meta property="og:url" content="https://check-todo.vercel.app" />
         <meta property="og:site_name" content="Todo List App" />
         <meta property="og:title" content="Todo List App" />
         <meta property="og:image" content="/images/logo.svg" />
@@ -28,10 +28,7 @@ export default function Document() {
 
         {/* 트위터 미리보기 설정 */}
         <meta name="twitter:card" content="Todo List App" />
-        <meta
-          name="twitter:url"
-          content="https://todo-list-ma9pie.vercel.app"
-        />
+        <meta name="twitter:url" content="https://check-todo.vercel.app" />
         <meta name="twitter:site_name" content="Todo List App" />
         <meta name="twitter:title" content="Todo List App" />
         <meta name="twitter:image" content="/images/logo.svg" />
