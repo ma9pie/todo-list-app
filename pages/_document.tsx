@@ -141,6 +141,20 @@ export default function Document() {
           sizes="196x196"
         />
 
+        {/* 기기 viewheight 할당 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              let vh = window.innerHeight * 0.01;
+              document.documentElement.style.setProperty('--vh', vh + 'px');
+              window.addEventListener('resize', function () {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', vh + 'px');
+              });
+            `,
+          }}
+        ></script>
+
         {/* 다크모드 시 화면 깜빡임 제거 */}
         <script
           dangerouslySetInnerHTML={{
