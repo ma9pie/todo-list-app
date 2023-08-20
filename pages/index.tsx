@@ -7,7 +7,7 @@ import HomeLayout from "@/components/layouts/HomeLayout";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddList from "@/modals/contents/AddList";
-import Add from "@/shared/buttons/Add";
+import AddButton from "@/shared/buttons/AddButton";
 import Loading from "@/shared/Loading";
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
   const openAddList = () => {
     openBottomSheet({
       key: "addList",
-      title: "Add List",
+      title: "AddButton List",
       component: () => <AddList></AddList>,
     });
   };
@@ -51,7 +51,7 @@ export default function Home() {
 
         <Bottom>
           <AddWrapper>
-            <Add onClick={openAddList}></Add>
+            <AddButton onClick={openAddList}></AddButton>
           </AddWrapper>
         </Bottom>
       </Container>
@@ -79,6 +79,7 @@ const AddWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 24px;
+  background-color: transparent;
 `;
 const LoadingWrapper = styled.div`
   position: absolute;
@@ -93,4 +94,5 @@ const Bottom = styled.div`
   transform: translateX(-50%);
   display: grid;
   gap: 8px;
+  background-color: transparent;
 `;

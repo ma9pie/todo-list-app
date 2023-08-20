@@ -7,6 +7,11 @@ body {
   min-width: var(--minWidth);
   height: calc(var(--vh, 1vh) * 100);
   overscroll-behavior: none;
+  -ms-overflow-style: none; /* ms */
+  scrollbar-width: none; /* firefox */
+  &::-webkit-scrollbar {
+    display: none; /* chrome, safari, opera, edge */
+  }
 }
 
 a {
@@ -127,5 +132,14 @@ svg {
 .fill-sub{
   path {
     fill: var(--sub);
+  }
+}
+
+.scroll-y {
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

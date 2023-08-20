@@ -78,7 +78,7 @@ const Container = styled.div<any>`
   width: 100%;
   min-width: 240px;
   height: ${(props) => props.height};
-  max-height: calc(var(--vh, 1vh) * 100);
+  max-height: 100vh;
   border-radius: 25px 25px 0px 0px;
   padding: 24px;
   z-index: 999;
@@ -106,6 +106,6 @@ const Title = styled.p`
 const Content = styled.div`
   padding-right: 8px;
   // 전체높이 - top영역 - 아래쪽 여백
-  max-height: calc(var(--vh, 1vh) * 100 - 32px - 48px - 32px);
+  max-height: calc(100vh - 32px - 48px - 32px);
   overflow-y: scroll;
 `;

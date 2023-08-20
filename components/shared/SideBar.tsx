@@ -73,52 +73,54 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
         onClick={closeSideBar}
       ></Overlay>
       <Content right={sideBarRight} width={`${SIDEBAR_WIDTH}px`}>
-        <div>
+        <Div>
           <Link href="/" onClick={closeSideBar}>
             <SubtitleBox>
-              <Div>
+              <FlexBox>
                 <DashboardSvg></DashboardSvg>
                 <Subtitle>ALL</Subtitle>
-              </Div>
+              </FlexBox>
             </SubtitleBox>
           </Link>
 
           <Divider></Divider>
 
           <SubtitleBox>
-            <Div>
+            <FlexBox>
               <SubjectSvg className="fill-sub"></SubjectSvg>
               <Subtitle color="var(--sub)">LIST</Subtitle>
-            </Div>
+            </FlexBox>
           </SubtitleBox>
 
           <Divider></Divider>
 
-          {clusters.map(({ clusterId, color, title, tasks }: Cluster) => (
-            <Link
-              key={clusterId}
-              href={`/todo/${clusterId}`}
-              onClick={closeSideBar}
-            >
-              <ListBox>
-                <Div>
-                  <DotWrapper>
-                    <Dot color={color}></Dot>
-                  </DotWrapper>
-                  <Text>{title}</Text>
-                </Div>
-                <SubText>{tasks.length}</SubText>
-              </ListBox>
-            </Link>
-          ))}
-        </div>
+          <ClusterContainer className="scroll-y">
+            {clusters.map(({ clusterId, color, title, tasks }: Cluster) => (
+              <Link
+                key={clusterId}
+                href={`/todo/${clusterId}`}
+                onClick={closeSideBar}
+              >
+                <ListBox>
+                  <FlexBox>
+                    <DotWrapper>
+                      <Dot color={color}></Dot>
+                    </DotWrapper>
+                    <Text>{title}</Text>
+                  </FlexBox>
+                  <SubText>{tasks.length}</SubText>
+                </ListBox>
+              </Link>
+            ))}
+          </ClusterContainer>
+        </Div>
         <Bottom>
           <Divider></Divider>
           <SubtitleBox onClick={openSettings}>
-            <Div>
+            <FlexBox>
               <SettingSvg className="fill-sub"></SettingSvg>
               <Subtitle color="var(--sub)">SETTING</Subtitle>
-            </Div>
+            </FlexBox>
           </SubtitleBox>
         </Bottom>
       </Content>
@@ -136,7 +138,7 @@ const Overlay = styled.div<any>`
   top: 0px;
   right: ${(props) => props.right};
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   background-color: black;
   opacity: ${(props) => props.opacity};
   transition: opacity 0.2s ease-in-out;
@@ -149,7 +151,7 @@ const Content = styled.div<any>`
   flex-direction: column;
   justify-content: space-between;
   width: ${(props) => props.width};
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   right: ${(props) => props.right};
   transition: right 0.2s ease-in-out;
   background-color: var(--bg);
@@ -168,10 +170,14 @@ const Subtitle = styled.p<any>`
 const Divider = styled.div`
   border-bottom: 1px solid var(--sectionLine);
 `;
-const Div = styled.div`
+const Div = styled.div``;
+const FlexBox = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+const ClusterContainer = styled.div`
+  height: calc(100vh - 180px);
 `;
 const ListBox = styled.div`
   display: flex;

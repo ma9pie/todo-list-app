@@ -3,8 +3,8 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
 import TestLayout from "@/components/layouts/TestLayout";
-import Add from "@/shared/buttons/Add";
-import Done from "@/shared/buttons/Done";
+import AddButton from "@/shared/buttons/AddButton";
+import DoneButton from "@/components/shared/buttons/DoneButton";
 import Button from "@/shared/buttons/index";
 
 function Components() {
@@ -12,8 +12,8 @@ function Components() {
     <Wrapper>
       <Button>button</Button>
       <Button disabled>disabled button</Button>
-      <Add></Add>
-      <Done></Done>
+      <AddButton></AddButton>
+      <DoneButton></DoneButton>
     </Wrapper>
   );
 }

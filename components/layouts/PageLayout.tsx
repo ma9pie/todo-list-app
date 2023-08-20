@@ -60,7 +60,7 @@ const pushPinStyles = css`
 const Wrapper = styled.div``;
 const Content = styled.div`
   min-width: var(--minWidth);
-  height: calc(var(--vh, 1vh) * 100 - 120px);
+  height: calc(100vh - 120px);
 `;
 const Header = styled.div`
   display: flex;

@@ -7,7 +7,7 @@ type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Add = (props: Props) => {
+const AddButton = (props: Props) => {
   return (
     <Wrapper onClick={props.onClick}>
       <AddSvg width={40} height={40}></AddSvg>
@@ -15,9 +15,9 @@ const Add = (props: Props) => {
   );
 };
 
-export default Add;
+export default AddButton;
 
-Add.defaultProps = {
+AddButton.defaultProps = {
   onClick: () => {},
 };
 
