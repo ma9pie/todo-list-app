@@ -27,7 +27,7 @@ const Settings = () => {
   const router = useRouter();
 
   const { setClusters, setTasks } = useTodo();
-  const modal = useModal();
+  const { openAlert, openConfirm, openBottomSheet, closeModal } = useModal();
 
   const [theme, setTheme] = useState("Light");
 
@@ -46,19 +46,19 @@ const Settings = () => {
     } else {
       setDark(setTheme);
     }
-    modal.closeModal("settings");
+    closeModal("settings");
   };
 
   // 백업 및 가져오기
   const backupAndRestore = () => {
-    modal.openAlert({
+    openAlert({
       message: "구글 계정 연동 개발 예정",
     });
   };
 
   // 데이터 초기화
   const resetData = () => {
-    modal.openConfirm({
+    openConfirm({
       message: "데이터를 초기화 하시겠습니까?",
       onRequestConfirm: () => {
         setClusters([]);
@@ -77,7 +77,7 @@ const Settings = () => {
 
   // 이용약관
   const termsAndCondition = () => {
-    modal.openBottomSheet({
+    openBottomSheet({
       title: "이용약관",
       component: TermsAndConditions,
     });
@@ -150,7 +150,7 @@ const Settings = () => {
           <List
             onClick={() => {
               router.push("/test");
-              modal.closeModal("settings");
+              closeModal("settings");
             }}
           >
             <Content>

@@ -6,7 +6,7 @@ import AddSvg from "@/images/add.svg";
 import { ToastStatus } from "@/types";
 
 const TaskInput = () => {
-  const modal = useModal();
+  const { openToast } = useModal();
 
   const [task, setTask] = useState("");
 
@@ -16,13 +16,13 @@ const TaskInput = () => {
 
   const addTask = () => {
     if (task) {
-      modal.openToast({
+      openToast({
         status: ToastStatus.Success,
         message: "Task added",
       });
       setTask("");
     } else {
-      modal.openToast({
+      openToast({
         status: ToastStatus.Warn,
         message: "Please input task",
       });

@@ -29,7 +29,7 @@ const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  flex: 1;
   padding: 8px;
   border-radius: 8px;
   background-color: var(--box);

@@ -8,7 +8,7 @@ import useModal from "@/hooks/useModal";
 import Header from "@/modals/Header";
 
 const Process = () => {
-  const modal = useModal();
+  const { closeModal } = useModal();
 
   const [title, setTitle] = useState<string>("");
   const [step, setStep] = useState<number>(0);
@@ -24,7 +24,7 @@ const Process = () => {
     }
   }, [step]);
 
-  const close = () => modal.closeModal("ProcessTest");
+  const close = () => closeModal("ProcessTest");
 
   return (
     <Wrapper>

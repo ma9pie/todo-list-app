@@ -23,7 +23,7 @@ const colorList = [
 
 const AddList = () => {
   const { clusters, setClusters } = useTodo();
-  const modal = useModal();
+  const { openToast, closeModal } = useModal();
 
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(colorList[0]);
@@ -34,17 +34,17 @@ const AddList = () => {
 
   const addList = () => {
     if (title === "") {
-      modal.openToast({
+      openToast({
         status: ToastStatus.Warn,
         message: "Please input list name",
       });
     } else {
       addCluster();
-      modal.openToast({
+      openToast({
         status: ToastStatus.Success,
         message: "List added",
       });
-      modal.closeModal("addList");
+      closeModal("addList");
     }
   };
 

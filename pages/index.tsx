@@ -12,7 +12,7 @@ import Loading from "@/shared/Loading";
 
 export default function Home() {
   const { clusters } = useTodo();
-  const modal = useModal();
+  const { openBottomSheet } = useModal();
 
   const [list, setList] = useState<any[]>([]);
   const [isMount, setIsMount] = useState(false);
@@ -27,7 +27,7 @@ export default function Home() {
 
   // 할일 추가창 열기
   const openAddList = () => {
-    modal.openBottomSheet({
+    openBottomSheet({
       key: "addList",
       title: "Add List",
       component: () => <AddList></AddList>,
