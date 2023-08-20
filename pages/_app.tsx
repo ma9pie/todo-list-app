@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import type { ReactElement, ReactNode } from "react";
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
 import useTrackEvent from "@/hooks/useTrackEvent";
@@ -20,10 +20,17 @@ type AppPropsWithLayout = AppProps & {
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App(props: AppPropsWithLayout) {
+  return (
+    <RecoilRoot>
+      <AppInner {...props}></AppInner>
+    </RecoilRoot>
+  );
+}
+
+const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   const router = useRouter();
   const getLayout = Component.getLayout ?? ((page) => page);
-
   const { initializeGA, trackPageView } = useTrackEvent();
 
   // Init GA4
@@ -37,10 +44,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, [router.pathname]);
 
   return (
-    <Fragment>
-      <RecoilRoot>
-        <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
-      </RecoilRoot>
-    </Fragment>
+    <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
   );
-}
+};
