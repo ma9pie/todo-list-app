@@ -7,6 +7,7 @@ import type { ReactElement, ReactNode } from "react";
 import { Fragment, useEffect } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
+import useTrackEvent from "@/hooks/useTrackEvent";
 import ModalProvider from "@/modals/ModalProvider";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -23,19 +24,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  // 구글 애널리틱스
+  const { initializeGA, trackPageView } = useTrackEvent();
+
+  // Init GA4
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      // @ts-ignore
-      window.gtag("config", process.env.NEXT_PUBLIC_GA_TRACKING_ID, {
-        page_path: url,
-      });
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+    initializeGA();
+  }, []);
+
+  // 페이지 view 추적
+  useEffect(() => {
+    trackPageView();
+  }, [router.pathname]);
 
   return (
     <Fragment>
