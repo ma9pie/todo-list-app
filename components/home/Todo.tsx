@@ -3,14 +3,12 @@ import Link from "next/link";
 import React from "react";
 
 import useModal from "@/hooks/useModal";
-import useTodo from "@/hooks/useTodo";
 import CheckSvg from "@/images/check.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import Dot from "@/shared/Dot";
 import { Cluster, Task } from "@/types";
 
 const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
-  const { clusters, setClusters } = useTodo();
   const { openDeleteClusterModal } = useModal();
 
   return (
@@ -59,13 +57,11 @@ export default Todo;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
   width: calc(100vw - 32px);
   min-width: var(--minWidth);
   border-radius: 5px;
   box-shadow: var(--boxShadow);
   background-color: var(--box);
-  padding-bottom: 8px;
   & * {
     background-color: inherit;
   }
@@ -82,7 +78,7 @@ const TitleBox = styled.div`
 const List = styled.div`
   width: 100%;
   word-wrap: break-word;
-  padding: 0px 16px;
+  padding: 0px 16px 12px 16px;
 `;
 const Title = styled.h3`
   font: var(--medium16);
