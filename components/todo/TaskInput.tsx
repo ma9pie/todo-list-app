@@ -29,6 +29,12 @@ const TaskInput = () => {
     }
   };
 
+  const handleOnKeyUp = (e: any) => {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  };
+
   return (
     <Wrapper>
       <Input
@@ -36,6 +42,7 @@ const TaskInput = () => {
         placeholder="new task"
         value={task}
         onChange={handleInput}
+        onKeyUp={handleOnKeyUp}
       ></Input>
       <AddSvg width={40} height={40} onClick={addTask}></AddSvg>
     </Wrapper>

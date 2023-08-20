@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import moment from "moment";
 import React, { useState } from "react";
 
+import DoneButton from "@/components/shared/buttons/DoneButton";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
-import Done from "@/shared/buttons/Done";
 import ColorSet from "@/shared/ColorSet";
 import { ToastStatus } from "@/types";
 import { createUid } from "@/utils";
@@ -40,11 +40,13 @@ const AddList = () => {
       });
     } else {
       addCluster();
-      openToast({
-        status: ToastStatus.Success,
-        message: "List added",
-      });
       closeModal("addList");
+      setTimeout(() => {
+        openToast({
+          status: ToastStatus.Success,
+          message: "List added",
+        });
+      }, 200);
     }
   };
 
@@ -60,6 +62,12 @@ const AddList = () => {
     setClusters(result);
   };
 
+  const handleOnKeyUp = (e: any) => {
+    if (e.key === "Enter") {
+      addList();
+    }
+  };
+
   return (
     <Wrapper>
       <Content>
@@ -68,6 +76,7 @@ const AddList = () => {
           value={title}
           placeholder="List name"
           onChange={onChange}
+          onKeyUp={handleOnKeyUp}
         ></Input>
       </Content>
 
@@ -80,7 +89,7 @@ const AddList = () => {
       </Content>
 
       <DoneWrapper>
-        <Done onClick={addList}></Done>
+        <DoneButton onClick={addList}></DoneButton>
       </DoneWrapper>
     </Wrapper>
   );
