@@ -11,6 +11,7 @@ import BackSvg from "@/images/arrow_back_ios.svg";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import MoonSvg from "@/images/bedtime.svg";
 import CheckSvg from "@/images/check.svg";
+import CheckedSvg from "@/images/checked.svg";
 import CloseSvg from "@/images/close.svg";
 import CloudDoneSvg from "@/images/cloud_done.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
@@ -31,6 +32,7 @@ import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
+import UncheckedSvg from "@/images/unchecked.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import SunSvg from "@/images/wb_sunny.svg";
 
@@ -68,6 +70,8 @@ function Components() {
         <SubjectSvg></SubjectSvg>
         <WarningSvg></WarningSvg>
         <TrashCanSvg></TrashCanSvg>
+        <CheckedSvg></CheckedSvg>
+        <UncheckedSvg></UncheckedSvg>
         <SunSvg></SunSvg>
       </Grid>
 

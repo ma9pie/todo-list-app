@@ -2,21 +2,51 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import React from "react";
 
+import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
+import CheckSvg from "@/images/check.svg";
+import TrashCanSvg from "@/images/trash_can.svg";
 import Dot from "@/shared/Dot";
 import { Cluster, Task } from "@/types";
 
-const Todo = (props: Cluster) => {
+const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
+  const { clusters, setClusters } = useTodo();
+  const { openDeleteClusterModal } = useModal();
+
   return (
-    <Link href={`/todo/${props.clusterId}`}>
+    <Link href={`/todo/${clusterId}`}>
       <Wrapper>
-        <List>
-          <Dot color={props.color}></Dot>
-          <Title>{props.title}</Title>
-        </List>
-        {props.tasks.map((item: Task) => (
+        <TitleBox>
+          <FlexBox>
+            <Dot color={color}></Dot>
+            <Title>{title}</Title>
+          </FlexBox>
+          <DeleteIconWrapper
+            onClick={(e) => {
+              e.preventDefault();
+              openDeleteClusterModal(clusterId);
+            }}
+          >
+            <TrashCanSvg className="fill-sub"></TrashCanSvg>
+          </DeleteIconWrapper>
+        </TitleBox>
+        {tasks.map((item: Task) => (
           <List key={item.taskId}>
-            <Dot color="var(--box)"></Dot>
-            <SubText>{item.content}</SubText>
+            {item.completed ? (
+              <FlexBox>
+                <CheckSvg
+                  className="fill-sub"
+                  width={16}
+                  height={16}
+                ></CheckSvg>
+                <SubText textDecoration="line-through">{item.content}</SubText>
+              </FlexBox>
+            ) : (
+              <FlexBox>
+                <Dot color="var(--box)"></Dot>
+                <SubText>{item.content}</SubText>
+              </FlexBox>
+            )}
           </List>
         ))}
       </Wrapper>
@@ -32,29 +62,43 @@ const Wrapper = styled.div`
   gap: 8px;
   width: calc(100vw - 32px);
   min-width: var(--minWidth);
-  padding: 16px;
   border-radius: 5px;
   box-shadow: var(--boxShadow);
   background-color: var(--box);
+  padding-bottom: 8px;
   & * {
     background-color: inherit;
   }
+  overflow: hidden;
   cursor: pointer;
 `;
-const List = styled.div`
+const TitleBox = styled.div`
   display: flex;
-  justify-content: left;
-  align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   width: 100%;
   word-wrap: break-word;
+  padding-left: 16px;
+`;
+const List = styled.div`
+  width: 100%;
+  word-wrap: break-word;
+  padding: 0px 16px;
 `;
 const Title = styled.h3`
-  font: var(--medium14);
+  font: var(--medium16);
   width: calc(100% - 24px);
   flex: 1;
 `;
-const SubText = styled.p`
+const SubText = styled.p<any>`
   font: var(--normal14);
   color: var(--sub);
+  text-decoration: ${(props) => props.textDecoration};
+`;
+const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+const DeleteIconWrapper = styled.div`
+  padding: 8px 16px;
 `;

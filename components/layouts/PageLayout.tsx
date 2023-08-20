@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import React, { ReactNode, useRef } from "react";
 
-import TaskInput from "@/components/todo/TaskInput";
 import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";
 import PushPinSvg from "@/images/push_pin.svg";
@@ -47,7 +46,6 @@ const PageLayout = (props: Props) => {
         </IconContainer> */}
       </Header>
       <Content>{props.children}</Content>
-      <TaskInput></TaskInput>
     </Wrapper>
   );
 };
@@ -60,7 +58,7 @@ const pushPinStyles = css`
 const Wrapper = styled.div``;
 const Content = styled.div`
   min-width: var(--minWidth);
-  height: calc(100vh - 120px);
+  height: calc(100vh - 60px);
 `;
 const Header = styled.div`
   display: flex;

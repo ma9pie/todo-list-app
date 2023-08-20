@@ -25,7 +25,7 @@ const SIDEBAR_WIDTH = 200;
 
 const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   const { clusters } = useTodo();
-  const { openSettings } = useModal();
+  const { openSettingsModal } = useModal();
 
   const [isMount, setIsMount] = useState<boolean>(false);
   const [sideBarRight, setSideBarRight] = useState<string>(
@@ -116,7 +116,7 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
         </Div>
         <Bottom>
           <Divider></Divider>
-          <SubtitleBox onClick={openSettings}>
+          <SubtitleBox onClick={openSettingsModal}>
             <FlexBox>
               <SettingSvg className="fill-sub"></SettingSvg>
               <Subtitle color="var(--sub)">SETTING</Subtitle>

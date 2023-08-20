@@ -1,30 +1,56 @@
 import styled from "@emotion/styled";
+import moment from "moment";
 import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
 import AddSvg from "@/images/add.svg";
 import { ToastStatus } from "@/types";
+import { createUid } from "@/utils";
 
-const TaskInput = () => {
+interface Props {
+  clusterId: string;
+}
+
+const TaskInput = ({ clusterId }: Props) => {
+  const { clusters, setClusters } = useTodo();
   const { openToast } = useModal();
 
-  const [task, setTask] = useState("");
+  const [input, setInput] = useState("");
 
   const handleInput = (e: any) => {
-    setTask(e.target.value);
+    setInput(e.target.value);
   };
 
   const addTask = () => {
-    if (task) {
+    if (!input) {
+      return openToast({
+        status: ToastStatus.Warn,
+        message: "Please input task",
+      });
+    }
+    const _clusters = clusters.map((item) => {
+      return { ...item };
+    });
+    const cluster = _clusters.find((item) => item.clusterId === clusterId);
+    if (cluster) {
+      cluster.tasks = cluster.tasks.concat({
+        clusterId: clusterId,
+        taskId: createUid(),
+        content: input,
+        completed: false,
+        created: moment().format("YYYY-MM-DD HH:mm:ss"),
+      });
+      setClusters(_clusters);
+      setInput("");
       openToast({
         status: ToastStatus.Success,
         message: "Task added",
       });
-      setTask("");
     } else {
       openToast({
-        status: ToastStatus.Warn,
-        message: "Please input task",
+        status: ToastStatus.Error,
+        message: "Invalid clusterId",
       });
     }
   };
@@ -40,7 +66,7 @@ const TaskInput = () => {
       <Input
         type="text"
         placeholder="new task"
-        value={task}
+        value={input}
         onChange={handleInput}
         onKeyUp={handleOnKeyUp}
       ></Input>

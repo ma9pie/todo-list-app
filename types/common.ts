@@ -8,9 +8,9 @@ export interface Cluster {
 }
 
 export interface Task {
-  taskId: string;
   clusterId: string;
+  taskId: string;
   content: string;
-  done: boolean;
-  created: "";
+  completed: boolean;
+  created: string;
 }

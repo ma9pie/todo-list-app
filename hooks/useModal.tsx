@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 
+import useTodo from "@/hooks/useTodo";
 import Settings from "@/modals/contents/Settings";
 import { ModalContext } from "@/modals/ModalProvider";
 import { ModalProps, Modals, ModalType } from "@/types";
@@ -9,6 +10,8 @@ let tmpModals: Modals;
 export default function useModal() {
   const { modals, setModals } = useContext(ModalContext);
   tmpModals = modals;
+
+  const { clusters, setClusters } = useTodo();
 
   const createUid = useCallback(() => {
     if (typeof window !== undefined && window.crypto) {
@@ -78,11 +81,24 @@ export default function useModal() {
     openModal({ ...props, type: ModalType.Toast });
   };
 
-  const openSettings = () => {
+  const openSettingsModal = () => {
     openBottomSheet({
       key: "settings",
       title: "Settings",
       component: () => <Settings></Settings>,
+    });
+  };
+
+  const openDeleteClusterModal = (clusterId: string) => {
+    openConfirm({
+      title: "항목 삭제",
+      message: "해당 항목을 삭제하시겠습니까?",
+      onRequestConfirm: () => {
+        const _clusters = clusters.filter(
+          (item) => item.clusterId !== clusterId
+        );
+        setClusters(_clusters);
+      },
     });
   };
 
@@ -93,6 +109,7 @@ export default function useModal() {
     openConfirm,
     openBottomSheet,
     openToast,
-    openSettings,
+    openSettingsModal,
+    openDeleteClusterModal,
   };
 }
