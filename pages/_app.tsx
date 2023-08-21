@@ -41,8 +41,6 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Init GA4
   useEffect(() => {
     initializeGA();
-    console.log(process.env.NEXT_PUBLIC_GOOGLE_ID![0]);
-    console.log(process.env.NEXT_PUBLIC_GOOGLE_SECRET![0]);
   }, []);
 
   // 페이지 view 추적
