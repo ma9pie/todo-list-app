@@ -3,6 +3,8 @@ import "@/styles/app.scss";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import type { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 import type { ReactElement, ReactNode } from "react";
 import { useEffect } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
@@ -16,15 +18,18 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
+  session: Session;
 };
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export default function App(props: AppPropsWithLayout) {
   return (
-    <RecoilRoot>
-      <AppInner {...props}></AppInner>
-    </RecoilRoot>
+    <SessionProvider session={props.session}>
+      <RecoilRoot>
+        <AppInner {...props}></AppInner>
+      </RecoilRoot>
+    </SessionProvider>
   );
 }
 

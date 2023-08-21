@@ -7,7 +7,6 @@ import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
-import CodeSvg from "@/images/code.svg";
 import PaintSvg from "@/images/color_lens.svg";
 import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
@@ -138,24 +137,6 @@ const Settings = () => {
             <Content>
               <GithubSvg></GithubSvg>
               <ListTitle>Github</ListTitle>
-            </Content>
-            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
-          </List>
-        </ListContainer>
-      </Container>
-
-      <Container>
-        <Subtitle>Test</Subtitle>
-        <ListContainer>
-          <List
-            onClick={() => {
-              router.push("/test");
-              closeModal("settings");
-            }}
-          >
-            <Content>
-              <CodeSvg></CodeSvg>
-              <ListTitle>Test</ListTitle>
             </Content>
             <ForwardSvg className={SUB_COLOR}></ForwardSvg>
           </List>
