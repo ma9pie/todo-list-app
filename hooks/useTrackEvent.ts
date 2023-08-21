@@ -32,7 +32,7 @@ const useTrackEvent = () => {
   const initializeGA = () => {
     const { hostname } = window.location;
     if (hostname === "localhost") return;
-    const trackingId = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
+    const trackingId = process.env.GA_TRACKING_ID;
     if (!trackingId) return;
     ReactGA.initialize(trackingId);
     setIsInitializedGA(true);

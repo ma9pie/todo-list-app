@@ -5,7 +5,7 @@ const headers = {
 };
 
 export const axios = Axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: process.env.BASE_URL,
   timeout: 15000,
   headers: headers,
 });
