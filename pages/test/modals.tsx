@@ -30,11 +30,11 @@ function Components() {
         </Button>
       </Content>
       <Content>
-        <Title>Alert</Title>
+        <Title>AlertModal</Title>
         <Button
           onClick={() =>
             openAlert({
-              title: "Alert",
+              title: "AlertModal",
               message: `message\n message\n message`,
               confirmBtnText: "yes",
               onAfterOpen: () => {
@@ -46,7 +46,7 @@ function Components() {
             })
           }
         >
-          Alert
+          AlertModal
         </Button>
         <Button
           onClick={() =>
@@ -55,16 +55,16 @@ function Components() {
             })
           }
         >
-          Component Alert
+          Component AlertModal
         </Button>
       </Content>
 
       <Content>
-        <Title>Confirm</Title>
+        <Title>ConfirmModal</Title>
         <Button
           onClick={() =>
             openConfirm({
-              title: "Confirm",
+              title: "ConfirmModal",
               message: `message\n message\n message`,
               confirmBtnText: "yes",
               cancleBtnText: "no",
@@ -80,7 +80,7 @@ function Components() {
             })
           }
         >
-          Confirm
+          ConfirmModal
         </Button>
         <Button
           onClick={() =>
@@ -89,7 +89,7 @@ function Components() {
             })
           }
         >
-          Component Confirm
+          Component ConfirmModal
         </Button>
       </Content>
 

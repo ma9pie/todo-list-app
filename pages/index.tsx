@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 
 import Todo from "@/components/home/Todo";
 import HomeLayout from "@/components/layouts/HomeLayout";
+import AddListModal from "@/components/modals/AddListModal";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
-import AddList from "@/modals/contents/AddList";
 import AddButton from "@/shared/buttons/AddButton";
 import Loading from "@/shared/Loading";
 
@@ -30,7 +30,7 @@ export default function Home() {
     openBottomSheet({
       key: "addList",
       title: "AddButton List",
-      component: () => <AddList></AddList>,
+      component: () => <AddListModal></AddListModal>,
     });
   };
 

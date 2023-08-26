@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-const TermsAndConditions = () => {
+const TOSModal = () => {
   return (
     <Wrapper>
       <Content>
@@ -196,7 +196,7 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default TOSModal;
 
 const Wrapper = styled.div`
   display: grid;

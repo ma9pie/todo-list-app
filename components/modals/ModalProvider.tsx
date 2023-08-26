@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import React, { createContext, ReactNode, useState } from "react";
 
-import Alert from "@/modals/Alert";
+import AlertModal from "@/modals/AlertModal";
 import BottomSheet from "@/modals/BottomSheet";
-import Confirm from "@/modals/Confirm";
+import ConfirmModal from "@/modals/ConfirmModal";
 import Modal from "@/modals/index";
 import Toast from "@/modals/Toast";
 import { ModalProps, ModalType } from "@/types";
@@ -63,12 +63,12 @@ const ModalProvider = ({ children }: Props) => {
         </Container>
         <Container id="alert-modal">
           {alertList.map((props) => (
-            <Alert key={props.key} {...props}></Alert>
+            <AlertModal key={props.key} {...props}></AlertModal>
           ))}
         </Container>
         <Container id="confirm-modal">
           {confirmList.map((props) => (
-            <Confirm key={props.key} {...props}></Confirm>
+            <ConfirmModal key={props.key} {...props}></ConfirmModal>
           ))}
         </Container>
         <Container id="toast">

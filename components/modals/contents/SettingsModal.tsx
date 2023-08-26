@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+import TOSModal from "@/components/modals/TOSModal";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
@@ -12,7 +13,6 @@ import GithubSvg from "@/images/github.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
-import TermsAndConditions from "@/modals/contents/TermsAndConditions";
 import Theme from "@/shared/Theme";
 import { setDark, setLight } from "@/utils";
 
@@ -22,7 +22,7 @@ const SUB_COLOR = css`
   }
 `;
 
-const Settings = () => {
+const SettingsModal = () => {
   const router = useRouter();
 
   const { setClusters, setTasks } = useTodo();
@@ -78,7 +78,7 @@ const Settings = () => {
   const termsAndCondition = () => {
     openBottomSheet({
       title: "이용약관",
-      component: TermsAndConditions,
+      component: TOSModal,
     });
   };
 
@@ -146,7 +146,7 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsModal;
 
 const Wrapper = styled.div`
   display: grid;

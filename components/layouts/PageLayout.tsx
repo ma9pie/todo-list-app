@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import React, { ReactNode, useRef } from "react";
 
+import SettingsModal from "@/components/modals/contents/SettingsModal";
 import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";
 import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
-import Settings from "@/modals/contents/Settings";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
 import TextLogo from "@/shared/TextLogo";

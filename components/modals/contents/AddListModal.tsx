@@ -21,7 +21,7 @@ const colorList = [
   "#4d4d59",
 ];
 
-const AddList = () => {
+const AddListModal = () => {
   const { clusters, setClusters } = useTodo();
   const { openToast, closeModal } = useModal();
 
@@ -95,7 +95,7 @@ const AddList = () => {
   );
 };
 
-export default AddList;
+export default AddListModal;
 
 const Wrapper = styled.div`
   position: relative;

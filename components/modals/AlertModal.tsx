@@ -5,18 +5,12 @@ import React, { useEffect } from "react";
 import useFixedScreen from "@/hooks/useFixedScreen";
 import { ModalProps } from "@/types";
 
-const Confirm = (props: ModalProps) => {
-  useFixedScreen("confirm");
+const AlertModal = (props: ModalProps) => {
+  useFixedScreen("alert");
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();
   }, []);
-
-  // 확인 버튼 클릭
-  const onClickConfirm = () => {
-    props.onRequestConfirm && props.onRequestConfirm();
-    props.onRequestClose && props.onRequestClose();
-  };
 
   return (
     <Wrapper>
@@ -42,10 +36,7 @@ const Confirm = (props: ModalProps) => {
               ))}
         </Content>
         <ButtonBox>
-          <SubButton onClick={props.onRequestClose}>
-            {props.cancleBtnText}
-          </SubButton>
-          <MainButton onClick={onClickConfirm}>
+          <MainButton onClick={props.onRequestClose}>
             {props.confirmBtnText}
           </MainButton>
         </ButtonBox>
@@ -54,21 +45,19 @@ const Confirm = (props: ModalProps) => {
   );
 };
 
-export default Confirm;
+export default AlertModal;
 
-Confirm.defaultProps = {
+AlertModal.defaultProps = {
   isOpen: false,
   top: "50%",
   left: "50%",
   title: "알림",
   message: "",
   confirmBtnText: "확인",
-  cancleBtnText: "취소",
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
   onRequestClose: () => {},
-  onRequestConfirm: () => {},
 };
 
 const fadeIn = css`
@@ -128,7 +117,7 @@ const ButtonBox = styled.div`
   justify-content: center;
   width: 100%;
 `;
-const MainButton = styled.button`
+const MainButton = styled.button<any>`
   font: var(--normal14);
   width: 100%;
   height: 40px;
@@ -139,17 +128,5 @@ const MainButton = styled.button`
   background-color: var(--blue500);
   &:hover {
     background-color: var(--blue700);
-  }
-`;
-const SubButton = styled.button<any>`
-  font: var(--normal14);
-  width: 100%;
-  height: 40px;
-  border: 0px;
-  transition: background-color 0.15s ease-in-out;
-  cursor: pointer;
-  background-color: var(--box);
-  &:hover {
-    background-color: var(--selected);
   }
 `;

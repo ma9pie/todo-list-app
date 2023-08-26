@@ -1,7 +1,8 @@
 import { useCallback, useContext } from "react";
 
+import LoginModal from "@/components/modals/contents/LoginModal";
+import SettingsModal from "@/components/modals/contents/SettingsModal";
 import useTodo from "@/hooks/useTodo";
-import Settings from "@/modals/contents/Settings";
 import { ModalContext } from "@/modals/ModalProvider";
 import { ModalProps, Modals, ModalType } from "@/types";
 
@@ -81,11 +82,18 @@ export default function useModal() {
     openModal({ ...props, type: ModalType.Toast });
   };
 
+  const openLoginModal = () => {
+    openModal({
+      title: "Social Login",
+      component: () => <LoginModal></LoginModal>,
+    });
+  };
+
   const openSettingsModal = () => {
     openBottomSheet({
       key: "settings",
-      title: "Settings",
-      component: () => <Settings></Settings>,
+      title: "SettingsModal",
+      component: () => <SettingsModal></SettingsModal>,
     });
   };
 
@@ -109,6 +117,8 @@ export default function useModal() {
     openConfirm,
     openBottomSheet,
     openToast,
+
+    openLoginModal,
     openSettingsModal,
     openDeleteClusterModal,
   };

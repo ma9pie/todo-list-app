@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { forwardRef, ReactNode } from "react";
 
 type Props = {
-  fullWidth?: boolean;
+  full?: boolean;
   disabled?: boolean;
   children?: ReactNode;
   margin?: string;
@@ -14,7 +14,7 @@ const Button = forwardRef((props: Props, ref) => {
     <Wrapper
       ref={ref}
       disabled={props.disabled}
-      fullWidth={props.fullWidth}
+      full={props.full}
       margin={props.margin}
       onClick={props.onClick}
     >
@@ -26,7 +26,7 @@ const Button = forwardRef((props: Props, ref) => {
 export default Button;
 
 Button.defaultProps = {
-  fullWidth: true,
+  full: true,
   disabled: false,
   onClick: () => {},
 };
@@ -35,7 +35,7 @@ const Wrapper = styled.button<any>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: ${(props) => (props.fullWidth ? "100%" : "auto")};
+  width: ${(props) => (props.full ? "100%" : "auto")};
   margin: ${(props) => props.margin};
   min-width: var(--minWidth);
   height: 48px;
