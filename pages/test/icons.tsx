@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import TestLayout from "@/components/layouts/TestLayout";
 import AddSvg from "@/images/add.svg";
 import AddCircleSvg from "@/images/add_circle_outline.svg";
+import AppleSvg from "@/images/apple.svg";
 import AppsSvg from "@/images/apps.svg";
 import BackSvg from "@/images/arrow_back_ios.svg";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
@@ -22,6 +23,7 @@ import DeleteSvg from "@/images/delete.svg";
 import EditSvg from "@/images/edit.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import GithubSvg from "@/images/github.svg";
+import GoogleSvg from "@/images/google.svg";
 import HomeSvg from "@/images/home.svg";
 import ListSvg from "@/images/list.svg";
 import LogoSvg from "@/images/logo.svg";
@@ -30,9 +32,11 @@ import MenuSvg from "@/images/menu.svg";
 import MoreVertSvg from "@/images/more_vert.svg";
 import PushPinSvg from "@/images/push_pin.svg";
 import SettingSvg from "@/images/settings.svg";
+import ShareSvg from "@/images/share.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import UncheckedSvg from "@/images/unchecked.svg";
+import UserSvg from "@/images/user.svg";
 import WarningSvg from "@/images/warning_amber.svg";
 import SunSvg from "@/images/wb_sunny.svg";
 
@@ -73,6 +77,13 @@ function Components() {
         <CheckedSvg></CheckedSvg>
         <UncheckedSvg></UncheckedSvg>
         <SunSvg></SunSvg>
+        <UserSvg></UserSvg>
+        <ShareSvg></ShareSvg>
+      </Grid>
+
+      <Grid>
+        <GoogleSvg></GoogleSvg>
+        <AppleSvg></AppleSvg>
       </Grid>
 
       <Grid>

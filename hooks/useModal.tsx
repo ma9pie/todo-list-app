@@ -7,6 +7,7 @@ import { ModalContext } from "@/modals/ModalProvider";
 import { ModalProps, Modals, ModalType } from "@/types";
 
 let tmpModals: Modals;
+const DELAY = 200; // modal unmount delay
 
 export default function useModal() {
   const { modals, setModals } = useContext(ModalContext);
@@ -33,6 +34,7 @@ export default function useModal() {
     });
     props.key = props.key || createUid();
     props.isOpen = true;
+    props.createdAt = new Date().getTime();
     props.onRequestClose = async () => {
       const hashMapB = new Map(hashMapA);
       props.isOpen = false;
@@ -42,7 +44,7 @@ export default function useModal() {
         setTimeout(() => {
           hashMapB.delete(props.key!);
           setModals(new Map(hashMapB));
-        }, 200);
+        }, DELAY);
       }
     };
     hashMapA.set(props.key, props);
@@ -60,11 +62,35 @@ export default function useModal() {
         setTimeout(() => {
           hashMap.delete(key);
           setModals(new Map(hashMap));
-        }, 200);
+        }, DELAY);
+      } else {
+        const id = getRecentModalId();
+        if (id) closeModal(id);
       }
-      return;
     }
   };
+
+  // 모달 변경
+  const changeModal = (props: ModalProps) => {
+    closeModal();
+    setTimeout(() => {
+      openModal(props);
+    }, DELAY);
+  };
+
+  // 가장 최근의 modal id 조회
+  const getRecentModalId = useCallback(() => {
+    const hashMap: Map<string, ModalProps> = new Map(tmpModals);
+    const arr = Array.from(hashMap.values()).sort(
+      (a: ModalProps, b: ModalProps) => {
+        const createdAtA = a.createdAt || 0;
+        const createdAtB = b.createdAt || 0;
+        return createdAtB - createdAtA;
+      }
+    );
+    if (arr.length === 0) return null;
+    return arr[0].key;
+  }, []);
 
   const openAlert = (props: ModalProps) => {
     openModal({ ...props, type: ModalType.Alert });
@@ -84,7 +110,6 @@ export default function useModal() {
 
   const openLoginModal = () => {
     openModal({
-      title: "Social Login",
       component: () => <LoginModal></LoginModal>,
     });
   };
@@ -113,6 +138,7 @@ export default function useModal() {
   return {
     openModal,
     closeModal,
+    changeModal,
     openAlert,
     openConfirm,
     openBottomSheet,

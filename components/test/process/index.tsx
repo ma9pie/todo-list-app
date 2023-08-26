@@ -1,15 +1,12 @@
 import styled from "@emotion/styled";
 import React, { Fragment, useEffect, useState } from "react";
 
+import ModalHeader from "@/components/modals/ModalHeader";
 import Process1 from "@/components/test/process/Process1";
 import Process2 from "@/components/test/process/Process2";
 import Process3 from "@/components/test/process/Process3";
-import useModal from "@/hooks/useModal";
-import Header from "@/modals/Header";
 
 const Process = () => {
-  const { closeModal } = useModal();
-
   const [title, setTitle] = useState<string>("");
   const [step, setStep] = useState<number>(0);
 
@@ -24,13 +21,11 @@ const Process = () => {
     }
   }, [step]);
 
-  const close = () => closeModal("ProcessTest");
-
   return (
     <Wrapper>
       {step === 0 && (
         <Fragment>
-          <Header title="Process1" close={close}></Header>
+          <ModalHeader title="Process1"></ModalHeader>
           <Content>
             <Process1 setStep={setStep}></Process1>
           </Content>
@@ -38,11 +33,7 @@ const Process = () => {
       )}
       {step === 1 && (
         <Fragment>
-          <Header
-            title="Process2"
-            back={() => setStep(0)}
-            close={close}
-          ></Header>
+          <ModalHeader title="Process2" back={() => setStep(0)}></ModalHeader>
           <Content>
             <Process2 setStep={setStep}></Process2>
           </Content>
@@ -50,13 +41,9 @@ const Process = () => {
       )}
       {step === 2 && (
         <Fragment>
-          <Header
-            title="Process3"
-            back={() => setStep(1)}
-            close={close}
-          ></Header>
+          <ModalHeader title="Process3" back={() => setStep(1)}></ModalHeader>
           <Content>
-            <Process3 close={close}></Process3>
+            <Process3></Process3>
           </Content>
         </Fragment>
       )}

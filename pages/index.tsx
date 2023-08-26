@@ -3,8 +3,8 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
 import Todo from "@/components/home/Todo";
-import HomeLayout from "@/components/layouts/HomeLayout";
-import AddListModal from "@/components/modals/AddListModal";
+import DefaultLayout from "@/components/layouts/DefaultLayout";
+import AddListModal from "@/components/modals/contents/AddListModal";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddButton from "@/shared/buttons/AddButton";
@@ -60,7 +60,7 @@ export default function Home() {
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return <DefaultLayout>{page}</DefaultLayout>;
 };
 
 const Wrapper = styled.div`

@@ -1,9 +1,7 @@
-import { css } from "@emotion/css";
 import styled from "@emotion/styled";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import TOSModal from "@/components/modals/TOSModal";
+import TOSModal from "@/components/modals/contents/TOSModal";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
@@ -16,15 +14,7 @@ import TrashCanSvg from "@/images/trash_can.svg";
 import Theme from "@/shared/Theme";
 import { setDark, setLight } from "@/utils";
 
-const SUB_COLOR = css`
-  path {
-    fill: var(--sub);
-  }
-`;
-
 const SettingsModal = () => {
-  const router = useRouter();
-
   const { setClusters, setTasks } = useTodo();
   const { openAlert, openConfirm, openBottomSheet, closeModal } = useModal();
 
@@ -97,21 +87,21 @@ const SettingsModal = () => {
               <PaintSvg></PaintSvg>
               <ListTitle>Theme</ListTitle>
             </Content>
-            <Theme className={SUB_COLOR} theme={theme}></Theme>
+            <Theme className="fill-sub" theme={theme}></Theme>
           </List>
           <List onClick={backupAndRestore}>
             <Content>
               <CloudDownloadSvg></CloudDownloadSvg>
               <ListTitle>Backup / Restore</ListTitle>
             </Content>
-            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
+            <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
           <List onClick={resetData}>
             <Content>
               <TrashCanSvg></TrashCanSvg>
               <ListTitle>Reset data</ListTitle>
             </Content>
-            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
+            <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
         </ListContainer>
       </Container>
@@ -124,21 +114,21 @@ const SettingsModal = () => {
               <EmailSvg></EmailSvg>
               <ListTitle>Inquiry</ListTitle>
             </Content>
-            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
+            <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
           <List onClick={termsAndCondition}>
             <Content>
               <SubjectSvg></SubjectSvg>
               <ListTitle>Terms & Condition</ListTitle>
             </Content>
-            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
+            <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
           <List onClick={github}>
             <Content>
               <GithubSvg></GithubSvg>
               <ListTitle>Github</ListTitle>
             </Content>
-            <ForwardSvg className={SUB_COLOR}></ForwardSvg>
+            <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
         </ListContainer>
       </Container>

@@ -6,7 +6,7 @@ type Props = {
   disabled?: boolean;
   children?: ReactNode;
   margin?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: (...arg: any) => void;
 };
 
 const Button = forwardRef((props: Props, ref) => {

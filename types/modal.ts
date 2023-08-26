@@ -14,6 +14,7 @@ export type Modals = Map<string, ModalProps>;
 
 export type ModalProps = {
   key?: string;
+  createdAt?: number;
   type?: ModalType;
   status?: ToastStatus;
   isOpen?: boolean;

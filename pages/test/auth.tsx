@@ -8,6 +8,8 @@ import TestLayout from "@/components/layouts/TestLayout";
 function Components() {
   const { data: session } = useSession();
 
+  console.log({ session });
+
   if (session) {
     return (
       <Wrapper>

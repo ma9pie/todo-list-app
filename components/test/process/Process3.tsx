@@ -2,13 +2,12 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import React from "react";
 
+import useModal from "@/hooks/useModal";
 import Button from "@/shared/buttons";
 
-type Props = {
-  close: () => void;
-};
+const Process3 = () => {
+  const { closeModal } = useModal();
 
-const Process3 = ({ close }: Props) => {
   return (
     <Wrapper>
       <Content>
@@ -22,7 +21,7 @@ const Process3 = ({ close }: Props) => {
 
       <Text>완료되었어요</Text>
 
-      <Button onClick={close}>완료</Button>
+      <Button onClick={closeModal}>완료</Button>
     </Wrapper>
   );
 };

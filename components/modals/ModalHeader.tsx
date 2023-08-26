@@ -1,27 +1,29 @@
 import styled from "@emotion/styled";
-import React, { Fragment } from "react";
+import React from "react";
 
+import useModal from "@/hooks/useModal";
 import BackSvg from "@/images/arrow_back_ios.svg";
 import CloseSvg from "@/images/close.svg";
 
 type Props = {
   title?: string;
   back?: () => void;
-  close?: () => void;
 };
 
-const Header = ({ title, back, close }: Props) => {
-  if (!title && !close && !back) return null;
+const ModalHeader = ({ title, back }: Props) => {
+  const { closeModal } = useModal();
+
+  if (!title && !back) return null;
   return (
     <Wrapper>
       <Icon>{back && <BackSvg onClick={back}></BackSvg>}</Icon>
       <Title>{title}</Title>
-      <Icon>{close && <CloseSvg onClick={close}></CloseSvg>}</Icon>
+      <Icon>{<CloseSvg onClick={closeModal}></CloseSvg>}</Icon>
     </Wrapper>
   );
 };
 
-export default Header;
+export default ModalHeader;
 
 const Wrapper = styled.div`
   display: flex;

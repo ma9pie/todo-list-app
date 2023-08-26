@@ -3,6 +3,9 @@ import { selector } from "recoil";
 import { clusterState, taskState } from "@/recoil/atoms";
 import { Cluster, Task } from "@/types";
 
+/**
+ * @unused
+ */
 export const todoState = selector({
   key: "todoState",
   get: ({ get }) => {

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 
-import PageLayout from "@/components/layouts/PageLayout";
+import DefaultLayout from "@/components/layouts/DefaultLayout";
 import useTodo from "@/hooks/useTodo";
 import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
@@ -106,7 +106,7 @@ const Todo = () => {
 export default Todo;
 
 Todo.getLayout = function getLayout(page: ReactElement) {
-  return <PageLayout>{page}</PageLayout>;
+  return <DefaultLayout>{page}</DefaultLayout>;
 };
 
 const Wrapper = styled.div`
