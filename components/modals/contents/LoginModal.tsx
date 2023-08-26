@@ -1,21 +1,17 @@
 import styled from "@emotion/styled";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import React from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
 import GoogleSvg from "@/images/google.svg";
 
 const LoginModal = () => {
-  const { data: session } = useSession();
-
-  console.log(session);
-
   return (
     <Wrapper>
       <ModalHeader title="Login"></ModalHeader>
 
       <ListContainer>
-        <List onClick={signIn}>
+        <List onClick={() => signIn("google")}>
           <GoogleSvg></GoogleSvg>
           <Text>Google</Text>
         </List>
