@@ -6,6 +6,7 @@ const useFirebase = () => {
     const { empty } = await firestore
       .collection("users")
       .where("email", "==", userData.email)
+      .where("provider", "==", userData.provider)
       .get();
     if (empty) {
       firestore.collection("users").doc().set(userData);
