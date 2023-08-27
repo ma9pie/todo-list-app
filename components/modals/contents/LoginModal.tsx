@@ -3,8 +3,8 @@ import { signIn } from "next-auth/react";
 import React from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
-import GithubleSvg from "@/images/github.svg";
-import GoogleSvg from "@/images/google.svg";
+import GithubleSvg from "@/images/social/github.svg";
+import GoogleSvg from "@/images/social/google.svg";
 
 const LoginModal = () => {
   return (
