@@ -137,11 +137,6 @@ export default function Document() {
           href="/images/logos/favicon-196x196.png"
           sizes="196x196"
         />
-        <link
-          rel="apple-touch-startup-image"
-          media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-          href="/images/logos/favicon-128.png"
-        />
 
         {/* 기기 viewheight 할당 */}
         <script
