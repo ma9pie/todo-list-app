@@ -66,7 +66,7 @@ export default function Document() {
           name="msapplication-square310x310logo"
           content="/images/logos/mstile-310x310.png"
         />
-        <link rel="manifest" href="manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
         <link
           rel="apple-touch-icon"
           sizes="57x57"
