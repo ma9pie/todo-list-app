@@ -87,20 +87,8 @@ function Components() {
       </Grid>
 
       <Grid>
-        <MoonSvg
-          className={css`
-            path {
-              fill: var(--sub);
-            }
-          `}
-        ></MoonSvg>
-        <SunSvg
-          className={css`
-            path {
-              fill: var(--sub);
-            }
-          `}
-        ></SunSvg>
+        <MoonSvg className="fill-sub"></MoonSvg>
+        <SunSvg className="fill-sub"></SunSvg>
       </Grid>
     </Wrapper>
   );

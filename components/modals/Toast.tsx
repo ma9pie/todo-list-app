@@ -42,25 +42,25 @@ const Toast = (props: ModalProps) => {
       case ToastStatus.Success:
         return (
           <CheckSvg
+            className="fill-green400"
             width="24px"
             height="24px"
-            className={successColor}
           ></CheckSvg>
         );
       case ToastStatus.Error:
         return (
           <ErrorSvg
+            className="fill-red400"
             width="24px"
             height="24px"
-            className={errorColor}
           ></ErrorSvg>
         );
       case ToastStatus.Warn:
         return (
           <WarningSvg
+            className="fill-yellow400"
             width="24px"
             height="24px"
-            className={warnColor}
           ></WarningSvg>
         );
       default:
@@ -110,21 +110,7 @@ const CloseToastPopup = css`
 const HideToastPopup = css`
   visibility: hidden;
 `;
-const successColor = css`
-  path {
-    fill: var(--green400);
-  }
-`;
-const errorColor = css`
-  path {
-    fill: var(--red400);
-  }
-`;
-const warnColor = css`
-  path {
-    fill: var(--yellow400);
-  }
-`;
+
 const Wrapper = styled.div<any>`
   position: fixed;
   display: flex;

@@ -128,12 +128,32 @@ svg {
     fill: var(--main);
   }
 }
-
 .fill-sub{
   path {
     fill: var(--sub);
   }
 }
+.fill-white{
+  path {
+    fill: white;
+  }
+}
+.fill-green400{
+  path {
+    fill:  var(--green400);
+  }
+}
+.fill-red400{
+  path {
+    fill:var(--red400);
+  }
+}
+.fill-yellow400{
+  path {
+    fill:var(--yellow400);
+  }
+}
+
 
 .scroll-y {
   overflow-y: scroll;

@@ -9,7 +9,7 @@ type Props = {
 
 const AddButton = (props: Props) => {
   return (
-    <Wrapper onClick={props.onClick}>
+    <Wrapper className="fill-white" onClick={props.onClick}>
       <AddSvg width={40} height={40}></AddSvg>
     </Wrapper>
   );
@@ -34,9 +34,6 @@ const Wrapper = styled.div<any>`
   cursor: pointer;
   & * {
     background-color: inherit;
-  }
-  path {
-    fill: white;
   }
   &:active:not([disabled]) {
     background-color: var(--blue700);

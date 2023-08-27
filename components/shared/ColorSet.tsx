@@ -38,7 +38,7 @@ const ColorSet = (props: Props) => {
   return (
     <Wrapper>
       <CurrentColor onClick={toggleColorSet}>
-        <PaintBoardSvg className={sub}></PaintBoardSvg>
+        <PaintBoardSvg className="fill-sub"></PaintBoardSvg>
         <Circle bg={props.color}></Circle>
       </CurrentColor>
 
@@ -47,7 +47,11 @@ const ColorSet = (props: Props) => {
           {colorSet.map((item, idx) => (
             <Circle key={idx} bg={item} onClick={() => selectColor(item)}>
               {props.color === item && (
-                <CheckSvg className={white} width={16} height={16}></CheckSvg>
+                <CheckSvg
+                  className="fill-white"
+                  width={16}
+                  height={16}
+                ></CheckSvg>
               )}
             </Circle>
           ))}
@@ -63,17 +67,6 @@ ColorSet.defaultProps = {
   colorNum: 0,
   setColorNum: () => {},
 };
-
-const white = css`
-  path {
-    fill: white;
-  }
-`;
-const sub = css`
-  path {
-    fill: var(--sub);
-  }
-`;
 
 const Wrapper = styled.div`
   position: relative;

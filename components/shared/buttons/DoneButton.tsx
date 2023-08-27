@@ -9,7 +9,7 @@ type Props = {
 
 const DoneButton = (props: Props) => {
   return (
-    <Wrapper onClick={props.onClick}>
+    <Wrapper className="fill-white" onClick={props.onClick}>
       <CheckSvg width={40} height={40}></CheckSvg>
     </Wrapper>
   );
@@ -34,9 +34,6 @@ const Wrapper = styled.div<any>`
   cursor: pointer;
   & * {
     background-color: inherit;
-  }
-  path {
-    fill: white;
   }
   &:active:not([disabled]) {
     background-color: var(--blue700);
