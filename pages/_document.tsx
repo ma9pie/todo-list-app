@@ -66,7 +66,7 @@ export default function Document() {
           name="msapplication-square310x310logo"
           content="/images/logos/mstile-310x310.png"
         />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="manifest.json" />
         <link
           rel="apple-touch-icon"
           sizes="57x57"
@@ -136,6 +136,11 @@ export default function Document() {
           type="image/png"
           href="/images/logos/favicon-196x196.png"
           sizes="196x196"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+          href="/images/logos/favicon-128.png"
         />
 
         {/* 기기 viewheight 할당 */}
