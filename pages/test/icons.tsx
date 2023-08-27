@@ -1,5 +1,5 @@
-import { css } from "@emotion/css";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
@@ -21,6 +21,8 @@ import PaintBoardSvg from "@/images/color_lens.svg";
 import DashboardSvg from "@/images/dashboard.svg";
 import DeleteSvg from "@/images/delete.svg";
 import EditSvg from "@/images/edit.svg";
+import EmptyListSvg from "@/images/empty_list.svg";
+import EmptyPageSvg from "@/images/empty_page.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import HomeSvg from "@/images/home.svg";
 import ListSvg from "@/images/list.svg";
@@ -90,6 +92,23 @@ function Components() {
         <MoonSvg className="fill-sub"></MoonSvg>
         <SunSvg className="fill-sub"></SunSvg>
       </Grid>
+
+      <div>
+        <Image
+          src="/images/empty_list.svg"
+          width={120}
+          height={120}
+          alt="empty_list"
+        ></Image>
+        <Image
+          src="/images/empty_page.svg"
+          width={120}
+          height={120}
+          alt="empty_page"
+        ></Image>
+        <EmptyListSvg width={80} height={80}></EmptyListSvg>
+        <EmptyPageSvg width={80} height={80}></EmptyPageSvg>
+      </div>
     </Wrapper>
   );
 }

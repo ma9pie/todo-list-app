@@ -8,6 +8,7 @@ import AddListModal from "@/components/modals/contents/AddListModal";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddButton from "@/shared/buttons/AddButton";
+import EmptyData from "@/shared/EmptyData";
 import Loading from "@/shared/Loading";
 
 export default function Home() {
@@ -45,6 +46,8 @@ export default function Home() {
   return (
     <Wrapper>
       <Container>
+        {list.length === 0 && <EmptyData type="list"></EmptyData>}
+
         {list.map((todo: any) => (
           <Todo key={todo.clusterId} {...todo}></Todo>
         ))}

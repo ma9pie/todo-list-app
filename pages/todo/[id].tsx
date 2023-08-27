@@ -6,6 +6,7 @@ import DefaultLayout from "@/components/layouts/DefaultLayout";
 import useTodo from "@/hooks/useTodo";
 import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
+import EmptyData from "@/shared/EmptyData";
 import TaskInput from "@/shared/inputs/TaskInput";
 import { Task } from "@/types";
 
@@ -68,6 +69,10 @@ const Todo = () => {
   return (
     <Wrapper>
       <Content>
+        {uncompletedList.concat(completedList).length === 0 && (
+          <EmptyData type="task"></EmptyData>
+        )}
+
         {uncompletedList.map(({ taskId, content }) => (
           <ListBox key={taskId} onClick={() => changeTaskStatus(taskId)}>
             <FlexBox>
