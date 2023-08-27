@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
 
 import TOSModal from "@/components/modals/contents/TOSModal";
 import useModal from "@/hooks/useModal";
+import useTheme from "@/hooks/useTheme";
 import useTodo from "@/hooks/useTodo";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
@@ -12,29 +12,15 @@ import GithubSvg from "@/images/social/github.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import Theme from "@/shared/Theme";
-import { setDark, setLight } from "@/utils";
 
 const SettingsModal = () => {
   const { setClusters, setTasks } = useTodo();
+  const { toggleTheme } = useTheme();
   const { openAlert, openConfirm, openBottomSheet, closeModal } = useModal();
 
-  const [theme, setTheme] = useState("Light");
-
-  useEffect(() => {
-    if (localStorage.getItem("theme") === "Light") {
-      setLight(setTheme);
-    } else {
-      setDark(setTheme);
-    }
-  }, []);
-
   // 테마 변경
-  const toggleTheme = () => {
-    if (theme === "Dark") {
-      setLight(setTheme);
-    } else {
-      setDark(setTheme);
-    }
+  const changeTheme = () => {
+    toggleTheme();
     closeModal("settings");
   };
 
@@ -82,12 +68,12 @@ const SettingsModal = () => {
       <Container>
         <Subtitle>Task</Subtitle>
         <ListContainer>
-          <List onClick={toggleTheme}>
+          <List onClick={changeTheme}>
             <Content>
               <PaintSvg></PaintSvg>
               <ListTitle>Theme</ListTitle>
             </Content>
-            <Theme className="fill-sub" theme={theme}></Theme>
+            <Theme className="fill-sub"></Theme>
           </List>
           <List onClick={backupAndRestore}>
             <Content>

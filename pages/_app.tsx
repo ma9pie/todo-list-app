@@ -12,6 +12,7 @@ import { RecoilEnv, RecoilRoot } from "recoil";
 
 import useFirebase from "@/hooks/useFirebase";
 import useLogin from "@/hooks/useLogin";
+import useTheme from "@/hooks/useTheme";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import ModalProvider from "@/modals/ModalProvider";
 
@@ -43,6 +44,7 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   const { data: session } = useSession<any>();
   const { setUser } = useLogin();
   const { registerUser } = useFirebase();
+  const { setLight, setDark } = useTheme();
   const { initializeGA, trackPageView } = useTrackEvent();
 
   // Init GA4
@@ -54,6 +56,12 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   useEffect(() => {
     trackPageView();
   }, [router.pathname]);
+
+  // Theme 설정
+  useEffect(() => {
+    const isLightMode = localStorage.getItem("theme") === "Light";
+    isLightMode ? setLight() : setDark();
+  }, []);
 
   // Login info update
   useEffect(() => {

@@ -6,8 +6,6 @@ import useClickOutside from "@/hooks/useClickOutside";
 import AppsSvg from "@/images/apps.svg";
 import CloseSvg from "@/images/close.svg";
 import HomesSvg from "@/images/home.svg";
-import Theme from "@/shared/Theme";
-import { setDark, setLight, toggleTheme } from "@/utils";
 
 type Props = {
   children: ReactNode;
@@ -19,7 +17,6 @@ const TestLayout = (props: Props) => {
   const router = useRouter();
   const [title, setTitle] = useState("Index");
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [theme, setTheme] = useState("Light");
 
   const pageList = [
     {
@@ -67,14 +64,6 @@ const TestLayout = (props: Props) => {
     setIsOpenMenu(false);
   });
 
-  useEffect(() => {
-    if (localStorage.getItem("theme") === "Light") {
-      setLight(setTheme);
-    } else {
-      setDark(setTheme);
-    }
-  }, []);
-
   return (
     <Wrapper>
       {/* 사이드바 */}
@@ -112,7 +101,6 @@ const TestLayout = (props: Props) => {
             height={30}
             onClick={() => router.push("/")}
           ></HomesSvg>
-          <Theme theme={theme} onClick={() => toggleTheme(setTheme)}></Theme>
         </Icons>
       </Top>
 
