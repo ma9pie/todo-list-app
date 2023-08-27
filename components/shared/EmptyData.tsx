@@ -14,7 +14,11 @@ const EmptyData = ({ type }: Props) => {
       return (
         <Wrapper>
           <ImageWrapper>
-            <EmptyListSvg width={80} height={80}></EmptyListSvg>
+            <EmptyListSvg
+              className="fill-sub"
+              width={80}
+              height={80}
+            ></EmptyListSvg>
           </ImageWrapper>
           <TextBox>
             <Text>there is no list.</Text>
@@ -26,7 +30,11 @@ const EmptyData = ({ type }: Props) => {
       return (
         <Wrapper>
           <ImageWrapper>
-            <EmptyPageSvg width={80} height={80}></EmptyPageSvg>
+            <EmptyPageSvg
+              className="fill-sub"
+              width={80}
+              height={80}
+            ></EmptyPageSvg>
           </ImageWrapper>
           <TextBox>
             <Text>there is no task.</Text>
@@ -65,4 +73,5 @@ const TextBox = styled.div``;
 const Text = styled.p`
   text-align: center;
   font: var(--medium14);
+  color: var(--sub);
 `;
