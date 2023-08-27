@@ -1,9 +1,5 @@
 import { useEffect } from "react";
 
-type Props = {
-  id: string;
-};
-
 const useFixedScreen = (id: string) => {
   useEffect(() => {
     const node = document.getElementById(id);

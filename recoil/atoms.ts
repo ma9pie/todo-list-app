@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-import { Cluster, Task } from "@/types";
+import { Cluster, LoginType, Task, User } from "@/types";
 
 const { persistAtom } = recoilPersist();
 
@@ -18,4 +18,8 @@ export const taskState = atom<Task[]>({
   key: "taskState",
   default: [],
   effects_UNSTABLE: [persistAtom],
+});
+export const userState = atom<User | null>({
+  key: "userState",
+  default: null,
 });

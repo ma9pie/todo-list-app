@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Todo from "@/components/home/Todo";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
 import AddListModal from "@/components/modals/contents/AddListModal";
+import useFirebase from "@/hooks/useFirebase";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddButton from "@/shared/buttons/AddButton";
@@ -14,15 +15,23 @@ import Loading from "@/shared/Loading";
 export default function Home() {
   const { clusters } = useTodo();
   const { openBottomSheet } = useModal();
+  const { getUserData } = useFirebase();
 
   const [list, setList] = useState<any[]>([]);
   const [isMount, setIsMount] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      // console.log(await getUserData("test"));
+    })();
+  }, []);
 
   useEffect(() => {
     setIsMount(true);
   }, []);
 
   useEffect(() => {
+    console.log(clusters);
     setList(clusters);
   }, [clusters]);
 

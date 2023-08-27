@@ -39,7 +39,7 @@ const TaskInput = ({ clusterId }: Props) => {
         taskId: createUid(),
         content: input,
         completed: false,
-        created: moment().format("YYYY-MM-DD HH:mm:ss"),
+        createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       });
       setClusters(_clusters);
       setInput("");

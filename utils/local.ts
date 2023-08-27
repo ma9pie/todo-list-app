@@ -10,7 +10,7 @@ export const local = {
         title: "오늘 해야할 일",
         color: "#64a8ff",
         pinned: false,
-        created: "",
+        createdAt: "",
         tasks: [],
       },
       {
@@ -18,7 +18,7 @@ export const local = {
         title: "내일 해야할 일",
         color: "#fb8890",
         pinned: false,
-        created: "",
+        createdAt: "",
         tasks: [],
       },
     ]);
@@ -28,21 +28,21 @@ export const local = {
         clusterId: "1",
         content: "react 공부",
         completed: false,
-        created: "",
+        createdAt: "",
       },
       {
         taskId: "1002",
         clusterId: "1",
         content: "typescript 공부",
         completed: false,
-        created: "",
+        createdAt: "",
       },
       {
         taskId: "1003",
         clusterId: "2",
         content: "redux 공부",
         completed: false,
-        created: "",
+        createdAt: "",
       },
     ]);
   },
@@ -81,7 +81,7 @@ export const local = {
       title: title,
       color: color,
       pinned: false,
-      created: moment().format("YYYY-MM-DD HH:mm:ss"),
+      createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       tasks: [],
     });
     console.log(clusters);

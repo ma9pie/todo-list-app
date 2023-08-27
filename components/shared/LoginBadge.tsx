@@ -1,31 +1,31 @@
 import styled from "@emotion/styled";
-import { signOut, useSession } from "next-auth/react";
 import React from "react";
 
+import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import UserSvg from "@/images/user.svg";
 
 const LoginBadge = () => {
-  const { data: session } = useSession();
+  const { user, logout } = useLogin();
   const { openConfirm, openLoginModal } = useModal();
 
   const handleClick = () => {
-    if (!session) {
+    if (!user) {
       return openLoginModal();
     } else {
       openConfirm({
         title: "Logout",
         message: "로그아웃 하시겠습니까?",
-        onRequestConfirm: signOut,
+        onRequestConfirm: logout,
       });
     }
   };
 
   return (
     <Wrapper>
-      {session && <Text>{session?.user?.email}</Text>}
+      {user && <Text>{user.email}</Text>}
       <UserSvg
-        className={session ? "fill-main" : "fill-sub"}
+        className={user ? "fill-main" : "fill-sub"}
         onClick={handleClick}
       ></UserSvg>
     </Wrapper>

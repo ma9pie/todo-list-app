@@ -1,22 +1,24 @@
 import styled from "@emotion/styled";
-import { signIn } from "next-auth/react";
 import React from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
+import useLogin from "@/hooks/useLogin";
 import GithubleSvg from "@/images/social/github.svg";
 import GoogleSvg from "@/images/social/google.svg";
 
 const LoginModal = () => {
+  const { googleLogin, githubLogin } = useLogin();
+
   return (
     <Wrapper>
       <ModalHeader title="Login"></ModalHeader>
 
       <ListContainer>
-        <List onClick={() => signIn("google")}>
+        <List onClick={googleLogin}>
           <GoogleSvg></GoogleSvg>
           <Text>Google</Text>
         </List>
-        <List onClick={() => signIn("github")}>
+        <List onClick={githubLogin}>
           <GithubleSvg></GithubleSvg>
           <Text>Github</Text>
         </List>

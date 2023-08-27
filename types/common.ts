@@ -3,14 +3,25 @@ export interface Cluster {
   title: string;
   color: string;
   pinned: boolean;
-  created: string;
+  createdAt: string;
   tasks: Array<Task>;
 }
-
 export interface Task {
   clusterId: string;
   taskId: string;
   content: string;
   completed: boolean;
-  created: string;
+  createdAt: string;
+}
+export interface User {
+  email?: string | null;
+  image?: string | null;
+  name?: string | null;
+  expires: string;
+  provider: string;
+  createdAt: string;
+}
+export enum LoginType {
+  Google = "google",
+  Github = "github",
 }

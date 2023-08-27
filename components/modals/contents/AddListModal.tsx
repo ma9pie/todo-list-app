@@ -56,7 +56,7 @@ const AddListModal = () => {
       title: title,
       color: color,
       pinned: false,
-      created: moment().format("YYYY-MM-DD HH:mm:ss"),
+      createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
       tasks: [],
     });
     setClusters(result);
