@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import React from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
+import GithubleSvg from "@/images/github.svg";
 import GoogleSvg from "@/images/google.svg";
 
 const LoginModal = () => {
@@ -15,6 +16,10 @@ const LoginModal = () => {
           <GoogleSvg></GoogleSvg>
           <Text>Google</Text>
         </List>
+        <List onClick={() => signIn("github")}>
+          <GithubleSvg></GithubleSvg>
+          <Text>Github</Text>
+        </List>
       </ListContainer>
     </Wrapper>
   );
@@ -24,7 +29,10 @@ export default LoginModal;
 
 const Wrapper = styled.div``;
 const ListContainer = styled.div`
-  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 32px;
 `;
 const List = styled.div<any>`
   display: flex;
