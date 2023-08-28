@@ -13,13 +13,15 @@ const EmptyData = ({ type }: Props) => {
     case "list":
       return (
         <Wrapper>
-          <ImageWrapper>
-            <EmptyListSvg
-              className="fill-sub"
-              width={80}
-              height={80}
-            ></EmptyListSvg>
-          </ImageWrapper>
+          <Div>
+            <ImageWrapper>
+              <EmptyListSvg
+                className="fill-sub"
+                width={80}
+                height={80}
+              ></EmptyListSvg>
+            </ImageWrapper>
+          </Div>
           <TextBox>
             <Text>there is no list.</Text>
             <Text>press + to add the list</Text>
@@ -29,13 +31,15 @@ const EmptyData = ({ type }: Props) => {
     case "task":
       return (
         <Wrapper>
-          <ImageWrapper>
-            <EmptyPageSvg
-              className="fill-sub"
-              width={80}
-              height={80}
-            ></EmptyPageSvg>
-          </ImageWrapper>
+          <Div>
+            <ImageWrapper>
+              <EmptyPageSvg
+                className="fill-sub"
+                width={80}
+                height={80}
+              ></EmptyPageSvg>
+            </ImageWrapper>
+          </Div>
           <TextBox>
             <Text>there is no task.</Text>
             <Text>press + to add the task.</Text>
@@ -75,3 +79,4 @@ const Text = styled.p`
   font: var(--medium14);
   color: var(--sub);
 `;
+const Div = styled.div``;
