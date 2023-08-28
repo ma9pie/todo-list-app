@@ -21,7 +21,6 @@ function Components() {
         <Button
           onClick={() => {
             openModal({
-              key: "ProcessTest",
               component: () => <ProcessTest></ProcessTest>,
             });
           }}

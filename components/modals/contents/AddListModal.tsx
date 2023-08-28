@@ -40,7 +40,7 @@ const AddListModal = () => {
       });
     } else {
       addCluster();
-      closeModal("addList");
+      closeModal();
       setTimeout(() => {
         openToast({
           status: ToastStatus.Success,

@@ -18,7 +18,7 @@ const ModalHeader = ({ title, back }: Props) => {
       <IconWrapper>{back && <BackSvg onClick={back}></BackSvg>}</IconWrapper>
       <Title>{title}</Title>
       <IconWrapper>
-        <CloseSvg onClick={closeModal}></CloseSvg>
+        <CloseSvg onClick={() => closeModal()}></CloseSvg>
       </IconWrapper>
     </Wrapper>
   );

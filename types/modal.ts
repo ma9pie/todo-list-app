@@ -13,7 +13,7 @@ export enum ToastStatus {
 export type Modals = Map<string, ModalProps>;
 
 export type ModalProps = {
-  key?: string;
+  id?: string;
   createdAt?: number;
   type?: ModalType;
   status?: ToastStatus;

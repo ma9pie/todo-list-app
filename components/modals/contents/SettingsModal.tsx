@@ -21,7 +21,7 @@ const SettingsModal = () => {
   // 테마 변경
   const changeTheme = () => {
     toggleTheme();
-    closeModal("settings");
+    closeModal();
   };
 
   // 백업 및 가져오기

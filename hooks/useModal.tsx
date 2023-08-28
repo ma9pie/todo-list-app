@@ -33,43 +33,43 @@ export default function useModal() {
         hashMapA.delete(key);
       }
     });
-    props.key = props.key || createUid();
+    props.id = props.id || createUid();
     props.isOpen = true;
     props.createdAt = new Date().getTime();
     props.onRequestClose = async () => {
       const hashMapB = new Map(hashMapA);
       props.isOpen = false;
-      if (props.key) {
-        hashMapB.set(props.key, props);
+      if (props.id) {
+        hashMapB.set(props.id, props);
         setModals(hashMapB);
         setTimeout(() => {
-          hashMapB.delete(props.key!);
+          hashMapB.delete(props.id!);
           setModals(new Map(hashMapB));
         }, DELAY);
       }
     };
-    hashMapA.set(props.key, props);
+    hashMapA.set(props.id, props);
     setModals(hashMapA);
   };
 
-  const closeModal = (key?: string) => {
+  const closeModal = (id?: string) => {
     const hashMap: Map<string, ModalProps> = new Map(tmpModals);
-    if (key) {
-      const props = hashMap.get(key);
+    if (id) {
+      const props = hashMap.get(id);
       if (props) {
         props.isOpen = false;
-        hashMap.set(key, props);
+        hashMap.set(id, props);
         setModals(hashMap);
         setTimeout(() => {
-          hashMap.delete(key);
+          hashMap.delete(id);
           setModals(new Map(hashMap));
         }, DELAY);
       }
     }
     // id가 없을 경우 가장 최근에 띄워진 모달의 id로 closeModal 실행
     else {
-      const id = getRecentModalId();
-      if (id) closeModal(id);
+      const _id = getRecentModalId();
+      if (_id) closeModal(_id);
     }
   };
 
@@ -92,7 +92,7 @@ export default function useModal() {
       }
     );
     if (arr.length === 0) return null;
-    return arr[0].key;
+    return arr[0].id;
   }, []);
 
   const openAlert = (props: ModalProps) => {
@@ -125,7 +125,6 @@ export default function useModal() {
 
   const openSettingsModal = () => {
     openBottomSheet({
-      key: "settings",
       title: "SettingsModal",
       component: () => <SettingsModal></SettingsModal>,
     });

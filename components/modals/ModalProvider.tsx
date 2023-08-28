@@ -28,7 +28,7 @@ const ModalProvider = ({ children }: Props) => {
   const bottomSheetList: ModalProps[] = [];
   const toastList: ModalProps[] = [];
 
-  modals.forEach((value, key) => {
+  modals.forEach((value) => {
     switch (value.type) {
       case ModalType.Alert:
         alertList.push(value);
@@ -53,27 +53,27 @@ const ModalProvider = ({ children }: Props) => {
       <Wrapper id="modal-manager">
         <Container id="modal">
           {modalList.map((props) => (
-            <Modal key={props.key} {...props}></Modal>
+            <Modal key={props.id} {...props}></Modal>
           ))}
         </Container>
         <Container id="bottom-sheet">
           {bottomSheetList.map((props) => (
-            <BottomSheet key={props.key} {...props}></BottomSheet>
+            <BottomSheet key={props.id} {...props}></BottomSheet>
           ))}
         </Container>
         <Container id="alert-modal">
           {alertList.map((props) => (
-            <AlertModal key={props.key} {...props}></AlertModal>
+            <AlertModal key={props.id} {...props}></AlertModal>
           ))}
         </Container>
         <Container id="confirm-modal">
           {confirmList.map((props) => (
-            <ConfirmModal key={props.key} {...props}></ConfirmModal>
+            <ConfirmModal key={props.id} {...props}></ConfirmModal>
           ))}
         </Container>
         <Container id="toast">
           {toastList.map((props) => (
-            <Toast key={props.key} {...props}></Toast>
+            <Toast key={props.id} {...props}></Toast>
           ))}
         </Container>
       </Wrapper>
