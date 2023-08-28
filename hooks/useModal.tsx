@@ -1,7 +1,9 @@
 import { useCallback, useContext } from "react";
 
+import AddListModal from "@/components/modals/contents/AddListModal";
 import LoginModal from "@/components/modals/contents/LoginModal";
 import SettingsModal from "@/components/modals/contents/SettingsModal";
+import TOSModal from "@/components/modals/contents/TOSModal";
 import UserInfoModal from "@/components/modals/contents/UserInfoModal";
 import useTodo from "@/hooks/useTodo";
 import { ModalContext } from "@/modals/ModalProvider";
@@ -125,8 +127,15 @@ export default function useModal() {
 
   const openSettingsModal = () => {
     openBottomSheet({
-      title: "SettingsModal",
+      title: "Settings",
       component: () => <SettingsModal></SettingsModal>,
+    });
+  };
+
+  const openAddList = () => {
+    openBottomSheet({
+      title: "Add List",
+      component: () => <AddListModal></AddListModal>,
     });
   };
 
@@ -143,6 +152,14 @@ export default function useModal() {
     });
   };
 
+  // 이용약관
+  const openTOSModal = () => {
+    openBottomSheet({
+      title: "이용약관",
+      component: () => <TOSModal></TOSModal>,
+    });
+  };
+
   return {
     openModal,
     closeModal,
@@ -155,6 +172,8 @@ export default function useModal() {
     openLoginModal,
     openUserInfoModal,
     openSettingsModal,
+    openAddList,
     openDeleteClusterModal,
+    openTOSModal,
   };
 }

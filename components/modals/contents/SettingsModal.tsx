@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 
-import TOSModal from "@/components/modals/contents/TOSModal";
 import useModal from "@/hooks/useModal";
 import useTheme from "@/hooks/useTheme";
 import useTodo from "@/hooks/useTodo";
@@ -16,7 +15,7 @@ import Theme from "@/shared/Theme";
 const SettingsModal = () => {
   const { setClusters, setTasks } = useTodo();
   const { toggleTheme } = useTheme();
-  const { openAlert, openConfirm, openBottomSheet, closeModal } = useModal();
+  const { openAlert, openConfirm, openTOSModal, closeModal } = useModal();
 
   // 테마 변경
   const changeTheme = () => {
@@ -48,14 +47,6 @@ const SettingsModal = () => {
       "https://docs.google.com/forms/d/1eE3KBOtAmtNh5cLHlGyrZC7q5I_rvG0TxwaJ16UiuvI",
       "_blank"
     );
-  };
-
-  // 이용약관
-  const termsAndCondition = () => {
-    openBottomSheet({
-      title: "이용약관",
-      component: TOSModal,
-    });
   };
 
   // 깃허브
@@ -102,7 +93,7 @@ const SettingsModal = () => {
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
-          <List onClick={termsAndCondition}>
+          <List onClick={openTOSModal}>
             <Content>
               <SubjectSvg></SubjectSvg>
               <ListTitle>Terms & Condition</ListTitle>

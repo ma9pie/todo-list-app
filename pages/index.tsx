@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 
 import Todo from "@/components/home/Todo";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
-import AddListModal from "@/components/modals/contents/AddListModal";
 import useFirebase from "@/hooks/useFirebase";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
@@ -14,7 +13,7 @@ import Loading from "@/shared/Loading";
 
 export default function Home() {
   const { clusters } = useTodo();
-  const { openBottomSheet } = useModal();
+  const { openAddList } = useModal();
   const { getUserData } = useFirebase();
 
   const [list, setList] = useState<any[]>([]);
@@ -34,15 +33,6 @@ export default function Home() {
     console.log(clusters);
     setList(clusters);
   }, [clusters]);
-
-  // 할일 추가창 열기
-  const openAddList = () => {
-    openBottomSheet({
-      key: "addList",
-      title: "AddButton List",
-      component: () => <AddListModal></AddListModal>,
-    });
-  };
 
   if (!isMount) {
     return (
