@@ -3,22 +3,40 @@ import React from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
 import useLogin from "@/hooks/useLogin";
+import useModal from "@/hooks/useModal";
 import GithubleSvg from "@/images/social/github.svg";
 import GoogleSvg from "@/images/social/google.svg";
+import { LoginType } from "@/types";
 
 const LoginModal = () => {
   const { googleLogin, githubLogin } = useLogin();
+  const { closeModal } = useModal();
+
+  const login = (type: LoginType) => {
+    switch (type) {
+      case LoginType.Google:
+        googleLogin();
+        closeModal();
+        break;
+      case LoginType.Github:
+        githubLogin();
+        closeModal();
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Wrapper>
       <ModalHeader title="Login"></ModalHeader>
 
       <ListContainer>
-        <List onClick={googleLogin}>
+        <List onClick={() => login(LoginType.Google)}>
           <GoogleSvg></GoogleSvg>
           <Text>Google</Text>
         </List>
-        <List onClick={githubLogin}>
+        <List onClick={() => login(LoginType.Github)}>
           <GithubleSvg></GithubleSvg>
           <Text>Github</Text>
         </List>
