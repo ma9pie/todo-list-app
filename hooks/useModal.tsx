@@ -52,7 +52,7 @@ export default function useModal() {
   };
 
   const closeModal = (key?: string) => {
-    const hashMap: Map<string, ModalProps> = new Map(modals);
+    const hashMap: Map<string, ModalProps> = new Map(tmpModals);
     if (key) {
       const props = hashMap.get(key);
       if (props) {
@@ -63,10 +63,12 @@ export default function useModal() {
           hashMap.delete(key);
           setModals(new Map(hashMap));
         }, DELAY);
-      } else {
-        const id = getRecentModalId();
-        if (id) closeModal(id);
       }
+    }
+    // id가 없을 경우 가장 최근에 띄워진 모달의 id로 closeModal 실행
+    else {
+      const id = getRecentModalId();
+      if (id) closeModal(id);
     }
   };
 
