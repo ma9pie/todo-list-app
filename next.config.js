@@ -4,12 +4,14 @@ const path = require("path");
 
 const nextConfig = {
   reactStrictMode: false,
-
+  swcMinify: true,
+  images: {
+    domains: ["static.toss.im"],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      // use: ["@svgr/webpack"],
       use: {
         loader: "@svgr/webpack",
         options: {
@@ -24,12 +26,7 @@ const nextConfig = {
         },
       },
     });
-
     return config;
-  },
-
-  images: {
-    domains: ["static.toss.im"],
   },
 };
 
