@@ -13,12 +13,13 @@ type Props = {
 const ModalHeader = ({ title, back }: Props) => {
   const { closeModal } = useModal();
 
-  if (!title && !back) return null;
   return (
     <Wrapper>
-      <Icon>{back && <BackSvg onClick={back}></BackSvg>}</Icon>
+      <IconWrapper>{back && <BackSvg onClick={back}></BackSvg>}</IconWrapper>
       <Title>{title}</Title>
-      <Icon>{<CloseSvg onClick={closeModal}></CloseSvg>}</Icon>
+      <IconWrapper>
+        <CloseSvg onClick={closeModal}></CloseSvg>
+      </IconWrapper>
     </Wrapper>
   );
 };
@@ -34,7 +35,7 @@ const Wrapper = styled.div`
 const Title = styled.p`
   font: var(--bold18);
 `;
-const Icon = styled.div`
+const IconWrapper = styled.div`
   width: 24px;
   height: 24px;
 `;

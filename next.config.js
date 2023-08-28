@@ -6,7 +6,11 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["static.toss.im"],
+    domains: [
+      "static.toss.im",
+      "lh3.googleusercontent.com",
+      "avatars.githubusercontent.com",
+    ],
   },
   webpack(config) {
     config.module.rules.push({

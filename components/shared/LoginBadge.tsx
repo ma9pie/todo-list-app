@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Image from "next/image";
 import React from "react";
 
 import useLogin from "@/hooks/useLogin";
@@ -6,28 +7,22 @@ import useModal from "@/hooks/useModal";
 import UserSvg from "@/images/user.svg";
 
 const LoginBadge = () => {
-  const { user, logout } = useLogin();
-  const { openConfirm, openLoginModal } = useModal();
-
-  const handleClick = () => {
-    if (!user) {
-      return openLoginModal();
-    } else {
-      openConfirm({
-        title: "Logout",
-        message: "로그아웃 하시겠습니까?",
-        onRequestConfirm: logout,
-      });
-    }
-  };
+  const { user, image } = useLogin();
+  const { openLoginModal, openUserInfoModal } = useModal();
 
   return (
     <Wrapper>
-      {user && <Text>{user.email}</Text>}
-      <UserSvg
-        className={user ? "fill-main" : "fill-sub"}
-        onClick={handleClick}
-      ></UserSvg>
+      {!user ? (
+        <UserSvg className="fill-sub" onClick={openLoginModal}></UserSvg>
+      ) : image ? (
+        <Box onClick={openUserInfoModal}>
+          <ImageWrapper>
+            <Image src={image} fill priority alt="user_image"></Image>
+          </ImageWrapper>
+        </Box>
+      ) : (
+        <UserSvg className="fill-main" onClick={openUserInfoModal}></UserSvg>
+      )}
     </Wrapper>
   );
 };
@@ -39,6 +34,18 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 8px;
 `;
-const Text = styled.p`
-  font: var(--medium12);
+const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+`;
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
 `;

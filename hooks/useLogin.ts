@@ -6,6 +6,9 @@ import { LoginType } from "@/types";
 
 const useLogin = () => {
   const [user, setUser] = useRecoilState(userState);
+  const email = user?.email;
+  const name = user?.name;
+  const image = user?.image;
 
   const googleLogin = () => {
     signIn(LoginType.Google);
@@ -19,7 +22,16 @@ const useLogin = () => {
     signOut();
   };
 
-  return { user, setUser, googleLogin, githubLogin, logout };
+  return {
+    user,
+    email,
+    name,
+    image,
+    setUser,
+    googleLogin,
+    githubLogin,
+    logout,
+  };
 };
 
 export default useLogin;

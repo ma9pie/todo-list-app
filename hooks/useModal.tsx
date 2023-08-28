@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 
 import LoginModal from "@/components/modals/contents/LoginModal";
 import SettingsModal from "@/components/modals/contents/SettingsModal";
+import UserInfoModal from "@/components/modals/contents/UserInfoModal";
 import useTodo from "@/hooks/useTodo";
 import { ModalContext } from "@/modals/ModalProvider";
 import { ModalProps, Modals, ModalType } from "@/types";
@@ -116,6 +117,12 @@ export default function useModal() {
     });
   };
 
+  const openUserInfoModal = () => {
+    openModal({
+      component: () => <UserInfoModal></UserInfoModal>,
+    });
+  };
+
   const openSettingsModal = () => {
     openBottomSheet({
       key: "settings",
@@ -147,6 +154,7 @@ export default function useModal() {
     openToast,
 
     openLoginModal,
+    openUserInfoModal,
     openSettingsModal,
     openDeleteClusterModal,
   };

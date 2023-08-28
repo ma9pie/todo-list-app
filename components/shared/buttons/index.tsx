@@ -5,29 +5,34 @@ type Props = {
   full?: boolean;
   disabled?: boolean;
   children?: ReactNode;
+  height?: number;
   margin?: string;
   onClick?: (...arg: any) => void;
 };
 
 const Button = forwardRef((props: Props, ref) => {
   return (
-    <Wrapper
-      ref={ref}
-      disabled={props.disabled}
-      full={props.full}
-      margin={props.margin}
-      onClick={props.onClick}
-    >
-      <Inner>{props.children}</Inner>
-    </Wrapper>
+    <span>
+      <Wrapper
+        ref={ref}
+        disabled={props.disabled}
+        full={props.full}
+        height={props.height}
+        margin={props.margin}
+        onClick={props.onClick}
+      >
+        <Inner>{props.children}</Inner>
+      </Wrapper>
+    </span>
   );
 });
 
 export default Button;
 
 Button.defaultProps = {
-  full: true,
+  full: false,
   disabled: false,
+  height: 40,
   onClick: () => {},
 };
 
@@ -37,10 +42,9 @@ const Wrapper = styled.button<any>`
   justify-content: center;
   width: ${(props) => (props.full ? "100%" : "auto")};
   margin: ${(props) => props.margin};
-  min-width: var(--minWidth);
-  height: 48px;
+  height: ${(props) => `${props.height}px`};
   border: 0 solid transparent;
-  border-radius: 16px;
+  border-radius: 12px;
   background-color: var(--blue500);
   font-size: 17px;
   font-weight: 600;
