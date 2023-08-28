@@ -13,7 +13,9 @@ const LoginBadge = () => {
   return (
     <Wrapper>
       {!user ? (
-        <UserSvg className="fill-sub" onClick={openLoginModal}></UserSvg>
+        <Box onClick={openLoginModal}>
+          <UserSvg className="fill-sub" width={32} height={32}></UserSvg>
+        </Box>
       ) : image ? (
         <Box onClick={openUserInfoModal}>
           <ImageWrapper>
@@ -21,7 +23,9 @@ const LoginBadge = () => {
           </ImageWrapper>
         </Box>
       ) : (
-        <UserSvg className="fill-main" onClick={openUserInfoModal}></UserSvg>
+        <Box onClick={openUserInfoModal}>
+          <UserSvg className="fill-main"></UserSvg>
+        </Box>
       )}
     </Wrapper>
   );
@@ -44,8 +48,9 @@ const Box = styled.div`
 `;
 const ImageWrapper = styled.div`
   position: relative;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  border: 2px solid var(--sectionLine);
   overflow: hidden;
 `;
