@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 
 import { firestore } from "@/firebase/firestore";
 import { userState } from "@/recoil/atoms";
-import { LoginType } from "@/types";
+import { LoginType, User } from "@/types";
 import { createUid, getCurrentTime } from "@/utils";
 
 const useLogin = () => {
@@ -36,7 +36,7 @@ const useLogin = () => {
   // User 등록
   const registerUser = async (session: Session) => {
     try {
-      const userData = {
+      const userData: User = {
         email: session?.user?.email,
         image: session?.user?.image,
         name: session?.user?.name,
@@ -54,6 +54,7 @@ const useLogin = () => {
         setUser(_user);
       } else {
         const userKey = createUid();
+        userData.userKey = userKey;
         await firestore.collection("users").doc(userKey).set(userData);
         setUser(userData);
       }
