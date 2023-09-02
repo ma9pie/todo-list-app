@@ -16,7 +16,7 @@ export default function useModal() {
   const { modals, setModals } = useContext(ModalContext);
   tmpModals = modals;
 
-  const { clusters, setClusters } = useTodo();
+  const { removeCluster } = useTodo();
 
   const createUid = useCallback(() => {
     if (typeof window !== undefined && window.crypto) {
@@ -143,12 +143,7 @@ export default function useModal() {
     openConfirm({
       title: "항목 삭제",
       message: "해당 항목을 삭제하시겠습니까?",
-      onRequestConfirm: () => {
-        const _clusters = clusters.filter(
-          (item) => item.clusterId !== clusterId
-        );
-        setClusters(_clusters);
-      },
+      onRequestConfirm: () => removeCluster(clusterId),
     });
   };
 

@@ -14,12 +14,13 @@ export interface Task {
   createdAt: string;
 }
 export interface User {
+  userKey?: string;
   email?: string | null;
   image?: string | null;
   name?: string | null;
-  expires: string;
-  provider: string;
-  createdAt: string;
+  expires?: string;
+  provider?: string;
+  createdAt?: string;
 }
 export enum LoginType {
   Google = "google",

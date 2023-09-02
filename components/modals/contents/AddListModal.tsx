@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 
 import DoneButton from "@/components/shared/buttons/DoneButton";
@@ -7,7 +6,7 @@ import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import ColorSet from "@/shared/ColorSet";
 import { ToastStatus } from "@/types";
-import { createUid, isMobileDevice } from "@/utils";
+import { isMobileDevice } from "@/utils";
 
 const colorList = [
   "#64a8ff",
@@ -22,7 +21,7 @@ const colorList = [
 ];
 
 const AddListModal = () => {
-  const { clusters, setClusters } = useTodo();
+  const { addCluster } = useTodo();
   const { openToast, closeModal } = useModal();
 
   const ref = useRef<HTMLInputElement>(null);
@@ -46,7 +45,7 @@ const AddListModal = () => {
         message: "Please input list name",
       });
     } else {
-      addCluster();
+      addCluster(title, color);
       closeModal();
       setTimeout(() => {
         openToast({
@@ -55,18 +54,6 @@ const AddListModal = () => {
         });
       }, 200);
     }
-  };
-
-  const addCluster = () => {
-    const result = clusters.concat({
-      clusterId: createUid(),
-      title: title,
-      color: color,
-      pinned: false,
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
-      tasks: [],
-    });
-    setClusters(result);
   };
 
   const handleOnKeyUp = (e: any) => {

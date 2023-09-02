@@ -3,18 +3,24 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 
 import DefaultLayout from "@/components/layouts/DefaultLayout";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import useLogin from "@/hooks/useLogin";
 import useTodo from "@/hooks/useTodo";
 import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
 import EmptyData from "@/shared/EmptyData";
 import TaskInput from "@/shared/inputs/TaskInput";
+import Loading from "@/shared/Loading";
 import { Task } from "@/types";
 
 const Todo = () => {
   const router = useRouter();
 
-  const { clusters, getCluster, setClusters } = useTodo();
+  const { user } = useLogin();
+  const { updatedAt, getTasks, changeTaskStatus, deleteTask } = useTodo();
+  const local = useLocalStorage();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [clusterId, setClusterId] = useState("");
   const [completedList, setCompletedList] = useState<Task[]>([]);
   const [uncompletedList, setUncompletedList] = useState<Task[]>([]);
@@ -26,45 +32,32 @@ const Todo = () => {
   }, [router.query]);
 
   useEffect(() => {
-    const _completedList: Task[] = [];
-    const _uncompletedList: Task[] = [];
-    const tasks = getCluster(clusterId)?.tasks || [];
-    tasks.map((item) => {
-      if (item.completed) {
-        _completedList.push(item);
-      } else {
-        _uncompletedList.push(item);
-      }
-    });
-    setCompletedList(_completedList);
-    setUncompletedList(_uncompletedList);
-  }, [clusterId, clusters]);
+    (async () => {
+      if (!clusterId) return;
+      const _completedList: Task[] = [];
+      const _uncompletedList: Task[] = [];
+      const tasks = await getTasks(clusterId);
+      tasks.map((item: Task) => {
+        if (item.completed) {
+          _completedList.push(item);
+        } else {
+          _uncompletedList.push(item);
+        }
+      });
+      setCompletedList(_completedList);
+      setUncompletedList(_uncompletedList);
+      setIsLoading(false);
+    })();
+    return;
+  }, [clusterId, user, updatedAt, local.clusters]);
 
-  const changeTaskStatus = (taskId: string) => {
-    const _clusters = clusters.map((item) => {
-      return { ...item };
-    });
-    const cluster = _clusters.find((item) => item.clusterId === clusterId);
-    if (!cluster) return;
-    cluster.tasks = cluster.tasks.map((item) => {
-      if (item.taskId === taskId) {
-        return { ...item, completed: !item.completed };
-      } else {
-        return item;
-      }
-    });
-    setClusters(_clusters);
-  };
-
-  const deleteTask = (taskId: string) => {
-    const _clusters = clusters.map((item) => {
-      return { ...item };
-    });
-    const cluster = _clusters.find((item) => item.clusterId === clusterId);
-    if (!cluster) return;
-    cluster.tasks = cluster.tasks.filter((item) => item.taskId !== taskId);
-    setClusters(_clusters);
-  };
+  if (isLoading) {
+    return (
+      <LoadingWrapper>
+        <Loading></Loading>
+      </LoadingWrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -74,7 +67,10 @@ const Todo = () => {
         )}
 
         {uncompletedList.map(({ taskId, content }) => (
-          <ListBox key={taskId} onClick={() => changeTaskStatus(taskId)}>
+          <ListBox
+            key={taskId}
+            onClick={() => changeTaskStatus(clusterId, taskId)}
+          >
             <FlexBox>
               <CheckBox></CheckBox>
               <Text>{content}</Text>
@@ -91,13 +87,13 @@ const Todo = () => {
 
         {completedList.map(({ taskId, content }) => (
           <ListBox className="fill-sub" key={taskId}>
-            <FlexBox onClick={() => changeTaskStatus(taskId)}>
+            <FlexBox onClick={() => changeTaskStatus(clusterId, taskId)}>
               <CheckBox checked={true}></CheckBox>
               <Text color="var(--sub)" textDecoration="line-through">
                 {content}
               </Text>
             </FlexBox>
-            <DeleteIconWrapper onClick={() => deleteTask(taskId)}>
+            <DeleteIconWrapper onClick={() => deleteTask(clusterId, taskId)}>
               <TrashCanSvg></TrashCanSvg>
             </DeleteIconWrapper>
           </ListBox>
@@ -114,6 +110,12 @@ Todo.getLayout = function getLayout(page: ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 
+const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
 `;

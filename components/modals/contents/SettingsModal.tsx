@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
+import useLocalStorage from "@/hooks/useLocalStorage";
 import useModal from "@/hooks/useModal";
 import useTheme from "@/hooks/useTheme";
-import useTodo from "@/hooks/useTodo";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import CloudDownloadSvg from "@/images/cloud_download.svg";
 import PaintSvg from "@/images/color_lens.svg";
@@ -13,7 +13,7 @@ import TrashCanSvg from "@/images/trash_can.svg";
 import Theme from "@/shared/Theme";
 
 const SettingsModal = () => {
-  const { setClusters, setTasks } = useTodo();
+  const { setClusters, setTasks } = useLocalStorage();
   const { toggleTheme } = useTheme();
   const { openAlert, openConfirm, openTOSModal, closeModal } = useModal();
 

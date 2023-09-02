@@ -1,6 +1,5 @@
 import "@/styles/app.scss";
 
-import moment from "moment";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
@@ -10,9 +9,9 @@ import type { ReactElement, ReactNode } from "react";
 import { useEffect } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
-import useFirebase from "@/hooks/useFirebase";
 import useLogin from "@/hooks/useLogin";
 import useTheme from "@/hooks/useTheme";
+import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import ModalProvider from "@/modals/ModalProvider";
 
@@ -42,8 +41,7 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   const { data: session } = useSession<any>();
-  const { setUser } = useLogin();
-  const { registerUser } = useFirebase();
+  const { user, setUser, registerUser } = useLogin();
   const { setLight, setDark } = useTheme();
   const { initializeGA, trackPageView } = useTrackEvent();
 
@@ -66,17 +64,8 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Login info update
   useEffect(() => {
     if (!session) return setUser(null);
-    const userData = {
-      email: session?.user?.email,
-      image: session?.user?.image,
-      name: session?.user?.name,
-      expires: session.expires,
-      provider: session.provider,
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
-    };
-    setUser(userData);
-    registerUser(userData);
-  }, [session, setUser]);
+    registerUser(session);
+  }, [session]);
 
   return (
     <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>

@@ -6,14 +6,13 @@ import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddSvg from "@/images/add.svg";
 import { ToastStatus } from "@/types";
-import { createUid } from "@/utils";
 
 interface Props {
   clusterId: string;
 }
 
 const TaskInput = ({ clusterId }: Props) => {
-  const { clusters, setClusters } = useTodo();
+  const { addTask } = useTodo();
   const { openToast } = useModal();
 
   const [input, setInput] = useState("");
@@ -22,26 +21,14 @@ const TaskInput = ({ clusterId }: Props) => {
     setInput(e.target.value);
   };
 
-  const addTask = () => {
+  const handleAddTask = async () => {
     if (!input) {
       return openToast({
         status: ToastStatus.Warn,
         message: "Please input task",
       });
     }
-    const _clusters = clusters.map((item) => {
-      return { ...item };
-    });
-    const cluster = _clusters.find((item) => item.clusterId === clusterId);
-    if (cluster) {
-      cluster.tasks = cluster.tasks.concat({
-        clusterId: clusterId,
-        taskId: createUid(),
-        content: input,
-        completed: false,
-        createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
-      });
-      setClusters(_clusters);
+    if (await addTask(clusterId, input)) {
       setInput("");
       openToast({
         status: ToastStatus.Success,
@@ -55,9 +42,9 @@ const TaskInput = ({ clusterId }: Props) => {
     }
   };
 
-  const handleOnKeyUp = (e: any) => {
+  const enter = (e: any) => {
     if (e.key === "Enter") {
-      addTask();
+      handleAddTask();
     }
   };
 
@@ -68,9 +55,9 @@ const TaskInput = ({ clusterId }: Props) => {
         placeholder="new task"
         value={input}
         onChange={handleInput}
-        onKeyUp={handleOnKeyUp}
+        onKeyUp={enter}
       ></Input>
-      <AddSvg width={40} height={40} onClick={addTask}></AddSvg>
+      <AddSvg width={40} height={40} onClick={handleAddTask}></AddSvg>
     </Wrapper>
   );
 };

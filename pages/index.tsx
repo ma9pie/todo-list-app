@@ -4,37 +4,32 @@ import React, { useEffect, useState } from "react";
 
 import Todo from "@/components/home/Todo";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
-import useFirebase from "@/hooks/useFirebase";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddButton from "@/shared/buttons/AddButton";
 import EmptyData from "@/shared/EmptyData";
 import Loading from "@/shared/Loading";
+import { Cluster } from "@/types";
 
 export default function Home() {
-  const { clusters } = useTodo();
+  const { user } = useLogin();
+  const local = useLocalStorage();
   const { openAddList } = useModal();
-  const { getUserData } = useFirebase();
+  const { updatedAt, getClusters } = useTodo();
 
-  const [list, setList] = useState<any[]>([]);
-  const [isMount, setIsMount] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [list, setList] = useState<Cluster[]>([]);
 
   useEffect(() => {
     (async () => {
-      // console.log(await getUserData("test"));
+      setList(await getClusters());
+      setIsLoading(false);
     })();
-  }, []);
+  }, [user, updatedAt, local.clusters]);
 
-  useEffect(() => {
-    setIsMount(true);
-  }, []);
-
-  useEffect(() => {
-    console.log(clusters);
-    setList(clusters);
-  }, [clusters]);
-
-  if (!isMount) {
+  if (isLoading) {
     return (
       <LoadingWrapper>
         <Loading></Loading>

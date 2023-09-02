@@ -1,21 +1,141 @@
+import { cloneDeep } from "lodash";
 import { useRecoilState } from "recoil";
 
-import { clusterState, taskState } from "@/recoil/atoms";
+import { firestore } from "@/firebase/firestore";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import useLogin from "@/hooks/useLogin";
+import { updatedAtState } from "@/recoil/atoms";
+import { Cluster, Task } from "@/types";
+import { createUid, getCurrentTime } from "@/utils";
 
 const useTodo = () => {
-  const [clusters, setClusters] = useRecoilState(clusterState);
-  const [tasks, setTasks] = useRecoilState(taskState);
+  const { userKey } = useLogin();
+  const local = useLocalStorage();
 
-  const getCluster = (id: string) => {
-    return clusters.find((item) => item.clusterId === id);
+  const [updatedAt, setUpdatedAt] = useRecoilState(updatedAtState);
+
+  // Clusters 조회
+  const getClusters = async () => {
+    try {
+      if (userKey) {
+        const clusters = await firestore
+          .collection("clusters")
+          .doc(userKey)
+          .get();
+        const clustersData = clusters.data();
+        if (!clustersData) return [];
+        return clustersData.clusters;
+      } else {
+        return cloneDeep(local.clusters);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Clusters 설정
+  const setClusters = async (clusters: Cluster[]) => {
+    if (userKey) {
+      const _updatedAt = getCurrentTime();
+      await firestore
+        .collection("clusters")
+        .doc(userKey)
+        .set({ clusters, updatedAt: _updatedAt });
+      setUpdatedAt(_updatedAt);
+    } else {
+      local.setClusters(clusters);
+    }
+  };
+
+  // Cluster 추가
+  const addCluster = async (title: string, color: string) => {
+    const clusters = await getClusters();
+    const _clusters = clusters.concat({
+      clusterId: createUid(),
+      title,
+      color,
+      pinned: false,
+      createdAt: getCurrentTime(),
+      tasks: [],
+    });
+    setClusters(_clusters);
+  };
+
+  // Cluster 제거
+  const removeCluster = async (clusterId: string) => {
+    const clusters = await getClusters();
+    const _clusters = clusters.filter(
+      (item: Cluster) => item.clusterId !== clusterId
+    );
+    setClusters(_clusters);
+  };
+
+  // Tasks 조회
+  const getTasks = async (clusterId: string) => {
+    const clusters = await getClusters();
+    const cluster = clusters.find(
+      (item: Cluster) => item.clusterId === clusterId
+    );
+    return cluster ? cluster.tasks : [];
+  };
+
+  // Task 추가
+  const addTask = async (clusterId: string, input: string) => {
+    const clusters = await getClusters();
+    const cluster = clusters.find(
+      (item: Cluster) => item.clusterId === clusterId
+    );
+    if (!cluster) return false;
+    cluster.tasks = cluster.tasks.concat({
+      clusterId: clusterId,
+      taskId: createUid(),
+      content: input,
+      completed: false,
+      createdAt: getCurrentTime(),
+    });
+    setClusters(clusters);
+    return true;
+  };
+
+  // Task 상태 변경
+  const changeTaskStatus = async (clusterId: string, taskId: string) => {
+    const clusters = await getClusters();
+    const cluster = clusters.find(
+      (item: Cluster) => item.clusterId === clusterId
+    );
+    if (!cluster) return;
+    cluster.tasks = cluster.tasks.map((item: Task) => {
+      if (item.taskId === taskId) {
+        return { ...item, completed: !item.completed };
+      } else {
+        return item;
+      }
+    });
+    setClusters(clusters);
+  };
+
+  // Task 삭제
+  const deleteTask = async (clusterId: string, taskId: string) => {
+    const clusters = await getClusters();
+    const cluster = clusters.find(
+      (item: Cluster) => item.clusterId === clusterId
+    );
+    if (!cluster) return;
+    cluster.tasks = cluster.tasks.filter(
+      (item: Task) => item.taskId !== taskId
+    );
+    setClusters(clusters);
   };
 
   return {
-    clusters,
-    tasks,
-    setClusters,
-    setTasks,
-    getCluster,
+    updatedAt,
+    getClusters,
+    addCluster,
+    removeCluster,
+    getTasks,
+    addTask,
+    changeTaskStatus,
+    deleteTask,
   };
 };
 

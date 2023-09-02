@@ -10,9 +10,13 @@ export const themeState = atom<"Dark" | "Light">({
   default: "Dark",
   effects_UNSTABLE: [persistAtom],
 });
-export const isInitializedGAState = atom<boolean>({
+export const isInitializedGAState = atom({
   key: "ga/isInitializedGA",
   default: false,
+});
+export const userState = atom<User | null>({
+  key: "userState",
+  default: null,
 });
 export const clusterState = atom<Cluster[]>({
   key: "clusterState",
@@ -24,7 +28,7 @@ export const taskState = atom<Task[]>({
   default: [],
   effects_UNSTABLE: [persistAtom],
 });
-export const userState = atom<User | null>({
-  key: "userState",
-  default: null,
+export const updatedAtState = atom({
+  key: "updatedAtState",
+  default: "",
 });
