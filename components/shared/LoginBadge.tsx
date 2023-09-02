@@ -19,7 +19,7 @@ const LoginBadge = () => {
       ) : image ? (
         <Box onClick={openUserInfoModal}>
           <ImageWrapper>
-            <Image src={image} fill priority alt="user_image"></Image>
+            <Image src={image} fill sizes="32px" alt="user_image"></Image>
           </ImageWrapper>
         </Box>
       ) : (
