@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import DoneButton from "@/components/shared/buttons/DoneButton";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import ColorSet from "@/shared/ColorSet";
 import { ToastStatus } from "@/types";
-import { createUid } from "@/utils";
+import { createUid, isMobileDevice } from "@/utils";
 
 const colorList = [
   "#64a8ff",
@@ -25,8 +25,15 @@ const AddListModal = () => {
   const { clusters, setClusters } = useTodo();
   const { openToast, closeModal } = useModal();
 
+  const ref = useRef<HTMLInputElement>(null);
+
   const [title, setTitle] = useState("");
   const [color, setColor] = useState(colorList[0]);
+
+  useEffect(() => {
+    if (!ref.current || isMobileDevice()) return;
+    ref.current.focus();
+  }, []);
 
   const onChange = (e: any) => {
     setTitle(e.target.value);
@@ -72,6 +79,7 @@ const AddListModal = () => {
     <Wrapper>
       <Content>
         <Input
+          ref={ref}
           type="text"
           value={title}
           placeholder="List name"
