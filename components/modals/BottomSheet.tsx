@@ -106,6 +106,6 @@ const Title = styled.p`
 const Content = styled.div`
   padding-right: 8px;
   // 전체높이 - top영역 - 아래쪽 여백
-  max-height: calc(100vh - 32px - 48px - 32px);
+  max-height: calc(100vh - 24px - 48px - 24px);
   overflow-y: scroll;
 `;
