@@ -7,13 +7,16 @@ export default function Document() {
         {/* 메타 태그 설정 */}
         <meta
           name="description"
-          content="사용자가 할 일을 리스트에 추가하고, 체크박스로 완료 여부를 표시할 수 있도록 해주는 Todo List App입니다. 사용자들은 할 일을 보다 체계적으로 관리할 수 있으며, 직관적이고 간단한 디자인으로 제작되어, 간편하게 사용할 수 있습니다."
+          content="This is a Todo List App that allows users to add tasks to a list and mark completion with a checkbox. Users can manage their to-do tasks more systematically, and the intuitive and simple design makes it easy to use."
         />
         <meta charSet="utf-8" />
         <meta name="author" content="ma9pie" />
         <meta name="image" content="/images/logo.svg" />
         <meta name="robots" content="index, follow" />
-        <meta name="keywords" content="todo, todo list, todo list app" />
+        <meta
+          name="keywords"
+          content="todo, todo list, todo list app, todolist"
+        />
 
         {/* Facebook Meta Tags */}
         <meta property="og:url" content="https://check-todo.vercel.app" />
@@ -22,7 +25,7 @@ export default function Document() {
         <meta property="og:image" content="/images/logo.svg" />
         <meta
           property="og:description"
-          content="사용자가 할 일을 리스트에 추가하고, 체크박스로 완료 여부를 표시할 수 있도록 해주는 Todo List App입니다. 사용자들은 할 일을 보다 체계적으로 관리할 수 있으며, 직관적이고 간단한 디자인으로 제작되어, 간편하게 사용할 수 있습니다."
+          content="This is a Todo List App that allows users to add tasks to a list and mark completion with a checkbox. Users can manage their to-do tasks more systematically, and the intuitive and simple design makes it easy to use."
         />
         <meta property="og:type" content="website" />
 
@@ -34,7 +37,7 @@ export default function Document() {
         <meta name="twitter:image" content="/images/logo.svg" />
         <meta
           name="twitter:description"
-          content="사용자가 할 일을 리스트에 추가하고, 체크박스로 완료 여부를 표시할 수 있도록 해주는 Todo List App입니다. 사용자들은 할 일을 보다 체계적으로 관리할 수 있으며, 직관적이고 간단한 디자인으로 제작되어, 간편하게 사용할 수 있습니다."
+          content="This is a Todo List App that allows users to add tasks to a list and mark completion with a checkbox. Users can manage their to-do tasks more systematically, and the intuitive and simple design makes it easy to use."
         />
         <meta name="twitter:type" content="website" />
 
