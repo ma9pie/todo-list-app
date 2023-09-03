@@ -150,7 +150,7 @@ export default function useModal() {
   // 이용약관
   const openTOSModal = () => {
     openBottomSheet({
-      title: "이용약관",
+      title: "Terms of service",
       component: () => <TOSModal></TOSModal>,
     });
   };

@@ -1,194 +1,287 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 import React from "react";
 
 const TOSModal = () => {
   return (
     <Wrapper>
       <Content>
-        <Subtitle>이용약관</Subtitle>
+        <Subtitle>Privacy Policy</Subtitle>
         <TextBox>
           <Description>
-            앱을 다운로드하거나 사용하면 이러한 약관이 귀하에게 자동으로
-            적용되므로 앱을 사용하기 전에 주의 깊게 읽어야 합니다.
+            ma9pie built the todo-list-app app as open source app. This SERVICE
+            is provided by ma9pie at no cost and is intended for use as is. This
+            page is used to inform visitors regarding my policies with the
+            collection, use, and disclosure of Personal Information if anyone
+            decided to use my Service.
           </Description>
           <Description>
-            어떤 식으로든 앱, 앱의 일부 또는 상표를 복사하거나 수정할 수
-            없습니다.
-          </Description>
-          <Description>
-            앱의 소스 코드를 추출하려고 시도할 수 없으며 앱을 다른 언어로
-            번역하거나 파생 버전을 만들려고 시도해서는 안 됩니다.
-          </Description>
-          <Description>
-            앱 자체 및 이와 관련된 모든 상표, 저작권, 데이터베이스 권한 및 기타
-            지적 재산권은 여전히 ma9pie에 속합니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            ma9pie은(는) 앱이 최대한 유용하고 효율적이 되도록 최선을 다하고
-            있습니다.
-          </Description>
-          <Description>
-            이러한 이유로 당사는 언제든지 어떤 이유로든 앱을 변경하거나 서비스
-            요금을 청구할 수 있는 권리를 보유합니다.
-          </Description>
-          <Description>
-            우리는 귀하가 지불하는 금액을 정확히 명시하지 않고는 앱이나 해당
-            서비스에 대해 비용을 청구하지 않습니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            앱은 Todo List App 서비스를 제공하기 위해 귀하가 당사에 제공한 개인
-            데이터를 저장 및 처리합니다.
-          </Description>
-          <Description>
-            휴대 전화를 유지하고 앱에 안전하게 액세스하는 것은 귀하의
-            책임입니다.
-          </Description>
-          <Description>
-            따라서 장치의 공식 운영 체제에서 부과하는 소프트웨어 제한 및 제한을
-            제거하는 프로세스인 휴대전화를 탈옥하거나 루팅하지 않는 것이
-            좋습니다.
-          </Description>
-          <Description>
-            휴대폰이 맬웨어/바이러스/악성 프로그램에 취약해지고 휴대폰의 보안
-            기능이 손상될 수 있으며 앱이 제대로 작동하지 않거나 전혀 작동하지
-            않을 수 있습니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            앱은 이용 약관을 선언하는 타사 서비스를 사용합니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            앱에서 사용하는 타사 서비스 제공업체의 이용약관 링크
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            ma9pie이(가) 책임지지 않는 사항이 있음을 알려드립니다.
-          </Description>
-          <Description>
-            앱의 특정 기능을 사용하려면 앱이 인터넷에 연결되어 있어야 합니다.
-          </Description>
-          <Description>
-            연결은 Wi-Fi이거나 모바일 네트워크 제공업체에서 제공할 수 있지만
-            ma9pie은(는) Wi-Fi에 액세스할 수 없는 경우 앱이 전체 기능으로
-            작동하지 않는 것에 대해 책임을 지지 않습니다. 데이터 허용량이 남아
-            있습니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            Wi-Fi가 있는 지역 밖에서 앱을 사용하는 경우 모바일 네트워크
-            제공업체와의 계약 조건이 여전히 적용된다는 점을 기억해야 합니다.
-          </Description>
-          <Description>
-            결과적으로 앱에 액세스하는 동안 연결 기간 동안의 데이터 비용 또는
-            기타 타사 요금에 대해 이동통신사로부터 요금이 청구될 수 있습니다.
-          </Description>
-          <Description>
-            앱 사용 시 데이터 로밍을 끄지 않고 본국(예: 지역 또는 국가) 외부에서
-            앱을 사용하는 경우 로밍 데이터 요금을 포함하여 그러한 요금에 대한
-            책임을 수락하는 것입니다.
-          </Description>
-          <Description>
-            앱을 사용하는 기기의 청구서 납부자가 아닌 경우,
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            같은 맥락에서 ma9pie은(는) 귀하가 앱을 사용하는 방식에 대해 항상
-            책임을 질 수는 없습니다. 즉, 배터리가 부족하여 사용할 수 없도록
-            기기를 켤 수 없는 경우 기기가 계속 충전되어 있는지 확인해야 합니다.
-            서비스, ma9pie은(는) 책임을 지지 않습니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            귀하의 앱 사용에 대한 ma9pie의 책임과 관련하여 귀하가 앱을 사용할 때
-            항상 업데이트되고 정확한지 확인하기 위해 노력하지만 귀하가 정보를
-            이용할 수 있도록 정보를 제공하는 제3자에게 의존하지 마십시오.
-          </Description>
-          <Description>
-            ma9pie은(는) 앱의 이 기능에 전적으로 의존한 결과로 발생하는
-            직간접적인 손실에 대해 책임을 지지 않습니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>
-            어느 시점에서 앱을 업데이트하고 싶을 수 있습니다.
-          </Description>
-          <Description>
-            앱은 현재 에서 사용할 수 있습니다. 시스템(및 앱의 가용성을
-            확장하기로 결정한 추가 시스템)에 대한 요구 사항이 변경될 수 있으며
-            앱을 계속 사용하려면 업데이트를 다운로드해야 합니다.
-          </Description>
-          <Description>
-            ma9pie은(는) 귀하와 관련이 있거나 귀하가 기기에 설치한 버전과
-            작동하도록 항상 앱을 업데이트할 것이라고 약속하지 않습니다.
-          </Description>
-          <Description>
-            그러나 귀하는 귀하에게 제공되는 애플리케이션에 대한 업데이트를 항상
-            수락할 것을 약속합니다. 당사는 또한 앱 제공을 중단하기를 원할 수
-            있습니다.
-          </Description>
-          <Description>
-            귀하에게 종료 통지 없이 언제든지 사용을 종료할 수 있습니다.
-          </Description>
-          <Description>
-            달리 명시하지 않는 한 종료 시 (a)본 약관에서 귀하에게 부여된 권리 및
-            라이선스는 종료됩니다.
-          </Description>
-          <Description>
-            (b)앱 사용을 중지하고 (필요한 경우) 기기에서 앱을 삭제해야 합니다.
+            If you choose to use my Service, then you agree to the collection
+            and use of information in relation to this policy. The Personal
+            Information that I collect is used for providing and improving the
+            Service. I will not use or share your information with anyone except
+            as described in this Privacy Policy. The terms used in this Privacy
+            Policy have the same meanings as in our Terms and Conditions, which
+            are accessible at todo-list-app unless otherwise defined in this
+            Privacy Policy.
           </Description>
         </TextBox>
       </Content>
 
       <Content>
-        <Subtitle>이용약관의 변경</Subtitle>
+        <Subtitle>Information Collection and Use</Subtitle>
         <TextBox>
           <Description>
-            ma9pie는 수시로 이용약관을 업데이트할 수 있습니다.
+            For a better experience, while using our Service, I may require you
+            to provide us with certain personally identifiable information. The
+            information that I request will be retained by us and used as
+            described in this privacy policy. The app does use third-party
+            services that may collect information used to identify you.
           </Description>
           <Description>
-            따라서 이 페이지를 정기적으로 검토하여 변경 사항을 확인하는 것이
-            좋습니다.
+            Link to the privacy policy of third-party service providers used by
+            the app
           </Description>
-          <Description>
-            ma9pie는 이 페이지에 새로운 이용약관을 게시하여 변경 사항을
-            알려드립니다.
-          </Description>
-        </TextBox>
-        <TextBox>
-          <Description>이 약관은 2023-03-03부터 유효합니다.</Description>
+          <Ul>
+            <Li>
+              <Link
+                href="https://firebase.google.com/policies/analytics/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Google Analytics for Firebase
+              </Link>
+            </Li>
+            <Li>
+              <Link
+                href="https://sentry.io/privacy/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Sentry
+              </Link>
+            </Li>
+          </Ul>
         </TextBox>
       </Content>
 
       <Content>
-        <Subtitle>문의하기</Subtitle>
+        <Subtitle>Log Data</Subtitle>
         <TextBox>
           <Description>
-            이용 약관에 대한 질문이나 제안 사항이 있는 경우 주저하지 말고
-            <A href="mailto:ma9pie.dev@gmail.com"> ma9pie.dev@gmail.com</A>
-            (으)로 문의하십시오.
+            I want to inform you that whenever you use my Service, in a case of
+            an error in the app I collect data and information (through
+            third-party products) on your phone called Log Data. This Log Data
+            may include information such as your device Internet Protocol (“IP”)
+            address, device name, operating system version, the configuration of
+            the app when utilizing my Service, the time and date of your use of
+            the Service, and other statistics.
           </Description>
         </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Cookies</Subtitle>
         <TextBox>
           <Description>
-            이 이용약관 페이지는
-            <A
+            Cookies are files with a small amount of data that are commonly used
+            as anonymous unique identifiers. These are sent to your browser from
+            the websites that you visit and are stored on your device&apos;s
+            internal memory.
+          </Description>
+          <Description>
+            This Service does not use these “cookies” explicitly. However, the
+            app may use third-party code and libraries that use “cookies” to
+            collect information and improve their services. You have the option
+            to either accept or refuse these cookies and know when a cookie is
+            being sent to your device. If you choose to refuse our cookies, you
+            may not be able to use some portions of this Service.
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Service Providers</Subtitle>
+        <TextBox>
+          <Description>
+            I may employ third-party companies and individuals due to the
+            following reasons:
+          </Description>
+          <Ul>
+            <Li>To facilitate our Service</Li>
+            <Li>To provide the Service on our behalf</Li>
+            <Li>To perform Service-related services</Li>
+            <Li>To assist us in analyzing how our Service is used</Li>
+          </Ul>
+          <Description>
+            I want to inform users of this Service that these third parties have
+            access to their Personal Information. The reason is to perform the
+            tasks assigned to them on our behalf. However, they are obligated
+            not to disclose or use the information for any other purpose.
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Security</Subtitle>
+        <TextBox>
+          <Description>
+            I value your trust in providing us your Personal Information, thus
+            we are striving to use commercially acceptable means of protecting
+            it. But remember that no method of transmission over the internet,
+            or method of electronic storage is 100% secure and reliable, and I
+            cannot guarantee its absolute security.
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Links to Other Sites</Subtitle>
+        <TextBox>
+          <Description>
+            This Service may contain links to other sites. If you click on a
+            third-party link, you will be directed to that site. Note that these
+            external sites are not operated by me. Therefore, I strongly advise
+            you to review the Privacy Policy of these websites. I have no
+            control over and assume no responsibility for the content, privacy
+            policies, or practices of any third-party sites or services.
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Children’s Privacy</Subtitle>
+        <TextBox>
+          <Description>
+            These Services do not address anyone under the age of 13. I do not
+            knowingly collect personally identifiable information from children
+            under 13 years of age. In the case I discover that a child under 13
+            has provided me with personal information, I immediately delete this
+            from our servers. If you are a parent or guardian and you are aware
+            that your child has provided us with personal information, please
+            contact me so that I will be able to do the necessary actions.
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Terms & Conditions</Subtitle>
+        <TextBox>
+          <Description>
+            By downloading or using the app, these terms will automatically
+            apply to you - you should make sure therefore that you read them
+            carefully before using the app. You’re not allowed to copy or modify
+            the app, any part of the app, or our trademarks in any way. You’re
+            not allowed to attempt to extract the source code of the app, and
+            you also shouldn’t try to translate the app into other languages or
+            make derivative versions. The app itself, and all the trademarks,
+            copyright, database rights, and other intellectual property rights
+            related to it, still belong to ma9pie.
+          </Description>
+          <Description>
+            ma9pie is committed to ensuring that the app is as useful and
+            efficient as possible. For that reason, we reserve the right to make
+            changes to the app or to charge for its services, at any time and
+            for any reason. We will never charge you for the app or its services
+            without making it very clear to you exactly what you’re paying for.
+          </Description>
+          <Description>
+            The todo-list-app app stores and processes personal data that you
+            have provided to us, to provide my Service. It’s your responsibility
+            to keep your phone and access to the app secure. We therefore
+            recommend that you do not jailbreak or root your phone, which is the
+            process of removing software restrictions and limitations imposed by
+            the official operating system of your device. It could make your
+            phone vulnerable to malware/viruses/malicious programs, compromise
+            your phone’s security features and it could mean that the
+            todo-list-app app won’t work properly or at all.
+          </Description>
+          <Description>
+            You should be aware that there are certain things that ma9pie will
+            not take responsibility for. Certain functions of the app will
+            require the app to have an active internet connection. The
+            connection can be Wi-Fi or provided by your mobile network provider,
+            but ma9pie cannot take responsibility for the app not working at
+            full functionality if you don’t have access to Wi-Fi, and you don’t
+            have any of your data allowance left.
+          </Description>
+          <Description>
+            If you’re using the app outside of an area with Wi-Fi, you should
+            remember that the terms of the agreement with your mobile network
+            provider will still apply. As a result, you may be charged by your
+            mobile provider for the cost of data for the duration of the
+            connection while accessing the app, or other third-party charges. In
+            using the app, you’re accepting responsibility for any such charges,
+            including roaming data charges if you use the app outside of your
+            home territory (i.e. region or country) without turning off data
+            roaming. If you are not the bill payer for the device on which
+            you’re using the app, please be aware that we assume that you have
+            received permission from the bill payer for using the app.
+          </Description>
+          <Description>
+            Along the same lines, ma9pie cannot always take responsibility for
+            the way you use the app i.e. You need to make sure that your device
+            stays charged - if it runs out of battery and you can’t turn it on
+            to avail the Service, ma9pie cannot accept responsibility.
+          </Description>
+          <Description>
+            With respect to ma9pie’s responsibility for your use of the app,
+            when you’re using the app, it’s important to bear in mind that
+            although we endeavor to ensure that it is updated and correct at all
+            times, we do rely on third parties to provide information to us so
+            that we can make it available to you.
+          </Description>
+          <Description>
+            ma9pie accepts no liability for any loss, direct or indirect, you
+            experience as a result of relying wholly on this functionality of
+            the app.
+          </Description>
+          <Description>
+            At some point, we may wish to update the app. The app is currently
+            available on - the requirements for the system(and for any
+            additional systems we decide to extend the availability of the app
+            to) may change, and you’ll need to download the updates if you want
+            to keep using the app. ma9pie does not promise that it will always
+            update the app so that it is relevant to you and/or works with the
+            version that you have installed on your device. However, you promise
+            to always accept updates to the application when offered to you, We
+            may also wish to stop providing the app, and may terminate use of it
+            at any time without giving notice of termination to you. Unless we
+            tell you otherwise, upon any termination, (a) the rights and
+            licenses granted to you in these terms will end; (b) you must stop
+            using the app, and (if needed) delete it from your device.
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Changes to This Terms and service</Subtitle>
+        <TextBox>
+          <Description>
+            I may update our Terms and service from time to time. Thus, you are
+            advised to review this page periodically for any changes. I will
+            notify you of any changes by posting the new Terms and service on
+            this page. These terms and service are effective as of 2023-09-03
+          </Description>
+        </TextBox>
+      </Content>
+
+      <Content>
+        <Subtitle>Contact Us</Subtitle>
+        <TextBox>
+          <Description>
+            If you have any questions or suggestions about my Terms and service,
+            do not hesitate to contact me at ma9pie.dev@gmail.com
+          </Description>
+          <Description>
+            This Terms and service page was generated by
+            <a
               href="https://app-privacy-policy-generator.nisrulz.com/"
+              rel="noreferrer"
               target="_blank"
             >
-              {" 앱 개인정보 보호정책 생성기 "}
-            </A>
-            에 의해 생성되었습니다.
+              {" App Privacy Policy Generator"}
+            </a>
           </Description>
         </TextBox>
       </Content>
@@ -201,20 +294,29 @@ export default TOSModal;
 const Wrapper = styled.div`
   display: grid;
   gap: 24px;
+  a {
+    color: var(--blue700);
+  }
 `;
 const Content = styled.div``;
 const Subtitle = styled.h3`
   font: var(--bold16);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
-const Description = styled.p<any>`
+const Description = styled.p`
   font: var(--normal12);
   color: var(--sub);
+  word-break: break-all;
 `;
-const TextBox = styled.div<any>`
+const TextBox = styled.div`
   display: grid;
   gap: 8px;
 `;
-const A = styled.a`
-  color: var(--blue700);
+const Ul = styled.ul`
+  padding-left: 16px;
+  list-style-type: disc;
+`;
+const Li = styled.li`
+  font: var(--normal12);
+  color: var(--sub);
 `;

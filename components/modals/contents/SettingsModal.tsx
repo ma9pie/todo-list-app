@@ -96,7 +96,7 @@ const SettingsModal = () => {
           <List onClick={openTOSModal}>
             <Content>
               <SubjectSvg></SubjectSvg>
-              <ListTitle>Terms & Condition</ListTitle>
+              <ListTitle>Terms of service</ListTitle>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
