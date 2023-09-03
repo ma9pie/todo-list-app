@@ -40,4 +40,4 @@ next-env.d.ts
 .sentryclirc
 
 # test page
-/page/test/*
+/pages/test/
