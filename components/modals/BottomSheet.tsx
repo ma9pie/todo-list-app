@@ -43,7 +43,7 @@ export default BottomSheet;
 BottomSheet.defaultProps = {
   height: "auto",
   isOpen: false,
-  title: "알림",
+  title: "Notice",
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},

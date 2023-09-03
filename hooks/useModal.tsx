@@ -141,8 +141,8 @@ export default function useModal() {
 
   const openDeleteClusterModal = (clusterId: string) => {
     openConfirm({
-      title: "항목 삭제",
-      message: "해당 항목을 삭제하시겠습니까?",
+      title: "Delete list",
+      message: `Would you like to delete\n this list?`,
       onRequestConfirm: () => removeCluster(clusterId),
     });
   };

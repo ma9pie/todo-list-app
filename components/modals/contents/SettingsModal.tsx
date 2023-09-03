@@ -4,7 +4,6 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import useModal from "@/hooks/useModal";
 import useTheme from "@/hooks/useTheme";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
-import CloudDownloadSvg from "@/images/cloud_download.svg";
 import PaintSvg from "@/images/color_lens.svg";
 import EmailSvg from "@/images/mail_outline.svg";
 import GithubSvg from "@/images/social/github.svg";
@@ -15,7 +14,7 @@ import Theme from "@/shared/Theme";
 const SettingsModal = () => {
   const { setClusters, setTasks } = useLocalStorage();
   const { toggleTheme } = useTheme();
-  const { openAlert, openConfirm, openTOSModal, closeModal } = useModal();
+  const { openConfirm, openTOSModal, closeModal } = useModal();
 
   // 테마 변경
   const changeTheme = () => {
@@ -23,17 +22,11 @@ const SettingsModal = () => {
     closeModal();
   };
 
-  // 백업 및 가져오기
-  const backupAndRestore = () => {
-    openAlert({
-      message: "구글 계정 연동 개발 예정",
-    });
-  };
-
   // 데이터 초기화
   const resetData = () => {
     openConfirm({
-      message: "데이터를 초기화 하시겠습니까?",
+      title: "Reset data",
+      message: `Do you want to reset\n your data?`,
       onRequestConfirm: () => {
         setClusters([]);
         setTasks([]);
@@ -65,13 +58,6 @@ const SettingsModal = () => {
               <ListTitle>Theme</ListTitle>
             </Content>
             <Theme className="fill-sub"></Theme>
-          </List>
-          <List onClick={backupAndRestore}>
-            <Content>
-              <CloudDownloadSvg></CloudDownloadSvg>
-              <ListTitle>Backup / Restore</ListTitle>
-            </Content>
-            <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
           <List onClick={resetData}>
             <Content>
