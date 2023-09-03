@@ -38,3 +38,6 @@ next-env.d.ts
 
 # Sentry Auth Token
 .sentryclirc
+
+# test page
+/page/test/*
