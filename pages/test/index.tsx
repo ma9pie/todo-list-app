@@ -3,12 +3,17 @@ import type { ReactElement } from "react";
 import React, { useEffect, useState } from "react";
 
 import TestLayout from "@/components/layouts/TestLayout";
+import Button from "@/components/shared/buttons";
 import { axios } from "@/utils";
 
 function Components() {
   useEffect(() => {
     axios.get("/api/todo/list").then((res) => {});
   }, []);
+
+  const sentryTest = () => {
+    throw Error("hello senty");
+  };
 
   return (
     <Wrapper>
@@ -17,6 +22,7 @@ function Components() {
       <Text>
         Frequently used components are classified by list and developed.
       </Text>
+      <Button onClick={sentryTest}>sentryTest</Button>
     </Wrapper>
   );
 }
