@@ -8,8 +8,8 @@ import React, {
   useState,
 } from "react";
 
-import useLocalStorage from "@/hooks/useLocalStorage";
 import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
 import DashboardSvg from "@/images/dashboard.svg";
 import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
@@ -24,11 +24,10 @@ type RefProps = {
 const SIDEBAR_WIDTH = 200;
 
 const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
-  const { clusters } = useLocalStorage();
+  const { todoList } = useTodo();
   const { openSettingsModal } = useModal();
 
   const [isMount, setIsMount] = useState(false);
-  const [list, setList] = useState<Cluster[]>([]);
 
   const [sideBarRight, setSideBarRight] = useState<string>(
     `${-SIDEBAR_WIDTH}px`
@@ -39,10 +38,6 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   useEffect(() => {
     setIsMount(true);
   }, []);
-
-  useEffect(() => {
-    setList(clusters);
-  }, [clusters]);
 
   useImperativeHandle(ref, () => ({
     openSideBar,
@@ -101,7 +96,7 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
           <Divider></Divider>
 
           <ClusterContainer className="scroll-y">
-            {list.map(({ clusterId, color, title, tasks }: Cluster) => (
+            {todoList.map(({ clusterId, color, title, tasks }: Cluster) => (
               <Link
                 key={clusterId}
                 href={`/todo/${clusterId}`}

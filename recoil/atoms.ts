@@ -18,6 +18,14 @@ export const userState = atom<User | null>({
   key: "userState",
   default: null,
 });
+export const todoListState = atom<Cluster[]>({
+  key: "todoListState",
+  default: [],
+});
+export const isLoadingTodoListState = atom({
+  key: "isLoadingTodoListState",
+  default: false,
+});
 export const clusterState = atom<Cluster[]>({
   key: "clusterState",
   default: [],

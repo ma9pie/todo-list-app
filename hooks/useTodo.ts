@@ -4,7 +4,11 @@ import { useRecoilState } from "recoil";
 import { firestore } from "@/firebase/firestore";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
-import { updatedAtState } from "@/recoil/atoms";
+import {
+  isLoadingTodoListState,
+  todoListState,
+  updatedAtState,
+} from "@/recoil/atoms";
 import { Cluster, Task } from "@/types";
 import { createUid, getCurrentTime } from "@/utils";
 
@@ -13,6 +17,10 @@ const useTodo = () => {
   const local = useLocalStorage();
 
   const [updatedAt, setUpdatedAt] = useRecoilState(updatedAtState);
+  const [todoList, setTodoList] = useRecoilState(todoListState);
+  const [isLoadingTodoList, setIsLoadingTodoList] = useRecoilState(
+    isLoadingTodoListState
+  );
 
   // Clusters 조회
   const getClusters = async () => {
@@ -129,6 +137,11 @@ const useTodo = () => {
 
   return {
     updatedAt,
+    todoList,
+    isLoadingTodoList,
+    setTodoList,
+    setIsLoadingTodoList,
+
     getClusters,
     addCluster,
     removeCluster,

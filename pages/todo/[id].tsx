@@ -10,17 +10,22 @@ import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
 import EmptyData from "@/shared/EmptyData";
 import TaskInput from "@/shared/inputs/TaskInput";
-import Loading from "@/shared/Loading";
+import PageLoading from "@/shared/PageLoading";
 import { Task } from "@/types";
 
 const Todo = () => {
   const router = useRouter();
 
   const { user } = useLogin();
-  const { updatedAt, getTasks, changeTaskStatus, deleteTask } = useTodo();
+  const {
+    updatedAt,
+    isLoadingTodoList,
+    getTasks,
+    changeTaskStatus,
+    deleteTask,
+  } = useTodo();
   const local = useLocalStorage();
 
-  const [isLoading, setIsLoading] = useState(true);
   const [clusterId, setClusterId] = useState("");
   const [completedList, setCompletedList] = useState<Task[]>([]);
   const [uncompletedList, setUncompletedList] = useState<Task[]>([]);
@@ -46,21 +51,14 @@ const Todo = () => {
       });
       setCompletedList(_completedList);
       setUncompletedList(_uncompletedList);
-      setIsLoading(false);
     })();
     return;
   }, [clusterId, user, updatedAt, local.clusters]);
 
-  if (isLoading) {
-    return (
-      <LoadingWrapper>
-        <Loading></Loading>
-      </LoadingWrapper>
-    );
-  }
-
   return (
     <Wrapper>
+      {isLoadingTodoList && <PageLoading></PageLoading>}
+
       <Content>
         {uncompletedList.concat(completedList).length === 0 && (
           <EmptyData type="task"></EmptyData>

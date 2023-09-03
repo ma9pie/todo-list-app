@@ -9,6 +9,7 @@ import type { ReactElement, ReactNode } from "react";
 import { useEffect } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
+import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useTheme from "@/hooks/useTheme";
 import useTodo from "@/hooks/useTodo";
@@ -42,6 +43,9 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   const { data: session } = useSession<any>();
   const { user, setUser, registerUser } = useLogin();
+  const { updatedAt, setTodoList, setIsLoadingTodoList, getClusters } =
+    useTodo();
+  const local = useLocalStorage();
   const { setLight, setDark } = useTheme();
   const { initializeGA, trackPageView } = useTrackEvent();
 
@@ -66,6 +70,15 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
     if (!session) return setUser(null);
     registerUser(session);
   }, [session]);
+
+  // TodoList 업데이트
+  useEffect(() => {
+    (async () => {
+      setIsLoadingTodoList(true);
+      setTodoList(await getClusters());
+      setIsLoadingTodoList(false);
+    })();
+  }, [user, updatedAt, local.clusters]);
 
   return (
     <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>

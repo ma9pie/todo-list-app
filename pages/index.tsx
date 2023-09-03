@@ -1,48 +1,27 @@
 import styled from "@emotion/styled";
 import type { ReactElement } from "react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Todo from "@/components/home/Todo";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
-import useLocalStorage from "@/hooks/useLocalStorage";
-import useLogin from "@/hooks/useLogin";
+import PageLoading from "@/components/shared/PageLoading";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddButton from "@/shared/buttons/AddButton";
 import EmptyData from "@/shared/EmptyData";
-import Loading from "@/shared/Loading";
-import { Cluster } from "@/types";
 
 export default function Home() {
-  const { user } = useLogin();
-  const local = useLocalStorage();
   const { openAddList } = useModal();
-  const { updatedAt, getClusters } = useTodo();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [list, setList] = useState<Cluster[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      setList(await getClusters());
-      setIsLoading(false);
-    })();
-  }, [user, updatedAt, local.clusters]);
-
-  if (isLoading) {
-    return (
-      <LoadingWrapper>
-        <Loading></Loading>
-      </LoadingWrapper>
-    );
-  }
+  const { todoList, isLoadingTodoList } = useTodo();
 
   return (
     <Wrapper>
-      <Container>
-        {list.length === 0 && <EmptyData type="list"></EmptyData>}
+      {isLoadingTodoList && <PageLoading></PageLoading>}
 
-        {list.map((todo: any) => (
+      <Container>
+        {todoList.length === 0 && <EmptyData type="list"></EmptyData>}
+
+        {todoList.map((todo: any) => (
           <Todo key={todo.clusterId} {...todo}></Todo>
         ))}
 
@@ -77,12 +56,6 @@ const AddWrapper = styled.div`
   align-items: center;
   margin-top: 24px;
   background-color: transparent;
-`;
-const LoadingWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 const Bottom = styled.div`
   position: fixed;
