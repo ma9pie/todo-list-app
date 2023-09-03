@@ -2,10 +2,10 @@
  
 🔗 https://check-todo.vercel.app/
 
-Hello, I am ma9pie, a front-end developer.
+Hello, I'm ma9pie, a front-end developer.
 
 The above web app is a todo list app, and is a web app that allows you to create a to-do list and manage tasks.
-This service currently support Google and GitHub logins, and we plan to integrate other login services such as Apple login if necessary in the future.
+This service currently support Google and GitHub logins, and i plan to integrate other login services such as Apple login if necessary in the future.
 
 Even if you do not log in, you can use the service because the data is stored in local storage.
 Since data is saved in firestore after logging in, you can manage synchronized data no matter which device you log in from.
