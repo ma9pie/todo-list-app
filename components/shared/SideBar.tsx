@@ -10,6 +10,7 @@ import React, {
 
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
+import CloseSvg from "@/images/close.svg";
 import DashboardSvg from "@/images/dashboard.svg";
 import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
@@ -75,14 +76,17 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
       ></Overlay>
       <Content right={sideBarRight} width={`${SIDEBAR_WIDTH}px`}>
         <Div>
-          <Link href="/" onClick={closeSideBar}>
-            <SubtitleBox>
+          <SubtitleBox>
+            <Link href="/" onClick={closeSideBar}>
               <FlexBox>
                 <DashboardSvg></DashboardSvg>
                 <Subtitle>ALL</Subtitle>
               </FlexBox>
-            </SubtitleBox>
-          </Link>
+            </Link>
+            <CloseIconWrapper onClick={closeSideBar}>
+              <CloseSvg width={32} height={32}></CloseSvg>
+            </CloseIconWrapper>
+          </SubtitleBox>
 
           <Divider></Divider>
 
@@ -160,9 +164,17 @@ const Content = styled.div<any>`
 `;
 const SubtitleBox = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 60px;
   padding: 0px 16px;
+`;
+const CloseIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
 `;
 const Subtitle = styled.p<any>`
   font: var(--medium16);
