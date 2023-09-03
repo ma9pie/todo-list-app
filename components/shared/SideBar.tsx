@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, {
   forwardRef,
   Ref,
@@ -28,8 +29,9 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   const { todoList } = useTodo();
   const { openSettingsModal } = useModal();
 
-  const [isMount, setIsMount] = useState(false);
+  const router = useRouter();
 
+  const [isMount, setIsMount] = useState(false);
   const [sideBarRight, setSideBarRight] = useState<string>(
     `${-SIDEBAR_WIDTH}px`
   );
@@ -99,14 +101,14 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
 
           <Divider></Divider>
 
-          <ClusterContainer className="scroll-y">
+          <ListContainer className="scroll-y">
             {todoList.map(({ clusterId, color, title, tasks }: Cluster) => (
               <Link
                 key={clusterId}
                 href={`/todo/${clusterId}`}
                 onClick={closeSideBar}
               >
-                <ListBox>
+                <ListBox selected={clusterId === router.query.id}>
                   <FlexBox>
                     <DotWrapper>
                       <Dot color={color}></Dot>
@@ -117,7 +119,7 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
                 </ListBox>
               </Link>
             ))}
-          </ClusterContainer>
+          </ListContainer>
         </Div>
         <Bottom>
           <Divider></Divider>
@@ -189,16 +191,23 @@ const FlexBox = styled.div`
   align-items: center;
   gap: 8px;
 `;
-const ClusterContainer = styled.div`
+const ListContainer = styled.div`
   height: calc(100vh - 180px);
 `;
-const ListBox = styled.div`
+const ListBox = styled.div<{ selected: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 40px;
   padding: 0px 16px;
+  background-color: ${(props) => props.selected && "var(--box)"};
   cursor: pointer;
+  &:hover {
+    background-color: var(--box);
+  }
+  & * {
+    background-color: inherit;
+  }
 `;
 const Text = styled.p`
   font: var(--normal14);
