@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-const path = require("path");
-
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: [
-      "static.toss.im",
-      "lh3.googleusercontent.com",
-      "avatars.githubusercontent.com",
-    ],
+    domains: ["lh3.googleusercontent.com", "avatars.githubusercontent.com"],
   },
   webpack(config) {
     config.module.rules.push({
