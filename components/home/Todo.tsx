@@ -15,7 +15,7 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
     <Link href={`/todo/${clusterId}`}>
       <Wrapper>
         <TitleBox>
-          <FlexBox>
+          <FlexBox width="calc(100% - 56px)">
             <Dot color={color}></Dot>
             <Title>{title}</Title>
           </FlexBox>
@@ -32,11 +32,13 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
           <List key={item.taskId}>
             {item.completed ? (
               <FlexBox>
-                <CheckSvg
-                  className="fill-sub"
-                  width={16}
-                  height={16}
-                ></CheckSvg>
+                <div>
+                  <CheckSvg
+                    className="fill-sub"
+                    width={16}
+                    height={16}
+                  ></CheckSvg>
+                </div>
                 <SubText textDecoration="line-through">{item.content}</SubText>
               </FlexBox>
             ) : (
@@ -82,19 +84,28 @@ const List = styled.div`
 `;
 const Title = styled.h3`
   font: var(--medium16);
-  width: calc(100% - 24px);
-  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
-const SubText = styled.p<any>`
+const SubText = styled.p<{ textDecoration?: string }>`
   font: var(--normal14);
   color: var(--sub);
   text-decoration: ${(props) => props.textDecoration};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
-const FlexBox = styled.div`
+const FlexBox = styled.div<{ width?: string }>`
   display: flex;
   align-items: center;
   gap: 8px;
+  width: ${(props) => props.width || "100%"};
 `;
 const DeleteIconWrapper = styled.div`
-  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 42px;
 `;

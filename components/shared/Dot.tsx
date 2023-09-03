@@ -7,7 +7,11 @@ type Props = {
 };
 
 const Dot = ({ color, size }: Props) => {
-  return <Wrapper bg={color} size={size}></Wrapper>;
+  return (
+    <Span>
+      <Wrapper bg={color} size={size}></Wrapper>
+    </Span>
+  );
 };
 
 export default Dot;
@@ -17,6 +21,7 @@ Dot.defaultProps = {
   size: 16,
 };
 
+const Span = styled.span``;
 const Wrapper = styled.div<any>`
   width: ${(props) => `${props.size}px`};
   height: ${(props) => `${props.size}px`};

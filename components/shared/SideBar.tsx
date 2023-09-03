@@ -190,7 +190,10 @@ const ListBox = styled.div`
 `;
 const Text = styled.p`
   font: var(--normal14);
-  width: 100px;
+  width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const SubText = styled.p`
   font: var(--normal14);

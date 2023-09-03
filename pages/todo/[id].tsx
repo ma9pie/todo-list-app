@@ -108,12 +108,6 @@ Todo.getLayout = function getLayout(page: ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 
-const LoadingWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
 `;
@@ -133,10 +127,14 @@ const FlexBox = styled.div`
   gap: 8px;
   flex: 1;
   padding: 16px;
+  width: calc(100% - 56px);
 `;
 const Text = styled.p<any>`
   color: ${(props) => props.color};
   text-decoration: ${(props) => props.textDecoration};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 const DividerWrapper = styled.div`
   display: flex;
@@ -151,5 +149,9 @@ const Divider = styled.div`
   background-color: var(--sectionLine);
 `;
 const DeleteIconWrapper = styled.div`
-  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
 `;
