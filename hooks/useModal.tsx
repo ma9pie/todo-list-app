@@ -6,6 +6,7 @@ import SettingsModal from "@/components/modals/contents/SettingsModal";
 import TOSModal from "@/components/modals/contents/TOSModal";
 import UserInfoModal from "@/components/modals/contents/UserInfoModal";
 import useTodo from "@/hooks/useTodo";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import { ModalContext } from "@/modals/ModalProvider";
 import { ModalProps, Modals, ModalType } from "@/types";
 
@@ -17,6 +18,7 @@ export default function useModal() {
   tmpModals = modals;
 
   const { removeCluster } = useTodo();
+  const { trackRemoveList } = useTrackEvent();
 
   const createUid = useCallback(() => {
     if (typeof window !== undefined && window.crypto) {
@@ -143,7 +145,10 @@ export default function useModal() {
     openConfirm({
       title: "Delete list",
       message: `Would you like to delete\n this list?`,
-      onRequestConfirm: () => removeCluster(clusterId),
+      onRequestConfirm: () => {
+        trackRemoveList();
+        removeCluster(clusterId);
+      },
     });
   };
 

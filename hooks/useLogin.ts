@@ -4,12 +4,15 @@ import { signIn, signOut } from "next-auth/react";
 import { useRecoilState } from "recoil";
 
 import { firestore } from "@/firebase/firestore";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import { userState } from "@/recoil/atoms";
 import { LoginType, User } from "@/types";
 import { createUid, getCurrentTime } from "@/utils";
 
 const useLogin = () => {
   const router = useRouter();
+
+  const { trackSignIn, trackSignOut, trackRequest } = useTrackEvent();
 
   const [user, setUser] = useRecoilState(userState);
   const userKey = user?.userKey;
@@ -21,14 +24,17 @@ const useLogin = () => {
   const createdAt = user?.createdAt;
 
   const googleLogin = () => {
+    trackSignIn(LoginType.Google);
     signIn(LoginType.Google);
   };
 
   const githubLogin = () => {
+    trackSignIn(LoginType.Github);
     signIn(LoginType.Github);
   };
 
   const logout = async () => {
+    trackSignOut();
     await signOut();
     router.push("/");
   };
@@ -44,6 +50,7 @@ const useLogin = () => {
         provider: session.provider,
         createdAt: getCurrentTime(),
       };
+      trackRequest("getUsers");
       const _users = await firestore
         .collection("users")
         .where("email", "==", userData.email)
@@ -55,6 +62,7 @@ const useLogin = () => {
       } else {
         const userKey = createUid();
         userData.userKey = userKey;
+        trackRequest("setUsers");
         await firestore.collection("users").doc(userKey).set(userData);
         setUser(userData);
       }

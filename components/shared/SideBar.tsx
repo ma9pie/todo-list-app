@@ -11,6 +11,7 @@ import React, {
 
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import CloseSvg from "@/images/close.svg";
 import DashboardSvg from "@/images/dashboard.svg";
 import SettingSvg from "@/images/settings.svg";
@@ -28,6 +29,7 @@ const SIDEBAR_WIDTH = 200;
 const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   const { todoList } = useTodo();
   const { openSettingsModal } = useModal();
+  const { trackViewSideBar } = useTrackEvent();
 
   const router = useRouter();
 
@@ -48,6 +50,7 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
 
   // 사이드바 열기
   const openSideBar = () => {
+    trackViewSideBar();
     setSideBarRight("0px");
     setOverlayRight("0px");
     setOpacity(calcOpacity(0));

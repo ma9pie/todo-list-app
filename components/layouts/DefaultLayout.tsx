@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
 import LoginBadge from "@/components/shared/LoginBadge";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import MenuSvg from "@/images/menu.svg";
 import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
@@ -16,10 +17,13 @@ type RefProps = {
 };
 
 const DefaultLayout = (props: Props) => {
+  const { trackClickIcon } = useTrackEvent();
+
   const ref = useRef<RefProps>(null);
 
   // Open SideBar
   const openSideBar = () => {
+    trackClickIcon("Menu");
     ref.current?.openSideBar();
   };
 

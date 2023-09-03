@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect } from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import GithubleSvg from "@/images/social/github.svg";
 import GoogleSvg from "@/images/social/google.svg";
 import { LoginType } from "@/types";
@@ -11,20 +12,25 @@ import { LoginType } from "@/types";
 const LoginModal = () => {
   const { googleLogin, githubLogin } = useLogin();
   const { closeModal } = useModal();
+  const { trackSignIn, trackViewModal } = useTrackEvent();
+
+  useEffect(() => {
+    trackViewModal("Login");
+  }, []);
 
   const login = (type: LoginType) => {
     switch (type) {
       case LoginType.Google:
         googleLogin();
-        closeModal();
         break;
       case LoginType.Github:
         githubLogin();
-        closeModal();
         break;
       default:
         break;
     }
+    trackSignIn(type);
+    closeModal();
   };
 
   return (

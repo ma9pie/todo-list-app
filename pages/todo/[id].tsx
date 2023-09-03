@@ -6,6 +6,7 @@ import DefaultLayout from "@/components/layouts/DefaultLayout";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useTodo from "@/hooks/useTodo";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
 import EmptyData from "@/shared/EmptyData";
@@ -22,9 +23,10 @@ const Todo = () => {
     isLoadingTodoList,
     getTasks,
     changeTaskStatus,
-    deleteTask,
+    removeTask,
   } = useTodo();
   const local = useLocalStorage();
+  const { trackRemoveTask, trackClickCheckbox } = useTrackEvent();
 
   const [clusterId, setClusterId] = useState("");
   const [completedList, setCompletedList] = useState<Task[]>([]);
@@ -55,6 +57,16 @@ const Todo = () => {
     return;
   }, [clusterId, user, updatedAt, local.clusters]);
 
+  const toggleStatus = (clusterId: string, taskId: string) => {
+    trackClickCheckbox();
+    changeTaskStatus(clusterId, taskId);
+  };
+
+  const remove = (clusterId: string, taskId: string) => {
+    trackRemoveTask();
+    removeTask(clusterId, taskId);
+  };
+
   return (
     <Wrapper>
       {isLoadingTodoList && <PageLoading></PageLoading>}
@@ -65,10 +77,7 @@ const Todo = () => {
         )}
 
         {uncompletedList.map(({ taskId, content }) => (
-          <ListBox
-            key={taskId}
-            onClick={() => changeTaskStatus(clusterId, taskId)}
-          >
+          <ListBox key={taskId} onClick={() => toggleStatus(clusterId, taskId)}>
             <FlexBox>
               <CheckBox></CheckBox>
               <Text>{content}</Text>
@@ -85,13 +94,13 @@ const Todo = () => {
 
         {completedList.map(({ taskId, content }) => (
           <ListBox className="fill-sub" key={taskId}>
-            <FlexBox onClick={() => changeTaskStatus(clusterId, taskId)}>
+            <FlexBox onClick={() => toggleStatus(clusterId, taskId)}>
               <CheckBox checked={true}></CheckBox>
               <Text color="var(--sub)" textDecoration="line-through">
                 {content}
               </Text>
             </FlexBox>
-            <DeleteIconWrapper onClick={() => deleteTask(clusterId, taskId)}>
+            <DeleteIconWrapper onClick={() => remove(clusterId, taskId)}>
               <TrashCanSvg></TrashCanSvg>
             </DeleteIconWrapper>
           </ListBox>

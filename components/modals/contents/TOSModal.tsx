@@ -1,8 +1,16 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+
+import useTrackEvent from "@/hooks/useTrackEvent";
 
 const TOSModal = () => {
+  const { trackViewModal } = useTrackEvent();
+
+  useEffect(() => {
+    trackViewModal("TermsOfService");
+  }, []);
+
   return (
     <Wrapper>
       <Content>

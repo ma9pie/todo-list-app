@@ -7,12 +7,19 @@ import DefaultLayout from "@/components/layouts/DefaultLayout";
 import PageLoading from "@/components/shared/PageLoading";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import AddButton from "@/shared/buttons/AddButton";
 import EmptyData from "@/shared/EmptyData";
 
 export default function Home() {
   const { openAddList } = useModal();
   const { todoList, isLoadingTodoList } = useTodo();
+  const { trackClickBtn } = useTrackEvent();
+
+  const handleClickAddBtn = () => {
+    trackClickBtn("AddList");
+    openAddList();
+  };
 
   return (
     <Wrapper>
@@ -27,7 +34,7 @@ export default function Home() {
 
         <Bottom>
           <AddWrapper>
-            <AddButton onClick={openAddList}></AddButton>
+            <AddButton onClick={handleClickAddBtn}></AddButton>
           </AddWrapper>
         </Bottom>
       </Container>

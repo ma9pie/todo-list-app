@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import React from "react";
+import React, { MouseEvent } from "react";
 
 import useModal from "@/hooks/useModal";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import CheckSvg from "@/images/check.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import Dot from "@/shared/Dot";
@@ -10,6 +11,13 @@ import { Cluster, Task } from "@/types";
 
 const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
   const { openDeleteClusterModal } = useModal();
+  const { trackClickIcon } = useTrackEvent();
+
+  const deleteList = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    trackClickIcon("TrashCan");
+    openDeleteClusterModal(clusterId);
+  };
 
   return (
     <Link href={`/todo/${clusterId}`}>
@@ -19,12 +27,7 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
             <Dot color={color}></Dot>
             <Title>{title}</Title>
           </FlexBox>
-          <DeleteIconWrapper
-            onClick={(e) => {
-              e.preventDefault();
-              openDeleteClusterModal(clusterId);
-            }}
-          >
+          <DeleteIconWrapper onClick={deleteList}>
             <TrashCanSvg className="fill-sub"></TrashCanSvg>
           </DeleteIconWrapper>
         </TitleBox>

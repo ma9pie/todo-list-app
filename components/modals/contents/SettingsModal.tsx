@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import React, { useEffect } from "react";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useModal from "@/hooks/useModal";
 import useTheme from "@/hooks/useTheme";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import PaintSvg from "@/images/color_lens.svg";
 import EmailSvg from "@/images/mail_outline.svg";
@@ -15,15 +17,22 @@ const SettingsModal = () => {
   const { setClusters, setTasks } = useLocalStorage();
   const { toggleTheme } = useTheme();
   const { openConfirm, openTOSModal, closeModal } = useModal();
+  const { trackClickBtn, trackClickLink, trackViewModal } = useTrackEvent();
+
+  useEffect(() => {
+    trackViewModal("Settings");
+  }, []);
 
   // 테마 변경
   const changeTheme = () => {
+    trackClickBtn("ChangeTheme");
     toggleTheme();
     closeModal();
   };
 
   // 데이터 초기화
   const resetData = () => {
+    trackClickBtn("ResetData");
     openConfirm({
       title: "Reset data",
       message: `Do you want to reset\n your data?`,
@@ -36,14 +45,22 @@ const SettingsModal = () => {
 
   // 문의하기
   const inquiry = () => {
+    trackClickLink("Inquiry");
     window.open(
       "https://docs.google.com/forms/d/1eE3KBOtAmtNh5cLHlGyrZC7q5I_rvG0TxwaJ16UiuvI",
       "_blank"
     );
   };
 
+  // 서비스 이용 약관
+  const termsOfService = () => {
+    trackClickBtn("TermsOfService");
+    openTOSModal();
+  };
+
   // 깃허브
   const github = () => {
+    trackClickLink("Github");
     window.open("https://github.com/ma9pie/todo-list", "_blank");
   };
 
@@ -79,7 +96,7 @@ const SettingsModal = () => {
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
-          <List onClick={openTOSModal}>
+          <List onClick={termsOfService}>
             <Content>
               <SubjectSvg></SubjectSvg>
               <ListTitle>Terms of service</ListTitle>

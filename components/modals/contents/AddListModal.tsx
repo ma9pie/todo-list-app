@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DoneButton from "@/components/shared/buttons/DoneButton";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import ColorSet from "@/shared/ColorSet";
 import { ToastStatus } from "@/types";
 import { isMobileDevice } from "@/utils";
@@ -23,6 +24,7 @@ const colorList = [
 const AddListModal = () => {
   const { addCluster } = useTodo();
   const { openToast, closeModal } = useModal();
+  const { trackViewModal, trackAddList } = useTrackEvent();
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -30,6 +32,7 @@ const AddListModal = () => {
   const [color, setColor] = useState(colorList[0]);
 
   useEffect(() => {
+    trackViewModal("AddList");
     if (!ref.current || isMobileDevice()) return;
     ref.current.focus();
   }, []);
@@ -45,6 +48,7 @@ const AddListModal = () => {
         message: "Please input list name",
       });
     } else {
+      trackAddList();
       addCluster(title, color);
       closeModal();
       setTimeout(() => {

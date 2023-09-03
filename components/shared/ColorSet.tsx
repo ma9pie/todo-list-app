@@ -1,7 +1,7 @@
-import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 
+import useTrackEvent from "@/hooks/useTrackEvent";
 import CheckSvg from "@/images/check.svg";
 import PaintBoardSvg from "@/images/color_lens.svg";
 
@@ -24,13 +24,17 @@ type Props = {
 };
 
 const ColorSet = (props: Props) => {
+  const { trackClickBtn, trackClickColor } = useTrackEvent();
+
   const [isOpenColorSet, setisOpenColorSet] = useState(false);
 
   const toggleColorSet = () => {
+    trackClickBtn("ColorSet");
     setisOpenColorSet(!isOpenColorSet);
   };
 
   const selectColor = (color: string) => {
+    trackClickColor(color);
     props.setColor(color);
     setisOpenColorSet(false);
   };

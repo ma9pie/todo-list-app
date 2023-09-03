@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import moment from "moment";
 import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import AddSvg from "@/images/add.svg";
 import { ToastStatus } from "@/types";
 
@@ -14,6 +14,7 @@ interface Props {
 const TaskInput = ({ clusterId }: Props) => {
   const { addTask } = useTodo();
   const { openToast } = useModal();
+  const { trackClickBtn, trackAddTask } = useTrackEvent();
 
   const [input, setInput] = useState("");
 
@@ -29,6 +30,7 @@ const TaskInput = ({ clusterId }: Props) => {
       });
     }
     if (await addTask(clusterId, input)) {
+      trackAddTask();
       setInput("");
       openToast({
         status: ToastStatus.Success,
@@ -48,6 +50,11 @@ const TaskInput = ({ clusterId }: Props) => {
     }
   };
 
+  const handleClickAddBtn = () => {
+    trackClickBtn("AddTask");
+    handleAddTask();
+  };
+
   return (
     <Wrapper>
       <Input
@@ -57,7 +64,7 @@ const TaskInput = ({ clusterId }: Props) => {
         onChange={handleInput}
         onKeyUp={enter}
       ></Input>
-      <AddSvg width={40} height={40} onClick={handleAddTask}></AddSvg>
+      <AddSvg width={40} height={40} onClick={handleClickAddBtn}></AddSvg>
     </Wrapper>
   );
 };

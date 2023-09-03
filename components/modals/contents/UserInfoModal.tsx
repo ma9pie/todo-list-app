@@ -1,18 +1,25 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
 import Button from "@/components/shared//buttons";
 import Spacing from "@/components/shared/Spacing";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
+import useTrackEvent from "@/hooks/useTrackEvent";
 
 const UserInfoModal = () => {
   const { email, name, image, logout } = useLogin();
   const { closeModal } = useModal();
+  const { trackClickBtn, trackViewModal } = useTrackEvent();
+
+  useEffect(() => {
+    trackViewModal("UserInfo");
+  }, []);
 
   const handleClick = () => {
+    trackClickBtn("Logout");
     logout();
     closeModal();
   };

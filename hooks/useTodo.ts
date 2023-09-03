@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { firestore } from "@/firebase/firestore";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import {
   isLoadingTodoListState,
   todoListState,
@@ -15,6 +16,7 @@ import { createUid, getCurrentTime } from "@/utils";
 const useTodo = () => {
   const { userKey } = useLogin();
   const local = useLocalStorage();
+  const { trackRequest } = useTrackEvent();
 
   const [updatedAt, setUpdatedAt] = useRecoilState(updatedAtState);
   const [todoList, setTodoList] = useRecoilState(todoListState);
@@ -26,6 +28,7 @@ const useTodo = () => {
   const getClusters = async () => {
     try {
       if (userKey) {
+        trackRequest("getClusters");
         const clusters = await firestore
           .collection("clusters")
           .doc(userKey)
@@ -45,6 +48,7 @@ const useTodo = () => {
   const setClusters = async (clusters: Cluster[]) => {
     if (userKey) {
       const _updatedAt = getCurrentTime();
+      trackRequest("setClusters");
       await firestore
         .collection("clusters")
         .doc(userKey)
@@ -123,7 +127,7 @@ const useTodo = () => {
   };
 
   // Task 삭제
-  const deleteTask = async (clusterId: string, taskId: string) => {
+  const removeTask = async (clusterId: string, taskId: string) => {
     const clusters = await getClusters();
     const cluster = clusters.find(
       (item: Cluster) => item.clusterId === clusterId
@@ -148,7 +152,7 @@ const useTodo = () => {
     getTasks,
     addTask,
     changeTaskStatus,
-    deleteTask,
+    removeTask,
   };
 };
 

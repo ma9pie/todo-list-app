@@ -4,14 +4,16 @@ import React from "react";
 
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
+import useTrackEvent from "@/hooks/useTrackEvent";
 import UserSvg from "@/images/user.svg";
 
 const LoginBadge = () => {
   const { user, image } = useLogin();
   const { openLoginModal, openUserInfoModal } = useModal();
+  const { trackClickIcon } = useTrackEvent();
 
   return (
-    <Wrapper>
+    <Wrapper onClick={() => trackClickIcon("User")}>
       {!user ? (
         <Box onClick={openLoginModal}>
           <UserSvg className="fill-sub" width={32} height={32}></UserSvg>
