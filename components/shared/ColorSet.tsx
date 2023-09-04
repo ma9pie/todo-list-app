@@ -1,25 +1,13 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 
+import { COLOR_LIST } from "@/constants";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import CheckSvg from "@/images/check.svg";
 import PaintBoardSvg from "@/images/color_lens.svg";
 
-const colorSet = [
-  "#64a8ff",
-  "#fb8890",
-  "#ffbd51",
-  "#ffdd78",
-  "#c770e4",
-  "#58c7c7",
-  "#3fd599",
-  "#d1d6db",
-  "#4d4d59",
-];
-
 type Props = {
   color: string;
-  colorList: Array<string>;
   setColor: Function;
 };
 
@@ -48,7 +36,7 @@ const ColorSet = (props: Props) => {
 
       {isOpenColorSet && (
         <Grid>
-          {colorSet.map((item, idx) => (
+          {COLOR_LIST.map((item, idx) => (
             <Circle key={idx} bg={item} onClick={() => selectColor(item)}>
               {props.color === item && (
                 <CheckSvg

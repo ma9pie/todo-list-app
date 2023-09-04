@@ -2,24 +2,13 @@ import styled from "@emotion/styled";
 import React, { useEffect, useRef, useState } from "react";
 
 import DoneButton from "@/components/shared/buttons/DoneButton";
+import { COLOR_LIST } from "@/constants";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import ColorSet from "@/shared/ColorSet";
 import { ToastStatus } from "@/types";
 import { isMobileDevice } from "@/utils";
-
-const colorList = [
-  "#64a8ff",
-  "#fb8890",
-  "#ffbd51",
-  "#ffdd78",
-  "#c770e4",
-  "#58c7c7",
-  "#3fd599",
-  "#d1d6db",
-  "#4d4d59",
-];
 
 const AddListModal = () => {
   const { addCluster } = useTodo();
@@ -29,7 +18,7 @@ const AddListModal = () => {
   const ref = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
-  const [color, setColor] = useState(colorList[0]);
+  const [color, setColor] = useState(COLOR_LIST[0]);
 
   useEffect(() => {
     trackViewModal("AddList");
@@ -80,11 +69,7 @@ const AddListModal = () => {
       </Content>
 
       <Content>
-        <ColorSet
-          color={color}
-          colorList={colorList}
-          setColor={setColor}
-        ></ColorSet>
+        <ColorSet color={color} setColor={setColor}></ColorSet>
       </Content>
 
       <DoneWrapper>
