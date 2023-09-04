@@ -39,5 +39,6 @@ next-env.d.ts
 # Sentry Auth Token
 .sentryclirc
 
-# test page
+# test file
+/components/layouts/TestLayout.tsx
 /pages/test/
