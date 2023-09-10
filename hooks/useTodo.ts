@@ -73,6 +73,21 @@ const useTodo = () => {
     setClusters(_clusters);
   };
 
+  // Cluster 수정
+  const editCluster = async (
+    clusterId: string,
+    title: string,
+    color: string
+  ) => {
+    const clusters = await getClusters();
+    const _clusters = [...clusters];
+    const cluster = _clusters.find((item) => item.clusterId === clusterId);
+    if (!cluster) return;
+    cluster.title = title;
+    cluster.color = color;
+    setClusters(_clusters);
+  };
+
   // Cluster 제거
   const removeCluster = async (clusterId: string) => {
     const clusters = await getClusters();
@@ -148,6 +163,7 @@ const useTodo = () => {
 
     getClusters,
     addCluster,
+    editCluster,
     removeCluster,
     getTasks,
     addTask,

@@ -12,13 +12,13 @@ import AddButton from "@/shared/buttons/AddButton";
 import EmptyData from "@/shared/EmptyData";
 
 export default function Home() {
-  const { openAddList } = useModal();
+  const { openAddListModal } = useModal();
   const { todoList, isLoadingTodoList } = useTodo();
   const { trackClickBtn } = useTrackEvent();
 
   const handleClickAddBtn = () => {
     trackClickBtn("AddList");
-    openAddList();
+    openAddListModal();
   };
 
   return (

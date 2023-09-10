@@ -6,8 +6,10 @@ import DefaultLayout from "@/components/layouts/DefaultLayout";
 import Dot from "@/components/shared/Dot";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
+import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
+import EditSvg from "@/images/edit.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
 import EmptyData from "@/shared/EmptyData";
@@ -27,7 +29,9 @@ const Todo = () => {
     removeTask,
   } = useTodo();
   const local = useLocalStorage();
-  const { trackRemoveTask, trackClickCheckbox } = useTrackEvent();
+  const { openEditListModal } = useModal();
+  const { trackRemoveTask, trackClickCheckbox, trackClickIcon } =
+    useTrackEvent();
 
   const [clusterId, setClusterId] = useState("");
   const [clusterTitle, setClusterTitle] = useState("");
@@ -77,6 +81,15 @@ const Todo = () => {
     removeTask(clusterId, taskId);
   };
 
+  const editList = () => {
+    trackClickIcon("Edit");
+    openEditListModal({
+      clusterId: clusterId,
+      prevTitle: clusterTitle,
+      prevColor: clusterColor,
+    });
+  };
+
   return (
     <Wrapper>
       <Content className="scroll-y">
@@ -85,6 +98,7 @@ const Todo = () => {
         <TitleBox>
           <Dot color={clusterColor}></Dot>
           <Text>{clusterTitle}</Text>
+          <EditSvg className="fill-sub" onClick={editList}></EditSvg>
         </TitleBox>
 
         {uncompletedList.concat(completedList).length === 0 && (
@@ -149,6 +163,7 @@ const Content = styled.div`
 `;
 const TitleBox = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 8px;
   height: 48px;
@@ -170,6 +185,7 @@ const FlexBox = styled.div`
   width: calc(100% - 56px);
 `;
 const Text = styled.p<{ color?: string; textDecoration?: string }>`
+  width: calc(100% - 60px);
   color: ${(props) => props.color};
   text-decoration: ${(props) => props.textDecoration};
   overflow: hidden;

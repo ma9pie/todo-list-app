@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 
 import AddListModal from "@/components/modals/contents/AddListModal";
+import EditListModal from "@/components/modals/contents/EditListModal";
 import LoginModal from "@/components/modals/contents/LoginModal";
 import SettingsModal from "@/components/modals/contents/SettingsModal";
 import TOSModal from "@/components/modals/contents/TOSModal";
@@ -8,7 +9,7 @@ import UserInfoModal from "@/components/modals/contents/UserInfoModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import { ModalContext } from "@/modals/ModalProvider";
-import { ModalProps, Modals, ModalType } from "@/types";
+import { EditListModalProps, ModalProps, Modals, ModalType } from "@/types";
 
 let tmpModals: Modals;
 const DELAY = 200; // modal unmount delay
@@ -134,10 +135,17 @@ export default function useModal() {
     });
   };
 
-  const openAddList = () => {
+  const openAddListModal = () => {
     openBottomSheet({
       title: "Add List",
       component: () => <AddListModal></AddListModal>,
+    });
+  };
+
+  const openEditListModal = (props: EditListModalProps) => {
+    openBottomSheet({
+      title: "Edit List",
+      component: () => <EditListModal {...props}></EditListModal>,
     });
   };
 
@@ -172,7 +180,8 @@ export default function useModal() {
     openLoginModal,
     openUserInfoModal,
     openSettingsModal,
-    openAddList,
+    openAddListModal,
+    openEditListModal,
     openDeleteClusterModal,
     openTOSModal,
   };

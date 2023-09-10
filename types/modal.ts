@@ -12,7 +12,7 @@ export enum ToastStatus {
 }
 export type Modals = Map<string, ModalProps>;
 
-export type ModalProps = {
+export interface ModalProps {
   id?: string;
   createdAt?: number;
   type?: ModalType;
@@ -31,4 +31,9 @@ export type ModalProps = {
   onRequestConfirm?: () => void;
   onAfterOpen?: () => void;
   onAfterClose?: () => void;
-};
+}
+export interface EditListModalProps {
+  clusterId: string;
+  prevTitle: string;
+  prevColor: string;
+}

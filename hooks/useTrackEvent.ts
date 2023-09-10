@@ -22,8 +22,8 @@ enum Action {
   Login = "Login",
   Request = "Request",
   Add = "Add",
-  Remove = "Remove",
   Edit = "Edit",
+  Remove = "Remove",
 }
 
 enum Category {
@@ -147,6 +147,15 @@ const useTrackEvent = () => {
     });
   };
 
+  const trackEditList = () => {
+    if (!isInitializedGA) return;
+    ReactGA.event({
+      action: Action.Edit,
+      category: Category.List,
+      label: provider,
+    });
+  };
+
   const trackRemoveList = () => {
     if (!isInitializedGA) return;
     ReactGA.event({
@@ -204,6 +213,7 @@ const useTrackEvent = () => {
     trackSignOut,
     trackRequest,
     trackAddList,
+    trackEditList,
     trackRemoveList,
     trackAddTask,
     trackRemoveTask,
