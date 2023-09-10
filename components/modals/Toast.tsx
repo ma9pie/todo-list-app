@@ -74,10 +74,10 @@ const Toast = (props: ModalProps) => {
       <Content
         className={
           isOpen === null
-            ? cx(HideToastPopup)
+            ? cx(hide)
             : isOpen
-            ? cx(openToast)
-            : cx(CloseToastPopup)
+            ? cx(openAnimation)
+            : cx(closeAnimation)
         }
         onClick={close}
       >
@@ -104,13 +104,13 @@ Toast.defaultProps = {
   onRequestClose: () => {},
 };
 
-const openToast = css`
+const openAnimation = css`
   animation: open-toast 0.2s ease forwards;
 `;
-const CloseToastPopup = css`
+const closeAnimation = css`
   animation: close-toast 0.1s ease forwards;
 `;
-const HideToastPopup = css`
+const hide = css`
   visibility: hidden;
 `;
 
