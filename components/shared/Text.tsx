@@ -20,9 +20,9 @@ interface Props {
   color?: string;
   center?: boolean;
   breakAll?: boolean;
-  hidden?: boolean;
   ellipsis?: boolean;
   nowrap?: boolean;
+  textDecoration?: string;
   children?: ReactNode;
 }
 
@@ -45,9 +45,9 @@ const Text = ({
   color,
   center,
   breakAll,
-  hidden,
   ellipsis,
   nowrap,
+  textDecoration,
   children,
 }: Props) => {
   const fontSize = s10
@@ -90,9 +90,9 @@ const Text = ({
       color={color}
       center={center}
       breakAll={breakAll}
-      hidden={hidden}
       ellipsis={ellipsis}
       nowrap={nowrap}
+      textDecoration={textDecoration}
     >
       {children}
     </P>
@@ -107,9 +107,9 @@ const P = styled.p<{
   color?: string;
   center?: boolean;
   breakAll?: boolean;
-  hidden?: boolean;
   ellipsis?: boolean;
   nowrap?: boolean;
+  textDecoration?: string;
 }>`
   font-family: "NotoSansKR";
   font-size: ${(props) => props.fontSize};
@@ -117,7 +117,7 @@ const P = styled.p<{
   color: ${(props) => props.color};
   text-align: ${(props) => props.center && "center"};
   word-break: ${(props) => props.breakAll && "break-all"};
-  overflow: ${(props) => props.hidden && "hidden"};
   text-overflow: ${(props) => props.ellipsis && "ellipsis"};
   white-space: ${(props) => props.nowrap && "nowrap"};
+  text-decoration: ${(props) => props.textDecoration};
 `;
