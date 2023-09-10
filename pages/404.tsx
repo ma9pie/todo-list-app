@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { ReactElement } from "react";
 
-import DefaultLayout from "@/layouts/DefaultLayout";
+import DefaultLayout from "@/components/layouts/DefaultLayout";
 
 function Error404() {
   return (

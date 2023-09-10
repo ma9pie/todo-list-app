@@ -49,7 +49,7 @@ Home.getLayout = function getLayout(page: ReactElement) {
 const Wrapper = styled.div`
   display: flex;
   gap: 8px;
-  padding: 16px;
+  padding: 16px 16px 124px 16px;
 `;
 const Container = styled.div`
   display: flex;

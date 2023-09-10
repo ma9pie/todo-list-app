@@ -69,9 +69,9 @@ const Todo = () => {
 
   return (
     <Wrapper>
-      {isLoadingTodoList && <PageLoading></PageLoading>}
+      <Content className="scroll-y">
+        {isLoadingTodoList && <PageLoading></PageLoading>}
 
-      <Content>
         {uncompletedList.concat(completedList).length === 0 && (
           <EmptyData type="task"></EmptyData>
         )}
@@ -106,6 +106,7 @@ const Todo = () => {
           </ListBox>
         ))}
       </Content>
+
       <TaskInput clusterId={clusterId}></TaskInput>
     </Wrapper>
   );
@@ -118,10 +119,11 @@ Todo.getLayout = function getLayout(page: ReactElement) {
 };
 
 const Wrapper = styled.div`
-  height: calc(100vh - 60px);
+  height: calc(100vh - 120px);
 `;
 const Content = styled.div`
-  height: calc(100vh - 120px);
+  height: 100%;
+  padding-bottom: 58px;
 `;
 const ListBox = styled.div`
   display: flex;
@@ -163,4 +165,14 @@ const DeleteIconWrapper = styled.div`
   align-items: center;
   width: 56px;
   height: 56px;
+`;
+const Bottom = styled.div`
+  position: fixed;
+  display: grid;
+  gap: 8px;
+  left: 50%;
+  bottom: 0px;
+  width: 100%;
+  transform: translateX(-50%);
+  background-color: transparent;
 `;
