@@ -25,18 +25,20 @@ const useLogin = () => {
 
   const googleLogin = () => {
     trackSignIn(LoginType.Google);
-    signIn(LoginType.Google);
+    router.push("/");
+    setTimeout(() => signIn(LoginType.Google), 0);
   };
 
   const githubLogin = () => {
     trackSignIn(LoginType.Github);
-    signIn(LoginType.Github);
+    router.push("/");
+    setTimeout(() => signIn(LoginType.Github), 0);
   };
 
   const logout = async () => {
     trackSignOut();
-    await signOut();
     router.push("/");
+    setTimeout(signOut, 0);
   };
 
   // User 등록
