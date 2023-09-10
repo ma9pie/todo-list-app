@@ -77,9 +77,11 @@ const Todo = () => {
         )}
 
         {uncompletedList.map(({ taskId, content }) => (
-          <ListBox key={taskId} onClick={() => toggleStatus(clusterId, taskId)}>
+          <ListBox key={taskId}>
             <FlexBox>
-              <CheckBox></CheckBox>
+              <CheckBox
+                onClick={() => toggleStatus(clusterId, taskId)}
+              ></CheckBox>
               <Text>{content}</Text>
             </FlexBox>
           </ListBox>
@@ -94,8 +96,11 @@ const Todo = () => {
 
         {completedList.map(({ taskId, content }) => (
           <ListBox className="fill-sub" key={taskId}>
-            <FlexBox onClick={() => toggleStatus(clusterId, taskId)}>
-              <CheckBox checked={true}></CheckBox>
+            <FlexBox>
+              <CheckBox
+                checked={true}
+                onClick={() => toggleStatus(clusterId, taskId)}
+              ></CheckBox>
               <Text color="var(--sub)" textDecoration="line-through">
                 {content}
               </Text>
@@ -125,14 +130,13 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   height: 100%;
-  padding-bottom: 120px;
+  padding-bottom: 116px;
 `;
 const ListBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
-  cursor: pointer;
+  height: 56px;
 `;
 const FlexBox = styled.div`
   display: flex;
