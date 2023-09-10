@@ -69,7 +69,5 @@ const Bottom = styled.div`
   bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
-  display: grid;
-  gap: 8px;
   background-color: transparent;
 `;
