@@ -50,7 +50,7 @@ const fadeOut = css`
   animation: fade-out 0.2s ease-in-out forwards;
 `;
 const Wrapper = styled.div``;
-const Overlay = styled.div<any>`
+const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -59,7 +59,7 @@ const Overlay = styled.div<any>`
   z-index: 999;
   background-color: var(--overlay);
 `;
-const Container = styled.div<any>`
+const Container = styled.div<{ top?: string; left?: string; padding?: string }>`
   position: fixed;
   top: ${(props) => props.top};
   left: ${(props) => props.left};

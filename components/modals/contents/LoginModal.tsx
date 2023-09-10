@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
 import ModalHeader from "@/components/modals/ModalHeader";
+import Text from "@/components/shared/Text";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTrackEvent from "@/hooks/useTrackEvent";
@@ -40,11 +41,11 @@ const LoginModal = () => {
       <ListContainer>
         <List onClick={() => login(LoginType.Google)}>
           <GoogleSvg></GoogleSvg>
-          <Text>Google</Text>
+          <Text medium>Google</Text>
         </List>
         <List onClick={() => login(LoginType.Github)}>
           <GithubleSvg></GithubleSvg>
-          <Text>Github</Text>
+          <Text medium>Github</Text>
         </List>
       </ListContainer>
     </Wrapper>
@@ -60,7 +61,7 @@ const ListContainer = styled.div`
   gap: 8px;
   margin-top: 32px;
 `;
-const List = styled.div<any>`
+const List = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -71,7 +72,4 @@ const List = styled.div<any>`
     background-color: inherit;
   }
   cursor: pointer;
-`;
-const Text = styled.p`
-  font: var(--medium16);
 `;

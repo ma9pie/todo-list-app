@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import ModalHeader from "@/components/modals/ModalHeader";
 import Button from "@/components/shared//buttons";
 import Spacing from "@/components/shared/Spacing";
+import Text from "@/components/shared/Text";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTrackEvent from "@/hooks/useTrackEvent";
@@ -34,10 +35,10 @@ const UserInfoModal = () => {
             <Image src={image} fill priority alt="user_image"></Image>
           </ImageWrapper>
         )}
-        <Text>{name}</Text>
+        <Text s14>{name}</Text>
       </FlexRow>
       <Spacing size={8}></Spacing>
-      <SubText>{`email : ${email}`}</SubText>
+      <Text s12>{`email : ${email}`}</Text>
       <Spacing size={48}></Spacing>
       <Button full onClick={handleClick}>
         Logout
@@ -60,15 +61,4 @@ const FlexRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-`;
-const FlexCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-const Text = styled.p`
-  font: var(--medium14);
-`;
-const SubText = styled.p`
-  font: var(--medium12);
 `;

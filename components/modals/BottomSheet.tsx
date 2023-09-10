@@ -2,6 +2,7 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
+import Text from "@/components/shared/Text";
 import useFixedScreen from "@/hooks/useFixedScreen";
 import CloseSvg from "@/images/close.svg";
 import { ModalProps } from "@/types";
@@ -25,7 +26,9 @@ const BottomSheet = (props: ModalProps) => {
       >
         <Top>
           <BlankBox></BlankBox>
-          <Title>{props.title}</Title>
+          <Text s18 bold>
+            {props.title}
+          </Text>
           <CloseSvg
             width={24}
             height={24}
@@ -63,7 +66,7 @@ const slideDown = css`
   animation: slide-down 0.2s ease-in-out forwards;
 `;
 const Wrapper = styled.div``;
-const Overlay = styled.div<any>`
+const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -72,7 +75,7 @@ const Overlay = styled.div<any>`
   z-index: 999;
   background-color: var(--overlay);
 `;
-const Container = styled.div<any>`
+const Container = styled.div<{ height?: string }>`
   position: fixed;
   bottom: 0px;
   width: 100%;
@@ -99,9 +102,6 @@ const Top = styled.div`
 `;
 const BlankBox = styled.div`
   width: 16px;
-`;
-const Title = styled.p`
-  font: var(--bold18);
 `;
 const Content = styled.div`
   padding-right: 8px;

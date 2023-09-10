@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 
+import Text from "@/components/shared/Text";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
@@ -85,7 +86,7 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
             <Link href="/" onClick={closeSideBar}>
               <FlexBox>
                 <DashboardSvg></DashboardSvg>
-                <Subtitle>ALL</Subtitle>
+                <Text medium>ALL</Text>
               </FlexBox>
             </Link>
             <CloseIconWrapper onClick={closeSideBar}>
@@ -98,7 +99,9 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
           <SubtitleBox>
             <FlexBox>
               <SubjectSvg className="fill-sub"></SubjectSvg>
-              <Subtitle color="var(--sub)">LIST</Subtitle>
+              <Text medium color="var(--sub)">
+                LIST
+              </Text>
             </FlexBox>
           </SubtitleBox>
 
@@ -116,9 +119,11 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
                     <DotWrapper>
                       <Dot color={color}></Dot>
                     </DotWrapper>
-                    <Text>{title}</Text>
+                    <Title>{title}</Title>
                   </FlexBox>
-                  <SubText>{tasks.length}</SubText>
+                  <Text s14 color="var(--sub)">
+                    {tasks.length}
+                  </Text>
                 </ListBox>
               </Link>
             ))}
@@ -129,7 +134,9 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
           <SubtitleBox onClick={openSettingsModal}>
             <FlexBox>
               <SettingSvg className="fill-sub"></SettingSvg>
-              <Subtitle color="var(--sub)">SETTING</Subtitle>
+              <Text medium color="var(--sub)">
+                SETTING
+              </Text>
             </FlexBox>
           </SubtitleBox>
         </Bottom>
@@ -172,7 +179,7 @@ const SubtitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  padding: 0px 16px;
+  padding: 0px 8px;
 `;
 const CloseIconWrapper = styled.div`
   display: flex;
@@ -180,10 +187,6 @@ const CloseIconWrapper = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
-`;
-const Subtitle = styled.p<any>`
-  font: var(--medium16);
-  color: ${(props) => props.color};
 `;
 const Divider = styled.div`
   border-bottom: 1px solid var(--sectionLine);
@@ -202,7 +205,7 @@ const ListBox = styled.div<{ selected: boolean }>`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  padding: 0px 16px;
+  padding: 0px 8px;
   background-color: ${(props) => props.selected && "var(--box)"};
   cursor: pointer;
   &:hover {
@@ -212,16 +215,11 @@ const ListBox = styled.div<{ selected: boolean }>`
     background-color: inherit;
   }
 `;
-const Text = styled.p`
-  font: var(--normal14);
-  width: 110px;
+const Title = styled.p`
+  width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
-const SubText = styled.p`
-  font: var(--normal14);
-  color: var(--sub);
 `;
 const DotWrapper = styled.div`
   display: flex;

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
+import Text from "@/components/shared/Text";
 import { GITHUB_URL, INQUIRY_URL } from "@/constants";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useModal from "@/hooks/useModal";
@@ -65,19 +66,21 @@ const SettingsModal = () => {
   return (
     <Wrapper>
       <Container>
-        <Subtitle>Task</Subtitle>
+        <Text s12 medium color="var(--sub)">
+          Task
+        </Text>
         <ListContainer>
           <List onClick={changeTheme}>
             <Content>
               <PaintSvg></PaintSvg>
-              <ListTitle>Theme</ListTitle>
+              <Text s12>Theme</Text>
             </Content>
             <Theme className="fill-sub"></Theme>
           </List>
           <List onClick={resetData}>
             <Content>
               <TrashCanSvg></TrashCanSvg>
-              <ListTitle>Reset data</ListTitle>
+              <Text s12>Reset data</Text>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
@@ -85,26 +88,28 @@ const SettingsModal = () => {
       </Container>
 
       <Container>
-        <Subtitle>About service</Subtitle>
+        <Text s12 medium color="var(--sub)">
+          About service
+        </Text>
         <ListContainer>
           <List onClick={inquiry}>
             <Content>
               <EmailSvg></EmailSvg>
-              <ListTitle>Inquiry</ListTitle>
+              <Text s12>Inquiry</Text>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
           <List onClick={termsOfService}>
             <Content>
               <SubjectSvg></SubjectSvg>
-              <ListTitle>Terms of service</ListTitle>
+              <Text s12>Terms of service</Text>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
           <List onClick={github}>
             <Content>
               <GithubSvg></GithubSvg>
-              <ListTitle>Github</ListTitle>
+              <Text s12>Github</Text>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
@@ -121,11 +126,10 @@ const Wrapper = styled.div`
   gap: 24px;
   padding-bottom: 40px;
 `;
-const Container = styled.div``;
-const Subtitle = styled.p`
-  font: var(--medium12);
-  color: var(--sub);
-  margin-bottom: 8px;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 const ListContainer = styled.div`
   display: grid;
@@ -138,18 +142,15 @@ const List = styled.div`
   height: 40px;
   padding: 0px 16px;
   border-radius: 10px;
-  cursor: pointer;
   user-select: none;
   background-color: var(--box);
   & * {
     background-color: inherit;
   }
+  cursor: pointer;
 `;
 const Content = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
-`;
-const ListTitle = styled.p`
-  font: var(--normal12);
 `;

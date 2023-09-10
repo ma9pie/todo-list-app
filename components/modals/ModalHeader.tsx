@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
+import Text from "@/components/shared/Text";
 import useModal from "@/hooks/useModal";
 import BackSvg from "@/images/arrow_back_ios.svg";
 import CloseSvg from "@/images/close.svg";
@@ -16,7 +17,9 @@ const ModalHeader = ({ title, back }: Props) => {
   return (
     <Wrapper>
       <IconWrapper>{back && <BackSvg onClick={back}></BackSvg>}</IconWrapper>
-      <Title>{title}</Title>
+      <Text s18 bold>
+        {title}
+      </Text>
       <IconWrapper>
         <CloseSvg onClick={() => closeModal()}></CloseSvg>
       </IconWrapper>
@@ -31,9 +34,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-`;
-const Title = styled.p`
-  font: var(--bold18);
 `;
 const IconWrapper = styled.div`
   width: 24px;

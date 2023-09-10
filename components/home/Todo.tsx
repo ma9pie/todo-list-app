@@ -86,13 +86,14 @@ const List = styled.div`
   padding: 0px 16px 12px 16px;
 `;
 const Title = styled.h3`
-  font: var(--medium16);
+  font-size: 16px;
+  font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
 const SubText = styled.p<{ textDecoration?: string }>`
-  font: var(--normal14);
+  font-size: 14px;
   color: var(--sub);
   text-decoration: ${(props) => props.textDecoration};
   overflow: hidden;

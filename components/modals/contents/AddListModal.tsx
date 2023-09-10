@@ -90,7 +90,7 @@ const Content = styled.div`
   border-bottom: 1px solid var(--sectionLine);
 `;
 const Input = styled.input`
-  font: var(--normal16);
+  font-size: 16px;
   width: 100%;
   height: 30px;
   border: 0px;

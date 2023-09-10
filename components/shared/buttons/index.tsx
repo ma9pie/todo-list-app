@@ -46,7 +46,6 @@ const Wrapper = styled.button<any>`
   border: 0 solid transparent;
   border-radius: 12px;
   background-color: var(--blue500);
-  font-size: 17px;
   font-weight: 600;
   white-space: nowrap;
   user-select: none;

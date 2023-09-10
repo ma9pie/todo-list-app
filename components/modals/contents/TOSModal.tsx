@@ -305,11 +305,10 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div``;
 const Subtitle = styled.h3`
-  font: var(--bold16);
   margin-bottom: 8px;
 `;
 const Description = styled.p`
-  font: var(--normal12);
+  font-size: 12px;
   color: var(--sub);
   word-break: break-all;
 `;
@@ -322,6 +321,6 @@ const Ul = styled.ul`
   list-style-type: disc;
 `;
 const Li = styled.li`
-  font: var(--normal12);
+  font-size: 12px;
   color: var(--sub);
 `;

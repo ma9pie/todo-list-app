@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
+import Text from "@/components/shared/Text";
 import EmptyListSvg from "@/images/empty_list.svg";
 import EmptyPageSvg from "@/images/empty_page.svg";
 
@@ -22,10 +23,14 @@ const EmptyData = ({ type }: Props) => {
               ></EmptyListSvg>
             </ImageWrapper>
           </Div>
-          <TextBox>
-            <Text>there is no list.</Text>
-            <Text>press + to add the list</Text>
-          </TextBox>
+          <Div>
+            <Text center color="var(--sub)">
+              there is no list.
+            </Text>
+            <Text center color="var(--sub)">
+              press + to add the list
+            </Text>
+          </Div>
         </Wrapper>
       );
     case "task":
@@ -40,10 +45,14 @@ const EmptyData = ({ type }: Props) => {
               ></EmptyPageSvg>
             </ImageWrapper>
           </Div>
-          <TextBox>
-            <Text>there is no task.</Text>
-            <Text>press + to add the task.</Text>
-          </TextBox>
+          <Div>
+            <Text center color="var(--sub)">
+              there is no task.
+            </Text>
+            <Text center color="var(--sub)">
+              press + to add the task.
+            </Text>
+          </Div>
         </Wrapper>
       );
     default:
@@ -72,11 +81,5 @@ const ImageWrapper = styled.div`
   & * {
     background-color: inherit;
   }
-`;
-const TextBox = styled.div``;
-const Text = styled.p`
-  text-align: center;
-  font: var(--medium14);
-  color: var(--sub);
 `;
 const Div = styled.div``;

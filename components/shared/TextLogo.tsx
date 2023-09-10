@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
 import Link from "next/link";
 import React from "react";
 
+import Text from "@/components/shared/Text";
 import useTrackEvent from "@/hooks/useTrackEvent";
 
 const TextLogo = () => {
@@ -9,13 +9,11 @@ const TextLogo = () => {
 
   return (
     <Link href="/" onClick={() => trackClickLink("Home")}>
-      <Text>TODO</Text>
+      <Text s24 bold>
+        TODO
+      </Text>
     </Link>
   );
 };
 
 export default TextLogo;
-
-const Text = styled.h1`
-  font: var(--bold24);
-`;

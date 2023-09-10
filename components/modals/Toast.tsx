@@ -2,6 +2,7 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useState } from "react";
 
+import Text from "@/components/shared/Text";
 import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
@@ -83,7 +84,9 @@ const Toast = (props: ModalProps) => {
         <SvgWrapper>{getSvg(props.status)}</SvgWrapper>
         <TextBox>
           {props.message?.split("\n").map((message: string, key: number) => (
-            <Text key={key}>{message}</Text>
+            <Text key={key} s14 medium color="white">
+              {message}
+            </Text>
           ))}
         </TextBox>
       </Content>
@@ -111,7 +114,7 @@ const HideToastPopup = css`
   visibility: hidden;
 `;
 
-const Wrapper = styled.div<any>`
+const Wrapper = styled.div<{ bottom: string }>`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -143,7 +146,3 @@ const Content = styled.div`
 `;
 const SvgWrapper = styled.div``;
 const TextBox = styled.div``;
-const Text = styled.p`
-  font: var(--normal14);
-  color: white;
-`;
