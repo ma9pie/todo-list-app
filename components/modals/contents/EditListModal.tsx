@@ -6,7 +6,7 @@ import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import ColorSet from "@/shared/ColorSet";
-import { EditListModalProps, ToastStatus } from "@/types";
+import { EditListModalProps, Message, ToastStatus } from "@/types";
 import { isMobileDevice } from "@/utils";
 
 const EditListModal = ({
@@ -16,7 +16,7 @@ const EditListModal = ({
 }: EditListModalProps) => {
   const { editCluster } = useTodo();
   const { openToast, closeModal } = useModal();
-  const { trackViewModal, trackEditList } = useTrackEvent();
+  const { trackViewModal } = useTrackEvent();
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -33,29 +33,21 @@ const EditListModal = ({
     setTitle(e.target.value);
   };
 
-  const addList = () => {
+  const editList = () => {
     if (title === "") {
       openToast({
         status: ToastStatus.Warn,
-        message: "Please input list name",
+        message: Message.PleaseInputListName,
       });
     } else {
-      trackEditList();
       editCluster(clusterId, title, color);
       closeModal();
-      setTimeout(() => {
-        openToast({
-          status: ToastStatus.Success,
-          message: "List edited",
-        });
-      }, 200);
     }
   };
 
   const handleOnKeyUp = (e: any) => {
-    if (e.key === "Enter") {
-      addList();
-    }
+    if (e.key !== "Enter") return;
+    editList();
   };
 
   return (
@@ -76,7 +68,7 @@ const EditListModal = ({
       </Content>
 
       <DoneWrapper>
-        <DoneButton onClick={addList}></DoneButton>
+        <DoneButton onClick={editList}></DoneButton>
       </DoneWrapper>
     </Wrapper>
   );

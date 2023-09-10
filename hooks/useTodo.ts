@@ -1,22 +1,35 @@
 import { cloneDeep } from "lodash";
+import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
 import { firestore } from "@/firebase/firestore";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
+import useModal from "@/hooks/useModal";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import {
   isLoadingTodoListState,
   todoListState,
   updatedAtState,
 } from "@/recoil/atoms";
-import { Cluster, Task } from "@/types";
+import { Cluster, Message, Task, ToastStatus } from "@/types";
 import { createUid, getCurrentTime } from "@/utils";
 
 const useTodo = () => {
+  const router = useRouter();
+
   const { userKey } = useLogin();
   const local = useLocalStorage();
-  const { trackRequest } = useTrackEvent();
+  const { openToast } = useModal();
+  const {
+    trackRequest,
+    trackAddList,
+    trackEditList,
+    trackRemoveList,
+    trackAddTask,
+    trackRemoveTask,
+    trackServerError,
+  } = useTrackEvent();
 
   const [updatedAt, setUpdatedAt] = useRecoilState(updatedAtState);
   const [todoList, setTodoList] = useRecoilState(todoListState);
@@ -41,36 +54,68 @@ const useTodo = () => {
       }
     } catch (err) {
       console.log(err);
+      trackServerError("getClusters");
+      openToast({
+        status: ToastStatus.Error,
+        message: Message.SeverError,
+      });
     }
   };
 
   // Clusters 설정
   const setClusters = async (clusters: Cluster[]) => {
-    if (userKey) {
-      const _updatedAt = getCurrentTime();
-      trackRequest("setClusters");
-      await firestore
-        .collection("clusters")
-        .doc(userKey)
-        .set({ clusters, updatedAt: _updatedAt });
-      setUpdatedAt(_updatedAt);
-    } else {
-      local.setClusters(clusters);
+    try {
+      if (userKey) {
+        trackRequest("setClusters");
+        const _updatedAt = getCurrentTime();
+        await firestore
+          .collection("clusters")
+          .doc(userKey)
+          .set({ clusters, updatedAt: _updatedAt });
+        setUpdatedAt(_updatedAt);
+      } else {
+        local.setClusters(clusters);
+      }
+    } catch (err) {
+      console.log(err);
+      trackServerError("setClusters");
+      openToast({
+        status: ToastStatus.Error,
+        message: Message.SeverError,
+      });
     }
   };
 
   // Cluster 추가
   const addCluster = async (title: string, color: string) => {
-    const clusters = await getClusters();
-    const _clusters = clusters.concat({
-      clusterId: createUid(),
-      title,
-      color,
-      pinned: false,
-      createdAt: getCurrentTime(),
-      tasks: [],
-    });
-    setClusters(_clusters);
+    try {
+      trackAddList();
+      const clusters = await getClusters();
+      const _clusters = clusters.concat({
+        clusterId: createUid(),
+        title,
+        color,
+        pinned: false,
+        createdAt: getCurrentTime(),
+        tasks: [],
+      });
+      await setClusters(_clusters);
+      setTimeout(() => {
+        openToast({
+          status: ToastStatus.Success,
+          message: Message.ListAdded,
+        });
+      }, 200);
+    } catch (err) {
+      console.log(err);
+      router.push("/");
+      setTimeout(() => {
+        openToast({
+          status: ToastStatus.Error,
+          message: Message.InvalidRequest,
+        });
+      }, 200);
+    }
   };
 
   // Cluster 수정
@@ -79,22 +124,40 @@ const useTodo = () => {
     title: string,
     color: string
   ) => {
-    const clusters = await getClusters();
-    const _clusters = [...clusters];
-    const cluster = _clusters.find((item) => item.clusterId === clusterId);
-    if (!cluster) return;
-    cluster.title = title;
-    cluster.color = color;
-    setClusters(_clusters);
+    try {
+      trackEditList();
+      const clusters = await getClusters();
+      const _clusters = [...clusters];
+      const cluster = _clusters.find((item) => item.clusterId === clusterId);
+      cluster.title = title;
+      cluster.color = color;
+      await setClusters(_clusters);
+      setTimeout(() => {
+        openToast({
+          status: ToastStatus.Success,
+          message: Message.ListEdited,
+        });
+      }, 200);
+    } catch (err) {
+      console.log(err);
+      router.push("/");
+      setTimeout(() => {
+        openToast({
+          status: ToastStatus.Error,
+          message: Message.InvalidRequest,
+        });
+      }, 200);
+    }
   };
 
   // Cluster 제거
   const removeCluster = async (clusterId: string) => {
+    trackRemoveList();
     const clusters = await getClusters();
     const _clusters = clusters.filter(
       (item: Cluster) => item.clusterId !== clusterId
     );
-    setClusters(_clusters);
+    await setClusters(_clusters);
   };
 
   // Tasks 조회
@@ -108,20 +171,45 @@ const useTodo = () => {
 
   // Task 추가
   const addTask = async (clusterId: string, input: string) => {
+    try {
+      trackAddTask();
+      const clusters = await getClusters();
+      const cluster = clusters.find(
+        (item: Cluster) => item.clusterId === clusterId
+      );
+      cluster.tasks = cluster.tasks.concat({
+        clusterId: clusterId,
+        taskId: createUid(),
+        content: input,
+        completed: false,
+        createdAt: getCurrentTime(),
+      });
+      await setClusters(clusters);
+      openToast({
+        status: ToastStatus.Success,
+        message: Message.TaskAdded,
+      });
+    } catch (err) {
+      console.log(err);
+      router.push("/");
+      openToast({
+        status: ToastStatus.Error,
+        message: Message.InvalidRequest,
+      });
+    }
+  };
+
+  // Task 삭제
+  const removeTask = async (clusterId: string, taskId: string) => {
+    trackRemoveTask();
     const clusters = await getClusters();
     const cluster = clusters.find(
       (item: Cluster) => item.clusterId === clusterId
     );
-    if (!cluster) return false;
-    cluster.tasks = cluster.tasks.concat({
-      clusterId: clusterId,
-      taskId: createUid(),
-      content: input,
-      completed: false,
-      createdAt: getCurrentTime(),
-    });
-    setClusters(clusters);
-    return true;
+    cluster.tasks = cluster.tasks.filter(
+      (item: Task) => item.taskId !== taskId
+    );
+    await setClusters(clusters);
   };
 
   // Task 상태 변경
@@ -130,7 +218,6 @@ const useTodo = () => {
     const cluster = clusters.find(
       (item: Cluster) => item.clusterId === clusterId
     );
-    if (!cluster) return;
     cluster.tasks = cluster.tasks.map((item: Task) => {
       if (item.taskId === taskId) {
         return { ...item, completed: !item.completed };
@@ -138,20 +225,7 @@ const useTodo = () => {
         return item;
       }
     });
-    setClusters(clusters);
-  };
-
-  // Task 삭제
-  const removeTask = async (clusterId: string, taskId: string) => {
-    const clusters = await getClusters();
-    const cluster = clusters.find(
-      (item: Cluster) => item.clusterId === clusterId
-    );
-    if (!cluster) return;
-    cluster.tasks = cluster.tasks.filter(
-      (item: Task) => item.taskId !== taskId
-    );
-    setClusters(clusters);
+    await setClusters(clusters);
   };
 
   return {

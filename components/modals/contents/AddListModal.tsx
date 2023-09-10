@@ -7,13 +7,13 @@ import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import ColorSet from "@/shared/ColorSet";
-import { ToastStatus } from "@/types";
+import { Message, ToastStatus } from "@/types";
 import { isMobileDevice } from "@/utils";
 
 const AddListModal = () => {
   const { addCluster } = useTodo();
   const { openToast, closeModal } = useModal();
-  const { trackViewModal, trackAddList } = useTrackEvent();
+  const { trackViewModal } = useTrackEvent();
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -34,25 +34,17 @@ const AddListModal = () => {
     if (title === "") {
       openToast({
         status: ToastStatus.Warn,
-        message: "Please input list name",
+        message: Message.PleaseInputListName,
       });
     } else {
-      trackAddList();
       addCluster(title, color);
       closeModal();
-      setTimeout(() => {
-        openToast({
-          status: ToastStatus.Success,
-          message: "List added",
-        });
-      }, 200);
     }
   };
 
   const handleOnKeyUp = (e: any) => {
-    if (e.key === "Enter") {
-      addList();
-    }
+    if (e.key !== "Enter") return;
+    addList();
   };
 
   return (

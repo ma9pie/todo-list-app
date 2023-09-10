@@ -1,23 +1,20 @@
 import styled from "@emotion/styled";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import AddSvg from "@/images/add.svg";
-import { ToastStatus } from "@/types";
+import { Message, ToastStatus } from "@/types";
 
 interface Props {
   clusterId: string;
 }
 
 const TaskInput = ({ clusterId }: Props) => {
-  const router = useRouter();
-
   const { addTask } = useTodo();
   const { openToast } = useModal();
-  const { trackClickBtn, trackAddTask } = useTrackEvent();
+  const { trackClickBtn } = useTrackEvent();
 
   const [input, setInput] = useState("");
 
@@ -29,29 +26,16 @@ const TaskInput = ({ clusterId }: Props) => {
     if (!input) {
       return openToast({
         status: ToastStatus.Warn,
-        message: "Please input task",
+        message: Message.PleaseInputTask,
       });
     }
-    if (await addTask(clusterId, input)) {
-      trackAddTask();
-      setInput("");
-      openToast({
-        status: ToastStatus.Success,
-        message: "Task added",
-      });
-    } else {
-      router.push("/");
-      openToast({
-        status: ToastStatus.Error,
-        message: "Invalid request",
-      });
-    }
+    setInput("");
+    addTask(clusterId, input);
   };
 
   const enter = (e: any) => {
-    if (e.key === "Enter") {
-      handleAddTask();
-    }
+    if (e.key !== "Enter") return;
+    handleAddTask();
   };
 
   const handleClickAddBtn = () => {

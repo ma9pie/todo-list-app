@@ -24,6 +24,7 @@ enum Action {
   Add = "Add",
   Edit = "Edit",
   Remove = "Remove",
+  Error = "Error",
 }
 
 enum Category {
@@ -39,6 +40,7 @@ enum Category {
   SignOut = "SignOut",
   List = "List",
   Task = "Task",
+  Server = "Server",
 }
 
 const useTrackEvent = () => {
@@ -201,6 +203,15 @@ const useTrackEvent = () => {
     });
   };
 
+  const trackServerError = (label: string) => {
+    if (!isInitializedGA) return;
+    ReactGA.event({
+      action: Action.Error,
+      category: Category.Server,
+      label: label,
+    });
+  };
+
   return {
     initializeGA,
     trackPageView,
@@ -219,6 +230,7 @@ const useTrackEvent = () => {
     trackRemoveTask,
     trackViewModal,
     trackViewSideBar,
+    trackServerError,
   };
 };
 

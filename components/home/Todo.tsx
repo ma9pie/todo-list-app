@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { MouseEvent } from "react";
 
 import useModal from "@/hooks/useModal";
+import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import CheckSvg from "@/images/check.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
@@ -10,13 +11,14 @@ import Dot from "@/shared/Dot";
 import { Cluster, Task } from "@/types";
 
 const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
+  const { removeCluster } = useTodo();
   const { openDeleteClusterModal } = useModal();
   const { trackClickIcon } = useTrackEvent();
 
   const deleteList = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     trackClickIcon("TrashCan");
-    openDeleteClusterModal(clusterId);
+    openDeleteClusterModal(() => removeCluster(clusterId));
   };
 
   return (
