@@ -32,7 +32,13 @@ const UserInfoModal = () => {
       <FlexRow>
         {image && (
           <ImageWrapper>
-            <Image src={image} fill priority alt="user_image"></Image>
+            <Image
+              src={image}
+              fill
+              priority
+              sizes="32px"
+              alt="user_image"
+            ></Image>
           </ImageWrapper>
         )}
         <Text s14>{name}</Text>
