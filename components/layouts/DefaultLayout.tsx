@@ -38,7 +38,7 @@ const DefaultLayout = (props: Props) => {
           <MenuSvg width={40} height={40} onClick={openSideBar}></MenuSvg>
         </IconContainer>
       </Header>
-      <Content>{props.children}</Content>
+      <Content className="scroll-y">{props.children}</Content>
     </Wrapper>
   );
 };
@@ -49,6 +49,7 @@ const Wrapper = styled.div``;
 const Content = styled.div`
   min-width: var(--minWidth);
   height: calc(100vh - 60px);
+  padding-bottom: 108px;
 `;
 const Header = styled.div`
   display: flex;
