@@ -85,6 +85,7 @@ const Wrapper = styled.div`
   }
 `;
 const Input = styled.input`
+  font: var(--body18);
   height: 30px;
   width: 100%;
   border: 0px;
