@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 
 import DefaultLayout from "@/components/layouts/DefaultLayout";
+import Dot from "@/components/shared/Dot";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useTodo from "@/hooks/useTodo";
@@ -12,7 +13,7 @@ import CheckBox from "@/shared/CheckBox";
 import EmptyData from "@/shared/EmptyData";
 import TaskInput from "@/shared/inputs/TaskInput";
 import PageLoading from "@/shared/PageLoading";
-import { Task } from "@/types";
+import { Cluster, Task } from "@/types";
 
 const Todo = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const Todo = () => {
   const {
     updatedAt,
     isLoadingTodoList,
-    getTasks,
+    getClusters,
     changeTaskStatus,
     removeTask,
   } = useTodo();
@@ -29,6 +30,8 @@ const Todo = () => {
   const { trackRemoveTask, trackClickCheckbox } = useTrackEvent();
 
   const [clusterId, setClusterId] = useState("");
+  const [clusterTitle, setClusterTitle] = useState("");
+  const [clusterColor, setClusterColor] = useState("");
   const [completedList, setCompletedList] = useState<Task[]>([]);
   const [uncompletedList, setUncompletedList] = useState<Task[]>([]);
 
@@ -43,7 +46,12 @@ const Todo = () => {
       if (!clusterId) return;
       const _completedList: Task[] = [];
       const _uncompletedList: Task[] = [];
-      const tasks = await getTasks(clusterId);
+      const clusters = await getClusters();
+      const cluster = clusters.find(
+        (item: Cluster) => item.clusterId === clusterId
+      );
+      if (!cluster) return;
+      const { title, color, tasks } = cluster;
       tasks.map((item: Task) => {
         if (item.completed) {
           _completedList.push(item);
@@ -51,6 +59,8 @@ const Todo = () => {
           _uncompletedList.push(item);
         }
       });
+      setClusterTitle(title);
+      setClusterColor(color);
       setCompletedList(_completedList);
       setUncompletedList(_uncompletedList);
     })();
@@ -71,6 +81,11 @@ const Todo = () => {
     <Wrapper>
       <Content className="scroll-y">
         {isLoadingTodoList && <PageLoading></PageLoading>}
+
+        <TitleBox>
+          <Dot color={clusterColor}></Dot>
+          <Text>{clusterTitle}</Text>
+        </TitleBox>
 
         {uncompletedList.concat(completedList).length === 0 && (
           <EmptyData type="task"></EmptyData>
@@ -132,6 +147,14 @@ const Content = styled.div`
   height: 100%;
   padding-bottom: 116px;
 `;
+const TitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0px 16px;
+  font-weight: 600;
+`;
 const ListBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -146,7 +169,7 @@ const FlexBox = styled.div`
   padding: 16px;
   width: calc(100% - 56px);
 `;
-const Text = styled.p<any>`
+const Text = styled.p<{ color?: string; textDecoration?: string }>`
   color: ${(props) => props.color};
   text-decoration: ${(props) => props.textDecoration};
   overflow: hidden;
