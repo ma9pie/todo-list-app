@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import useModal from "@/hooks/useModal";
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const TaskInput = ({ clusterId }: Props) => {
+  const router = useRouter();
+
   const { addTask } = useTodo();
   const { openToast } = useModal();
   const { trackClickBtn, trackAddTask } = useTrackEvent();
@@ -37,9 +40,10 @@ const TaskInput = ({ clusterId }: Props) => {
         message: "Task added",
       });
     } else {
+      router.push("/");
       openToast({
         status: ToastStatus.Error,
-        message: "Invalid clusterId",
+        message: "Invalid request",
       });
     }
   };
