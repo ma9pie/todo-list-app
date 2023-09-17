@@ -39,6 +39,9 @@ const Todo = () => {
   const [completedList, setCompletedList] = useState<Task[]>([]);
   const [uncompletedList, setUncompletedList] = useState<Task[]>([]);
 
+  const totalNum = completedList.concat(uncompletedList).length;
+  const completedNum = completedList.length;
+
   useEffect(() => {
     const { id } = router.query;
     if (!id || typeof id === "object") return;
@@ -101,9 +104,7 @@ const Todo = () => {
           <EditSvg className="fill-sub" onClick={editList}></EditSvg>
         </TitleBox>
 
-        {uncompletedList.concat(completedList).length === 0 && (
-          <EmptyData type="task"></EmptyData>
-        )}
+        {totalNum === 0 && <EmptyData type="task"></EmptyData>}
 
         {uncompletedList.map(({ taskId, content }) => (
           <ListBox key={taskId}>
@@ -116,10 +117,10 @@ const Todo = () => {
           </ListBox>
         ))}
 
-        {completedList.length > 0 && (
+        {completedNum > 0 && (
           <DividerWrapper>
             <Divider></Divider>
-            <Text color="var(--sub)">Completed Tasks</Text>
+            <Text color="var(--sub)">{`Completed Tasks (${completedNum})`}</Text>
           </DividerWrapper>
         )}
 
