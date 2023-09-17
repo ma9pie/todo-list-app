@@ -17,3 +17,13 @@ export const FIREBASE_POLICY_URL =
 export const SENTRY_PRIVACY_URL = "https://sentry.io/privacy/";
 export const APP_PRIVACY_POLICY_GENERATOR_URL =
   "https://app-privacy-policy-generator.nisrulz.com/";
+export const breakpoints = {
+  mobile: "640px",
+  tablet: "768px",
+  desktop: "1024px",
+};
+export const media = {
+  mobile: `(max-width: ${breakpoints.mobile})`,
+  tablet: `(max-width: ${breakpoints.tablet})`,
+  desktop: `(max-width: ${breakpoints.desktop})`,
+};
