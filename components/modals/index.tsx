@@ -66,7 +66,7 @@ const Container = styled.div<{ top?: string; left?: string; padding?: string }>`
   padding: ${(props) => props.padding};
   width: 80%;
   min-width: 240px;
-  max-width: 600px;
+  max-width: 400px;
   gap: 16px;
   border-radius: 15px;
   overflow: hidden;
