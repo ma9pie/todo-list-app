@@ -1,9 +1,16 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import DefaultLayout from "@/components/layouts/DefaultLayout";
 import Dot from "@/components/shared/Dot";
+import useClickOutside from "@/hooks/useClickOutside";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
@@ -25,22 +32,30 @@ const Todo = () => {
     updatedAt,
     isLoadingTodoList,
     getClusters,
-    changeTaskStatus,
+    editTask,
     removeTask,
+    changeTaskStatus,
   } = useTodo();
   const local = useLocalStorage();
   const { openEditListModal } = useModal();
   const { trackRemoveTask, trackClickCheckbox, trackClickIcon } =
     useTrackEvent();
 
+  const ref = useRef<HTMLInputElement>(null);
   const [clusterId, setClusterId] = useState("");
   const [clusterTitle, setClusterTitle] = useState("");
   const [clusterColor, setClusterColor] = useState("");
   const [completedList, setCompletedList] = useState<Task[]>([]);
   const [uncompletedList, setUncompletedList] = useState<Task[]>([]);
+  const [input, setInput] = useState("");
+  const [selectedTaskId, setSelectedTaskId] = useState("");
 
   const totalNum = completedList.concat(uncompletedList).length;
   const completedNum = completedList.length;
+
+  useClickOutside(ref, () => {
+    editTask(clusterId, selectedTaskId, input);
+  });
 
   useEffect(() => {
     const { id } = router.query;
@@ -79,18 +94,39 @@ const Todo = () => {
     changeTaskStatus(clusterId, taskId);
   };
 
-  const remove = (clusterId: string, taskId: string) => {
+  const handleClickDelete = (clusterId: string, taskId: string) => {
     trackRemoveTask();
     removeTask(clusterId, taskId);
   };
 
-  const editList = () => {
+  const handleClickEdit = () => {
     trackClickIcon("Edit");
     openEditListModal({
       clusterId: clusterId,
       prevTitle: clusterTitle,
       prevColor: clusterColor,
     });
+  };
+
+  const handleClickTask = (taskId: string, text: string) => {
+    setSelectedTaskId(taskId);
+    setInput(text);
+    setTimeout(() => {
+      if (!ref.current) return;
+      ref.current.select();
+      console.log();
+    }, 0);
+  };
+
+  const handleChangeTask = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const enter = (e: any) => {
+    if (e.key !== "Enter" || !selectedTaskId) return;
+    editTask(clusterId, selectedTaskId, input);
+    if (!ref.current) return;
+    ref.current.blur();
   };
 
   return (
@@ -101,7 +137,7 @@ const Todo = () => {
         <TitleBox>
           <Dot color={clusterColor}></Dot>
           <Text>{clusterTitle}</Text>
-          <EditSvg className="fill-sub" onClick={editList}></EditSvg>
+          <EditSvg className="fill-sub" onClick={handleClickEdit}></EditSvg>
         </TitleBox>
 
         {totalNum === 0 && <EmptyData type="task"></EmptyData>}
@@ -112,7 +148,18 @@ const Todo = () => {
               <CheckBox
                 onClick={() => toggleStatus(clusterId, taskId)}
               ></CheckBox>
-              <Text>{content}</Text>
+              {taskId === selectedTaskId ? (
+                <Input
+                  ref={ref}
+                  value={input}
+                  onChange={handleChangeTask}
+                  onKeyDown={enter}
+                ></Input>
+              ) : (
+                <Text pointer onClick={() => handleClickTask(taskId, content)}>
+                  {content}
+                </Text>
+              )}
             </FlexBox>
           </ListBox>
         ))}
@@ -135,7 +182,9 @@ const Todo = () => {
                 {content}
               </Text>
             </FlexBox>
-            <DeleteIconWrapper onClick={() => remove(clusterId, taskId)}>
+            <DeleteIconWrapper
+              onClick={() => handleClickDelete(clusterId, taskId)}
+            >
               <TrashCanSvg></TrashCanSvg>
             </DeleteIconWrapper>
           </ListBox>
@@ -185,13 +234,25 @@ const FlexBox = styled.div`
   padding: 16px;
   width: calc(100% - 56px);
 `;
-const Text = styled.p<{ color?: string; textDecoration?: string }>`
+const Text = styled.p<{
+  color?: string;
+  textDecoration?: string;
+  pointer?: boolean;
+}>`
+  font-size: 16px;
+  line-height: 24px;
   width: calc(100% - 60px);
   color: ${(props) => props.color};
   text-decoration: ${(props) => props.textDecoration};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  cursor: ${(props) => props.pointer && "pointer"};
+`;
+const Input = styled.input`
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
 `;
 const DividerWrapper = styled.div`
   display: flex;

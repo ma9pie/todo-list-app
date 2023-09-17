@@ -28,8 +28,13 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-input:focus {
+input {
+  border: 0px;
+  padding:0px;
   outline: none;
+  &:focus{
+    outline: none;
+  }
 }
 
 svg {

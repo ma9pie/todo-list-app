@@ -176,6 +176,15 @@ const useTrackEvent = () => {
     });
   };
 
+  const trackEditTask = () => {
+    if (!isInitializedGA) return;
+    ReactGA.event({
+      action: Action.Edit,
+      category: Category.Task,
+      label: provider,
+    });
+  };
+
   const trackRemoveTask = () => {
     if (!isInitializedGA) return;
     ReactGA.event({
@@ -227,6 +236,7 @@ const useTrackEvent = () => {
     trackEditList,
     trackRemoveList,
     trackAddTask,
+    trackEditTask,
     trackRemoveTask,
     trackViewModal,
     trackViewSideBar,

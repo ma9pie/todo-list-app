@@ -27,6 +27,7 @@ const useTodo = () => {
     trackEditList,
     trackRemoveList,
     trackAddTask,
+    trackEditTask,
     trackRemoveTask,
     trackServerError,
   } = useTrackEvent();
@@ -201,6 +202,24 @@ const useTodo = () => {
     }
   };
 
+  // Task 수정
+  const editTask = async (
+    clusterId: string,
+    taskId: string,
+    content: string
+  ) => {
+    trackEditTask();
+    const clusters = await getClusters();
+    const cluster = clusters.find(
+      (item: Cluster) => item.clusterId === clusterId
+    );
+    if (!cluster) return;
+    const task = cluster.tasks.find((item: Task) => item.taskId === taskId);
+    if (!task || task.content === content) return;
+    task.content = content;
+    await setClusters(clusters);
+  };
+
   // Task 삭제
   const removeTask = async (clusterId: string, taskId: string) => {
     trackRemoveTask();
@@ -208,6 +227,7 @@ const useTodo = () => {
     const cluster = clusters.find(
       (item: Cluster) => item.clusterId === clusterId
     );
+    if (!cluster) return;
     cluster.tasks = cluster.tasks.filter(
       (item: Task) => item.taskId !== taskId
     );
@@ -220,13 +240,10 @@ const useTodo = () => {
     const cluster = clusters.find(
       (item: Cluster) => item.clusterId === clusterId
     );
-    cluster.tasks = cluster.tasks.map((item: Task) => {
-      if (item.taskId === taskId) {
-        return { ...item, completed: !item.completed };
-      } else {
-        return item;
-      }
-    });
+    if (!cluster) return;
+    const task = cluster.tasks.find((item: Task) => item.taskId === taskId);
+    if (!task) return;
+    task.completed = !task.completed;
     await setClusters(clusters);
   };
 
@@ -243,8 +260,9 @@ const useTodo = () => {
     removeCluster,
     getTasks,
     addTask,
-    changeTaskStatus,
+    editTask,
     removeTask,
+    changeTaskStatus,
   };
 };
 
