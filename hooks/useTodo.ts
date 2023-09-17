@@ -93,8 +93,8 @@ const useTodo = () => {
   const addCluster = async (title: string, color: string) => {
     try {
       trackAddList();
-      const clusters = await getClusters();
-      const _clusters = clusters.concat({
+      const list = cloneDeep(todoList);
+      const _list = list.concat({
         clusterId: createUid(),
         title,
         color,
@@ -102,7 +102,7 @@ const useTodo = () => {
         createdAt: getCurrentTime(),
         tasks: [],
       });
-      await setClusters(_clusters);
+      await setClusters(_list);
       setTimeout(() => {
         openToast({
           status: ToastStatus.Success,
@@ -129,12 +129,12 @@ const useTodo = () => {
   ) => {
     try {
       trackEditList();
-      const clusters = await getClusters();
-      const _clusters = [...clusters];
-      const cluster = _clusters.find((item) => item.clusterId === clusterId);
+      const list = cloneDeep(todoList);
+      const cluster = list.find((item) => item.clusterId === clusterId);
+      if (!cluster) return;
       cluster.title = title;
       cluster.color = color;
-      await setClusters(_clusters);
+      await setClusters(list);
       setTimeout(() => {
         openToast({
           status: ToastStatus.Success,
@@ -156,19 +156,15 @@ const useTodo = () => {
   // Cluster 제거
   const removeCluster = async (clusterId: string) => {
     trackRemoveList();
-    const clusters = await getClusters();
-    const _clusters = clusters.filter(
-      (item: Cluster) => item.clusterId !== clusterId
-    );
-    await setClusters(_clusters);
+    const list = cloneDeep(todoList);
+    const _list = list.filter((item: Cluster) => item.clusterId !== clusterId);
+    await setClusters(_list);
   };
 
   // Tasks 조회
   const getTasks = async (clusterId: string) => {
-    const clusters = await getClusters();
-    const cluster = clusters.find(
-      (item: Cluster) => item.clusterId === clusterId
-    );
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item: Cluster) => item.clusterId === clusterId);
     return cluster ? cluster.tasks : [];
   };
 
@@ -176,10 +172,11 @@ const useTodo = () => {
   const addTask = async (clusterId: string, input: string) => {
     try {
       trackAddTask();
-      const clusters = await getClusters();
-      const cluster = clusters.find(
+      const list = cloneDeep(todoList);
+      const cluster = list.find(
         (item: Cluster) => item.clusterId === clusterId
       );
+      if (!cluster) return;
       cluster.tasks = cluster.tasks.concat({
         clusterId: clusterId,
         taskId: createUid(),
@@ -187,7 +184,7 @@ const useTodo = () => {
         completed: false,
         createdAt: getCurrentTime(),
       });
-      await setClusters(clusters);
+      await setClusters(list);
       openToast({
         status: ToastStatus.Success,
         message: Message.TaskAdded,
@@ -209,42 +206,36 @@ const useTodo = () => {
     content: string
   ) => {
     trackEditTask();
-    const clusters = await getClusters();
-    const cluster = clusters.find(
-      (item: Cluster) => item.clusterId === clusterId
-    );
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item: Cluster) => item.clusterId === clusterId);
     if (!cluster) return;
     const task = cluster.tasks.find((item: Task) => item.taskId === taskId);
     if (!task || task.content === content) return;
     task.content = content;
-    await setClusters(clusters);
+    await setClusters(list);
   };
 
   // Task 삭제
   const removeTask = async (clusterId: string, taskId: string) => {
     trackRemoveTask();
-    const clusters = await getClusters();
-    const cluster = clusters.find(
-      (item: Cluster) => item.clusterId === clusterId
-    );
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item: Cluster) => item.clusterId === clusterId);
     if (!cluster) return;
     cluster.tasks = cluster.tasks.filter(
       (item: Task) => item.taskId !== taskId
     );
-    await setClusters(clusters);
+    await setClusters(list);
   };
 
   // Task 상태 변경
   const changeTaskStatus = async (clusterId: string, taskId: string) => {
-    const clusters = await getClusters();
-    const cluster = clusters.find(
-      (item: Cluster) => item.clusterId === clusterId
-    );
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item: Cluster) => item.clusterId === clusterId);
     if (!cluster) return;
     const task = cluster.tasks.find((item: Task) => item.taskId === taskId);
     if (!task) return;
     task.completed = !task.completed;
-    await setClusters(clusters);
+    await setClusters(list);
   };
 
   return {

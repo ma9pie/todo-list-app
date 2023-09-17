@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { cloneDeep } from "lodash";
 import { useRouter } from "next/router";
 import React, {
   ChangeEvent,
@@ -30,6 +31,7 @@ const Todo = () => {
 
   const { user } = useLogin();
   const {
+    todoList,
     updatedAt,
     isLoadingTodoList,
     getClusters,
@@ -65,30 +67,26 @@ const Todo = () => {
   }, [router.query]);
 
   useEffect(() => {
-    (async () => {
-      if (!clusterId) return;
-      const _completedList: Task[] = [];
-      const _uncompletedList: Task[] = [];
-      const clusters = await getClusters();
-      const cluster = clusters.find(
-        (item: Cluster) => item.clusterId === clusterId
-      );
-      if (!cluster) return;
-      const { title, color, tasks } = cluster;
-      tasks.map((item: Task) => {
-        if (item.completed) {
-          _completedList.push(item);
-        } else {
-          _uncompletedList.push(item);
-        }
-      });
-      setClusterTitle(title);
-      setClusterColor(color);
-      setCompletedList(_completedList);
-      setUncompletedList(_uncompletedList);
-    })();
-    return;
-  }, [clusterId, user, updatedAt, local.clusters]);
+    if (!clusterId) return;
+    const _completedList: Task[] = [];
+    const _uncompletedList: Task[] = [];
+
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item: Cluster) => item.clusterId === clusterId);
+    if (!cluster) return;
+    const { title, color, tasks } = cluster;
+    tasks.map((item: Task) => {
+      if (item.completed) {
+        _completedList.push(item);
+      } else {
+        _uncompletedList.push(item);
+      }
+    });
+    setClusterTitle(title);
+    setClusterColor(color);
+    setCompletedList(_completedList);
+    setUncompletedList(_uncompletedList);
+  }, [clusterId, todoList]);
 
   const handleEditList = () => {
     trackClickIcon("Edit");
