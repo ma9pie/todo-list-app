@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, {
   ChangeEvent,
+  KeyboardEvent,
   ReactElement,
   useEffect,
   useRef,
@@ -89,17 +90,7 @@ const Todo = () => {
     return;
   }, [clusterId, user, updatedAt, local.clusters]);
 
-  const toggleStatus = (clusterId: string, taskId: string) => {
-    trackClickCheckbox();
-    changeTaskStatus(clusterId, taskId);
-  };
-
-  const handleClickDelete = (clusterId: string, taskId: string) => {
-    trackRemoveTask();
-    removeTask(clusterId, taskId);
-  };
-
-  const handleClickEdit = () => {
+  const handleEditList = () => {
     trackClickIcon("Edit");
     openEditListModal({
       clusterId: clusterId,
@@ -108,21 +99,30 @@ const Todo = () => {
     });
   };
 
-  const handleClickTask = (taskId: string, text: string) => {
+  const toggleTaskStatus = (clusterId: string, taskId: string) => {
+    trackClickCheckbox();
+    changeTaskStatus(clusterId, taskId);
+  };
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const handleSelectTask = (taskId: string, text: string) => {
     setSelectedTaskId(taskId);
     setInput(text);
     setTimeout(() => {
       if (!ref.current) return;
       ref.current.select();
-      console.log();
     }, 0);
   };
 
-  const handleChangeTask = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+  const handleRemoveTask = (clusterId: string, taskId: string) => {
+    trackRemoveTask();
+    removeTask(clusterId, taskId);
   };
 
-  const enter = (e: any) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key !== "Enter" || !selectedTaskId) return;
     editTask(clusterId, selectedTaskId, input);
     if (!ref.current) return;
@@ -137,7 +137,7 @@ const Todo = () => {
         <TitleBox>
           <Dot color={clusterColor}></Dot>
           <Text>{clusterTitle}</Text>
-          <EditSvg className="fill-sub" onClick={handleClickEdit}></EditSvg>
+          <EditSvg className="fill-sub" onClick={handleEditList}></EditSvg>
         </TitleBox>
 
         {totalNum === 0 && <EmptyData type="task"></EmptyData>}
@@ -146,17 +146,17 @@ const Todo = () => {
           <ListBox key={taskId}>
             <FlexBox>
               <CheckBox
-                onClick={() => toggleStatus(clusterId, taskId)}
+                onClick={() => toggleTaskStatus(clusterId, taskId)}
               ></CheckBox>
               {taskId === selectedTaskId ? (
                 <Input
                   ref={ref}
                   value={input}
-                  onChange={handleChangeTask}
-                  onKeyDown={enter}
+                  onChange={handleChangeInput}
+                  onKeyDown={handleKeyDown}
                 ></Input>
               ) : (
-                <Text pointer onClick={() => handleClickTask(taskId, content)}>
+                <Text pointer onClick={() => handleSelectTask(taskId, content)}>
                   {content}
                 </Text>
               )}
@@ -176,17 +176,15 @@ const Todo = () => {
             <FlexBox>
               <CheckBox
                 checked={true}
-                onClick={() => toggleStatus(clusterId, taskId)}
+                onClick={() => toggleTaskStatus(clusterId, taskId)}
               ></CheckBox>
               <Text color="var(--sub)" textDecoration="line-through">
                 {content}
               </Text>
             </FlexBox>
-            <DeleteIconWrapper
-              onClick={() => handleClickDelete(clusterId, taskId)}
-            >
+            <IconWrapper onClick={() => handleRemoveTask(clusterId, taskId)}>
               <TrashCanSvg></TrashCanSvg>
-            </DeleteIconWrapper>
+            </IconWrapper>
           </ListBox>
         ))}
       </Content>
@@ -266,7 +264,7 @@ const Divider = styled.div`
   height: 1px;
   background-color: var(--sectionLine);
 `;
-const DeleteIconWrapper = styled.div`
+const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

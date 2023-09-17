@@ -12,15 +12,15 @@ import { Cluster, Task } from "@/types";
 
 const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
   const { removeCluster } = useTodo();
-  const { openDeleteClusterModal } = useModal();
+  const { openRemoveClusterModal } = useModal();
   const { trackClickIcon } = useTrackEvent();
 
   const tasksNum = tasks.length;
 
-  const deleteList = (e: MouseEvent<HTMLDivElement>) => {
+  const handleRemoveList = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     trackClickIcon("TrashCan");
-    openDeleteClusterModal(() => removeCluster(clusterId));
+    openRemoveClusterModal(() => removeCluster(clusterId));
   };
 
   return (
@@ -31,9 +31,9 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
             <Dot color={color}></Dot>
             <Title>{title}</Title>
           </FlexBox>
-          <DeleteIconWrapper onClick={deleteList}>
+          <IconWrapper onClick={handleRemoveList}>
             <TrashCanSvg className="fill-sub"></TrashCanSvg>
-          </DeleteIconWrapper>
+          </IconWrapper>
         </TitleBox>
         {tasks.slice(0, 8).map((item: Task) => (
           <List key={item.taskId}>
@@ -115,7 +115,7 @@ const FlexBox = styled.div<{ width?: string }>`
   gap: 8px;
   width: ${(props) => props.width || "100%"};
 `;
-const DeleteIconWrapper = styled.div`
+const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

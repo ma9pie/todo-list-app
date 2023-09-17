@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
-import useTrackEvent from "@/hooks/useTrackEvent";
 import AddSvg from "@/images/add.svg";
 import { Message, ToastStatus } from "@/types";
 
@@ -14,11 +13,10 @@ interface Props {
 const TaskInput = ({ clusterId }: Props) => {
   const { addTask } = useTodo();
   const { openToast } = useModal();
-  const { trackClickBtn } = useTrackEvent();
 
   const [input, setInput] = useState("");
 
-  const handleInput = (e: any) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
@@ -33,13 +31,8 @@ const TaskInput = ({ clusterId }: Props) => {
     addTask(clusterId, input);
   };
 
-  const enter = (e: any) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key !== "Enter") return;
-    handleAddTask();
-  };
-
-  const handleClickAddBtn = () => {
-    trackClickBtn("AddTask");
     handleAddTask();
   };
 
@@ -50,9 +43,9 @@ const TaskInput = ({ clusterId }: Props) => {
         placeholder="new task"
         value={input}
         onChange={handleInput}
-        onKeyUp={enter}
+        onKeyDown={handleKeyDown}
       ></Input>
-      <AddSvg width={40} height={40} onClick={handleClickAddBtn}></AddSvg>
+      <AddSvg width={40} height={40} onClick={handleAddTask}></AddSvg>
     </Wrapper>
   );
 };

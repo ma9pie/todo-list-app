@@ -19,7 +19,7 @@ const UserInfoModal = () => {
     trackViewModal("UserInfo");
   }, []);
 
-  const handleClick = () => {
+  const handleLogout = () => {
     trackClickBtn("Logout");
     logout();
     closeModal();
@@ -46,7 +46,7 @@ const UserInfoModal = () => {
       <Spacing size={8}></Spacing>
       <Text s12>{`email : ${email}`}</Text>
       <Spacing size={48}></Spacing>
-      <Button full onClick={handleClick}>
+      <Button full onClick={handleLogout}>
         Logout
       </Button>
     </Wrapper>

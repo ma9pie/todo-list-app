@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useRef, useState } from "react";
+import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 import DoneButton from "@/components/shared/buttons/DoneButton";
 import useModal from "@/hooks/useModal";
@@ -29,11 +29,11 @@ const EditListModal = ({
     ref.current.focus();
   }, []);
 
-  const onChange = (e: any) => {
+  const handleChange = (e: any) => {
     setTitle(e.target.value);
   };
 
-  const editList = () => {
+  const handleEditList = () => {
     if (title === "") {
       openToast({
         status: ToastStatus.Warn,
@@ -45,9 +45,9 @@ const EditListModal = ({
     }
   };
 
-  const handleOnKeyUp = (e: any) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key !== "Enter") return;
-    editList();
+    handleEditList();
   };
 
   return (
@@ -58,8 +58,8 @@ const EditListModal = ({
           type="text"
           value={title}
           placeholder="List name"
-          onChange={onChange}
-          onKeyUp={handleOnKeyUp}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         ></Input>
       </Content>
 
@@ -68,7 +68,7 @@ const EditListModal = ({
       </Content>
 
       <DoneWrapper>
-        <DoneButton onClick={editList}></DoneButton>
+        <DoneButton onClick={handleEditList}></DoneButton>
       </DoneWrapper>
     </Wrapper>
   );

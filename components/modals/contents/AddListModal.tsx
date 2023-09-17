@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useRef, useState } from "react";
+import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 import DoneButton from "@/components/shared/buttons/DoneButton";
 import { COLOR_LIST } from "@/constants";
@@ -26,11 +26,11 @@ const AddListModal = () => {
     ref.current.focus();
   }, []);
 
-  const onChange = (e: any) => {
+  const handleChange = (e: any) => {
     setTitle(e.target.value);
   };
 
-  const addList = () => {
+  const handleAddList = () => {
     if (title === "") {
       openToast({
         status: ToastStatus.Warn,
@@ -42,9 +42,9 @@ const AddListModal = () => {
     }
   };
 
-  const handleOnKeyUp = (e: any) => {
+  const handleOnKeyUp = (e: KeyboardEvent) => {
     if (e.key !== "Enter") return;
-    addList();
+    handleAddList();
   };
 
   return (
@@ -55,7 +55,7 @@ const AddListModal = () => {
           type="text"
           value={title}
           placeholder="List name"
-          onChange={onChange}
+          onChange={handleChange}
           onKeyUp={handleOnKeyUp}
         ></Input>
       </Content>
@@ -65,7 +65,7 @@ const AddListModal = () => {
       </Content>
 
       <DoneWrapper>
-        <DoneButton onClick={addList}></DoneButton>
+        <DoneButton onClick={handleAddList}></DoneButton>
       </DoneWrapper>
     </Wrapper>
   );

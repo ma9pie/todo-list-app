@@ -144,7 +144,7 @@ export default function useModal() {
     });
   };
 
-  const openDeleteClusterModal = (callback: () => void) => {
+  const openRemoveClusterModal = (callback: () => void) => {
     openConfirm({
       title: "Delete list",
       message: `Would you like to delete\n this list?`,
@@ -174,7 +174,7 @@ export default function useModal() {
     openSettingsModal,
     openAddListModal,
     openEditListModal,
-    openDeleteClusterModal,
+    openRemoveClusterModal,
     openTOSModal,
   };
 }
