@@ -48,6 +48,8 @@ const useTodo = () => {
           .get();
         const clustersData = clusters.data();
         if (!clustersData) return [];
+        console.log("\n========== getClusters ==========");
+        console.log(clustersData.clusters);
         return clustersData.clusters;
       } else {
         return cloneDeep(local.clusters);

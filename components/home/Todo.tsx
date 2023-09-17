@@ -15,6 +15,8 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
   const { openDeleteClusterModal } = useModal();
   const { trackClickIcon } = useTrackEvent();
 
+  const tasksNum = tasks.length;
+
   const deleteList = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     trackClickIcon("TrashCan");
@@ -33,7 +35,7 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
             <TrashCanSvg className="fill-sub"></TrashCanSvg>
           </DeleteIconWrapper>
         </TitleBox>
-        {tasks.map((item: Task) => (
+        {tasks.slice(0, 8).map((item: Task) => (
           <List key={item.taskId}>
             {item.completed ? (
               <FlexBox>
@@ -54,6 +56,11 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
             )}
           </List>
         ))}
+        {tasksNum > 8 && (
+          <List>
+            <SubText>{`+ ${tasksNum - 8} Tasks`}</SubText>
+          </List>
+        )}
       </Wrapper>
     </Link>
   );
