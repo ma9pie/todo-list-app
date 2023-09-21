@@ -41,8 +41,28 @@ const useLogin = () => {
     setTimeout(() => signOut(), 100);
   };
 
-  // User 등록
-  const registerUser = async (session: Session) => {
+  const getUsers = async (email: string, provider: string) => {
+    trackRequest("getUsers");
+    return firestore
+      .collection("users")
+      .where("email", "==", email)
+      .where("provider", "==", provider)
+      .get();
+  };
+
+  const createUser = (userData: User) => {
+    trackRequest("createUser");
+    const userKey = createUid();
+    return firestore
+      .collection("users")
+      .doc(userKey)
+      .set({
+        userKey,
+        ...userData,
+      });
+  };
+
+  const autoLogin = async (session: Session) => {
     try {
       const userData: User = {
         email: session?.user?.email,
@@ -52,20 +72,14 @@ const useLogin = () => {
         provider: session.provider,
         createdAt: getCurrentTime(),
       };
-      trackRequest("getUsers");
-      const _users = await firestore
-        .collection("users")
-        .where("email", "==", userData.email)
-        .where("provider", "==", userData.provider)
-        .get();
-      const _user = _users.docs[0]?.data();
+      const { email, provider } = userData;
+      if (!email || !provider) return;
+      const users = await getUsers(email, provider);
+      const _user = users.docs[0]?.data();
       if (_user) {
         setUser(_user);
       } else {
-        const userKey = createUid();
-        userData.userKey = userKey;
-        trackRequest("setUsers");
-        await firestore.collection("users").doc(userKey).set(userData);
+        await createUser(userData);
         setUser(userData);
       }
     } catch (err) {
@@ -86,7 +100,7 @@ const useLogin = () => {
     googleLogin,
     githubLogin,
     logout,
-    registerUser,
+    autoLogin,
   };
 };
 

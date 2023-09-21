@@ -6,9 +6,10 @@ import { useRouter } from "next/router";
 import type { Session } from "next-auth";
 import { SessionProvider, useSession } from "next-auth/react";
 import type { ReactElement, ReactNode } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
+import PageLoading from "@/components/shared/PageLoading";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useTheme from "@/hooks/useTheme";
@@ -42,12 +43,14 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   const { data: session } = useSession<any>();
-  const { user, setUser, registerUser } = useLogin();
+  const { user, setUser, autoLogin } = useLogin();
   const { updatedAt, setTodoList, setIsLoadingTodoList, getClusters } =
     useTodo();
   const local = useLocalStorage();
   const { setLight, setDark } = useTheme();
   const { initializeGA, trackPageView } = useTrackEvent();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // Init GA4
   useEffect(() => {
@@ -67,8 +70,12 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   // Login info update
   useEffect(() => {
-    if (!session) return setUser(null);
-    registerUser(session);
+    (async () => {
+      if (!session) return setUser(null);
+      setIsLoading(true);
+      await autoLogin(session);
+      setIsLoading(false);
+    })();
   }, [session]);
 
   // TodoList 업데이트
@@ -81,6 +88,9 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   }, [user, updatedAt, local.clusters]);
 
   return (
-    <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
+    <ModalProvider>
+      {isLoading && <PageLoading></PageLoading>}
+      {getLayout(<Component {...pageProps} />)}
+    </ModalProvider>
   );
 };
