@@ -112,7 +112,7 @@ const Todo = () => {
     setTimeout(() => {
       if (!ref.current) return;
       ref.current.focus();
-    }, 0);
+    }, 50);
   };
 
   const handleRemoveTask = (clusterId: string, taskId: string) => {
