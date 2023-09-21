@@ -111,7 +111,7 @@ const Todo = () => {
     setInput(text);
     setTimeout(() => {
       if (!ref.current) return;
-      ref.current.select();
+      ref.current.focus();
     }, 0);
   };
 
@@ -154,7 +154,11 @@ const Todo = () => {
                   onKeyDown={handleKeyDown}
                 ></Input>
               ) : (
-                <Text pointer onClick={() => handleSelectTask(taskId, content)}>
+                <Text
+                  pointer
+                  onClick={() => handleSelectTask(taskId, content)}
+                  onTouchStart={() => handleSelectTask(taskId, content)}
+                >
                   {content}
                 </Text>
               )}
