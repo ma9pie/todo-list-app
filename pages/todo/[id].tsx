@@ -6,15 +6,11 @@ import React, {
   KeyboardEvent,
   ReactElement,
   useEffect,
-  useRef,
   useState,
 } from "react";
 
 import DefaultLayout from "@/components/layouts/DefaultLayout";
 import Dot from "@/components/shared/Dot";
-import useClickOutside from "@/hooks/useClickOutside";
-import useLocalStorage from "@/hooks/useLocalStorage";
-import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
@@ -29,7 +25,6 @@ import { Cluster, Task } from "@/types";
 const Todo = () => {
   const router = useRouter();
 
-  const { user } = useLogin();
   const {
     todoList,
     updatedAt,
@@ -39,12 +34,10 @@ const Todo = () => {
     removeTask,
     changeTaskStatus,
   } = useTodo();
-  const local = useLocalStorage();
   const { openEditListModal } = useModal();
   const { trackRemoveTask, trackClickCheckbox, trackClickIcon } =
     useTrackEvent();
 
-  const ref = useRef<HTMLInputElement>(null);
   const [clusterId, setClusterId] = useState("");
   const [clusterTitle, setClusterTitle] = useState("");
   const [clusterColor, setClusterColor] = useState("");
@@ -55,10 +48,6 @@ const Todo = () => {
 
   const totalNum = completedList.concat(uncompletedList).length;
   const completedNum = completedList.length;
-
-  useClickOutside(ref, () => {
-    editTask(clusterId, selectedTaskId, input);
-  });
 
   useEffect(() => {
     const { id } = router.query;
@@ -109,10 +98,6 @@ const Todo = () => {
   const handleSelectTask = (taskId: string, text: string) => {
     setSelectedTaskId(taskId);
     setInput(text);
-    setTimeout(() => {
-      if (!ref.current) return;
-      ref.current.focus();
-    }, 50);
   };
 
   const handleRemoveTask = (clusterId: string, taskId: string) => {
@@ -120,11 +105,10 @@ const Todo = () => {
     removeTask(clusterId, taskId);
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter" || !selectedTaskId) return;
     editTask(clusterId, selectedTaskId, input);
-    if (!ref.current) return;
-    ref.current.blur();
+    e.currentTarget.blur();
   };
 
   return (
@@ -146,22 +130,13 @@ const Todo = () => {
               <CheckBox
                 onClick={() => toggleTaskStatus(clusterId, taskId)}
               ></CheckBox>
-              {taskId === selectedTaskId ? (
-                <Input
-                  ref={ref}
-                  value={input}
-                  onChange={handleChangeInput}
-                  onKeyDown={handleKeyDown}
-                ></Input>
-              ) : (
-                <Text
-                  pointer
-                  onClick={() => handleSelectTask(taskId, content)}
-                  onTouchStart={() => handleSelectTask(taskId, content)}
-                >
-                  {content}
-                </Text>
-              )}
+              <Input
+                value={taskId === selectedTaskId ? input : content}
+                onKeyDown={handleKeyDown}
+                onChange={handleChangeInput}
+                onClick={() => handleSelectTask(taskId, content)}
+                onBlur={() => editTask(clusterId, selectedTaskId, input)}
+              ></Input>
             </FlexBox>
           </ListBox>
         ))}
