@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import ReactGA from "react-ga4";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { server } from "typescript";
 
 import { userState } from "@/recoil/atoms";
 import { isInitializedGAState } from "@/recoil/atoms";

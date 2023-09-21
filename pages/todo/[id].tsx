@@ -27,9 +27,7 @@ const Todo = () => {
 
   const {
     todoList,
-    updatedAt,
     isLoadingTodoList,
-    getClusters,
     editTask,
     removeTask,
     changeTaskStatus,

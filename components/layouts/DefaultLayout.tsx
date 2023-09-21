@@ -21,7 +21,6 @@ const DefaultLayout = (props: Props) => {
 
   const ref = useRef<RefProps>(null);
 
-  // Open SideBar
   const openSideBar = () => {
     trackClickIcon("Menu");
     ref.current?.openSideBar();
