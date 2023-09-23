@@ -17,6 +17,10 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
 
   const tasksNum = tasks.length;
 
+  const filterdList = [...tasks]
+    .sort((a) => (a.completed ? 1 : -1))
+    .slice(0, 8);
+
   const handleRemoveList = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     trackClickIcon("TrashCan");
@@ -35,7 +39,7 @@ const Todo = ({ clusterId, color, title, tasks }: Cluster) => {
             <TrashCanSvg className="fill-sub"></TrashCanSvg>
           </IconWrapper>
         </TitleBox>
-        {tasks.slice(0, 8).map((item: Task) => (
+        {filterdList.map((item: Task) => (
           <List key={item.taskId}>
             {item.completed ? (
               <FlexBox>
