@@ -103,6 +103,7 @@ const Title = styled.h3`
 `;
 const SubText = styled.p<{ textDecoration?: string }>`
   font-size: 14px;
+  line-height: 18px;
   color: var(--sub);
   text-decoration: ${(props) => props.textDecoration};
   overflow: hidden;
