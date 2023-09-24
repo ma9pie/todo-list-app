@@ -23,16 +23,16 @@ const useLogin = () => {
   const provider = user?.provider;
   const createdAt = user?.createdAt;
 
-  const googleLogin = () => {
-    trackSignIn(LoginType.Google);
+  const login = (type: LoginType) => {
+    trackSignIn(type);
     router.push("/");
-    setTimeout(() => signIn(LoginType.Google), 100);
-  };
-
-  const githubLogin = () => {
-    trackSignIn(LoginType.Github);
-    router.push("/");
-    setTimeout(() => signIn(LoginType.Github), 100);
+    setTimeout(
+      () =>
+        signIn(type, undefined, {
+          prompt: "select_account",
+        }),
+      100
+    );
   };
 
   const logout = async () => {
@@ -97,8 +97,7 @@ const useLogin = () => {
     provider,
     createdAt,
     setUser,
-    googleLogin,
-    githubLogin,
+    login,
     logout,
     autoLogin,
   };

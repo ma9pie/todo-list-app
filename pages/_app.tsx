@@ -42,7 +42,7 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   const router = useRouter();
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  const { data: session } = useSession<any>();
+  const { data: session } = useSession();
   const { user, setUser, autoLogin } = useLogin();
   const { updatedAt, setTodoList, setIsLoadingTodoList, getClusters } =
     useTodo();

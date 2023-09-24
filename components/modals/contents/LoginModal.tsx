@@ -11,26 +11,16 @@ import GoogleSvg from "@/images/social/google.svg";
 import { LoginType } from "@/types";
 
 const LoginModal = () => {
-  const { googleLogin, githubLogin } = useLogin();
+  const { login } = useLogin();
   const { closeModal } = useModal();
-  const { trackSignIn, trackViewModal } = useTrackEvent();
+  const { trackViewModal } = useTrackEvent();
 
   useEffect(() => {
     trackViewModal("Login");
   }, []);
 
-  const login = (type: LoginType) => {
-    switch (type) {
-      case LoginType.Google:
-        googleLogin();
-        break;
-      case LoginType.Github:
-        githubLogin();
-        break;
-      default:
-        break;
-    }
-    trackSignIn(type);
+  const handleLogin = (type: LoginType) => {
+    login(type);
     closeModal();
   };
 
@@ -39,11 +29,11 @@ const LoginModal = () => {
       <ModalHeader title="Login"></ModalHeader>
 
       <ListContainer>
-        <List onClick={() => login(LoginType.Google)}>
+        <List onClick={() => handleLogin(LoginType.Google)}>
           <GoogleSvg></GoogleSvg>
           <Text medium>Google</Text>
         </List>
-        <List onClick={() => login(LoginType.Github)}>
+        <List onClick={() => handleLogin(LoginType.Github)}>
           <GithubleSvg></GithubleSvg>
           <Text medium>Github</Text>
         </List>
