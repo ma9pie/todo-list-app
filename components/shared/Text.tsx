@@ -120,4 +120,5 @@ const P = styled.p<{
   text-overflow: ${(props) => props.ellipsis && "ellipsis"};
   white-space: ${(props) => props.nowrap && "nowrap"};
   text-decoration: ${(props) => props.textDecoration};
+  line-height: 110%;
 `;
