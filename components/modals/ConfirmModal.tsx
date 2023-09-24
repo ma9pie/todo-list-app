@@ -111,7 +111,8 @@ const Top = styled.div`
   margin-top: 16px;
 `;
 const Content = styled.div`
-  width: 100%;
+  width: 80%;
+  max-width: 400px;
   max-height: 1000px;
   padding: 0px 16px;
   text-align: center;

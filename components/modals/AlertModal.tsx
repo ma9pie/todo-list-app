@@ -100,7 +100,8 @@ const Top = styled.div`
   margin-top: 16px;
 `;
 const Content = styled.div`
-  width: 100%;
+  width: 80%;
+  max-width: 400px;
   max-height: 1000px;
   padding: 0px 16px;
   text-align: center;
@@ -115,7 +116,7 @@ const MainButton = styled.button<any>`
   width: 100%;
   height: 40px;
   border: 0px;
-  color: white;
+  color: #483c3c;
   transition: background-color 0.15s ease-in-out;
   cursor: pointer;
   background-color: var(--blue500);
