@@ -38,6 +38,11 @@ const useTodo = () => {
     isLoadingTodoListState
   );
 
+  // 데이터 초기화
+  const resetData = async () => {
+    await setClusters([]);
+  };
+
   // Clusters 조회
   const getClusters = async () => {
     try {
@@ -245,6 +250,7 @@ const useTodo = () => {
     setTodoList,
     setIsLoadingTodoList,
 
+    resetData,
     getClusters,
     addCluster,
     editCluster,

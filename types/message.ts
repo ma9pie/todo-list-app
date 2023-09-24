@@ -6,4 +6,5 @@ export enum Message {
   TaskAdded = "Task added",
   PleaseInputListName = "Please input list name",
   PleaseInputTask = "Please input task",
+  DataHasBeenInitialized = "Data has been initialized.",
 }

@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 
 import Text from "@/components/shared/Text";
 import { GITHUB_URL, INQUIRY_URL } from "@/constants";
-import useLocalStorage from "@/hooks/useLocalStorage";
 import useModal from "@/hooks/useModal";
 import useTheme from "@/hooks/useTheme";
+import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import PaintSvg from "@/images/color_lens.svg";
@@ -14,11 +14,12 @@ import GithubSvg from "@/images/social/github.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import Theme from "@/shared/Theme";
+import { Message, ToastStatus } from "@/types";
 
 const SettingsModal = () => {
-  const { setClusters, setTasks } = useLocalStorage();
+  const { resetData } = useTodo();
   const { toggleTheme } = useTheme();
-  const { openConfirm, openTOSModal, closeModal } = useModal();
+  const { openConfirm, openTOSModal, closeModal, openToast } = useModal();
   const { trackClickBtn, trackClickLink, trackViewModal } = useTrackEvent();
 
   useEffect(() => {
@@ -26,39 +27,42 @@ const SettingsModal = () => {
   }, []);
 
   // 테마 변경
-  const changeTheme = () => {
+  const handleChangeTheme = () => {
     trackClickBtn("ChangeTheme");
     toggleTheme();
     closeModal();
   };
 
   // 데이터 초기화
-  const resetData = () => {
+  const handleResetData = () => {
     trackClickBtn("ResetData");
     openConfirm({
       title: "Reset data",
-      message: `Do you want to reset\n your data?`,
-      onRequestConfirm: () => {
-        setClusters([]);
-        setTasks([]);
+      message: `Do you want to reset\n your data?\n (Once you delete a data, there is no going back. Please be certain.)`,
+      onRequestConfirm: async () => {
+        await resetData();
+        openToast({
+          status: ToastStatus.Success,
+          message: Message.DataHasBeenInitialized,
+        });
       },
     });
   };
 
   // 문의하기
-  const inquiry = () => {
+  const handleInquiry = () => {
     trackClickLink("Inquiry");
     window.open(INQUIRY_URL, "_blank");
   };
 
   // 서비스 이용 약관
-  const termsOfService = () => {
+  const handleTOS = () => {
     trackClickBtn("TermsOfService");
     openTOSModal();
   };
 
   // 깃허브
-  const github = () => {
+  const handleGithub = () => {
     trackClickLink("Github");
     window.open(GITHUB_URL, "_blank");
   };
@@ -70,14 +74,14 @@ const SettingsModal = () => {
           Task
         </Text>
         <ListContainer>
-          <List onClick={changeTheme}>
+          <List onClick={handleChangeTheme}>
             <Content>
               <PaintSvg></PaintSvg>
               <Text s12>Theme</Text>
             </Content>
             <Theme className="fill-sub"></Theme>
           </List>
-          <List onClick={resetData}>
+          <List onClick={handleResetData}>
             <Content>
               <TrashCanSvg></TrashCanSvg>
               <Text s12>Reset data</Text>
@@ -92,21 +96,21 @@ const SettingsModal = () => {
           About service
         </Text>
         <ListContainer>
-          <List onClick={inquiry}>
+          <List onClick={handleInquiry}>
             <Content>
               <EmailSvg></EmailSvg>
               <Text s12>Inquiry</Text>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
-          <List onClick={termsOfService}>
+          <List onClick={handleTOS}>
             <Content>
               <SubjectSvg></SubjectSvg>
               <Text s12>Terms of service</Text>
             </Content>
             <ForwardSvg className="fill-sub"></ForwardSvg>
           </List>
-          <List onClick={github}>
+          <List onClick={handleGithub}>
             <Content>
               <GithubSvg></GithubSvg>
               <Text s12>Github</Text>
