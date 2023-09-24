@@ -3,7 +3,12 @@ import React from "react";
 
 import Loading from "@/components/shared/Loading";
 
-const PageLoading = () => {
+interface Props {
+  isLoading?: boolean;
+}
+
+const PageLoading = ({ isLoading }: Props) => {
+  if (!isLoading) return null;
   return (
     <Wrapper>
       <Loading></Loading>
