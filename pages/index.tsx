@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useSession } from "next-auth/react";
 import type { ReactElement } from "react";
 import React from "react";
 
@@ -12,9 +13,12 @@ import AddButton from "@/shared/buttons/AddButton";
 import EmptyData from "@/shared/EmptyData";
 
 export default function Home() {
-  const { openAddListModal } = useModal();
+  const { status } = useSession();
   const { todoList, isLoadingTodoList } = useTodo();
+  const { openAddListModal } = useModal();
   const { trackClickBtn } = useTrackEvent();
+
+  const isSessionLoading = status === "loading";
 
   const handleClickAddBtn = () => {
     trackClickBtn("AddList");
@@ -23,7 +27,9 @@ export default function Home() {
 
   return (
     <Wrapper>
-      {isLoadingTodoList && <PageLoading></PageLoading>}
+      <PageLoading
+        isLoading={isLoadingTodoList || isSessionLoading}
+      ></PageLoading>
 
       <Container>
         {todoList.length === 0 && <EmptyData type="list"></EmptyData>}

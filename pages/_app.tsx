@@ -9,7 +9,6 @@ import type { ReactElement, ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
-import PageLoading from "@/components/shared/PageLoading";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useTheme from "@/hooks/useTheme";
@@ -88,9 +87,6 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   }, [user, updatedAt, local.clusters]);
 
   return (
-    <ModalProvider>
-      {isLoading && <PageLoading></PageLoading>}
-      {getLayout(<Component {...pageProps} />)}
-    </ModalProvider>
+    <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
   );
 };

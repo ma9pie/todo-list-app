@@ -112,7 +112,7 @@ const Todo = () => {
   return (
     <Wrapper>
       <Content className="scroll-y">
-        {isLoadingTodoList && <PageLoading></PageLoading>}
+        <PageLoading isLoading={isLoadingTodoList}></PageLoading>
 
         <TitleBox>
           <Dot color={clusterColor}></Dot>
