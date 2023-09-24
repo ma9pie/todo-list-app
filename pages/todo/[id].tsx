@@ -19,19 +19,12 @@ import TrashCanSvg from "@/images/trash_can.svg";
 import CheckBox from "@/shared/CheckBox";
 import EmptyData from "@/shared/EmptyData";
 import TaskInput from "@/shared/inputs/TaskInput";
-import PageLoading from "@/shared/PageLoading";
 import { Cluster, Task } from "@/types";
 
 const Todo = () => {
   const router = useRouter();
 
-  const {
-    todoList,
-    isLoadingTodoList,
-    editTask,
-    removeTask,
-    changeTaskStatus,
-  } = useTodo();
+  const { todoList, editTask, removeTask, changeTaskStatus } = useTodo();
   const { openEditListModal } = useModal();
   const { trackRemoveTask, trackClickCheckbox, trackClickIcon } =
     useTrackEvent();
@@ -112,8 +105,6 @@ const Todo = () => {
   return (
     <Wrapper>
       <Content className="scroll-y">
-        <PageLoading isLoading={isLoadingTodoList}></PageLoading>
-
         <TitleBox>
           <Dot color={clusterColor}></Dot>
           <Text>{clusterTitle}</Text>
