@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { firestore } from "@/firebase/firestore";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import { userState } from "@/recoil/atoms";
-import { LoginType, User } from "@/types";
+import { LoginType, Role, User } from "@/types";
 import { createUid, getCurrentTime } from "@/utils";
 
 const useLogin = () => {
@@ -22,6 +22,7 @@ const useLogin = () => {
   const expires = user?.expires;
   const provider = user?.provider;
   const createdAt = user?.createdAt;
+  const role = user?.role;
 
   const login = (type: LoginType) => {
     trackSignIn(type);
@@ -50,6 +51,12 @@ const useLogin = () => {
       .get();
   };
 
+  const getAllUsers = async () => {
+    trackRequest("getAllUsers");
+    const users = await firestore.collection("users").get();
+    return users.docs.map((item) => item.data());
+  };
+
   const createUser = (userData: User) => {
     trackRequest("createUser");
     const userKey = createUid();
@@ -64,21 +71,29 @@ const useLogin = () => {
 
   const autoLogin = async (session: Session) => {
     try {
-      const userData: User = {
-        email: session?.user?.email,
-        image: session?.user?.image,
-        name: session?.user?.name,
-        expires: session.expires,
-        provider: session.provider,
-        createdAt: getCurrentTime(),
-      };
-      const { email, provider } = userData;
-      if (!email || !provider) return;
-      const users = await getUsers(email, provider);
+      const _email = session?.user?.email;
+      const _image = session?.user?.image;
+      const _name = session?.user?.name;
+      const _expires = session.expires;
+      const _provider = session.provider;
+
+      if (!_email || !_provider) return;
+
+      const users = await getUsers(_email, _provider);
       const _user = users.docs[0]?.data();
       if (_user) {
+        if (!_user.role) _user.role = Role.User;
         setUser(_user);
       } else {
+        const userData: User = {
+          email: _email,
+          image: _image,
+          name: _name,
+          expires: _expires,
+          provider: _provider,
+          createdAt: getCurrentTime(),
+          role: Role.User,
+        };
         await createUser(userData);
         setUser(userData);
       }
@@ -96,10 +111,12 @@ const useLogin = () => {
     expires,
     provider,
     createdAt,
+    role,
     setUser,
     login,
     logout,
     autoLogin,
+    getAllUsers,
   };
 };
 

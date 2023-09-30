@@ -21,6 +21,11 @@ export interface User {
   expires?: string;
   provider?: string;
   createdAt?: string;
+  role?: Role;
+}
+export enum Role {
+  Admin = "Admin",
+  User = "User",
 }
 export enum LoginType {
   Google = "google",

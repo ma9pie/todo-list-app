@@ -1,12 +1,15 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 import React, { useEffect } from "react";
 
 import Text from "@/components/shared/Text";
 import { GITHUB_URL, INQUIRY_URL } from "@/constants";
+import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTheme from "@/hooks/useTheme";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
+import AdminBadgeSvg from "@/images/admin_badge.svg";
 import ForwardSvg from "@/images/arrow_forward_ios.svg";
 import PaintSvg from "@/images/color_lens.svg";
 import EmailSvg from "@/images/mail_outline.svg";
@@ -14,11 +17,12 @@ import GithubSvg from "@/images/social/github.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
 import Theme from "@/shared/Theme";
-import { Message, ToastStatus } from "@/types";
+import { Message, Role, ToastStatus } from "@/types";
 
 const SettingsModal = () => {
-  const { resetData } = useTodo();
+  const { role } = useLogin();
   const { toggleTheme } = useTheme();
+  const { resetData } = useTodo();
   const { openConfirm, openTOSModal, closeModal, openToast } = useModal();
   const { trackClickBtn, trackClickLink, trackViewModal } = useTrackEvent();
 
@@ -119,6 +123,25 @@ const SettingsModal = () => {
           </List>
         </ListContainer>
       </Container>
+
+      {role === Role.Admin && (
+        <Container>
+          <Text s12 medium color="var(--sub)">
+            Admin
+          </Text>
+          <Link href="/admin" onClick={() => closeModal()}>
+            <ListContainer>
+              <List>
+                <Content>
+                  <AdminBadgeSvg></AdminBadgeSvg>
+                  <Text s12>Admin</Text>
+                </Content>
+                <ForwardSvg className="fill-sub"></ForwardSvg>
+              </List>
+            </ListContainer>
+          </Link>
+        </Container>
+      )}
     </Wrapper>
   );
 };
