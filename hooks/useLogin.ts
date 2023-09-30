@@ -51,6 +51,12 @@ const useLogin = () => {
       .get();
   };
 
+  const getAllUsers = async () => {
+    trackRequest("getAllUsers");
+    const users = await firestore.collection("users").get();
+    return users.docs.map((item) => item.data());
+  };
+
   const createUser = (userData: User) => {
     trackRequest("createUser");
     const userKey = createUid();
@@ -110,6 +116,7 @@ const useLogin = () => {
     login,
     logout,
     autoLogin,
+    getAllUsers,
   };
 };
 
