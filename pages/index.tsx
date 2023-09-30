@@ -10,7 +10,7 @@ import useTrackEvent from "@/hooks/useTrackEvent";
 import AddButton from "@/shared/buttons/AddButton";
 import EmptyData from "@/shared/EmptyData";
 
-export default function Home() {
+const Home = () => {
   const { todoList } = useTodo();
   const { openAddListModal } = useModal();
   const { trackClickBtn } = useTrackEvent();
@@ -37,7 +37,9 @@ export default function Home() {
       </Container>
     </Wrapper>
   );
-}
+};
+
+export default Home;
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;

@@ -41,13 +41,17 @@ const SideBar = forwardRef((props: Props, ref: Ref<RefProps>) => {
   const [overlayRight, setOverlayRight] = useState<string>("-100vw");
   const [opacity, setOpacity] = useState<number>(0);
 
+  useImperativeHandle(ref, () => ({
+    openSideBar,
+  }));
+
   useEffect(() => {
     setIsMount(true);
   }, []);
 
-  useImperativeHandle(ref, () => ({
-    openSideBar,
-  }));
+  useEffect(() => {
+    closeSideBar();
+  }, [router.pathname]);
 
   // 사이드바 열기
   const openSideBar = () => {
