@@ -91,6 +91,11 @@ const Todo = () => {
     setInput(text);
   };
 
+  const handleBlur = () => {
+    editTask(clusterId, selectedTaskId, input);
+    setSelectedTaskId("");
+  };
+
   const handleRemoveTask = (clusterId: string, taskId: string) => {
     trackRemoveTask();
     removeTask(clusterId, taskId);
@@ -113,22 +118,27 @@ const Todo = () => {
 
         {totalNum === 0 && <EmptyData type="task"></EmptyData>}
 
-        {uncompletedList.map(({ taskId, content }) => (
-          <ListBox key={taskId}>
-            <FlexBox>
-              <CheckBox
-                onClick={() => toggleTaskStatus(clusterId, taskId)}
-              ></CheckBox>
-              <Input
-                value={taskId === selectedTaskId ? input : content}
-                onKeyDown={handleKeyDown}
-                onChange={handleChangeInput}
-                onClick={() => handleSelectTask(taskId, content)}
-                onBlur={() => editTask(clusterId, selectedTaskId, input)}
-              ></Input>
-            </FlexBox>
-          </ListBox>
-        ))}
+        {uncompletedList.map(({ taskId, content }) => {
+          const selected = taskId === selectedTaskId;
+          return (
+            <ListBox key={taskId}>
+              <FlexBox>
+                <CheckBox
+                  onClick={() => toggleTaskStatus(clusterId, taskId)}
+                ></CheckBox>
+                <Input
+                  id={taskId}
+                  value={selected ? input : content}
+                  selected={selected}
+                  onKeyDown={handleKeyDown}
+                  onChange={handleChangeInput}
+                  onClick={() => handleSelectTask(taskId, content)}
+                  onBlur={handleBlur}
+                ></Input>
+              </FlexBox>
+            </ListBox>
+          );
+        })}
 
         {completedNum > 0 && (
           <DividerWrapper>
@@ -213,10 +223,15 @@ const Text = styled.p<{
   text-overflow: ellipsis;
   cursor: ${(props) => props.pointer && "pointer"};
 `;
-const Input = styled.input`
+const Input = styled.input<{ selected: boolean }>`
   font-size: 16px;
   line-height: 24px;
   width: 100%;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: ${(props) =>
+    props.selected ? "var(--blue700)" : "transparent"};
+  transition: 0.2s border ease;
 `;
 const DividerWrapper = styled.div`
   display: flex;
