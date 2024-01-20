@@ -43,7 +43,7 @@ const AddListModal = () => {
   };
 
   const handleOnKeyUp = (e: KeyboardEvent) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
     handleAddList();
   };
 

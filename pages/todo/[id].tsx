@@ -102,7 +102,8 @@ const Todo = () => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter" || !selectedTaskId) return;
+    if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
+    if (!selectedTaskId) return;
     editTask(clusterId, selectedTaskId, input);
     e.currentTarget.blur();
   };

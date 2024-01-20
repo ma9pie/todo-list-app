@@ -46,7 +46,7 @@ const EditListModal = ({
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
     handleEditList();
   };
 
