@@ -102,7 +102,8 @@ const Todo = () => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter" || !selectedTaskId) return;
+    if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
+    if (!selectedTaskId) return;
     editTask(clusterId, selectedTaskId, input);
     e.currentTarget.blur();
   };
@@ -136,6 +137,9 @@ const Todo = () => {
                   onBlur={handleBlur}
                 ></Input>
               </FlexBox>
+              <IconWrapper onClick={() => handleRemoveTask(clusterId, taskId)}>
+                <TrashCanSvg></TrashCanSvg>
+              </IconWrapper>
             </ListBox>
           );
         })}

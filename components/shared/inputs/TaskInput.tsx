@@ -20,19 +20,19 @@ const TaskInput = ({ clusterId }: Props) => {
     setInput(e.target.value);
   };
 
-  const handleAddTask = async () => {
+  const handleAddTask = () => {
     if (!input) {
       return openToast({
         status: ToastStatus.Warn,
         message: Message.PleaseInputTask,
       });
     }
-    setInput("");
     addTask(clusterId, input);
+    setInput("");
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key !== "Enter") return;
+    if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
     handleAddTask();
   };
 
