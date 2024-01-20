@@ -136,6 +136,9 @@ const Todo = () => {
                   onBlur={handleBlur}
                 ></Input>
               </FlexBox>
+              <IconWrapper onClick={() => handleRemoveTask(clusterId, taskId)}>
+                <TrashCanSvg></TrashCanSvg>
+              </IconWrapper>
             </ListBox>
           );
         })}
