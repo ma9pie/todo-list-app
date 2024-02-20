@@ -9,7 +9,8 @@ import React, {
   useState,
 } from "react";
 
-import Text from "@/components/shared/Text";
+import Dot from "@/components/common/Dot";
+import Text from "@/components/common/Text";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
@@ -17,7 +18,6 @@ import CloseSvg from "@/images/close.svg";
 import DashboardSvg from "@/images/dashboard.svg";
 import SettingSvg from "@/images/settings.svg";
 import SubjectSvg from "@/images/subject.svg";
-import Dot from "@/shared/Dot";
 import { Cluster } from "@/types";
 
 type Props = {};

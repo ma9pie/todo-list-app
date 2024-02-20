@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-import Loading from "@/components/shared/Loading";
+import Loading from "@/components/common/Loading";
 
 interface Props {
   isLoading?: boolean;

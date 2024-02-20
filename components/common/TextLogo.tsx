@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import Text from "@/components/shared/Text";
+import Text from "@/components/common/Text";
 import useTrackEvent from "@/hooks/useTrackEvent";
 
 const TextLogo = () => {

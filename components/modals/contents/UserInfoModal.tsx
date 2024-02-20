@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import React, { useEffect } from "react";
 
+import Button from "@/components/common/buttons";
+import Spacing from "@/components/common/Spacing";
+import Text from "@/components/common/Text";
 import ModalHeader from "@/components/modals/ModalHeader";
-import Button from "@/components/shared//buttons";
-import Spacing from "@/components/shared/Spacing";
-import Text from "@/components/shared/Text";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTrackEvent from "@/hooks/useTrackEvent";

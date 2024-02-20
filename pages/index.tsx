@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 import type { ReactElement } from "react";
 import React from "react";
 
+import AddButton from "@/components/common/buttons/AddButton";
+import EmptyData from "@/components/common/EmptyData";
 import Todo from "@/components/home/Todo";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
-import AddButton from "@/shared/buttons/AddButton";
-import EmptyData from "@/shared/EmptyData";
 
 const Home = () => {
   const { todoList } = useTodo();

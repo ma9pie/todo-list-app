@@ -16,22 +16,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["*"],
-      "@/firebase/*": ["firebase/*"],
-      "@/constants": ["constants"],
-      "@/types": ["types"],
-      "@/pages/*": ["pages/*"],
-      "@/components/*": ["components/*"],
-      "@/layouts/*": ["components/layouts/*"],
-      "@/modals/*": ["components/modals/*"],
-      "@/shared/*": ["components/shared/*"],
-      "@/recoil/*": ["recoil/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/utils": ["utils"],
-      "@/public/*": ["public/*"],
-      "@/styles/*": ["styles/*"],
-      "@/images/*": ["public/images/*"],
-      "@/svgs/*": ["components/svgs/*"]
+      "@/*": ["*"],
+      "@/images/*": ["public/images/*"]
     },
     "types": ["@emotion/react/types/css-prop"]
   },

@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
-import Text from "@/components/shared/Text";
+import Text from "@/components/common/Text";
 import useFixedScreen from "@/hooks/useFixedScreen";
 import CloseSvg from "@/images/close.svg";
 import { ModalProps } from "@/types";

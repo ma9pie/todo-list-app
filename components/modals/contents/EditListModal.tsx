@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 
-import DoneButton from "@/components/shared/buttons/DoneButton";
+import DoneButton from "@/components/common/buttons/DoneButton";
+import ColorSet from "@/components/common/ColorSet";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
-import ColorSet from "@/shared/ColorSet";
 import { EditListModalProps, Message, ToastStatus } from "@/types";
 import { isMobileDevice } from "@/utils";
 

@@ -6,7 +6,7 @@ import LoginModal from "@/components/modals/contents/LoginModal";
 import SettingsModal from "@/components/modals/contents/SettingsModal";
 import TOSModal from "@/components/modals/contents/TOSModal";
 import UserInfoModal from "@/components/modals/contents/UserInfoModal";
-import { ModalContext } from "@/modals/ModalProvider";
+import { ModalContext } from "@/components/modals/ModalProvider";
 import { EditListModalProps, ModalProps, Modals, ModalType } from "@/types";
 
 let tmpModals: Modals;

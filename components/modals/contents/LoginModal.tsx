@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
+import Text from "@/components/common/Text";
 import ModalHeader from "@/components/modals/ModalHeader";
-import Text from "@/components/shared/Text";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
 import useTrackEvent from "@/hooks/useTrackEvent";

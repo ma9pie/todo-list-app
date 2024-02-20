@@ -2,7 +2,7 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useState } from "react";
 
-import Text from "@/components/shared/Text";
+import Text from "@/components/common/Text";
 import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";

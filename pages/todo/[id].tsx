@@ -9,16 +9,16 @@ import React, {
   useState,
 } from "react";
 
+import CheckBox from "@/components/common/CheckBox";
+import Dot from "@/components/common/Dot";
+import EmptyData from "@/components/common/EmptyData";
+import TaskInput from "@/components/common/inputs/TaskInput";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
-import Dot from "@/components/shared/Dot";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import EditSvg from "@/images/edit.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
-import CheckBox from "@/shared/CheckBox";
-import EmptyData from "@/shared/EmptyData";
-import TaskInput from "@/shared/inputs/TaskInput";
 import { Cluster, Task } from "@/types";
 
 const Todo = () => {

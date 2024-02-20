@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-import Text from "@/components/shared/Text";
+import Text from "@/components/common/Text";
 import EmptyListSvg from "@/images/empty_list.svg";
 import EmptyPageSvg from "@/images/empty_page.svg";
 
