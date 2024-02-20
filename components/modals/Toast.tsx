@@ -135,8 +135,9 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 340px;
-  margin: 0px;
+  width: 100%;
+  max-width: 340px;
+  margin: 0px 16px;
   padding: 16px;
   border-radius: 15px;
   background-color: var(--toast) !important;
