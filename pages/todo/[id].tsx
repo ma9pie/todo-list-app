@@ -236,6 +236,7 @@ const Input = styled.input<{ selected: boolean }>`
   border-bottom-color: ${(props) =>
     props.selected ? "var(--blue700)" : "transparent"};
   transition: 0.2s border ease;
+  text-overflow: ellipsis;
 `;
 const DividerWrapper = styled.div`
   display: flex;
