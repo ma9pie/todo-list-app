@@ -37,8 +37,10 @@ const AddListModal = () => {
         message: Message.PleaseInputListName,
       });
     } else {
-      addCluster(title, color);
       closeModal();
+      setTimeout(() => {
+        addCluster(title, color);
+      }, 0);
     }
   };
 
