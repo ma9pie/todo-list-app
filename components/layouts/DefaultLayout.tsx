@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
+import Head from "@/components/layouts/Head";
 import LoginBadge from "@/components/shared/LoginBadge";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import MenuSvg from "@/images/menu.svg";
-import Head from "@/shared/Head";
 import SideBar from "@/shared/SideBar";
 import TextLogo from "@/shared/TextLogo";
 
