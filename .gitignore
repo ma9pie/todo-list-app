@@ -42,3 +42,5 @@ next-env.d.ts
 # test file
 /components/layouts/TestLayout.tsx
 /pages/test/
+# Sentry Config File
+.sentryclirc
