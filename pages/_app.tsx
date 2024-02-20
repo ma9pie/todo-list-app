@@ -5,17 +5,19 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import type { Session } from "next-auth";
 import { SessionProvider, useSession } from "next-auth/react";
+import { DefaultSeo } from "next-seo";
 import type { ReactElement, ReactNode } from "react";
 import { useEffect } from "react";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
-import PageLoading from "@/components/shared/PageLoading";
+import PageLoading from "@/components/common/PageLoading";
+import ModalProvider from "@/components/modals/ModalProvider";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import useLogin from "@/hooks/useLogin";
 import useTheme from "@/hooks/useTheme";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
-import ModalProvider from "@/modals/ModalProvider";
+import seoConfig from "@/next-seo.config";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -93,6 +95,7 @@ const AppInner = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <ModalProvider>
       <PageLoading isLoading={isLoadingTodoList}></PageLoading>
+      <DefaultSeo {...seoConfig}></DefaultSeo>
       {getLayout(<Component {...pageProps} />)}
     </ModalProvider>
   );

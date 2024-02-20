@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
-import Text from "@/components/shared/Text";
+import Text from "@/components/common/Text";
+import Theme from "@/components/common/Theme";
 import { GITHUB_URL, INQUIRY_URL } from "@/constants";
 import useLogin from "@/hooks/useLogin";
 import useModal from "@/hooks/useModal";
@@ -16,7 +17,6 @@ import EmailSvg from "@/images/mail_outline.svg";
 import GithubSvg from "@/images/social/github.svg";
 import SubjectSvg from "@/images/subject.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
-import Theme from "@/shared/Theme";
 import { Message, Role, ToastStatus } from "@/types";
 
 const SettingsModal = () => {

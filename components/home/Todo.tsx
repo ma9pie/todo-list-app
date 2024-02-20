@@ -2,12 +2,12 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import React, { MouseEvent } from "react";
 
+import Dot from "@/components/common/Dot";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import CheckSvg from "@/images/check.svg";
 import TrashCanSvg from "@/images/trash_can.svg";
-import Dot from "@/shared/Dot";
 import { Cluster, Task } from "@/types";
 
 const Todo = ({ clusterId, color, title, tasks }: Cluster) => {

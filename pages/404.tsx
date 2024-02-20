@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import React, { ReactElement } from "react";
 
+import Text from "@/components/common/Text";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
-import Text from "@/components/shared/Text";
 
 function Error404() {
   return (

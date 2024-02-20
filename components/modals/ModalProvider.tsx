@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import React, { createContext, ReactNode, useState } from "react";
 
-import AlertModal from "@/modals/AlertModal";
-import BottomSheet from "@/modals/BottomSheet";
-import ConfirmModal from "@/modals/ConfirmModal";
-import Modal from "@/modals/index";
-import Toast from "@/modals/Toast";
+import AlertModal from "@/components/modals/AlertModal";
+import BottomSheet from "@/components/modals/BottomSheet";
+import ConfirmModal from "@/components/modals/ConfirmModal";
+import Modal from "@/components/modals/index";
+import Toast from "@/components/modals/Toast";
 import { ModalProps, ModalType } from "@/types";
 
 type Props = {

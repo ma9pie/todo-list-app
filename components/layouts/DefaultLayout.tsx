@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import React, { ReactNode, useRef } from "react";
 
-import LoginBadge from "@/components/shared/LoginBadge";
+import LoginBadge from "@/components/common/LoginBadge";
+import SideBar from "@/components/common/SideBar";
+import TextLogo from "@/components/common/TextLogo";
+import Head from "@/components/layouts/Head";
 import useTrackEvent from "@/hooks/useTrackEvent";
 import MenuSvg from "@/images/menu.svg";
-import Head from "@/shared/Head";
-import SideBar from "@/shared/SideBar";
-import TextLogo from "@/shared/TextLogo";
 
 type Props = {
   children: ReactNode;

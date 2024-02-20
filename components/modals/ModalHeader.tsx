@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-import Text from "@/components/shared/Text";
+import Text from "@/components/common/Text";
 import useModal from "@/hooks/useModal";
 import BackSvg from "@/images/arrow_back_ios.svg";
 import CloseSvg from "@/images/close.svg";

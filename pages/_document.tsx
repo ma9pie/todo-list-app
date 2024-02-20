@@ -1,46 +1,10 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* 메타 태그 설정 */}
-        <meta
-          name="description"
-          content="This is a Todo List App that allows users to add tasks to a list and mark completion with a checkbox. Users can manage their to-do tasks more systematically, and the intuitive and simple design makes it easy to use."
-        />
-        <meta charSet="utf-8" />
-        <meta name="author" content="ma9pie" />
-        <meta name="image" content="/images/logo.svg" />
-        <meta name="robots" content="index, follow" />
-        <meta
-          name="keywords"
-          content="todo, todo list, todo list app, todolist"
-        />
-
-        {/* Facebook Meta Tags */}
-        <meta property="og:url" content="https://check-todo.vercel.app" />
-        <meta property="og:site_name" content="Todo List App" />
-        <meta property="og:title" content="Todo List App" />
-        <meta property="og:image" content="/images/logo.svg" />
-        <meta
-          property="og:description"
-          content="This is a Todo List App that allows users to add tasks to a list and mark completion with a checkbox. Users can manage their to-do tasks more systematically, and the intuitive and simple design makes it easy to use."
-        />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Meta Tags */}
-        <meta name="twitter:card" content="Todo List App" />
-        <meta name="twitter:url" content="https://check-todo.vercel.app" />
-        <meta name="twitter:site_name" content="Todo List App" />
-        <meta name="twitter:title" content="Todo List App" />
-        <meta name="twitter:image" content="/images/logo.svg" />
-        <meta
-          name="twitter:description"
-          content="This is a Todo List App that allows users to add tasks to a list and mark completion with a checkbox. Users can manage their to-do tasks more systematically, and the intuitive and simple design makes it easy to use."
-        />
-        <meta name="twitter:type" content="website" />
-
         {/* 아이콘 생성 사이트 - https://favicomatic.com */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,6 +132,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <Analytics></Analytics>
       </body>
     </Html>
   );
