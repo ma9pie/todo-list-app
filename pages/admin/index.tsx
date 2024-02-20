@@ -12,14 +12,14 @@ const Admin = () => {
   const router = useRouter();
   const { role, getAllUsers } = useLogin();
 
-  const [invisible, setInvisible] = useState(true);
+  const [isShow, setIsShow] = useState(false);
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
   // Admin 계정만 접근
   useEffect(() => {
     switch (role) {
       case Role.Admin:
-        setInvisible(false);
+        setIsShow(true);
         break;
       default:
         const { hostname } = window.location;
@@ -43,7 +43,7 @@ const Admin = () => {
     }
   }, []);
 
-  if (invisible) return null;
+  if (!isShow) return null;
   return (
     <Wrapper>
       <Container>
