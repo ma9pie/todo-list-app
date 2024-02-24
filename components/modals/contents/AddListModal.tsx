@@ -12,7 +12,7 @@ import { isMobileDevice } from "@/utils";
 
 const AddListModal = () => {
   const { addCluster } = useTodo();
-  const { openToast, closeModal } = useModal();
+  const { openToast, closeModal, changeModal } = useModal();
   const { trackViewModal } = useTrackEvent();
 
   const ref = useRef<HTMLInputElement>(null);
@@ -40,7 +40,7 @@ const AddListModal = () => {
       closeModal();
       setTimeout(() => {
         addCluster(title, color);
-      }, 0);
+      }, 200);
     }
   };
 
