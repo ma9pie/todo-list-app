@@ -42,7 +42,6 @@ module.exports = withSentryConfig(
 
     // Suppresses source map uploading logs during build
     silent: true,
-
     org: process.env.NEXT_PUBLIC_SENTRY_ORG,
     project: process.env.NEXT_PUBLIC_SENTRY_PROJECT,
     authToken: process.env.NEXT_PUBLIC_SENTRY_AUTH_TOKEN,
@@ -65,5 +64,11 @@ module.exports = withSentryConfig(
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
     disableLogger: true,
+
+    // Enables automatic instrumentation of Vercel Cron Monitors.
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
   }
 );
