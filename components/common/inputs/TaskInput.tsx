@@ -1,18 +1,21 @@
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import AddSvg from "@/images/add.svg";
-import { Message, ToastStatus } from "@/types";
+import { Message, ModalType, ToastStatus } from "@/types";
 
 interface Props {
   clusterId: string;
 }
 
 const TaskInput = ({ clusterId }: Props) => {
+  const router = useRouter();
+
   const { addTask } = useTodo();
-  const { openToast } = useModal();
+  const { openToast, changeModal } = useModal();
 
   const [input, setInput] = useState("");
 
@@ -20,15 +23,33 @@ const TaskInput = ({ clusterId }: Props) => {
     setInput(e.target.value);
   };
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (!input) {
       return openToast({
         status: ToastStatus.Warn,
         message: Message.PleaseInputTask,
       });
     }
-    addTask(clusterId, input);
-    setInput("");
+
+    try {
+      await addTask(clusterId, input);
+      setInput("");
+      changeModal({
+        type: ModalType.Toast,
+        status: ToastStatus.Success,
+        message: Message.TaskAdded,
+      });
+    } catch (err) {
+      console.log(err);
+      changeModal({
+        type: ModalType.Toast,
+        status: ToastStatus.Error,
+        message: Message.InvalidRequest,
+      });
+      setTimeout(() => {
+        router.push("/");
+      }, 200);
+    }
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {

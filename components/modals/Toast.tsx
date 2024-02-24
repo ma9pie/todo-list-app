@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useState } from "react";
 
 import Text from "@/components/common/Text";
+import useModal from "@/hooks/useModal";
 import CheckSvg from "@/images/check.svg";
 import ErrorSvg from "@/images/error_outline.svg";
 import WarningSvg from "@/images/warning_amber.svg";
@@ -11,6 +12,8 @@ import { ModalProps, ToastStatus } from "@/types";
 let pid: ReturnType<typeof setTimeout>;
 
 const Toast = (props: ModalProps) => {
+  const { closeModal } = useModal();
+
   const [isIOS, setIsIOS] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -24,18 +27,13 @@ const Toast = (props: ModalProps) => {
     setIsOpen(true);
     clearTimeout(pid);
     pid = setTimeout(() => {
-      setIsOpen(false);
-      props.onRequestClose && props.onRequestClose();
+      close();
     }, 2000);
-    return () => {
-      setIsOpen(false);
-      clearTimeout(pid);
-    };
   }, []);
 
   const close = () => {
     setIsOpen(false);
-    props.onRequestClose && props.onRequestClose();
+    closeModal(props.id);
   };
 
   const getSvg = useCallback((status: ToastStatus | undefined) => {
@@ -100,8 +98,6 @@ Toast.defaultProps = {
   status: ToastStatus.None,
   message: "",
   isOpen: null,
-  unmount: () => {},
-  onRequestClose: () => {},
 };
 
 const openAnimation = css`

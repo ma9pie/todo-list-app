@@ -27,7 +27,6 @@ export interface ModalProps {
   cancleBtnText?: string;
   confirmBtnText?: string;
   component?: () => JSX.Element;
-  onRequestClose?: () => void;
   onRequestConfirm?: () => void;
   onAfterOpen?: () => void;
   onAfterClose?: () => void;

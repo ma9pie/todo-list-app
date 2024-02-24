@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 
@@ -96,34 +96,17 @@ const useTodo = () => {
 
   // Cluster 추가
   const addCluster = async (title: string, color: string) => {
-    try {
-      trackAddList();
-      const list = cloneDeep(todoList);
-      const _list = list.concat({
-        clusterId: createUid(),
-        title,
-        color,
-        pinned: false,
-        createdAt: getCurrentTime(),
-        tasks: [],
-      });
-      await setClusters(_list);
-      setTimeout(() => {
-        openToast({
-          status: ToastStatus.Success,
-          message: Message.ListAdded,
-        });
-      }, 200);
-    } catch (err) {
-      console.log(err);
-      router.push("/");
-      setTimeout(() => {
-        openToast({
-          status: ToastStatus.Error,
-          message: Message.InvalidRequest,
-        });
-      }, 200);
-    }
+    trackAddList();
+    const list = cloneDeep(todoList);
+    const _list = list.concat({
+      clusterId: createUid(),
+      title,
+      color,
+      pinned: false,
+      createdAt: getCurrentTime(),
+      tasks: [],
+    });
+    await setClusters(_list);
   };
 
   // Cluster 수정
@@ -132,30 +115,13 @@ const useTodo = () => {
     title: string,
     color: string
   ) => {
-    try {
-      trackEditList();
-      const list = cloneDeep(todoList);
-      const cluster = list.find((item) => item.clusterId === clusterId);
-      if (!cluster) return;
-      cluster.title = title;
-      cluster.color = color;
-      await setClusters(list);
-      setTimeout(() => {
-        openToast({
-          status: ToastStatus.Success,
-          message: Message.ListEdited,
-        });
-      }, 200);
-    } catch (err) {
-      console.log(err);
-      router.push("/");
-      setTimeout(() => {
-        openToast({
-          status: ToastStatus.Error,
-          message: Message.InvalidRequest,
-        });
-      }, 200);
-    }
+    trackEditList();
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item) => item.clusterId === clusterId);
+    if (!cluster) return;
+    cluster.title = title;
+    cluster.color = color;
+    await setClusters(list);
   };
 
   // Cluster 제거
@@ -175,33 +141,18 @@ const useTodo = () => {
 
   // Task 추가
   const addTask = async (clusterId: string, input: string) => {
-    try {
-      trackAddTask();
-      const list = cloneDeep(todoList);
-      const cluster = list.find(
-        (item: Cluster) => item.clusterId === clusterId
-      );
-      if (!cluster) return;
-      cluster.tasks = cluster.tasks.concat({
-        clusterId: clusterId,
-        taskId: createUid(),
-        content: input,
-        completed: false,
-        createdAt: getCurrentTime(),
-      });
-      await setClusters(list);
-      openToast({
-        status: ToastStatus.Success,
-        message: Message.TaskAdded,
-      });
-    } catch (err) {
-      console.log(err);
-      router.push("/");
-      openToast({
-        status: ToastStatus.Error,
-        message: Message.InvalidRequest,
-      });
-    }
+    trackAddTask();
+    const list = cloneDeep(todoList);
+    const cluster = list.find((item: Cluster) => item.clusterId === clusterId);
+    if (!cluster) return;
+    cluster.tasks = cluster.tasks.concat({
+      clusterId: clusterId,
+      taskId: createUid(),
+      content: input,
+      completed: false,
+      createdAt: getCurrentTime(),
+    });
+    await setClusters(list);
   };
 
   // Task 수정

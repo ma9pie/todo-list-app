@@ -4,20 +4,29 @@ import React, { useEffect } from "react";
 
 import Text from "@/components/common/Text";
 import useFixedScreen from "@/hooks/useFixedScreen";
+import useModal from "@/hooks/useModal";
 import CloseSvg from "@/images/close.svg";
 import { ModalProps } from "@/types";
 
 const BottomSheet = (props: ModalProps) => {
+  const { closeModal } = useModal();
+
   useFixedScreen("bottom-sheet");
+
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
+  // Close modal
+  const close = () => {
+    closeModal(props.id);
+  };
+
   return (
     <Wrapper>
       <Overlay
-        onClick={props.onRequestClose}
+        onClick={close}
         className={props.isOpen ? fadeIn : fadeOut}
       ></Overlay>
       <Container
@@ -29,11 +38,7 @@ const BottomSheet = (props: ModalProps) => {
           <Text s18 bold>
             {props.title}
           </Text>
-          <CloseSvg
-            width={24}
-            height={24}
-            onClick={() => props.onRequestClose && props.onRequestClose()}
-          ></CloseSvg>
+          <CloseSvg width={24} height={24} onClick={close}></CloseSvg>
         </Top>
         <Content>{props.component && props.component()} </Content>
       </Container>

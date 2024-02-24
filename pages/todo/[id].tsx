@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useRouter } from "next/router";
 import React, {
   ChangeEvent,

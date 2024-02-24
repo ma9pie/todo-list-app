@@ -11,6 +11,12 @@ export const createUid = () => {
   }
 };
 
+// 현재 시간 조회
 export const getCurrentTime = () => {
   return moment().format("YYYY-MM-DD HH:mm:ss");
+};
+
+// Delay
+export const delay = (ms: number) => {
+  return new Promise((r) => setTimeout(r, ms));
 };

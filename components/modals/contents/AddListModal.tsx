@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 import DoneButton from "@/components/common/buttons/DoneButton";
@@ -7,12 +8,13 @@ import { COLOR_LIST } from "@/constants";
 import useModal from "@/hooks/useModal";
 import useTodo from "@/hooks/useTodo";
 import useTrackEvent from "@/hooks/useTrackEvent";
-import { Message, ToastStatus } from "@/types";
+import { Message, ModalType, ToastStatus } from "@/types";
 import { isMobileDevice } from "@/utils";
 
 const AddListModal = () => {
+  const router = useRouter();
   const { addCluster } = useTodo();
-  const { openToast, closeModal, changeModal } = useModal();
+  const { openToast, changeModal, closeModal, openModal } = useModal();
   const { trackViewModal } = useTrackEvent();
 
   const ref = useRef<HTMLInputElement>(null);
@@ -30,16 +32,30 @@ const AddListModal = () => {
     setTitle(e.target.value);
   };
 
-  const handleAddList = () => {
+  const handleAddList = async () => {
     if (title === "") {
-      openToast({
+      return openToast({
         status: ToastStatus.Warn,
         message: Message.PleaseInputListName,
       });
-    } else {
-      closeModal();
+    }
+
+    try {
+      await addCluster(title, color);
+      changeModal({
+        type: ModalType.Toast,
+        status: ToastStatus.Success,
+        message: Message.ListAdded,
+      });
+    } catch (err) {
+      console.log(err);
+      changeModal({
+        type: ModalType.Toast,
+        status: ToastStatus.Error,
+        message: Message.InvalidRequest,
+      });
       setTimeout(() => {
-        addCluster(title, color);
+        router.push("/");
       }, 200);
     }
   };

@@ -3,19 +3,28 @@ import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 
 import useFixedScreen from "@/hooks/useFixedScreen";
+import useModal from "@/hooks/useModal";
 import { ModalProps } from "@/types";
 
 const Modal = (props: ModalProps) => {
+  const { closeModal } = useModal();
+
   useFixedScreen("modal");
+
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
+  // Close modal
+  const close = () => {
+    closeModal(props.id);
+  };
+
   return (
     <Wrapper>
       <Overlay
-        onClick={props.onRequestClose}
+        onClick={close}
         className={props.isOpen ? fadeIn : fadeOut}
       ></Overlay>
       <Container
@@ -40,7 +49,6 @@ Modal.defaultProps = {
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
-  onRequestClose: () => {},
 };
 
 const fadeIn = css`

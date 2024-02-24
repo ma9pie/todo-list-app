@@ -4,25 +4,34 @@ import React, { useEffect } from "react";
 
 import Text from "@/components/common/Text";
 import useFixedScreen from "@/hooks/useFixedScreen";
+import useModal from "@/hooks/useModal";
 import { ModalProps } from "@/types";
 
 const ConfirmModal = (props: ModalProps) => {
+  const { closeModal } = useModal();
+
   useFixedScreen("confirm");
+
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
-  // 확인 버튼 클릭
+  // Close modal
+  const close = () => {
+    closeModal(props.id);
+  };
+
+  // Click confirm
   const onClickConfirm = () => {
     props.onRequestConfirm && props.onRequestConfirm();
-    props.onRequestClose && props.onRequestClose();
+    close();
   };
 
   return (
     <Wrapper>
       <Overlay
-        onClick={props.onRequestClose}
+        onClick={close}
         className={props.isOpen ? fadeIn : fadeOut}
       ></Overlay>
       <Container
@@ -45,9 +54,7 @@ const ConfirmModal = (props: ModalProps) => {
             ))}
         </Content>
         <ButtonBox>
-          <SubButton onClick={props.onRequestClose}>
-            {props.cancleBtnText}
-          </SubButton>
+          <SubButton onClick={close}>{props.cancleBtnText}</SubButton>
           <MainButton onClick={onClickConfirm}>
             {props.confirmBtnText}
           </MainButton>
@@ -70,7 +77,6 @@ ConfirmModal.defaultProps = {
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
-  onRequestClose: () => {},
   onRequestConfirm: () => {},
 };
 

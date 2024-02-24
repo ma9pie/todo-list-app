@@ -4,19 +4,28 @@ import React, { useEffect } from "react";
 
 import Text from "@/components/common/Text";
 import useFixedScreen from "@/hooks/useFixedScreen";
+import useModal from "@/hooks/useModal";
 import { ModalProps } from "@/types";
 
 const AlertModal = (props: ModalProps) => {
+  const { closeModal } = useModal();
+
   useFixedScreen("alert");
+
   useEffect(() => {
     props.onAfterOpen && props.onAfterOpen();
     return () => props.onAfterClose && props.onAfterClose();
   }, []);
 
+  // Close modal
+  const close = () => {
+    closeModal(props.id);
+  };
+
   return (
     <Wrapper>
       <Overlay
-        onClick={props.onRequestClose}
+        onClick={close}
         className={props.isOpen ? fadeIn : fadeOut}
       ></Overlay>
       <Container
@@ -39,9 +48,7 @@ const AlertModal = (props: ModalProps) => {
             ))}
         </Content>
         <ButtonBox>
-          <MainButton onClick={props.onRequestClose}>
-            {props.confirmBtnText}
-          </MainButton>
+          <MainButton onClick={close}>{props.confirmBtnText}</MainButton>
         </ButtonBox>
       </Container>
     </Wrapper>
@@ -116,7 +123,7 @@ const MainButton = styled.button<any>`
   width: 100%;
   height: 40px;
   border: 0px;
-  color: #483c3c;
+  color: white;
   transition: background-color 0.15s ease-in-out;
   cursor: pointer;
   background-color: var(--blue500);
