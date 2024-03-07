@@ -72,7 +72,7 @@ export default function useModal() {
   const changeModal = useCallback(
     async (props: ModalProps) => {
       closeModal();
-      await delay(DELAY + 100);
+      await delay(DELAY);
       openModal(props);
     },
     [openModal, closeModal]
