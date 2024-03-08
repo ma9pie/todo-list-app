@@ -63,7 +63,7 @@ export default function useModal() {
       setModals(newMap);
       await delay(DELAY);
       newMap.delete(_id);
-      setModals(new Map(newMap));
+      return setModals(new Map(newMap));
     },
     [setModals, getRecentModalId]
   );
@@ -71,8 +71,8 @@ export default function useModal() {
   // 모달 change
   const changeModal = useCallback(
     async (props: ModalProps) => {
-      closeModal();
-      await delay(DELAY);
+      await closeModal();
+      await delay(20);
       openModal(props);
     },
     [openModal, closeModal]
