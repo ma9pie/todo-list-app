@@ -24,7 +24,7 @@ export interface ModalProps {
   left?: string;
   padding?: string;
   height?: string;
-  cancleBtnText?: string;
+  cancelBtnText?: string;
   confirmBtnText?: string;
   component?: () => JSX.Element;
   onRequestConfirm?: () => void;
