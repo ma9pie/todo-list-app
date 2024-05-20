@@ -54,7 +54,7 @@ const ConfirmModal = (props: ModalProps) => {
             ))}
         </Content>
         <ButtonBox>
-          <SubButton onClick={close}>{props.cancleBtnText}</SubButton>
+          <SubButton onClick={close}>{props.cancelBtnText}</SubButton>
           <MainButton onClick={onClickConfirm}>
             {props.confirmBtnText}
           </MainButton>
@@ -73,7 +73,7 @@ ConfirmModal.defaultProps = {
   title: "Notice",
   message: "",
   confirmBtnText: "Confirm",
-  cancleBtnText: "Cancle",
+  cancelBtnText: "Cancle",
   component: () => {},
   onAfterOpen: () => {},
   onAfterClose: () => {},
